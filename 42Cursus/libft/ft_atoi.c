@@ -1,3 +1,5 @@
+#include "libft.h"
+
 int ft_atoi(const char *theString)
 {
     int i;
