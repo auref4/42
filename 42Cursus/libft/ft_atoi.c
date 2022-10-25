@@ -1,4 +1,4 @@
-int ft_atoi(char *str)
+int ft_atoi(const char *theString)
 {
     int i;
     int signe;
@@ -6,17 +6,17 @@ int ft_atoi(char *str)
 
     i = 0;
     nb = 0;
-    while ((str[i] >= '\t' && str[i] <= '\r') || (str[i] == ' '))
+    while ((theString[i] >= '\t' && theString[i] <= '\r') || (theString[i] == ' '))
         i++;
-    if (str[i] == '-' || str[i] == '+')
+    if (theString[i] == '-' || theString[i] == '+')
     {
-        if (str[i] == '-')
+        if (theString[i] == '-')
             signe = 1;
         i++;
     }
-    while (str[i] >= '0' && str[i] <= '9')
+    while (theString[i] >= '0' && theString[i] <= '9')
     {
-        nb = nb * 10 + (str[i] - 48);
+        nb = nb * 10 + (theString[i] - 48);
         i++;
     }
     if (signe == 1)
