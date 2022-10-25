@@ -1,0 +1,59 @@
+man : permet d'utilisr le manuel d'information dans le terminal
+    man man : permet de connaitre le fonctionnement du manuel man
+        man nomcommande : permet de connaitre l'utilité et les autres possibilités de cette commande
+
+echo : permet d'écrire une chaine de caractere, mettre en " en faire un seul argument
+
+pwd : permet de savoir ou l'on se trouve dans la hierachie (dans quel document etc..)
+
+cd : permet de changer d'endroit, changer de documents etc, ecrire cd dans rien d'autre est egal a écrire cd ~ (~ permet de retourner a sont répertoire perso)
+    cd ~nom : permet d'aller au repertoire demandé
+        cd . : permet de dire d'aller sur le repertoire actuel
+            cd .. : permet de dire d'aller sur le repertoire parent, cd ../nom permet de revenir au documents précedent souhaité
+                cd / : permet de revenir a la racine précedente, /nomdossier permet de repartir de la racine
+
+clear : permet d'effacer le terminal
+
+fleche du haut : permet de revenir dans l'historique des commandes
+
+fleche du bas : permet de revenir dans l'historique des commandes
+
+touche tab lorsque que l'on écrit : permet de compléter seul si il trouve un dossier commencer par les mêmes caracteres
+
+ls : permet de lister le répertoire ou on se trouve
+    ls /nomfichier : permet de lister le répertoire de l'endroit voulu
+        ls -l : permet d'avoir plus d'informations sur les fichiers dans le répertoire actuel
+            ls -a : permet de ne pas cacher tout les fichier qui commence par un . ou un .. dans le repertoire actuel
+                ls -R : permet de lister le répertoire ainsir que les sous repertoire et les sous sous repertoire etc..    
+                    man ls : pour connaitre d'autres possibilités
+                    
+touch : permet de créer un fichier
+    touch "nom" : permet de creer un fichier en lui donnant un nom
+
+nomlogiciel nomdossier : permet d'ouvrir le dossier dans le logiciel voulu
+
+mkdir :  permet de créer un dossier repertoire
+    mkdir "nom" : permet de crée un dossier repertoire en lui donnant un nom
+
+cp : permet de copier un fichier
+    cp "nomdufichier" : permet de copier un fichier existant pour le deplacer ou on le souhaite, suffit de lui donner une direction
+        cp -R "nomdudossier" : permet de copier un dossier directory pour le deplacer ou on le souhaite
+
+mv : permet de déplacer un fichier et non pas le copier
+    mv "nomfichier" : permet de déplacer un fichier existant pour le deplacer ou on le souhaite, suffit de lui donner une direction
+        mv"nomfichier" "nouveaunomfichier" : permet de renommer un fichier, possibilité de le déplace si on le souhaite mais il faut mettre l'adresse avant de rennomer
+
+rm "nomfichier" : permet de supprimer un fichier
+    rm -R "nomdossier" : permet de supprimer un dossier et tout ce qu'il contient
+        rmdir "nomdossier"/ : permet de supprimer un repertoire vide
+            rm * : permet de supprimer tout les fichier a l'endroit ou on se trouve
+                rm *.type : permet de supprimer tout les fichier type a l'endroit ou on se trouve, il suffit de designer le type (txt, odt, mp3 etc..)
+
+cat "nom fichier" : permet d'afficher le contenu du fichier
+
+tail "nomfichier" : permet de lire la fin d'un fichier
+    tail -n2 "nomfichier" : permet d'"indiquer le nombre de ligne que l'on veut 
+
+top : fournit une vue dynamique temps réel du système en cours d'exécution
+
+less : permet de parcourir un fichier texte, affichant un écran plein de texte à chaque fois
