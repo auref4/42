@@ -2,6 +2,7 @@
 #define LIBFT_H
 
 #include <stddef.h>
+#include <stdlib.h>
 
 int ft_atoi(const char *theString);
 int ft_isalnum(int character);
@@ -14,5 +15,6 @@ char    *ft_strrchr(const char *string, int searchedChar);
 size_t  ft_strlen(const char *theString);
 int ft_tolower(int character);
 int ft_toupper(int character);
+char    *ft_strdup(const char *source);
 
 #endif

@@ -1,20 +1,10 @@
 #include "libft.h"
 
-int ft_strlen(char *str)
-{
-    int i;
-
-    i = 0;
-    while (str[i] != '\0')
-        i++;
-    return (i);
-}
-
 char    *ft_strrchr(const char *string, int searchedChar)
 {
     int i;
 
-    i = ft_strlen((char *)string);
+    i = ft_strlen(string);
     i--;
     while (i >= 0)
     {
