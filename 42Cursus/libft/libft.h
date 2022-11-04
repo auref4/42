@@ -16,5 +16,6 @@ size_t  ft_strlen(const char *theString);
 int ft_tolower(int character);
 int ft_toupper(int character);
 char    *ft_strdup(const char *source);
+int ft_strncmp(const char *first, const char *second, size_t lenght)
 
 #endif
