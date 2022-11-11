@@ -1,45 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 11:52:47 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/09 13:01:22 by auferran         ###   ########.fr       */
+/*   Created: 2022/11/10 15:55:04 by auferran          #+#    #+#             */
+/*   Updated: 2022/11/10 19:01:41 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *string, int searchedChar)
+void	ft_bzero(void *s, size_t n)
 {
-	int	i;
+	size_t			i;
+	unsigned char	*str;
 
-	i = ft_strlen(string);
-	i--;
-	while (i >= 0)
+	i = 0;
+	str = (unsigned char *) s;
+	while (i < n)
 	{
-		if (searchedChar == string[i])
-			return ((char *)&string[i]);
-		i--;
+		str[i] = 0;
+		i++;
 	}
-	return (NULL);
 }
 /*
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <strings.h>
 
-int	main(int argc, char **argv)
+int	main(void)
 {
-	char	*a;
-	char	*b;
-	(void) argc;
+	int	i;
+	char	s1[5] = {1, 2, 3, 4, 5};
+	char	s2[5] = {1, 2, 3, 4, 5};
 
-	a = ft_strrchr(argv[1], atoi(argv[2]));
-	b = strrchr(argv[1], atoi(argv[2]));
-	printf("ft_strrchr = %s\n", a);
-	printf("strrchr = %s\n", b);
+	i = 0;
+	ft_bzero(s1, 5);
+	bzero(s2, 5);
+	while (i < 5)
+	{
+		printf("ft_bzero = %d\nbzero = %d\n", s1[i], s2[i]);
+		i++;
+	}
 }
 */

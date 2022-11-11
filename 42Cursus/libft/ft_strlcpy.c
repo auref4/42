@@ -1,56 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 11:55:44 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/10 19:58:07 by auferran         ###   ########.fr       */
+/*   Created: 2022/11/09 11:35:16 by auferran          #+#    #+#             */
+/*   Updated: 2022/11/09 11:35:49 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_strcpy(char *dest, char *src)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	int	i;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
-	while (src[i] != '\0')
+	while (src[i] != '\0' && i < size - 1)
 	{
-		dest[i] = src[i];
+		dst[i] = src[i];
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-char	*ft_strdup(const char *source)
-{
-	char	*dest;
-	size_t	i;
-
-	i = ft_strlen(source);
-	dest = malloc(sizeof(char) * (i + 1));
-	if (!dest)
-		return (NULL);
-	ft_strcpy(dest, (char *)source);
-	return (dest);
+	dst[i] = '\0';
+	j = ft_strlen(src);
+	return (j);
 }
 /*
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
+#include <bsd/string.h>
 
 int	main(int argc, char **argv)
 {
-	char	*dest;
-	char	*dest2;
+	size_t	i;
+	size_t	j;
+	char	dst[2500];
 	(void) argc;
 
-	dest = ft_strdup(argv[1]);
-	dest2 = strdup(argv[1]);
-	printf("ft_strdup = %s\n", dest);
-	printf("strdup = %s\n", dest2);
+	i = ft_strlcpy(dst, argv[1], atoi(argv[2]));
+	j = strlcpy(dst, argv[1], atoi(argv[2]));
+	printf("ft_strlcpy = %ld\n", i);
+	printf("strlcpy = %ld\n", j);
 }
 */

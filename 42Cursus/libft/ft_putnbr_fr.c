@@ -1,45 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 11:52:47 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/09 13:01:22 by auferran         ###   ########.fr       */
+/*   Created: 2022/11/11 14:30:16 by auferran          #+#    #+#             */
+/*   Updated: 2022/11/11 14:45:54 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *string, int searchedChar)
+void	ft_putnbr_fd(int n, int fd)
 {
-	int	i;
+	long long int	nb;
 
-	i = ft_strlen(string);
-	i--;
-	while (i >= 0)
+	nb = n;
+	if (nb < 0)
 	{
-		if (searchedChar == string[i])
-			return ((char *)&string[i]);
-		i--;
+		ft_putchar_fd('-', fd);
+		nb = nb * -1;
 	}
-	return (NULL);
+	if (nb > 9)
+	{
+		ft_putnbr_fd(nb / 10, fd);
+	}
+	ft_putchar_fd(nb % 10 + 48, fd);
 }
 /*
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 int	main(int argc, char **argv)
 {
-	char	*a;
-	char	*b;
 	(void) argc;
 
-	a = ft_strrchr(argv[1], atoi(argv[2]));
-	b = strrchr(argv[1], atoi(argv[2]));
-	printf("ft_strrchr = %s\n", a);
-	printf("strrchr = %s\n", b);
+	ft_putnbr_fd(ft_atoi(argv[1]), 0);
 }
 */

@@ -1,42 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 11:55:44 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/10 19:58:07 by auferran         ###   ########.fr       */
+/*   Created: 2022/11/10 15:09:27 by auferran          #+#    #+#             */
+/*   Updated: 2022/11/10 16:20:21 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_strcpy(char *dest, char *src)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	int	i;
+	size_t			i;
+	unsigned char	*s1;
 
 	i = 0;
-	while (src[i] != '\0')
+	s1 = (unsigned char *) s;
+	while (s1 && i < n)
 	{
-		dest[i] = src[i];
+		if (c == s1[i])
+			return (&s1[i]);
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-char	*ft_strdup(const char *source)
-{
-	char	*dest;
-	size_t	i;
-
-	i = ft_strlen(source);
-	dest = malloc(sizeof(char) * (i + 1));
-	if (!dest)
-		return (NULL);
-	ft_strcpy(dest, (char *)source);
-	return (dest);
+	return (NULL);
 }
 /*
 #include <stdio.h>
@@ -44,13 +33,12 @@ char	*ft_strdup(const char *source)
 
 int	main(int argc, char **argv)
 {
-	char	*dest;
-	char	*dest2;
+	char	*s1;
+	char	*s2;
 	(void) argc;
 
-	dest = ft_strdup(argv[1]);
-	dest2 = strdup(argv[1]);
-	printf("ft_strdup = %s\n", dest);
-	printf("strdup = %s\n", dest2);
+	s1 = ft_memchr(argv[1], ft_atoi(argv[2]), ft_atoi(argv[3]));
+	s2 = memchr(argv[1], ft_atoi(argv[2]), ft_atoi(argv[3]));
+	printf("ft_memchr = %s\nmemchr = %s\n", s1, s2);
 }
 */

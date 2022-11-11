@@ -1,56 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 11:55:44 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/10 19:58:07 by auferran         ###   ########.fr       */
+/*   Created: 2022/11/11 15:17:42 by auferran          #+#    #+#             */
+/*   Updated: 2022/11/11 17:53:46 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_strcpy(char *dest, char *src)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	int	i;
+	size_t	i;
+	size_t	j;
+	char	*t;
 
 	i = 0;
-	while (src[i] != '\0')
+	if (len == 0)
+		return (NULL);
+	t = malloc(sizeof(char) * len + 1);
+	if (!t)
+		return (NULL);
+	while (s[i])
 	{
-		dest[i] = src[i];
+		if (s[i] == (char const)start)
+		{
+			j = 0;
+			while (s[i] && j < len)
+			{
+				t[j++] = s[i++];
+			}
+			t[j] = '\0';
+			return (t);
+		}
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-char	*ft_strdup(const char *source)
-{
-	char	*dest;
-	size_t	i;
-
-	i = ft_strlen(source);
-	dest = malloc(sizeof(char) * (i + 1));
-	if (!dest)
-		return (NULL);
-	ft_strcpy(dest, (char *)source);
-	return (dest);
+	return (NULL);
 }
 /*
 #include <stdio.h>
-#include <string.h>
 
 int	main(int argc, char **argv)
 {
-	char	*dest;
-	char	*dest2;
+	char	*str;
 	(void) argc;
 
-	dest = ft_strdup(argv[1]);
-	dest2 = strdup(argv[1]);
-	printf("ft_strdup = %s\n", dest);
-	printf("strdup = %s\n", dest2);
+	str = ft_substr(argv[1], *argv[2], ft_atoi(argv[3]));
+	printf("ft_substr = %s\n", str);
 }
 */

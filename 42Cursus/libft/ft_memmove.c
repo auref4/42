@@ -1,30 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 11:52:47 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/09 13:01:22 by auferran         ###   ########.fr       */
+/*   Created: 2022/11/09 12:37:00 by auferran          #+#    #+#             */
+/*   Updated: 2022/11/10 18:59:56 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *string, int searchedChar)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	int	i;
+	size_t			i;
+	unsigned char	*pdest;
+	unsigned char	*psrc;
 
-	i = ft_strlen(string);
-	i--;
-	while (i >= 0)
+	i = 0;
+	pdest = (unsigned char *)dest;
+	psrc = (unsigned char *) src;
+	if (pdest > psrc)
 	{
-		if (searchedChar == string[i])
-			return ((char *)&string[i]);
-		i--;
+		while (n > 0)
+		{
+			pdest[n - 1] = psrc[n - 1];
+			n--;
+		}
+		return (pdest);
 	}
-	return (NULL);
+	else
+	{
+		while (i < n)
+		{
+			pdest[i] = psrc[i];
+			i++;
+		}
+		return (pdest);
+	}
 }
 /*
 #include <stdio.h>
@@ -33,13 +47,12 @@ char	*ft_strrchr(const char *string, int searchedChar)
 
 int	main(int argc, char **argv)
 {
-	char	*a;
-	char	*b;
+	char	*i;
+	char	*j;
 	(void) argc;
 
-	a = ft_strrchr(argv[1], atoi(argv[2]));
-	b = strrchr(argv[1], atoi(argv[2]));
-	printf("ft_strrchr = %s\n", a);
-	printf("strrchr = %s\n", b);
+	i = ft_memmove(argv[1], argv[2], ft_atoi(argv[3]));
+	j = memmove(argv[1], argv[2], ft_atoi(argv[3]));
+	printf("ft_memmove = %s\nmemmove = %s\n", i, j);
 }
 */

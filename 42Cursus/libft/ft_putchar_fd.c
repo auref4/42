@@ -1,38 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 11:54:53 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/08 14:45:48 by auferran         ###   ########.fr       */
+/*   Created: 2022/11/11 13:56:38 by auferran          #+#    #+#             */
+/*   Updated: 2022/11/11 14:26:00 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isascii(int character)
+void	ft_putchar_fd(char c, int fd)
 {
-	if (character >= 0 && character <= 127)
-		return (1);
-	else
-		return (0);
+	write(fd, &c, 1);
 }
 /*
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
-
-int	main(int argc, char **argv)
+int	main(void)
 {
-	int	i;
-	int	j;
-	(void) argc;
-
-	i = ft_isascii(atoi(argv[1]));
-	j = isascii(atoi(argv[1]));
-	printf("%d\n", i);
-	printf("%d\n", j);
+	ft_putchar_fd(101, 0);
 }
 */

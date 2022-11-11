@@ -1,56 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 11:55:44 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/10 19:58:07 by auferran         ###   ########.fr       */
+/*   Created: 2022/11/10 19:02:51 by auferran          #+#    #+#             */
+/*   Updated: 2022/11/11 10:49:03 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_strcpy(char *dest, char *src)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	int	i;
+	size_t			i;
+	unsigned char	*p;
 
-	i = 0;
-	while (src[i] != '\0')
+	if (size == 0 || nmemb > SIZE_MAX / size)
+		return (NULL);
+	p = malloc(nmemb * size);
+	if (!p)
+		return (NULL);
+	while (i < nmemb * size)
 	{
-		dest[i] = src[i];
+		p[i] = 0;
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-char	*ft_strdup(const char *source)
-{
-	char	*dest;
-	size_t	i;
-
-	i = ft_strlen(source);
-	dest = malloc(sizeof(char) * (i + 1));
-	if (!dest)
-		return (NULL);
-	ft_strcpy(dest, (char *)source);
-	return (dest);
+	return ((void *)p);
 }
 /*
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
 
 int	main(int argc, char **argv)
 {
-	char	*dest;
-	char	*dest2;
+	int	i;
+	unsigned int	*p1;
+	unsigned int	*p2;
 	(void) argc;
 
-	dest = ft_strdup(argv[1]);
-	dest2 = strdup(argv[1]);
-	printf("ft_strdup = %s\n", dest);
-	printf("strdup = %s\n", dest2);
+	i = 0;
+	p1 = ft_calloc(atoi(argv[1]), sizeof(int));
+	p2 = calloc(atoi(argv[1]), sizeof(int));
+	while (i < atoi(argv[1]))
+	{
+		printf("ft_calloc = %d\ncalloc = %d\n", p1[i], p2[i]);
+		i++;
+	}
 }
 */

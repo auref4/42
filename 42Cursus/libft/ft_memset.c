@@ -1,42 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 11:55:44 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/10 19:58:07 by auferran         ###   ########.fr       */
+/*   Created: 2022/11/07 15:05:14 by auferran          #+#    #+#             */
+/*   Updated: 2022/11/10 18:59:06 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_strcpy(char *dest, char *src)
+void	*ft_memset(void *pointer, int value, size_t count)
 {
-	int	i;
+	size_t			i;
+	unsigned char	*p;
 
 	i = 0;
-	while (src[i] != '\0')
+	p = (unsigned char *)pointer;
+	while (p[i] && i < count)
 	{
-		dest[i] = src[i];
+		p[i] = value;
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-char	*ft_strdup(const char *source)
-{
-	char	*dest;
-	size_t	i;
-
-	i = ft_strlen(source);
-	dest = malloc(sizeof(char) * (i + 1));
-	if (!dest)
-		return (NULL);
-	ft_strcpy(dest, (char *)source);
-	return (dest);
+	return (pointer);
 }
 /*
 #include <stdio.h>
@@ -44,13 +32,13 @@ char	*ft_strdup(const char *source)
 
 int	main(int argc, char **argv)
 {
-	char	*dest;
-	char	*dest2;
+	unsigned char *pointer;
+	unsigned char *pointer2;
 	(void) argc;
 
-	dest = ft_strdup(argv[1]);
-	dest2 = strdup(argv[1]);
-	printf("ft_strdup = %s\n", dest);
-	printf("strdup = %s\n", dest2);
+	pointer = ft_memset(argv[1], 'A', 4);
+	pointer2 = memset(argv[1], 'A', 4);
+	printf("%s\n", pointer);
+	printf("%s\n", pointer2);
 }
 */
