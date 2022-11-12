@@ -1,42 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 16:30:36 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/12 15:28:36 by auferran         ###   ########.fr       */
+/*   Created: 2022/11/12 16:37:55 by auferran          #+#    #+#             */
+/*   Updated: 2022/11/12 22:23:13 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+static int	check_set(char c, char const *set)
+{
+	size_t	i;
+
+	i = 0;
+	while (set[i])
+	{
+		if (set[i] == c)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t	i;
 	size_t	j;
-	size_t	len;
+	size_t	x;
 	char	*dest;
 
 	i = 0;
-	j = 0;
-	len = ft_strlen(s1) + ft_strlen(s2);
-	dest = malloc(sizeof(char) * (len + 1));
+	j = ft_strlen(s1) - 1;
+	while (s1[i] && !check_set(s1[i], set))
+		i++;
+	while (s1[j] && !check_set(s1[j], set))
+		j--;
+	dest = malloc(sizeof(char) * (j - i + 1));
 	if (!dest)
 		return (NULL);
-	while (s1[i])
+	x = 0;
+	while (i <= j)
 	{
-		dest[i] = s1[i];
+		dest[x] = s1[i];
+		x++;
 		i++;
 	}
-	while (s2[j])
-	{
-		dest[i] = s2[j];
-		i++;
-		j++;
-	}
-	dest[i] = '\0';
+	dest[x] = '\0';
 	return (dest);
 }
 /*
@@ -45,13 +58,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 int	main(int argc, char **argv)
 {
 	char	*s1;
+	(void) argc;
 
-	if (argc == 3)
-	{
-		s1 = ft_strjoin(argv[1], argv[2]);
-		printf("ft_strjoin = %s\n", s1);
-	}
-	else
-		return (0);
+	s1 = ft_strtrim(argv[1], argv[2]);
+	printf("ft_strtrim = %s\n", s1);
 }
 */
