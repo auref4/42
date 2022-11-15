@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:56:18 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/11 15:21:30 by auferran         ###   ########.fr       */
+/*   Updated: 2022/11/15 16:36:08 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,29 @@
 int	ft_strncmp(const char *first, const char *second, size_t lenght)
 {
 	size_t	i;
+	unsigned char	*ufirst;
+	unsigned char	*usecond;
 
+	ufirst = (unsigned char *)first;
+	usecond = (unsigned char *)second;
 	i = 0;
 	if (lenght == 0)
 		return (0);
-	while (first[i] && second[i] && first[i] == second[i] && i < lenght - 1)
+	while (ufirst[i] && usecond[i] && ufirst[i] == usecond[i] && i < lenght - 1)
 		i++;
-	return (first[i] - second[i]);
+	return (ufirst[i] - usecond[i]);
 }
 /*
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-int	main(int argc, char **argv)
+int	main(void)
 {
 	int	i;
 	int	j;
-	(void) argc;
 
-	i = ft_strncmp(argv[1], argv[2], atoi(argv[3]));
-	j = strncmp(argv[1], argv[2], atoi(argv[3]));
+	i = ft_strncmp("test\200", "test\0", 6);
+	j = strncmp("test\200", "test\0", 6);
 	printf("%d\n", i);
 	printf("%d\n", j);
 }
