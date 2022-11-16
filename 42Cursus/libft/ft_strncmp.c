@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:56:18 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/15 16:36:08 by auferran         ###   ########.fr       */
+/*   Updated: 2022/11/16 19:24:09 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_strncmp(const char *first, const char *second, size_t lenght)
 {
-	size_t	i;
+	size_t			i;
 	unsigned char	*ufirst;
 	unsigned char	*usecond;
 
