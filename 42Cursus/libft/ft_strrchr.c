@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:52:47 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/09 13:01:22 by auferran         ###   ########.fr       */
+/*   Updated: 2022/11/16 21:13:52 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strrchr(const char *string, int searchedChar)
 	int	i;
 
 	i = ft_strlen(string);
+	if (!searchedChar)
+		return ((char *)&string[i]);
 	i--;
 	while (i >= 0)
 	{

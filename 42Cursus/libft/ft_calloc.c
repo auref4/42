@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 19:02:51 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/11 10:49:03 by auferran         ###   ########.fr       */
+/*   Updated: 2022/11/16 20:23:15 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	p = malloc(nmemb * size);
 	if (!p)
 		return (NULL);
+	i = 0;
 	while (i < nmemb * size)
 	{
 		p[i] = 0;

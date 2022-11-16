@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:58:34 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/14 20:38:45 by auferran         ###   ########.fr       */
+/*   Updated: 2022/11/16 22:00:38 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	nb_recurs(long long int nb, int size, char *dest)
 {
 	size -= 1;
-	if (nb > 0)
+	if (nb >= 10)
 		nb_recurs(nb / 10, size, dest);
 	dest[size] = nb % 10 + 48;
 }
@@ -49,6 +49,8 @@ char	*ft_itoa(int n)
 	}
 	nb_size(nb, &size);
 	dest = malloc(sizeof(char) * (size + 1));
+	if (!dest)
+		return (NULL);
 	nb_recurs(nb, size, dest);
 	if (nb == 0)
 		dest[0] = '0';
@@ -65,9 +67,11 @@ int	main(int argc, char **argv)
 {
 	char	*s1;
 	(void) argc;
+	s1 = NULL;
 
-	s1 = ft_itoa(ft_atoi(argv[1]));
+	s1 = ft_itoa(atoi(argv[1]));
 	printf("ft_itoa = %s\n", s1);
 	printf("%d\n", INT_MAX);
+	free (s1);
 }
 */

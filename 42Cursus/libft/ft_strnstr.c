@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 11:31:38 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/09 11:32:48 by auferran         ###   ########.fr       */
+/*   Updated: 2022/11/16 21:14:50 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	while (big[i] != '\0' && i < len)
 	{
 		j = 0;
-		while (big[i + j] == little[j] && i < len)
+		while (big[i + j] == little[j] && i + j < len)
 		{
 			j++;
 			if (little[j] == '\0')

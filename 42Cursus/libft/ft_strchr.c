@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:51:55 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/08 14:41:31 by auferran         ###   ########.fr       */
+/*   Updated: 2022/11/16 21:12:03 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ char	*ft_strchr(const char *string, int searchedChar)
 			return ((char *)&string[i]);
 		i++;
 	}
+	if (!searchedChar)
+		return ((char *)&string[i]);
 	return (NULL);
 }
 /*

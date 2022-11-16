@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 16:37:55 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/12 22:23:13 by auferran         ###   ########.fr       */
+/*   Updated: 2022/11/16 20:03:41 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		i++;
 	while (s1[j] && !check_set(s1[j], set))
 		j--;
-	dest = malloc(sizeof(char) * (j - i + 1));
+	dest = malloc(sizeof(char) * (j - i + 1 + 1));
 	if (!dest)
 		return (NULL);
 	x = 0;
@@ -60,7 +60,13 @@ int	main(int argc, char **argv)
 	char	*s1;
 	(void) argc;
 
-	s1 = ft_strtrim(argv[1], argv[2]);
-	printf("ft_strtrim = %s\n", s1);
+	s1 = ft_strtrim("x o x o x o x o x o", " xo");
+//	if (!s1)
+//	{
+//		puts("null");
+//		return (0);
+//	}
+	puts(s1);
+	//printf("ft_strtrim = %s\n", s1);
 }
 */
