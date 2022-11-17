@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 12:35:46 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/16 19:36:51 by auferran         ###   ########.fr       */
+/*   Updated: 2022/11/17 18:59:14 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static int	ft_nb_words(char const *s, char c)
 
 	i = 1;
 	j = 0;
+	if (s[0] == 0)
+		return (0);
 	if (s[0] != c)
 		j = 1;
 	while (s[i])
@@ -103,6 +105,11 @@ char	**ft_split(char const *s, char c)
 	dest = malloc(sizeof(char *) * (nb_words + 1));
 	if (!dest)
 		return (NULL);
+	if (nb_words == 0)
+	{
+		*dest = NULL;
+		return (dest);
+	}
 	ft_recurswords(dest, s, c, index);
 	if (!dest)
 		return (NULL);
@@ -118,7 +125,7 @@ int	main(void)
 	int	i;
 
 	i = 0;
-	dest = ft_split("test de fou furieux mais - que celui en bas", ' ');
+	dest = ft_split("", 'z');
 	while (dest[i])
 	{
 		printf("ft_split = %s\n", dest[i]);
