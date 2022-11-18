@@ -34,11 +34,12 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 /*
 #include <stdio.h>
 
-char	f(unsigned int, char c)
+char	f(unsigned int i, char c)
 {
 	char	x;
+	(void) i;
 
-	x = c + 13;
+	x = c - 32;
 	return (x);
 }
 

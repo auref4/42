@@ -25,25 +25,22 @@ void	free_dest(char **dest)
 	free (dest);
 }
 
-static int	ft_current_word(char const *s, char c, int index)
+int	ft_lenwords(char const *s, char c, int index)
 {
-	int	i;
-	int	current_word;
+	int	len;
 
-	i = 1;
-	current_word = 0;
-	if (s[0] != c)
-		current_word = 1;
-	while (i <= index)
+	len = 0;
+	while (s[index] && s[index] == c)
+		index++;
+	while (s[index] && s[index] != c)
 	{
-		if (s[i - 1] == c && s[i] != c)
-			current_word++;
-		i++;
+		index++;
+		len++;
 	}
-	return (current_word);
+	return (len);
 }
 
-static int	ft_nb_words(char const *s, char c)
+int	ft_nb_words(char const *s, char c)
 {
 	int	i;
 	int	j;
@@ -54,6 +51,8 @@ static int	ft_nb_words(char const *s, char c)
 		return (0);
 	if (s[0] != c)
 		j = 1;
+	while (s[i] == c)
+		i++;
 	while (s[i])
 	{
 		if (s[i - 1] == c && s[i] != c)
@@ -63,60 +62,52 @@ static int	ft_nb_words(char const *s, char c)
 	return (j);
 }
 
-static void	ft_recurswords(char **dest, char const *s, char c, int index)
+void	ft_split_words(char const *s, char c, char **dest, int current_words)
 {
-	int	len_word;
+	int	i;
 	int	j;
-	int	current_word;
 
-	j = 0;
-	len_word = 0;
-	while (s[index] && s[index] == c)
-		index++;
-	while (s[index + len_word] && s[index + len_word] != c)
-		len_word++;
-	current_word = ft_current_word(s, c, index);
-	current_word -= 1;
-	dest[current_word] = malloc(sizeof(char) * (len_word + 1));
-	if (!dest)
+	i = 0;
+	while (s[i])
 	{
-		free_dest(dest);
-		return ;
+		j = 0;
+		dest[current_words] = malloc(sizeof(char) * (ft_lenwords(s, c, i) + 1));
+		if (!dest)
+		{
+			free_dest(dest);
+			return ;
+		}
+		while (s[i] && s[i] != c)
+			dest[current_words][j++] = s[i++];
+		while (s[i] == c)
+			i++;
+		if ((s[i - 1] == c && s[i] != c) || (s[i - 1] != c && s[i] == '\0'))
+		{
+			dest[current_words][j++] = '\0';
+			current_words++;
+		}
 	}
-	while (j < len_word)
-	{
-		dest[current_word][j++] = s[index++];
-	}
-	dest[current_word][len_word] = '\0';
-	if (current_word + 1 != ft_nb_words(s, c))
-		ft_recurswords(dest, s, c, index);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	int		index;
-	int		nb_words;
 	char	**dest;
+	int		nb_words;
+	int		current_words;
 
-	index = 0;
-	if (s == NULL)
-		return (NULL);
+	current_words = 0;
 	nb_words = ft_nb_words(s, c);
 	dest = malloc(sizeof(char *) * (nb_words + 1));
 	if (!dest)
 		return (NULL);
-	if (nb_words == 0)
-	{
-		*dest = NULL;
-		return (dest);
-	}
-	ft_recurswords(dest, s, c, index);
+	if (nb_words > 0)
+		ft_split_words(s, c, dest, current_words);
 	if (!dest)
 		return (NULL);
 	dest[nb_words] = NULL;
 	return (dest);
 }
-/*
+
 #include <stdio.h>
 
 int	main(void)
@@ -125,38 +116,11 @@ int	main(void)
 	int	i;
 
 	i = 0;
-	dest = ft_split("", 'z');
+	dest = ft_split("lorem i", ' ');
 	while (dest[i])
 	{
 		printf("ft_split = %s\n", dest[i]);
 		i++;
-	}
+    }
 }
-*/
-/*
-#include <stdio.h>
-#include <sys/types.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <sys/stat.h>
 
-int	main(void)
-{
-	char	**dest;
-	char	*str;
-	int	i;
-
-	str = malloc(2000000001);
-	str[2000000000] = 0;
-	int fd = open("/tmp/coucou", O_RDONLY);
-	fd = read(fd, str, 2000000000);
-	i = 0;
-	printf("a %d\n", fd);
-	dest = ft_split(str, '\n');
-	while (dest[i])
-	{
-		printf("ft_split = %s\n", dest[i]);
-		i++;
-	}
-}
-*/
