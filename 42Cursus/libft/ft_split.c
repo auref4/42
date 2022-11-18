@@ -30,8 +30,6 @@ int	ft_lenwords(char const *s, char c, int index)
 	int	len;
 
 	len = 0;
-	while (s[index] && s[index] == c)
-		index++;
 	while (s[index] && s[index] != c)
 	{
 		index++;
@@ -51,7 +49,7 @@ int	ft_nb_words(char const *s, char c)
 		return (0);
 	if (s[0] != c)
 		j = 1;
-	while (s[i] == c)
+	while (s[i] && s[i] == c)
 		i++;
 	while (s[i])
 	{
@@ -70,6 +68,8 @@ void	ft_split_words(char const *s, char c, char **dest, int current_words)
 	i = 0;
 	while (s[i])
 	{
+		while (s[i] && s[i] == c)
+			i++;
 		j = 0;
 		dest[current_words] = malloc(sizeof(char) * (ft_lenwords(s, c, i) + 1));
 		if (!dest)
@@ -78,14 +78,13 @@ void	ft_split_words(char const *s, char c, char **dest, int current_words)
 			return ;
 		}
 		while (s[i] && s[i] != c)
-			dest[current_words][j++] = s[i++];
-		while (s[i] == c)
-			i++;
-		if ((s[i - 1] == c && s[i] != c) || (s[i - 1] != c && s[i] == '\0'))
 		{
-			dest[current_words][j++] = '\0';
-			current_words++;
+			dest[current_words][j] = s[i];
+			j++;
+			i++;
 		}
+		dest[current_words][j] = '\0';
+		current_words++;
 	}
 }
 
@@ -107,7 +106,7 @@ char	**ft_split(char const *s, char c)
 	dest[nb_words] = NULL;
 	return (dest);
 }
-
+/*
 #include <stdio.h>
 
 int	main(void)
@@ -120,7 +119,9 @@ int	main(void)
 	while (dest[i])
 	{
 		printf("ft_split = %s\n", dest[i]);
+		free(dest[i]);
 		i++;
     }
+	free(dest);
 }
-
+*/
