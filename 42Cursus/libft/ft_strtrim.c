@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 16:37:55 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/16 20:03:41 by auferran         ###   ########.fr       */
+/*   Updated: 2022/11/21 20:07:15 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,45 +28,40 @@ static int	check_set(char c, char const *set)
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
+	size_t	len_left;
+	size_t	len_right;
 	size_t	i;
-	size_t	j;
-	size_t	x;
 	char	*dest;
 
-	i = 0;
-	j = ft_strlen(s1) - 1;
-	while (s1[i] && !check_set(s1[i], set))
-		i++;
-	while (s1[j] && !check_set(s1[j], set))
-		j--;
-	dest = malloc(sizeof(char) * (j - i + 1 + 1));
+	len_left = 0;
+	if (!s1 || !set)
+		return (NULL);
+	len_right = ft_strlen(s1) - 1;
+	while (s1[len_left] && !check_set(s1[len_left], set))
+		len_left++;
+	while (s1[len_right] && !check_set(s1[len_right], set))
+		len_right--;
+	dest = malloc(sizeof(char) * (len_right - len_left + 1) + 1);
 	if (!dest)
 		return (NULL);
-	x = 0;
-	while (i <= j)
+	i = 0;
+	while (len_left <= len_right)
 	{
-		dest[x] = s1[i];
-		x++;
+		dest[i] = s1[len_left];
 		i++;
+		len_left++;
 	}
-	dest[x] = '\0';
+	dest[i] = '\0';
 	return (dest);
 }
 /*
 #include <stdio.h>
 
-int	main(int argc, char **argv)
+int	main(void)
 {
 	char	*s1;
-	(void) argc;
 
-	s1 = ft_strtrim("x o x o x o x o x o", " xo");
-//	if (!s1)
-//	{
-//		puts("null");
-//		return (0);
-//	}
-	puts(s1);
-	//printf("ft_strtrim = %s\n", s1);
+	s1 = ft_strtrim("   xxx   xxx", " i");
+	printf("ft_strtrim = %s\n", s1);
 }
 */

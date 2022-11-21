@@ -6,7 +6,7 @@
 #    By: auferran <auferran@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 16:24:02 by auferran          #+#    #+#              #
-#    Updated: 2022/11/17 16:49:28 by auferran         ###   ########.fr        #
+#    Updated: 2022/11/21 20:07:44 by auferran         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,9 @@ FLAGS = -Wall -Werror -Wextra
 $(NAME) : $(OBJS)
 		ar rcs $(NAME) $(OBJS)
 
-BONUS =
+BONUS =		ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
+			ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
+			ft_lstmap.c
 
 OBJS_BONUS = $(BONUS:.c=.o)
 
@@ -38,6 +40,9 @@ OBJS_BONUS = $(BONUS:.c=.o)
 		$(CC) $(FLAGS) -c -o $@ $<
 
 all : $(NAME)
+
+bonus : $(OBJS_BONUS) $(OBJS)
+		ar rcs $(NAME) $(OBJS) $(OBJS_BONUS)
 
 clean :
 		rm -f $(OBJS) $(OBJS_BONUS)

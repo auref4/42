@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:46:32 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/08 14:44:32 by auferran         ###   ########.fr       */
+/*   Updated: 2022/11/21 18:57:05 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,19 @@ int	ft_atoi(const char *theString)
 	int	signe;
 	int	nb;
 
+	signe = 0;
 	i = 0;
 	nb = 0;
-	while ((theString[i] >= '\t' && theString[i] <= '\r')
+	while ((theString[i] && (theString[i] >= '\t' && theString[i] <= '\r'))
 		|| (theString[i] == ' '))
 		i++;
-	if (theString[i] == '-' || theString[i] == '+')
+	if ((theString[i] && theString[i] == '-') || theString[i] == '+')
 	{
 		if (theString[i] == '-')
 			signe = 1;
 		i++;
 	}
-	while (theString[i] >= '0' && theString[i] <= '9')
+	while (theString[i] && theString[i] >= '0' && theString[i] <= '9')
 	{
 		nb = nb * 10 + (theString[i] - 48);
 		i++;

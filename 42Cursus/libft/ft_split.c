@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 12:35:46 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/17 18:59:14 by auferran         ###   ########.fr       */
+/*   Updated: 2022/11/21 15:33:47 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ void	ft_split_words(char const *s, char c, char **dest, int current_words)
 	int	j;
 
 	i = 0;
-	while (s[i])
+	while (s[i] && current_words < ft_nb_words(s, c))
 	{
+		j = 0;
 		while (s[i] && s[i] == c)
 			i++;
-		j = 0;
 		dest[current_words] = malloc(sizeof(char) * (ft_lenwords(s, c, i) + 1));
 		if (!dest)
 		{
@@ -97,12 +97,8 @@ char	**ft_split(char const *s, char c)
 	current_words = 0;
 	nb_words = ft_nb_words(s, c);
 	dest = malloc(sizeof(char *) * (nb_words + 1));
-	if (!dest)
-		return (NULL);
 	if (nb_words > 0)
 		ft_split_words(s, c, dest, current_words);
-	if (!dest)
-		return (NULL);
 	dest[nb_words] = NULL;
 	return (dest);
 }
@@ -115,7 +111,7 @@ int	main(void)
 	int	i;
 
 	i = 0;
-	dest = ft_split("lorem i", ' ');
+	dest = ft_split("test de fou furieux", ' ');
 	while (dest[i])
 	{
 		printf("ft_split = %s\n", dest[i]);

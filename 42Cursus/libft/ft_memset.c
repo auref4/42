@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:05:14 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/10 18:59:06 by auferran         ###   ########.fr       */
+/*   Updated: 2022/11/21 18:41:59 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	*ft_memset(void *pointer, int value, size_t count)
 
 	i = 0;
 	p = (unsigned char *)pointer;
-	while (p[i] && i < count)
+	while (i < count)
 	{
-		p[i] = value;
+		p[i] = (unsigned char)value;
 		i++;
 	}
 	return (pointer);
