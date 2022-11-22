@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 11:04:51 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/15 12:25:37 by auferran         ###   ########.fr       */
+/*   Updated: 2022/11/22 20:31:24 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	char			*dest;
 
 	i = 0;
+	if (!s || !f)
+		return (NULL);
 	len = ft_strlen(s);
 	dest = malloc(sizeof(char) * (len + 1));
 	if (!dest)
