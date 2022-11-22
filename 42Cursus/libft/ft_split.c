@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 12:35:46 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/22 15:40:40 by auferran         ###   ########.fr       */
+/*   Updated: 2022/11/22 19:58:51 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ char	**ft_split(char const *s, char c)
 	int		actual_word;
 
 	actual_word = 0;
+	if (!s)
+		return (NULL);
 	nb_words = ft_nb_words(s, c);
 	dest = malloc(sizeof(char *) * (nb_words + 1));
 	if (nb_words > 0)
@@ -111,7 +113,9 @@ int	main(void)
 	int	i;
 
 	i = 0;
-	dest = ft_split("test de fou furieux", ' ');
+	dest = ft_split(NULL, ' ');
+	if (!dest)
+		return (0);
 	while (dest[i])
 	{
 		printf("ft_split = %s\n", dest[i]);
