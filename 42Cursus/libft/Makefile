@@ -6,7 +6,7 @@
 #    By: auferran <auferran@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 16:24:02 by auferran          #+#    #+#              #
-#    Updated: 2022/11/21 20:07:44 by auferran         ###   ########.fr        #
+#    Updated: 2022/11/22 15:42:03 by auferran         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,10 @@ CC = clang
 
 FLAGS = -Wall -Werror -Wextra
 
-$(NAME) : $(OBJS)
+$(NAME) : $(OBJS) $(HEADER)
 		ar rcs $(NAME) $(OBJS)
+
+HEADER = libft.h
 
 BONUS =		ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
 			ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \

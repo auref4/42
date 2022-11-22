@@ -6,13 +6,13 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 12:35:46 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/21 15:33:47 by auferran         ###   ########.fr       */
+/*   Updated: 2022/11/22 15:40:40 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	free_dest(char **dest)
+static void	free_dest(char **dest)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ void	free_dest(char **dest)
 	free (dest);
 }
 
-int	ft_lenwords(char const *s, char c, int index)
+static int	ft_lenwords(char const *s, char c, int index)
 {
 	int	len;
 
@@ -38,7 +38,7 @@ int	ft_lenwords(char const *s, char c, int index)
 	return (len);
 }
 
-int	ft_nb_words(char const *s, char c)
+static int	ft_nb_words(char const *s, char c)
 {
 	int	i;
 	int	j;
@@ -60,18 +60,18 @@ int	ft_nb_words(char const *s, char c)
 	return (j);
 }
 
-void	ft_split_words(char const *s, char c, char **dest, int current_words)
+static void	ft_split_words(char const *s, char c, char **dest, int actual_word)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (s[i] && current_words < ft_nb_words(s, c))
+	while (s[i] && actual_word < ft_nb_words(s, c))
 	{
 		j = 0;
 		while (s[i] && s[i] == c)
 			i++;
-		dest[current_words] = malloc(sizeof(char) * (ft_lenwords(s, c, i) + 1));
+		dest[actual_word] = malloc(sizeof(char) * (ft_lenwords(s, c, i) + 1));
 		if (!dest)
 		{
 			free_dest(dest);
@@ -79,12 +79,12 @@ void	ft_split_words(char const *s, char c, char **dest, int current_words)
 		}
 		while (s[i] && s[i] != c)
 		{
-			dest[current_words][j] = s[i];
+			dest[actual_word][j] = s[i];
 			j++;
 			i++;
 		}
-		dest[current_words][j] = '\0';
-		current_words++;
+		dest[actual_word][j] = '\0';
+		actual_word++;
 	}
 }
 
@@ -92,13 +92,13 @@ char	**ft_split(char const *s, char c)
 {
 	char	**dest;
 	int		nb_words;
-	int		current_words;
+	int		actual_word;
 
-	current_words = 0;
+	actual_word = 0;
 	nb_words = ft_nb_words(s, c);
 	dest = malloc(sizeof(char *) * (nb_words + 1));
 	if (nb_words > 0)
-		ft_split_words(s, c, dest, current_words);
+		ft_split_words(s, c, dest, actual_word);
 	dest[nb_words] = NULL;
 	return (dest);
 }

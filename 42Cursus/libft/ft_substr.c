@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 15:17:42 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/21 19:15:53 by auferran         ###   ########.fr       */
+/*   Updated: 2022/11/22 15:17:40 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	x;
 	char	*t;
 
-	if (s == NULL || *s == 0)
+	if (s == NULL)
 		return (NULL);
 	if (start >= ft_strlen(s))
 		x = 0;
