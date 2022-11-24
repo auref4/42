@@ -1,40 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_print_str.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 16:59:20 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/24 18:52:51 by auferran         ###   ########.fr       */
+/*   Created: 2022/11/24 11:29:16 by auferran          #+#    #+#             */
+/*   Updated: 2022/11/24 18:26:09 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	ft_printf(const char *format, ...)
+int	ft_print_str(char *str)
 {
-	int		i;
-	int		len;
-	va_list	args;
+	int	i;
 
 	i = 0;
-	len = 0;
-	if (!format)
-		return (-1);
-	va_start(args, format);
-	while (format[i])
+	if (!str)
 	{
-		if (format[i] == '%' && ft_check_pc_letter(format[i + 1]))
-			len += ft_print_type(args, format[i++ + 1]);
-		else
-		{
-			len += ft_print_char(format[i]);
-			if (len == -1)
-				return (-1);
-		}
+		i += write (1, "(null)", 6);
+		return (i);
+	}
+	while (str[i])
+	{
+		write(1, &str[i], 1);
 		i++;
 	}
-	va_end(args);
-	return (len);
+	return (i);
 }
+/*
+#include <stdio.h>
+
+int	main(int argc, char **argv)
+{
+	if (argc == 2)
+		printf("%d\n", ft_print_str(argv[1]));
+	return (0);
+}
+*/

@@ -1,40 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_print_uns_nbr.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 16:59:20 by auferran          #+#    #+#             */
-/*   Updated: 2022/11/24 18:52:51 by auferran         ###   ########.fr       */
+/*   Created: 2022/11/24 12:11:51 by auferran          #+#    #+#             */
+/*   Updated: 2022/11/24 18:25:59 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	ft_printf(const char *format, ...)
+int	ft_print_uns_nbr(unsigned int n)
 {
-	int		i;
-	int		len;
-	va_list	args;
+	unsigned long long int	nb;
+	int						len;
 
-	i = 0;
+	nb = n;
 	len = 0;
-	if (!format)
-		return (-1);
-	va_start(args, format);
-	while (format[i])
-	{
-		if (format[i] == '%' && ft_check_pc_letter(format[i + 1]))
-			len += ft_print_type(args, format[i++ + 1]);
-		else
-		{
-			len += ft_print_char(format[i]);
-			if (len == -1)
-				return (-1);
-		}
-		i++;
-	}
-	va_end(args);
+	if (nb > 9)
+		len += ft_print_uns_nbr(nb / 10);
+	len += ft_print_char(nb % 10 + 48);
 	return (len);
 }
+/*
+#include <stdio.h>
+#include <stdlib.h>
+
+int	main(int argc, char **argv)
+{
+	if (argc == 2)
+		printf("%d\n", ft_print_uns_nbr(atoi(argv[1])));
+	return (0);
+}
+*/
