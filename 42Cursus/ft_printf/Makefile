@@ -6,7 +6,7 @@
 #    By: auferran <auferran@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 16:24:02 by auferran          #+#    #+#              #
-#    Updated: 2022/11/24 18:27:07 by auferran         ###   ########.fr        #
+#    Updated: 2022/11/25 12:16:21 by auferran         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRCS =		ft_printf.c ft_check_pc_letter.c ft_print_char.c ft_print_type.c \
 			ft_print_str.c ft_print_nbr.c ft_print_uns_nbr.c ft_print_hex.c
 OBJS = $(SRCS:.c=.o)
 
-CC = clang
+CC = cc
 
 FLAGS = -Wall -Werror -Wextra
 
