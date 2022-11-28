@@ -1,0 +1,25 @@
+su - : permet de passer en root.
+
+sudo apt-get install wget : permet d'installer wget, un outli libre et open source pour
+telecharger dest fichiers depuis des web repositories.
+	sudo apt-get install vim : permet d'installer vim.
+		sudo apt-get install openssh-server: permet d'installer le serveur ssh(Secure Shell Host).
+apt-get update -y : permet de verifier si des maj sont dispos.
+	apt-get upgrade -y : permet de lancer la dernier maj dispo.
+		apt-get install git -y : permet d'installer git.
+			apt install sudo : permet d'installer le mode sudo.
+
+sudo systemctl status ssh : permet de check le status du serveur ssh.
+
+sudo vim /etc/ssh/sshd_config : permet d'aller dans les configs du serveur ssh.
+
+sudo grep Port /etc/ssh/sshd_config : permet de voir si le port 4242 et bien ouvert.
+
+sudo service ssh restart : permet de restart le service ssh.
+
+usermod -aG sudo your_username : permet d'ajouter l'utilisateur voulu dans le groupe sudo.
+
+sudo visudo : permet d'aller dans les parametres sudo:
+	your_username ALL=(ALL) ALL :permet de donner tout les droits a l'utilisateur concerne.
+
+git --version : permet de check la version actuel de git.
