@@ -1,25 +1,80 @@
+lsblk : permet de check les partitions.
+
 su - : permet de passer en root.
+
+sudo reboot : permet de reboot le VM.
 
 sudo apt-get install wget : permet d'installer wget, un outli libre et open source pour
 telecharger dest fichiers depuis des web repositories.
 	sudo apt-get install vim : permet d'installer vim.
 		sudo apt-get install openssh-server: permet d'installer le serveur ssh(Secure Shell Host).
+			sudo apt-get install ufw : permet d'installer le parefeu (ufw est un outil de configuration de parefeu).
+				sudo apt-get install libpam-pwquality : permet de d'installer une library de securite de mdp.
 apt-get update -y : permet de verifier si des maj sont dispos.
 	apt-get upgrade -y : permet de lancer la dernier maj dispo.
 		apt-get install git -y : permet d'installer git.
 			apt install sudo : permet d'installer le mode sudo.
 
 sudo systemctl status ssh : permet de check le status du serveur ssh.
+	sudo systemctl restart ssh : permet de restart le serveur ssh.
+
+sudo service sshd status : permer de check le status ssh.
 
 sudo vim /etc/ssh/sshd_config : permet d'aller dans les configs du serveur ssh.
+	sudo vim /etc/pam.d/common-password : permet d'aller dans les configs de mdp de la library pam.
+		sudo vim /etc/login.defs : permet d'aller dans les configs des login (notamment pour changer les DAYS PASSWORDS).
 
 sudo grep Port /etc/ssh/sshd_config : permet de voir si le port 4242 et bien ouvert.
 
 sudo service ssh restart : permet de restart le service ssh.
 
+ssh your_username@127.0.0.1 -p 4242: permet de se connecter a distance sur le serveur.
+
 usermod -aG sudo your_username : permet d'ajouter l'utilisateur voulu dans le groupe sudo.
+
+sudo ufw enable : permet d'activer ufw.
+	sudo ufw status numbered : permet de verifier si ufw est actif.
+		sudo ufw allow ssh : permet de configurer les rules.
+			sudo ufw allow 4242 : permet de configurer les rules du port 4242.
 
 sudo visudo : permet d'aller dans les parametres sudo:
 	your_username ALL=(ALL) ALL :permet de donner tout les droits a l'utilisateur concerne.
 
+sudo groupadd user42 : permet de creer un groupe "user42".
+	sudo groupadd evaluating : permet de creer un groupe "evaluating".
+
+getent group : permet de voir si les groupes ont ete crees.
+	getent group user42 : permet de voir les users qui sont dans le groupe "user42".
+		getent group evaluating : permet de voir les users qui sont dans le groupe "evaluating".
+
+cut -d: -f1 /etc/passwd : pernet de check tout les local users.
+
 git --version : permet de check la version actuel de git.
+
+sudo adduser new_username : pour creer un nouvel utilisateur (besoin pendant la correction).
+	sudo usermod -aG user42 your_username : permet d'ajouter le user au goupe "user42".
+		sudo usermod -aG evaluating your_new_username : permet d'ajouter le user au goupe "evaluating"
+
+groups : permet de voir les groupes auxquel l'utilisateur appartient.
+
+chage -l your_new_username : permet de voir si les regles de mdp sont applique a cet utilisateur.
+
+
+
+PASSWORD CONFIG :
+
+password requisite pam_pwquality.so retry=3 minlen=10 ucredit=-1 dcredit=-1 maxrepeat=3 reject_username difok=7 enforce_for_root
+{
+	retry : c'est le nombre de fois que l'utilisateur pourra reessayer s'il se trompe de mot de passe
+	minlen : la longueur minimale du mot de passe
+	difok : permet qu'il se rappelle des anciens mots de passe que les utilisateurs ont mis.
+	dcredit : si le chiffre est negatif, c'est qu'il faut au moins x fois de nombre decimal pour que le mot de passe soit valide.
+	ucredit : si le chiffre est negatif, c'est qu'il faut au moins x fois de lettre majuscule pour que le mot de passe soit valide.
+	lcredit : si le chiffre est negatif, c'est qu'il faut au moins x fois de lettre minuscule pour que le mot de passe soit valide.
+	reject_username : permet de refuser l'username dans le mdp.
+	enforce_for_root : permet d'appliquer les restrictions a root.
+}
+
+PASS_MAX_DAYS 30 : mdp valide max 30 jour.
+PASS_MIN_DAYS : minimum 2 jours avant de pouvoir changer le mdp.
+PASS_WARN_ARGE : message avertissement 7 jours avant que le mdp expire (7 avant 30).
