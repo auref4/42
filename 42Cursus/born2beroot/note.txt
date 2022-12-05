@@ -103,78 +103,95 @@ MONITORING SCRYPT :
 {
 	#!/bin/bash
 
-	arc=$(uname -a) :	uname permet d'afficher les informations systeme (-a permet de toutes les afficher).
+	arc=$(uname -a)
+		uname permet d'afficher les informations systeme (-a permet de toutes les afficher).
 
-	cpup=$(grep "physical id" /proc/cpuinfo | wc -l) :	grep permet d'attraper "", wc -l permet de compter le nombre de ligne.
+	cpup=$(grep "physical id" /proc/cpuinfo | wc -l)
+		grep permet d'attraper "", wc -l permet de compter le nombre de ligne.
 
-	cpuv=$(grep "processor" /proc/cpuinfo | wc -l) :	grep permet d'attraper "", wc -l permet de compter le nombre de ligne.
+	cpuv=$(grep "processor" /proc/cpuinfo | wc -l)
+		grep permet d'attraper "", wc -l permet de compter le nombre de ligne.
 
-	memu1=$(free -m | awk '$1 == "Mem:" {print $3}') :	free affiche le nombre de memoire utilise est libre du systeme (-m en megabytes),
-														awk permet de gerer les colonnes.
+	memu1=$(free -m | awk '$1 == "Mem:" {print $3}')
+		free affiche le nombre de memoire utilise est libre du systeme (-m en megabytes),
+		awk permet de gerer les colonnes.
 
-	memu2=$(free -m | awk '$1 == "Mem:" {print $2}') :	free affiche le nombre de memoire utilise est libre du systeme (-m en megabytes),
-														awk permet de gerer les colonnes.
+	memu2=$(free -m | awk '$1 == "Mem:" {print $2}')
+		free affiche le nombre de memoire utilise est libre du systeme (-m en megabytes),
+		awk permet de gerer les colonnes.
 
-	memu3=$(free -m | awk '$1 == "Mem:" {printf"(%.2f%%)", $3/$2*100}') :	free affiche le nombre de memoire utilise est libre du systeme (-m en megabytes),
-																			awk permet de gerer les colonnes.
+	memu3=$(free -m | awk '$1 == "Mem:" {printf"(%.2f%%)", $3/$2*100}')
+		free affiche le nombre de memoire utilise est libre du systeme (-m en megabytes),
+		awk permet de gerer les colonnes.
 
-	disku1=$(df -BM | grep '^/dev/' | grep -v '/boot$' | awk '{nb1 += $3} END {print nb1}') :	df permet de voir le rapport file system et le disk usage (-BM en megabytes),
-																								grep permet d'attraper '^/dev' ou '/boot$' (^ pour dire a partir de /dev en l'excluant),
-																								-v permet d'inverser le sens de ce qu'on garde.
-																								awk permet de gerer les colonnes (+= de les additionner entre elles),
-																								END permet d'avoir seulement le resultats de toute les additions.
+	disku1=$(df -BM | grep '^/dev/' | grep -v '/boot$' | awk '{nb1 += $3} END {print nb1}')
+		df permet de voir le rapport file system et le disk usage (-BM en megabytes),
+		grep permet d'attraper '^/dev' ou '/boot$' (^ pour dire a partir de /dev en l'excluant),
+		-v permet d'inverser le sens de ce qu'on garde.
+		awk permet de gerer les colonnes (+= de les additionner entre elles),
+		END permet d'avoir seulement le resultats de toute les additions.
 
-	disku2=$(df -BG | grep '^/dev/' | grep -v '/boot$' | awk '{nb2 += $4} END {print nb2}') :	df permet de voir le rapport file system et le disk usage (-BG en gigabytes)
-																								grep permet d'attraper '^/dev' ou '/boot$' (^ pour dire a partir de /dev en l'excluant),
-																								-v permet d'inverser le sens de ce qu'on garde.
-																								awk permet de gerer les colonnes (+= de les additionner entre elles),
-																								END permet d'avoir seulement le resultats de toute les additions.
+	disku2=$(df -BG | grep '^/dev/' | grep -v '/boot$' | awk '{nb2 += $4} END {print nb2}')
+		df permet de voir le rapport file system et le disk usage (-BG en gigabytes)
+		grep permet d'attraper '^/dev' ou '/boot$' (^ pour dire a partir de /dev en l'excluant),
+		-v permet d'inverser le sens de ce qu'on garde.
+		awk permet de gerer les colonnes (+= de les additionner entre elles),
+		END permet d'avoir seulement le resultats de toute les additions.
 
-	disku3=$(df -BM | grep '^/dev/' | grep -v '/boot$' | awk '{nb1 += $3} {nb2 += $4} END {printf"(%d%%)", nb1/nb2*100}') :	df permet de voir le rapport file system et le disk usage (-BG en gigabytes)
-																															grep permet d'attraper '^/dev' ou '/boot$' (^ pour dire a partir de /dev en l'excluant),
-																															-v permet d'inverser le sens de ce qu'on garde.
-																															awk permet de gerer les colonnes (+= de les additionner entre elles),
-																															END permet d'avoir seulement le resultats de toute les additions.
+	disku3=$(df -BM | grep '^/dev/' | grep -v '/boot$' | awk '{nb1 += $3} {nb2 += $4} END {printf"(%d%%)", nb1/nb2*100}')
+		df permet de voir le rapport file system et le disk usage (-BG en gigabytes)
+		grep permet d'attraper '^/dev' ou '/boot$' (^ pour dire a partir de /dev en l'excluant),
+		-v permet d'inverser le sens de ce qu'on garde.
+		awk permet de gerer les colonnes (+= de les additionner entre elles),
+		END permet d'avoir seulement le resultats de toute les additions.
 
-	cpul=$(top -bn1 | grep '^%Cpu' | cut -c 10- | awk '{printf("%.1f%%"), $1 + $3}') :	top affiche les processus en cours (-bn1 l'affiche d'une maniere differente).
-																						grep permet d'attraper '^%Cpu' (^ pour dire a partir de /dev en l'excluant).
-																						cut permet de retirer quelque chose d'un dossier ou d'un fichier (-c n'enleve que les types character),
-																						10- enleve le nombre demande.
-																						awk permet de gerer les colonnes.
+	cpul=$(top -bn1 | grep '^%Cpu' | cut -c 10- | awk '{printf("%.1f%%"), $1 + $3}')
+		top affiche les processus en cours (-bn1 l'affiche d'une maniere differente).
+		grep permet d'attraper '^%Cpu' (^ pour dire a partir de /dev en l'excluant).
+		cut permet de retirer quelque chose d'un dossier ou d'un fichier (-c n'enleve que les types character),
+		10- enleve le nombre demande.
+		awk permet de gerer les colonnes.
 
-	lb=$(who -b | awk '$1 == "system" {print $3 " " $4}') :	who permet de voir qui est logged actuellement (-b permet d'afficher l'horaire du dernier system boot).
-															awk permet de gerer les colonnes.
+	lb=$(who -b | awk '$1 == "system" {print $3 " " $4}')
+		who permet de voir qui est logged actuellement (-b permet d'afficher l'horaire du dernier system boot).
+		awk permet de gerer les colonnes.
 
-	lvmu=$(if [ $(lsblk | grep "lvm" | wc -l) -eq 0 ];	then echo no; else echo yes; fi) : if permet de faire une condition.
-														lsblk afficher la liste des partitions.
-														grep permet d'attraper 'lvm'.
-														wc permet de compter (-l le nombre de lignes).
-														-eq 0 est-elle egale a 0 ?
-														echo permet d'ecrire. si = 0 ecrire no, sinon ecrire yes.
-														fi permet de fermet la confition.
+	lvmu=$(if [ $(lsblk | grep "lvm" | wc -l) -eq 0 ]; then echo no; else echo yes; fi)
+		if permet de faire une condition.
+		lsblk afficher la liste des partitions.
+		grep permet d'attraper 'lvm'.
+		wc permet de compter (-l le nombre de lignes).
+		-eq 0 est-elle egale a 0 ?
+		echo permet d'ecrire. si = 0 ecrire no, sinon ecrire yes.
+		fi permet de fermet la confition.
 
-	ctcp=$(ss -neopt state established | wc -l) :	ss permet d'investiger pour etudier les sockets.
-													-n affiche les valeurs des bandes passantes exactes.
-													-e permet de voir les details des sockets.
-													-o afficher les informations d'horaire.
-													-p permet de voir le process utiliser par les sockets.
-													-t afficher les socket TCP.
-													state established etat etabli ?.
-													wc compte (-l le nombre de lignes).
+	ctcp=$(ss -neopt state established | wc -l)
+		ss permet d'investiger pour etudier les sockets.
+		-n affiche les valeurs des bandes passantes exactes.
+		-e permet de voir les details des sockets.
+		-o afficher les informations d'horaire.
+		-p permet de voir le process utiliser par les sockets.
+		-t afficher les socket TCP.
+		state established etat etabli ?.
+		wc compte (-l le nombre de lignes).
 
-	ulog=$(users | wc -w) :	users ecrit le nombre de users connecter actuellement.
-							wc compte (-w le nombre de mots).
+	ulog=$(users | wc -w)
+		users ecrit le nombre de users connecter actuellement.
+		wc compte (-w le nombre de mots).
 
-	ip=$(hostname -I) :	afficher le nom de l'hote systeme.
-						-I affichhe l'ip.
+	ip=$(hostname -I)
+		afficher le nom de l'hote systeme.
+		-I affichhe l'ip.
 
-	mac=$(ip link | grep "ether" | awk '{print $2}') :	ip link afficher les configurations de network de l'ordinateur.
-														grep permet d'attraper 'ether'.
-														awk permet de gerer les colonnes.
+	mac=$(ip link | grep "ether" | awk '{print $2}')
+		ip link afficher les configurations de network de l'ordinateur.
+		grep permet d'attraper 'ether'.
+		awk permet de gerer les colonnes.
 
-	sudo=$(journalctl _COMM=sudo | grep COMMAND | wc -l) :	journalctl interroge le systeme journal.
-															grep permet d'attraper COMMAND.
-															wc compte (-l le nombre de lignes).
+	sudo=$(journalctl _COMM=sudo | grep COMMAND | wc -l)
+		journalctl interroge le systeme journal.
+		grep permet d'attraper COMMAND.
+		wc compte (-l le nombre de lignes).
 
 	wall "	#Architecture: $arc
 			#CPU physical: $cpup
