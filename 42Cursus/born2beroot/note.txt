@@ -61,6 +61,8 @@ groups : permet de voir les groupes auxquel l'utilisateur appartient.
 
 chage -l your_new_username : permet de voir si les regles de mdp sont applique a cet utilisateur.
 
+SUDO CHAGE -e 30 -M 2 -m 30 root :
+
 touch monitoring.sh : permet de creer un fichier .sh pour faire le monitoring.
 
 chmod 777 monitoring.sh : permet de donner les droits au monitoring.sh.
@@ -165,7 +167,7 @@ MONITORING SCRYPT :
 		echo permet d'ecrire. si = 0 ecrire no, sinon ecrire yes.
 		fi permet de fermet la confition.
 
-	ctcp=$(ss -neopt state established | wc -l)
+	ctcp=$(ss -t state established | wc -l)
 		ss permet d'investiger pour etudier les sockets.
 		-n affiche les valeurs des bandes passantes exactes.
 		-e permet de voir les details des sockets.
@@ -204,6 +206,52 @@ MONITORING SCRYPT :
 			#Connections TCP: $ctcp ESTABLISHED
 			#User log: $ulog
 			#Network: IP $ip($mac)
+			#Sudo : $sudo cmd":
 }
 
 wall permet de mieux organiser son scrypt est permet de l'afficher sur tout les terminaux en meme temps.
+
+sudo /usr/local/bin/monitoring.sh : permet d'executer le monitoring.
+
+
+BONUS :
+
+sudo apt install lighttpd : permet d'installer lighttpd (un logiciel serveur web securise).
+
+dpkg -l | grep lighttpd :
+	permet de verifier si lighttpd est bien installe. (dpk permet de voir les managers de package).
+	-l permet d'afficher une liste des paquets satisfaisant un motif de recherche.
+	grep "lighttpd" permet d'attraper "lighttpd.
+
+sudo ufw allow 80 : permet de configurer les regles pour le port 80.
+
+sudo apt install mariadb-server : permet d'installer mariadb-server. (un systene de gestion des donnees).
+
+dpkg -l | grep mariadb-server : permet de verifier si mariadb est bien installe.
+
+sudo mariadb : permet de se log in a MariaDB une premiere fois.
+
+CREATE DATABASE born2beroot : permet de creer la database avec le nom 'born2beroot'.
+
+GRANT ALL ON born2beroot.* TO 'root'@'localhost' IDENTIFIED BY 'Testtest42' WITH GRANT OPTION
+	permet de donner tout les privileges de la database creer a root.
+
+FLUSH PRIVILEGES; permet de vider les privileges.
+
+SHOW DATABASES; : permet de voir les databases.
+
+mariadb -u root -p : permet de se connecter de nouveau a mariadb une fois root ajoute.
+
+sudo apt install php-cgi php-mysql : permet d'installer php.
+
+dpkg -l | grep php : permet de verifier si php est bien installe.
+
+sudo wget http://wordpress.org/latest.tar.gz -P /var/www/html : permet d'installer wordpress en .tar dans le chemin cite.
+
+sudo tar -xzvf /var/www/html/latest.tar.gz : permet d'extraire les fichiers du .tar
+
+sudo rm /var/www/html/latest.tar.gz : permet d'effacer le .tar une foi les fiecheirs extrait.
+
+sudo cp -r /var/www/html/wordpress/* /var/www/html : permet de copier coller le dossier wordpress a l'endroit cite.
+
+sudo rm -rf /var/www/html/wordpress : permet de supprimert l'ancien dossier wordpress.
