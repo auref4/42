@@ -216,7 +216,7 @@ sudo /usr/local/bin/monitoring.sh : permet d'executer le monitoring.
 
 BONUS :
 
-sudo apt install lighttpd : permet d'installer lighttpd (un logiciel serveur web securise).
+sudo apt install lighttpd : permet d'installer lighttpd (un logiciel serveur web securise qui permet de traite une requete http).
 
 dpkg -l | grep lighttpd :
 	permet de verifier si lighttpd est bien installe. (dpk permet de voir les managers de package).
@@ -254,4 +254,29 @@ sudo rm /var/www/html/latest.tar.gz : permet d'effacer le .tar une foi les fiech
 
 sudo cp -r /var/www/html/wordpress/* /var/www/html : permet de copier coller le dossier wordpress a l'endroit cite.
 
-sudo rm -rf /var/www/html/wordpress : permet de supprimert l'ancien dossier wordpress.
+sudo rm -rf /var/www/html/wordpress : permet de supprimer l'ancien dossier wordpress.
+
+sudo cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php : permet de copier un fichier de config wordpress.
+
+sudo vi /var/www/html/wp-config.php : permet de modifier le fichier de config.
+{
+	23 define( 'DB_NAME', 'born2beroot' );
+	26 define( 'DB_USER', 'root' );
+	29 define( 'DB_PASSWORD', 'Testtest42' );
+}
+
+sudo lighty-enable-mod fastcgi : permet d'activer le fastcgi (module permettant de gerer les requetes de maniere simulatanee).
+
+sudo lighty-enable-mod fastcgi-php : permet d'activer le fastcgi-php module. (gestionnaire de processus).
+
+sudo service lighttpd force-reload : permet d'activer le force-reload du service lighttpd. (permet de force-reload lighttpd).
+
+sudo apt install vsftpd : permet d'installer vsftpd (un serveur ultra securise).
+
+dpkg -l | grep vsftpd : permet de check si vsftpd est bien installe.
+
+sudo ufw allow 21 : permet d'ouvrir le port 21.
+
+sudo vim /etc/vsftpd.conf : permet de rentrer dans le fichier config de vsftpd.
+
+ftp 127.0.0.1 2122 : permet de se connecter a ftp.
