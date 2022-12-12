@@ -358,13 +358,16 @@ sudo ufw status numbered
 sudo ufw allow 8080
 sudo ufw delete rule number
 
+
 SSH :
 sudo vim /etc/ssh/sshd_config
 ssh your_user_id@127.0.0.1 -p 4444
 
+
 SCRIPT :
 sudo vim /usr/local/bin/monitoring.sh
 crontab -u root -u
+
 
 BONUS :
 ftp :
