@@ -365,3 +365,8 @@ ssh your_user_id@127.0.0.1 -p 4444
 SCRIPT :
 sudo vim /usr/local/bin/monitoring.sh
 crontab -u root -u
+
+BONUS :
+ftp :
+	protocole de communication destines au partage de fichiers
+	port 21 pour les commandes et port 20 pour les donnes.
