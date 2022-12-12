@@ -317,20 +317,17 @@ Cron :
 COMMANDES ET TRUCS A CONNAITRE :
 
 CHECK :
-
 sudo ufw status
 sudo systemctl status ssh
 hostnamectl
 
 
 GROUP :
-
 getent group sudo
 getent group user42
 
 
 USER :
-
 sudo adduser new-username
 sudo vim /etc/pam.d/common-password
 sudo vim /etc/login.defs
@@ -340,7 +337,6 @@ sudo usermod -aG group-name user-name
 
 
 HOST AND PARTITIONS:
-
 hostnamectl
 hostnamectl set-hostname new_hostname
 Restat machine
@@ -348,7 +344,6 @@ lsblk
 
 
 SUDO :
-
 dpkg -l | grep sudo -
 sudo visudo
 
