@@ -370,6 +370,8 @@ crontab -u root -u
 
 
 BONUS :
+if config
+ftp auferran@127.0.0.1 2122
 ftp :
 	protocole de communication destines au partage de fichiers
 	port 21 pour les commandes et port 20 pour les donnes.
