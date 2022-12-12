@@ -67,6 +67,8 @@ touch monitoring.sh : permet de creer un fichier .sh pour faire le monitoring.
 
 chmod 777 monitoring.sh : permet de donner les droits au monitoring.sh.
 
+shasum : permet de creer la signature de la vm.
+
 
 
 PASSWORD CONFIG :
@@ -280,3 +282,86 @@ sudo ufw allow 21 : permet d'ouvrir le port 21.
 sudo vim /etc/vsftpd.conf : permet de rentrer dans le fichier config de vsftpd.
 
 ftp 127.0.0.1 2122 : permet de se connecter a ftp.
+
+REVISION CORRECTION :
+
+difference CENTOS ET DEBIAN :
+	Debian est plus orienter pour les particulier, Centos + pour les pro
+	les package de centos sont limite aux utilisations pros
+	les maj de debian sont facile a faire, les maj de centos sont rare + difficile d'acces
+
+difference APT et Aptitude :
+	Aptitude est plus securise et te prend plus par la maniere.
+	Aptitude recommande des package interessant et supprime des package que tu n'utilise pas.
+	APT fait que ce que tu lui dis.
+
+AppARMOR :
+	logiciel de base de Linux qui permet a root de modifier l'utilisation des cpus
+	brider l'utilisation des packages.
+	il peut brider la machine.
+
+LVM ;
+	Logical Volume Manager.
+	Il permet de manipuler facilement les partitions et de les crypter.
+
+UFW :
+	c'est un parefeu.
+	Permet de gerer l'ouverture et fermeture des ports.
+
+SSH :
+	Systeme securise qui permet de communiquer avec la vm de maniere crypter.
+
+Cron :
+	Permet d'executer un script a interval regulie.
+
+COMMANDES ET TRUCS A CONNAITRE :
+
+CHECK :
+
+sudo ufw status
+sudo systemctl status ssh
+hostnamectl
+
+
+GROUP :
+
+getent group sudo
+getent group user42
+
+
+USER :
+
+sudo adduser new-username
+sudo vim /etc/pam.d/common-password
+sudo vim /etc/login.defs
+sudo chage -l user-name
+sudo groupadd group-name
+sudo usermod -aG group-name user-name
+
+
+HOST AND PARTITIONS:
+
+hostnamectl
+hostnamectl set-hostname new_hostname
+Restat machine
+lsblk
+
+
+SUDO :
+
+dpkg -l | grep sudo -
+sudo visudo
+
+
+UFW :
+sudo ufw status numbered
+sudo ufw allow 8080
+sudo ufw delete rule number
+
+SSH :
+sudo vim /etc/ssh/sshd_config
+ssh your_user_id@127.0.0.1 -p 4444
+
+SCRIPT :
+sudo vim /usr/local/bin/monitoring.sh
+crontab -u root -u
