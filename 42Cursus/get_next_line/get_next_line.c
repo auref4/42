@@ -39,14 +39,16 @@ char	*get_next_line(int fd)
 			free(buff);
 			return (line);
 		}
-	//	if (r <= 0 || r < BUFFER_SIZE)
-	//		return (ft_strdup(save));
 		if (n <= 0)
 		{
 			line = ft_strdup(buff);
-			save = buff;
 			return (line);
-		}	
+		}
+		if (r <= 0 || r < BUFFER_SIZE)
+		{
+			buff = NULL;
+			return (ft_strdup(buff));
+		}
 		return (NULL);
 	}
 }
