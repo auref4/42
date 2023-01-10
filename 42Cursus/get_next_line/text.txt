@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 je fais
 un
 test
 de fou
 furieux ahahahahaha
+=======
+test
+de fou
+furieux
+>>>>>>> e3163b0027112141f8ca7c48acfe480615132d05
 !

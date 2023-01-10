@@ -42,8 +42,22 @@ char	*get_next_line(int fd)
 			save = ft_substr(&save[n + 1], 0, ft_strlen(&save[n + 1]));
 			return (line);
 		}
+<<<<<<< HEAD
 		if (r <= 0 || r < BUFFER_SIZE)
 			return (ft_strdup(&save));
+=======
+		if (n <= 0)
+		{
+			line = ft_strdup(buff);
+			return (line);
+		}
+		if (r <= 0 || r < BUFFER_SIZE)
+		{
+			buff = NULL;
+			return (ft_strdup(buff));
+		}
+		return (NULL);
+>>>>>>> e3163b0027112141f8ca7c48acfe480615132d05
 	}
 	return (NULL);
 }
