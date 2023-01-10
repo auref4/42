@@ -6,7 +6,7 @@
 /*   By: auferran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 19:05:49 by auferran          #+#    #+#             */
-/*   Updated: 2022/12/17 16:11:39 by auferran         ###   ########.fr       */
+/*   Updated: 2023/01/09 19:54:47 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,30 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_strdup(char *src)
+char	*ft_strdup(char **src)
 {
 	char	*dest;
 	size_t	len;
 	int	i;
 
-	len = ft_strlen(src);
+	len = ft_strlen(*src);
+	if (len == 0)
+	{
+		dest = NULL;
+		free(*src);
+		return (dest);
+	}
 	dest = malloc(sizeof(char) * (len + 1));
 	if (!dest)
 		return (NULL);
 	i = 0;
-	while (src[i])
+	while ((*src)[i])
 	{
-		dest[i] = src[i];
+		dest[i] = (*src)[i];
 		i++;
 	}
+	free(*src);
+	*src = NULL;
 	dest[i] = '\0';
 	return (dest);
 }
@@ -106,7 +114,7 @@ int	ft_strchr(char *str, char searchedChar)
 			return (i);
 		i++;
 	}
-	return (0);
+	return (-1);
 }
 /*
 #include <stdio.h>

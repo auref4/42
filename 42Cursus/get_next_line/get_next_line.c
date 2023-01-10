@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:25:07 by auferran          #+#    #+#             */
-/*   Updated: 2022/12/17 19:29:41 by auferran         ###   ########.fr       */
+/*   Updated: 2023/01/09 19:55:51 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*get_next_line(int fd)
 	(void)	r;
 
 	line = NULL;
+	n = -1;
 	while (4)
 	{
 		buff = malloc(sizeof(char) * BUFFER_SIZE + 1);
@@ -29,26 +30,22 @@ char	*get_next_line(int fd)
 			return (NULL);
 		r = read(fd, buff, BUFFER_SIZE);
 		buff[r] = '\0';
-		n = ft_strchr(buff, '\n');
 		if (save)
-			buff = ft_strjoin(save, buff);
-		if (n > 0)
+			save = ft_strjoin(save, buff);
+		else
+			save = buff;
+		if (save)
+			n = ft_strchr(save, '\n');
+		if (n >= 0)
 		{
-			line = ft_substr(buff, 0, n);
-			save = ft_substr(&buff[n + 1], 0, ft_strlen(&buff[n + 1])); 
-			free(buff);
+			line = ft_substr(save, 0, n + 1);
+			save = ft_substr(&save[n + 1], 0, ft_strlen(&save[n + 1]));
 			return (line);
 		}
-	//	if (r <= 0 || r < BUFFER_SIZE)
-	//		return (ft_strdup(save));
-		if (n <= 0)
-		{
-			line = ft_strdup(buff);
-			save = buff;
-			return (line);
-		}	
-		return (NULL);
+		if (r <= 0 || r < BUFFER_SIZE)
+			return (ft_strdup(&save));
 	}
+	return (NULL);
 }
 
 #include <stdio.h>
@@ -59,13 +56,23 @@ char	*get_next_line(int fd)
 int	main(void)
 {
 	int	fd;
+	int	a;
 	char	*line;
 
+	a = 1;
 	fd = open("text.txt", O_RDONLY);
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		printf("%s", line);
+		printf("line = %s", line);
 		free (line);
 	}
+/*	while (a)
+	{
+		line = get_next_line(fd);
+		printf("testdefoufurieux = %s", line);
+		if (line == NULL)
+			a = 0;
+		free(line);
+	} */
 	return (0);
 }
