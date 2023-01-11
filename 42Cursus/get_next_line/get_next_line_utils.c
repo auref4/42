@@ -6,7 +6,7 @@
 /*   By: auferran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 19:05:49 by auferran          #+#    #+#             */
-/*   Updated: 2023/01/09 19:54:47 by auferran         ###   ########.fr       */
+/*   Updated: 2023/01/11 17:38:21 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_strdup(char **src)
 {
 	char	*dest;
 	size_t	len;
-	int	i;
+	int		i;
 
 	len = ft_strlen(*src);
 	if (len == 0)
@@ -75,7 +75,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		j++;
 	}
 	dest[i] = '\0';
-	return (dest);
+	return (free(s1), free(s2), dest);
 }
 
 char	*ft_substr(char *s, int start, size_t len)
@@ -116,16 +116,3 @@ int	ft_strchr(char *str, char searchedChar)
 	}
 	return (-1);
 }
-/*
-#include <stdio.h>
-#include <stdlib.h>
-
-int	main(int argc, char **argv)
-{
-	int	i;
-	(void)	argc;
-
-	i = ft_strchr(argv[1], argv[2][0]);
-	printf("ft_strchr = %d\n", i);
-}
-*/
