@@ -6,11 +6,11 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 17:52:22 by auferran          #+#    #+#             */
-/*   Updated: 2023/01/11 17:53:09 by auferran         ###   ########.fr       */
+/*   Updated: 2023/01/16 16:09:51 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*verif_n(int n, char **save)
 {
