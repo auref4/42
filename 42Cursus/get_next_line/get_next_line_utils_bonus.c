@@ -6,11 +6,11 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 17:52:49 by auferran          #+#    #+#             */
-/*   Updated: 2023/01/11 17:52:53 by auferran         ###   ########.fr       */
+/*   Updated: 2023/01/16 16:10:05 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	ft_strlen(char *str)
 {
