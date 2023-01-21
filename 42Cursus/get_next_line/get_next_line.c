@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:25:07 by auferran          #+#    #+#             */
-/*   Updated: 2023/01/11 17:40:18 by auferran         ###   ########.fr       */
+/*   Updated: 2023/01/21 03:54:14 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	main(void)
 	int	fd;
 	char	*line;
 
-	fd = open("bible.txt", O_RDONLY);
+	fd = open("text.txt", O_RDONLY);
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		printf("line = %s", line);
