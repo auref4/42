@@ -6,7 +6,7 @@
 /*   By: auferran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 22:06:48 by auferran          #+#    #+#             */
-/*   Updated: 2023/01/21 02:15:09 by auferran         ###   ########.fr       */
+/*   Updated: 2023/01/24 09:49:45 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 int	ft_elmt_size(t_elmt *first_a)
 {
 	int	i;
+	t_elmt	*tmp;
 
 	if (!first_a)
 		return (0);
-	i = 0;
-	while (first_a)
+	i = 1;
+	tmp = first_a;
+	while (tmp->next != first_a)
 	{
-		first_a = first_a->next;
+		tmp = tmp->next;
 		i++;
 	}
 	return (i);
@@ -42,7 +44,7 @@ t_elmt	*ft_elmt_last(t_elmt *first_a)
 	return (first_a);
 }
 
-t_elmt	*ft_elmt_new(int number)
+t_elmt	*ft_elmt_new(int number, t_elmt *first_a)
 {
 	t_elmt	*new;
 
@@ -50,7 +52,7 @@ t_elmt	*ft_elmt_new(int number)
 	if (!new)
 		return (NULL);
 	new->nb = number;
-	new->next = NULL;
+	new->next = first_a;
 	return (new);
 }
 
@@ -61,8 +63,10 @@ void	ft_add_back(t_elmt **first_a, t_elmt *new)
 	if (*first_a == NULL)
 	{
 		*first_a = new;
-		return;
+		return ;
 	}
 	tmp = ft_elmt_last(*first_a);
 	tmp->next = new;
+	*first_a->prev = new;
+	new->prev = tmp;
 }
