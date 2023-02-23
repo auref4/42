@@ -1,6 +1,16 @@
 #include "minitalk.h"
 #include <stdio.h>
 
+void  ft_putstr(char *str)
+{
+  int   i;
+
+  i = 0;
+  while(str[i])
+    i++;
+  write(1, str, i);
+}
+
 void  ft_putchar(char c)
 {
   write(1, &c, 1);
@@ -10,8 +20,9 @@ void  ft_write_lst(t_lst  *lst)
 {
   while(lst)
   {
-   ft_putchar(lst->character);
-   lst = lst->next;
+    ft_putchar(lst->character);
+    ft_putstr("write lst\n");
+    lst = lst->next;
   }
 }
 
@@ -25,6 +36,7 @@ t_lst   *ft_lstlast(t_lst *lst)
     lst = lst->next;
     i++;
   }
+  ft_putstr("elmt last\n");
   return (lst);
 }
 
@@ -37,6 +49,7 @@ t_lst   *ft_elmt_new(char c)
     return (NULL);
   new->character = c;
   new->next = NULL;
+  ft_putstr("elmt new\n");
   return (new);
 }
 
@@ -50,6 +63,7 @@ void  ft_lstadd_back(t_lst *lst, t_lst *new)
   }
   tmp = ft_lstlast(lst);
   tmp->next = new;
+  ft_putstr("lstdaddback\n");
 }
 
 void  ft_putnbr(int nb)
@@ -78,26 +92,23 @@ void  def_gest(t_sigaction sigact)
 {
   sigaction(SIGUSR1, &sigact, NULL);
   sigaction(SIGUSR2, &sigact, NULL);
+  sigaction(SIGINT, &sigact, NULL);
 }
 
 void  sig_receipt2(int sig, int pid_client, int *i, char *c)
 {
   static int   count;
   static char  bi;
-
-  if (sig == SIGUSR1)
+  
+  if (sig == SIGUSR1 || sig == SIGUSR2)
   {
-    bi = bi * 2;
+    if (sig == SIGUSR1)
+      bi = bi * 2;
+    if (sig == SIGUSR2)
+      bi = bi * 2 + 1;
     count++;
-    printf("test1\n");
-    kill (SIGUSR1, pid_client);
-  }
-  if (sig == SIGUSR2)
-  {
-    bi = bi * 2 + 1;
-    count++;
-    printf("test2");
-    kill (SIGUSR2, pid_client);
+    ft_putstr("signal recu\n");
+    kill(pid_client, SIGUSR1);
   }
   if (sig == -4)
   {
@@ -123,6 +134,7 @@ void  def_sigact(t_sigaction *sigact)
 {
   ft_memset(sigact, 0, sizeof(t_sigaction));
   sigact->sa_sigaction = &sig_receipt;
+  sigact->sa_flags = SA_SIGINFO;
 }
 
 void  get_char(int *i, char *c, t_lst *lst)
@@ -134,6 +146,7 @@ void  get_char(int *i, char *c, t_lst *lst)
   else if (*i == 8)
   {
     new = ft_elmt_new(*c);
+    ft_putstr("avant lstaddback\n");
     ft_lstadd_back(lst, new);
     if (*c == '\0')
       ft_write_lst(lst);
@@ -144,7 +157,7 @@ void  get_char(int *i, char *c, t_lst *lst)
 
 int   main(void)
 {
-  //t_sigaction   sigact;
+  t_sigaction   sigact;
   t_lst  *lst;
   int   i;
   char  c;
@@ -153,11 +166,8 @@ int   main(void)
   c = 0;
   lst = NULL;
   ft_putnbr(getpid());
-  //def_sigact(&sigact);
-  //def_gest(sigact);
+  def_sigact(&sigact);
+  def_gest(sigact);
   while(4)
-  {
-    //get_char(&i, &c, lst);
-    //pause();
-  }
+    get_char(&i, &c, lst);
 }

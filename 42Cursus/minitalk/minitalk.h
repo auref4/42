@@ -31,5 +31,6 @@ void  sig_receipt2(int sig, int pid_client, int *i, char *c);
 void  sig_receipt(int sig, siginfo_t *info, void *v);
 void  def_sigact(t_sigaction *sigact);
 void  get_char(int *i, char *c, t_lst *lst);
+void  sig_handler(int nb);
 
 #endif

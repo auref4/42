@@ -54,11 +54,17 @@ void  voyager(char byte, int pid_server)
   i = 7;
   while (i >= 0)
   {
-    if (byte >> i % 2 == 0)
+    if ((byte >> i) % 2 == 0)
+    {
+      printf("byte = 0\n");
       kill(pid_server, SIGUSR1);
-    else if (byte >> i % 2 == 1)
+    }
+    if ((byte >> i) % 2 == 1)
+    {
+      printf("byte = 1\n");
       kill(pid_server, SIGUSR2);
-    printf("je lance un signal\n");
+    }
+    printf("avant pause\n");
     i--;
     pause();
   }
@@ -76,14 +82,20 @@ void  send_message(int pid_server, char *str)
       voyager(str[i], pid_server);
       i++;
     }
+    voyager(str[i], pid_server);
   }
   else
     ft_error(2);
 }
 
+void  sig_handler(int nb)
+{
+  (void) nb;
+}
+
 int main(int argc, char **argv)
 {
-  printf("nb = %d\n", ft_atoi(argv[1]));
+  signal(SIGUSR1, sig_handler);
   if (argc == 3)
    send_message(ft_atoi(argv[1]), argv[2]);
   else
