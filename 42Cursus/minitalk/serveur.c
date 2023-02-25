@@ -16,14 +16,35 @@ void  ft_putchar(char c)
   write(1, &c, 1);
 }
 
-void  ft_write_lst(t_lst  *lst)
+int   ft_lst_size(t_lst *lst)
 {
-  while(lst)
+  int   i;
+
+  i = 0;
+  while (lst)
   {
-    ft_putchar(lst->character);
-    ft_putstr("write lst\n");
+    i++;
     lst = lst->next;
   }
+  return (i);
+}
+
+char  *ft_lst_join(t_lst *lst)
+{
+  int   i;
+  char  *str;
+
+  i = 0;
+  str = malloc(sizeof(char) * ft_lst_size(lst));
+  if (!str)
+    return (NULL);
+  while (lst)
+  {
+    str[i] = lst->character;
+    i++;
+    lst = lst->next;
+  }
+  return (str);
 }
 
 t_lst   *ft_lstlast(t_lst *lst)
@@ -31,12 +52,11 @@ t_lst   *ft_lstlast(t_lst *lst)
   int   i;
   
   i = 0;
-  while (lst)
+  while (lst->next)
   {
     lst = lst->next;
     i++;
   }
-  ft_putstr("elmt last\n");
   return (lst);
 }
 
@@ -49,21 +69,20 @@ t_lst   *ft_elmt_new(char c)
     return (NULL);
   new->character = c;
   new->next = NULL;
-  ft_putstr("elmt new\n");
   return (new);
 }
 
-void  ft_lstadd_back(t_lst *lst, t_lst *new)
+void  ft_lstadd_back(t_lst **lst, t_lst *new)
 {
   t_lst  *tmp;
-  if(lst == NULL)
+
+  if(*lst == NULL)
   {
-    lst = new;
+    *lst = new;
     return ;
   }
-  tmp = ft_lstlast(lst);
+  tmp = ft_lstlast(*lst);
   tmp->next = new;
-  ft_putstr("lstdaddback\n");
 }
 
 void  ft_putnbr(int nb)
@@ -95,10 +114,13 @@ void  def_gest(t_sigaction sigact)
   sigaction(SIGINT, &sigact, NULL);
 }
 
-void  sig_receipt2(int sig, int pid_client, int *i, char *c)
+void  sig_receipt(int sig, siginfo_t *info, void *v)
 {
+  (void)  v;
+  static t_lst   *lst;
   static int   count;
   static char  bi;
+  char  *str;
   
   if (sig == SIGUSR1 || sig == SIGUSR2)
   {
@@ -107,27 +129,20 @@ void  sig_receipt2(int sig, int pid_client, int *i, char *c)
     if (sig == SIGUSR2)
       bi = bi * 2 + 1;
     count++;
-    ft_putstr("signal recu\n");
-    kill(pid_client, SIGUSR1);
-  }
-  if (sig == -4)
-  {
-    *c = bi;
-    *i = count;
-    if (count == 8)
+    if(count == 8)
     {
+      ft_lstadd_back(&lst, ft_elmt_new(bi));
+      if (bi == '\0')
+      {
+        str = ft_lst_join(lst);
+        ft_putstr(str);
+        ft_putchar('\n');
+      }
       count = 0;
       bi = 0;
     }
+    kill(info->si_pid, SIGUSR1);
   }
-}
-
-void  sig_receipt(int sig, siginfo_t *info, void *v)
-{
-  (void)  v;
-
-  if (sig == SIGUSR1 || sig == SIGUSR2)
-    sig_receipt2(sig, info->si_pid, NULL, NULL);
 }
 
 void  def_sigact(t_sigaction *sigact)
@@ -137,37 +152,13 @@ void  def_sigact(t_sigaction *sigact)
   sigact->sa_flags = SA_SIGINFO;
 }
 
-void  get_char(int *i, char *c, t_lst *lst)
-{
-  t_lst   *new;
-
-  if (*i < 8)
-    sig_receipt2(-4, 0, i, c);
-  else if (*i == 8)
-  {
-    new = ft_elmt_new(*c);
-    ft_putstr("avant lstaddback\n");
-    ft_lstadd_back(lst, new);
-    if (*c == '\0')
-      ft_write_lst(lst);
-    *i = 0;
-    *c = 0;
-  }
-}
-
 int   main(void)
 {
   t_sigaction   sigact;
-  t_lst  *lst;
-  int   i;
-  char  c;
 
-  i = 0;
-  c = 0;
-  lst = NULL;
   ft_putnbr(getpid());
+  ft_putchar('\n');
   def_sigact(&sigact);
   def_gest(sigact);
-  while(4)
-    get_char(&i, &c, lst);
+  while(4);
 }

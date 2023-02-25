@@ -55,16 +55,9 @@ void  voyager(char byte, int pid_server)
   while (i >= 0)
   {
     if ((byte >> i) % 2 == 0)
-    {
-      printf("byte = 0\n");
       kill(pid_server, SIGUSR1);
-    }
     if ((byte >> i) % 2 == 1)
-    {
-      printf("byte = 1\n");
       kill(pid_server, SIGUSR2);
-    }
-    printf("avant pause\n");
     i--;
     pause();
   }
