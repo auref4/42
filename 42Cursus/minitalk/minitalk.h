@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 20:53:12 by auferran          #+#    #+#             */
-/*   Updated: 2023/03/01 03:40:02 by auferran         ###   ########.fr       */
+/*   Updated: 2023/03/01 04:34:51 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_write_lst(t_lst *lst);
 t_lst	*ft_lstlast(t_lst *lst);
 t_lst	*ft_elmt_new(char c);
 int		ft_lst_size(t_lst *lst);
-char	*ft_lst_join(t_lst **lst);
+char	*ft_lst_join(t_lst *lst);
 void	ft_lstadd_back(t_lst **lst, t_lst *new);
 void	*ft_memset(void *pointer, int value, size_t count);
 void	ft_lst_clear(t_lst **lst);

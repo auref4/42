@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 00:00:16 by auferran          #+#    #+#             */
-/*   Updated: 2023/03/01 03:45:04 by auferran         ###   ########.fr       */
+/*   Updated: 2023/03/01 04:36:56 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,20 @@ int	ft_lst_size(t_lst *lst)
 	return (i);
 }
 
-char	*ft_lst_join(t_lst **lst)
+char	*ft_lst_join(t_lst *lst)
 {
 	int		i;
 	char	*str;
 
 	i = 0;
-	str = malloc(sizeof(char) * ft_lst_size(*lst));
+	str = malloc(sizeof(char) * ft_lst_size(lst));
 	if (!str)
 		return (NULL);
-	while (*lst)
+	while (lst)
 	{
-		str[i] = (*lst)->character;
+		str[i] = lst->character;
 		i++;
-		*lst = (*lst)->next;
+		lst = lst->next;
 	}
 	return (str);
 }
