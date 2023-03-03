@@ -33,5 +33,14 @@ void	push_swap(char **dest)
 		ft_add_back(&lst_a, new);
 		i++;
 	}
+	/*t_lst	*tmp;
+	tmp = lst_a;
+	while (tmp->next)
+	{
+		printf("number = %d\n", tmp->nb);
+		if (tmp->next == lst_a)
+			return ;
+		tmp = tmp->next;
+	}*/
 	free_dest(dest);
 }

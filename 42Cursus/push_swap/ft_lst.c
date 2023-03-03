@@ -21,8 +21,10 @@ int	ft_lst_size(t_lst *lst_a)
 		return (0);
 	i = 1;
 	tmp = lst_a;
-	while (tmp->next != lst_a)
+	while (tmp->next)
 	{
+		if (tmp->next == lst_a)
+			return (i);
 		tmp = tmp->next;
 		i++;
 	}
