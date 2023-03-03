@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_elmt_add.c                                      :+:      :+:    :+:   */
+/*   ft_lst_add.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auferran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,16 +12,16 @@
 
 #include "push_swap.h"
 
-int	ft_elmt_size(t_elmt *first_a)
+int	ft_lst_size(t_lst *lst_a)
 {
 	int	i;
-	t_elmt	*tmp;
 
-	if (!first_a)
+	t_lst	*tmp;
+	if (!lst_a)
 		return (0);
 	i = 1;
-	tmp = first_a;
-	while (tmp->next != first_a)
+	tmp = lst_a;
+	while (tmp->next != lst_a)
 	{
 		tmp = tmp->next;
 		i++;
@@ -29,44 +29,45 @@ int	ft_elmt_size(t_elmt *first_a)
 	return (i);
 }
 
-t_elmt	*ft_elmt_last(t_elmt *first_a)
+t_lst	*ft_lst_last(t_lst *lst_a)
 {
 	int	i;
 	int	len;
 
 	i = 0;
-	len = ft_elmt_size(first_a);
+	len = ft_lst_size(lst_a);
 	while (i < len -1)
 	{
-		first_a = first_a->next;
+		lst_a = lst_a->next;
 		i++;
 	}
-	return (first_a);
+	return (lst_a);
 }
 
-t_elmt	*ft_elmt_new(int number, t_elmt *first_a)
+t_lst	*ft_lst_new(int number, t_lst *lst_a)
 {
-	t_elmt	*new;
+	t_lst	*new;
 
-	new = malloc(sizeof(t_elmt));
+	new = malloc(sizeof(t_lst));
 	if (!new)
 		return (NULL);
 	new->nb = number;
-	new->next = first_a;
+	new->next = lst_a;
 	return (new);
 }
 
-void	ft_add_back(t_elmt **first_a, t_elmt *new)
+void	ft_add_back(t_lst **lst_a, t_lst *new)
 {
-	t_elmt	*tmp;
+	t_lst	*tmp;
 
-	if (*first_a == NULL)
+	tmp = NULL;
+	if (*lst_a == NULL)
 	{
-		*first_a = new;
+		*lst_a = new;
 		return ;
 	}
-	tmp = ft_elmt_last(*first_a);
+	tmp = ft_lst_last(*lst_a);
 	tmp->next = new;
-	*first_a->prev = new;
+	(*lst_a)->prev = new;
 	new->prev = tmp;
 }

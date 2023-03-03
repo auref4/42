@@ -12,7 +12,17 @@
 
 #include "push_swap.h"
 
+void ft_putstr(char *str)
+{
+	int	i;
+
+	i = 0;
+	while(str[i])
+		i++;
+	write(1, str, i);
+}
+
 void	ft_error(void)
 {
-	write(1, "Error\n", 6);
+		ft_putstr("Error\n");
 }

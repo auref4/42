@@ -12,22 +12,26 @@
 
 #include "push_swap.h"
 
-void	push_swap(char **argv)
+void	push_swap(char **dest)
 {
 	int	i;
+	int	nb;
 
-	t_elmt *first_a;
-//	t_elmt *elmt_b;
-	t_elmt *new;
-	i = 1;
-	first_a = NULL;
-	while (argv[i])
+	t_lst *lst_a;
+	t_lst *new;
+	lst_a = NULL;
+	new = NULL;
+	i = 0;
+	while (dest[i])
 	{
-		new = ft_elmt_new(ft_atoi(argv[i]), t_elmt *first_a);
+		nb = 0;
+		if (!ft_atoi(dest[i], &nb))
+			return;
+		new = ft_lst_new(nb, lst_a);
 		if (!new)
 			return (ft_error()); // pas oublier lstclear
-		ft_add_back(&first_a, new);
+		ft_add_back(&lst_a, new);
 		i++;
 	}
-	return;
+	free_dest(dest);
 }
