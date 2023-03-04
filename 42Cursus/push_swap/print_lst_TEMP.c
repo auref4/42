@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_lst_TEMP.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/17 23:35:46 by auferran          #+#    #+#             */
-/*   Updated: 2023/03/04 03:28:28 by auferran         ###   ########.fr       */
+/*   Created: 2023/03/04 03:05:25 by auferran          #+#    #+#             */
+/*   Updated: 2023/03/04 03:08:09 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
-int	main(int argc, char **argv)
+void	print_lst_TEMP(t_lst *lst_a)
 {
-	char	**dest;
-
-	dest = NULL;
-	if (argc > 1)
+	t_lst	*tmp;
+	tmp = lst_a;
+	while (tmp)
 	{
-		if (!check_arg(argv))
-			return (ft_error(), 0);
-		dest = prep_arg(argv);
-		if (!dest)
-			return (ft_error(), 0);
-		push_swap(dest);
+		printf("number = %d\n", tmp->nb);
+		if (tmp->next == lst_a)
+			return ;
+		tmp = tmp->next;
 	}
-	if (argc <= 1)
-		ft_error();
-	if (!argv)
-		ft_error();
-	return (0);
 }

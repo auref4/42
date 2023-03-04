@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_lst.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/17 23:35:46 by auferran          #+#    #+#             */
-/*   Updated: 2023/03/04 03:28:28 by auferran         ###   ########.fr       */
+/*   Created: 2023/03/04 03:15:34 by auferran          #+#    #+#             */
+/*   Updated: 2023/03/04 03:28:01 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+void	init_lst(char **dest, t_lst **lst_a)
 {
-	char	**dest;
+	int	i;
+	int	nb;
+	t_lst *new;
 
-	dest = NULL;
-	if (argc > 1)
+	i = 0;
+	nb = 0;
+	new = NULL;
+	while (dest[i])
 	{
-		if (!check_arg(argv))
-			return (ft_error(), 0);
-		dest = prep_arg(argv);
-		if (!dest)
-			return (ft_error(), 0);
-		push_swap(dest);
+		nb = 0;
+		if (!ft_atoi(dest[i], &nb))
+			return (ft_error());
+		new = ft_lst_new(nb, lst_a);
+		if (!new)
+		{
+			ft_lst_clear(lst_a);
+			return (ft_error());
+		}
+		ft_add_back(lst_a, new);
+		i++;
 	}
-	if (argc <= 1)
-		ft_error();
-	if (!argv)
-		ft_error();
-	return (0);
 }

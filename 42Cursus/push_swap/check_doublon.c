@@ -1,34 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   check_doublon.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/17 23:35:46 by auferran          #+#    #+#             */
-/*   Updated: 2023/03/04 03:28:28 by auferran         ###   ########.fr       */
+/*   Created: 2023/03/04 01:35:33 by auferran          #+#    #+#             */
+/*   Updated: 2023/03/04 02:43:24 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+int	check_doublon(t_lst *lst_a)
 {
-	char	**dest;
+	t_lst	*tmp1;
+	t_lst	*tmp2;
+	int	size;
+	int	i;
+	int	j;
 
-	dest = NULL;
-	if (argc > 1)
+	if (!lst_a)
+		return (0);
+	tmp1 = lst_a;
+	if (!lst_a->next)
+		return (1);
+	size = ft_lst_size(lst_a);
+	i = 0;
+	while (i < size)
 	{
-		if (!check_arg(argv))
-			return (ft_error(), 0);
-		dest = prep_arg(argv);
-		if (!dest)
-			return (ft_error(), 0);
-		push_swap(dest);
+		j = i + 1;
+		tmp2 = tmp1->next;
+		while(j < size)
+		{
+			if (tmp1->nb == tmp2->nb)
+				return (0);
+			else
+				tmp2 = tmp2->next;
+			j++;
+		}
+		tmp1 = tmp1->next;
+		i++;
 	}
-	if (argc <= 1)
-		ft_error();
-	if (!argv)
-		ft_error();
-	return (0);
+	return(1);
 }

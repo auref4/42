@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   prep_arg.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/04 00:48:36 by auferran          #+#    #+#             */
+/*   Updated: 2023/03/04 03:42:44 by auferran         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	nb_words(char **argv)
@@ -11,14 +23,16 @@ int	nb_words(char **argv)
 	while (argv[i])
 	{
 		j = 0;
-		if (is_digit(argv[i][j]))
+		if (is_digit(argv[i][j]) ||
+			(argv[i][j] == '-' && is_digit(argv[i][j + 1])))
 		{
 				words++;
 				j++;
 		}
 		while (argv[i][j])
 		{
-			if (argv[i][j] == ' ' && is_digit(argv[i][j + 1]))
+			if (((argv[i][j] == ' ') || argv[i][j] == '-')
+				&& is_digit(argv[i][j + 1]))
 				words++;
 			j++;
 		}

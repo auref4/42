@@ -12,6 +12,24 @@
 
 #include "push_swap.h"
 
+void	ft_lst_clear(t_lst **lst)
+{
+	t_lst	*tmp;
+	int	i;
+	int size;
+
+	i = 0;
+	size = ft_lst_size(*lst);
+	while (i < size)
+	{
+		tmp = (*lst)->next;
+		free (*lst);
+		*lst = tmp;
+		i++;
+	}
+	*lst = NULL;
+}
+
 int	ft_lst_size(t_lst *lst_a)
 {
 	int	i;
@@ -46,7 +64,7 @@ t_lst	*ft_lst_last(t_lst *lst_a)
 	return (lst_a);
 }
 
-t_lst	*ft_lst_new(int number, t_lst *lst_a)
+t_lst	*ft_lst_new(int number, t_lst **lst_a)
 {
 	t_lst	*new;
 
@@ -54,7 +72,7 @@ t_lst	*ft_lst_new(int number, t_lst *lst_a)
 	if (!new)
 		return (NULL);
 	new->nb = number;
-	new->next = lst_a;
+	new->next = *lst_a;
 	return (new);
 }
 
