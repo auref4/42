@@ -39,6 +39,9 @@ int			ft_lst_size(t_lst *lst_a);
 t_lst		*ft_lst_last(t_lst *lst_a);
 t_lst		*ft_lst_new(int number, t_lst **lst_a);
 void		ft_add_back(t_lst **lst_a, t_lst *new);
+void		sa(t_lst **lst_a);
+void		sb(t_lst **lst_b);
+void		ss(t_lst **lst_a, t_lst **lst_b);
 void print_lst_TEMP(t_lst *lst_a);
 
 # endif

@@ -11,15 +11,22 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 void	push_swap(char **argv)
 {
-	t_lst *lst_a;
+	t_lst	*lst_a;
+	//t_lst	*lst_b;
 
 	lst_a = NULL;
+	//lst_b = NULL;
 	init_lst(argv, &lst_a);
 	if (!check_doublon(lst_a))
 		return(ft_error());
+	printf("pile avant op\n");
+	print_lst_TEMP(lst_a);
+	sa(&lst_a);
+	printf("pile apres op\n");
 	print_lst_TEMP(lst_a);
 	ft_lst_clear(&lst_a);
 }
