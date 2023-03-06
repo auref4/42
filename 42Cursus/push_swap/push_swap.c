@@ -12,15 +12,14 @@
 
 #include "push_swap.h"
 
-void	push_swap(char **dest)
+void	push_swap(char **argv)
 {
 	t_lst *lst_a;
 
 	lst_a = NULL;
-	init_lst(dest, &lst_a);
+	init_lst(argv, &lst_a);
 	if (!check_doublon(lst_a))
 		return(ft_error());
 	print_lst_TEMP(lst_a);
 	ft_lst_clear(&lst_a);
-	free_dest(dest);
 }

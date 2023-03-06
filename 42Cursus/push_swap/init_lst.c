@@ -12,27 +12,43 @@
 
 #include "push_swap.h"
 
-void	init_lst(char **dest, t_lst **lst_a)
+void	free_str(char **dest)
 {
 	int	i;
-	int	nb;
-	t_lst *new;
 
 	i = 0;
-	nb = 0;
-	new = NULL;
 	while (dest[i])
 	{
-		nb = 0;
-		if (!ft_atoi(dest[i], &nb))
-			return (ft_error());
-		new = ft_lst_new(nb, lst_a);
-		if (!new)
-		{
-			ft_lst_clear(lst_a);
-			return (ft_error());
-		}
-		ft_add_back(lst_a, new);
+		free(dest[i]);
 		i++;
+	}
+	free (dest);
+}
+
+void	init_lst(char **argv, t_lst **lst_a)
+{
+	int	i;
+	int	j;
+	int	nb;
+	char **tmp;
+	t_lst *new;
+
+	i = 1;
+	nb = 0;
+	while (argv[i])
+	{
+		tmp = ft_split(argv[i++], ' ');
+		j = 0;
+		while (tmp[j])
+		{
+			nb = 0;
+			if (!ft_atoi(tmp[j++], &nb))
+				return (ft_error());
+			new = ft_lst_new(nb, lst_a);
+			if (!new)
+				return (ft_lst_clear(lst_a), ft_error());
+			ft_add_back(lst_a, new);
+		}
+		free_str(tmp);
 	}
 }

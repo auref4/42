@@ -90,4 +90,5 @@ void	ft_add_back(t_lst **lst_a, t_lst *new)
 	tmp->next = new;
 	(*lst_a)->prev = new;
 	new->prev = tmp;
+	new->next = *lst_a;
 }

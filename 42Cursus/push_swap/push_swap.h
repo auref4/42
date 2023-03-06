@@ -26,16 +26,13 @@ typedef struct s_lst
 	struct s_lst	*prev;
 }	t_lst;
 void		ft_error(void);
-int			is_digit(char c);
 int			check_arg(char **argv);
 void		*ft_calloc(size_t nmemb, size_t size);
-void		free_dest(char **dest);
 char		**ft_split(char const *s, char c);
 int			ft_strlen(char *str);
-char		**prep_arg(char **str);
 int			ft_atoi(const char *s, int *nb);
 int			check_doublon(t_lst *lst_a);
-void		init_lst(char **dest, t_lst **lst_a);
+void		init_lst(char **argv, t_lst **lst_a);
 void		push_swap(char **dest);
 void		ft_lst_clear(t_lst **lst);
 int			ft_lst_size(t_lst *lst_a);

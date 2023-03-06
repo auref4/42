@@ -14,17 +14,11 @@
 
 int	main(int argc, char **argv)
 {
-	char	**dest;
-
-	dest = NULL;
 	if (argc > 1)
 	{
 		if (!check_arg(argv))
 			return (ft_error(), 0);
-		dest = prep_arg(argv);
-		if (!dest)
-			return (ft_error(), 0);
-		push_swap(dest);
+		push_swap(argv);
 	}
 	if (argc <= 1)
 		ft_error();

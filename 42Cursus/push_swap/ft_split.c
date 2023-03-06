@@ -12,6 +12,19 @@
 
 #include "push_swap.h"
 
+void	free_dest(char **dest)
+{
+	int	i;
+
+	i = 0;
+	while (dest[i])
+	{
+		free(dest[i]);
+		i++;
+	}
+	free (dest);
+}
+
 static int	ft_lenwords(char const *s, char c, int index)
 {
 	int	len;
