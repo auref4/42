@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_lst_TEMP.c                                   :+:      :+:    :+:   */
+/*   sort_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/04 03:05:25 by auferran          #+#    #+#             */
-/*   Updated: 2023/03/07 02:52:57 by auferran         ###   ########.fr       */
+/*   Created: 2023/03/07 05:49:52 by auferran          #+#    #+#             */
+/*   Updated: 2023/03/07 06:46:49 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
-void	print_lst_TEMP(t_lst *lst_a)
+int	is_sort(t_lst *lst)
 {
-	t_lst	*tmp;
-	tmp = lst_a;
-	while (tmp)
+	while (lst)
 	{
-		printf("number = %d\n", tmp->nb);
-		if (tmp->next == lst_a)
-			return ;
-		tmp = tmp->next;
+		if (lst->next == lst)
+			return (1);
+		if (lst->nb > lst->next->nb)
+			return (0);
+		lst = lst->next;
 	}
+	return (1);
+}
+
+int	is_r_sort(t_lst *lst)
+{
+	while (lst)
+	{
+		if (lst->next == lst)
+			return (1);
+		if (lst->nb < lst->next->nb)
+			return (0);
+		lst = lst->next;
+	}
+	return (1);
 }

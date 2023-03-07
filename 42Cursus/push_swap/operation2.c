@@ -1,27 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_lst_TEMP.c                                   :+:      :+:    :+:   */
+/*   operation2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/04 03:05:25 by auferran          #+#    #+#             */
-/*   Updated: 2023/03/07 02:52:57 by auferran         ###   ########.fr       */
+/*   Created: 2023/03/07 04:18:57 by auferran          #+#    #+#             */
+/*   Updated: 2023/03/07 06:46:50 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
-void	print_lst_TEMP(t_lst *lst_a)
+
+void	ra(t_lst **lst_a)
 {
-	t_lst	*tmp;
-	tmp = lst_a;
-	while (tmp)
-	{
-		printf("number = %d\n", tmp->nb);
-		if (tmp->next == lst_a)
-			return ;
-		tmp = tmp->next;
-	}
+	*lst_a = (*lst_a)->next;
 }
+
+void	rb(t_lst **lst_b)
+{
+	*lst_b = (*lst_b)->next;
+}
+
+void	rr(t_lst **lst_a, t_lst **lst_b)
+{
+	ra(lst_a);
+	rb(lst_b);
+}
+
+void	rra(t_lst **lst_a)
+{
+	*lst_a = (*lst_a)->prev;
+}
+
+void	rrb(t_lst **lst_b)
+{
+	*lst_b = (*lst_b)->prev;
+}
+

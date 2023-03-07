@@ -12,24 +12,6 @@
 
 #include "push_swap.h"
 
-void	ft_lst_clear(t_lst **lst)
-{
-	t_lst	*tmp;
-	int	i;
-	int size;
-
-	i = 0;
-	size = ft_lst_size(*lst);
-	while (i < size)
-	{
-		tmp = (*lst)->next;
-		free (*lst);
-		*lst = tmp;
-		i++;
-	}
-	*lst = NULL;
-}
-
 int	ft_lst_size(t_lst *lst_a)
 {
 	int	i;
@@ -54,6 +36,8 @@ t_lst	*ft_lst_last(t_lst *lst_a)
 	int	i;
 	int	len;
 
+	if (!lst_a)
+		return (0);
 	i = 0;
 	len = ft_lst_size(lst_a);
 	while (i < len -1)
@@ -76,6 +60,25 @@ t_lst	*ft_lst_new(int number, t_lst **lst_a)
 	return (new);
 }
 
+void	ft_add_front(t_lst **lst_a, t_lst *new)
+{
+	t_lst	*tmp;
+
+	if (*lst_a == NULL)
+	{
+		*lst_a = new;
+		(*lst_a)->next = new;
+		(*lst_a)->prev = new;
+		return ;
+	}
+	tmp = *lst_a;
+	tmp->prev->next = new;
+	new->next = tmp;
+	new->prev = tmp->prev;
+	tmp->prev = new;
+	*lst_a = new;
+}
+
 void	ft_add_back(t_lst **lst_a, t_lst *new)
 {
 	t_lst	*tmp;
@@ -84,9 +87,11 @@ void	ft_add_back(t_lst **lst_a, t_lst *new)
 	if (*lst_a == NULL)
 	{
 		*lst_a = new;
+		(*lst_a)->next = new;
+		(*lst_a)->prev = new;
 		return ;
 	}
-	tmp = ft_lst_last(*lst_a);
+	tmp = (*lst_a)->prev;
 	tmp->next = new;
 	(*lst_a)->prev = new;
 	new->prev = tmp;
