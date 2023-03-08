@@ -14,9 +14,12 @@
 
 int	is_sort(t_lst *lst)
 {
+	int	tmp;
+
+	tmp = lst->nb;
 	while (lst)
 	{
-		if (lst->next == lst)
+		if (lst->next->nb == tmp)
 			return (1);
 		if (lst->nb > lst->next->nb)
 			return (0);
@@ -27,9 +30,12 @@ int	is_sort(t_lst *lst)
 
 int	is_r_sort(t_lst *lst)
 {
+	int	tmp;
+
+	tmp = lst->nb;
 	while (lst)
 	{
-		if (lst->next == lst)
+		if (lst->next->nb == tmp)
 			return (1);
 		if (lst->nb < lst->next->nb)
 			return (0);

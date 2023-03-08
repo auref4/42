@@ -23,15 +23,15 @@ void	push_swap(char **argv)
 	init_lst(argv, &lst_a);
 	if (!check_doublon(lst_a))
 		return(ft_error());
-	printf("pile A avant op\n");
-	print_lst_TEMP(lst_a);
-	printf("pile B avant op\n");
-	print_lst_TEMP(lst_b);
+	//printf("pile A avant op\n");
+	//print_lst_TEMP(lst_a);
+	//printf("pile B avant op\n");
+	//print_lst_TEMP(lst_b);
 	sort(&lst_a, &lst_b);
-	printf("pile A apres op\n");
-	print_lst_TEMP(lst_a);
-	printf("pile B apres op\n");
-	print_lst_TEMP(lst_b);
+	//printf("pile A apres op\n");
+	//print_lst_TEMP(lst_a);
+	//printf("pile B apres op\n");
+	//print_lst_TEMP(lst_b);
 	ft_lst_clear(&lst_a);
 	ft_lst_clear(&lst_b);
 }

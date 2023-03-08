@@ -31,62 +31,77 @@ void push_mid_size(t_lst **lst_a, t_lst **lst_b)
 	return ;
 }
 
-void	checker_a_b(t_lst **lst_a, t_lst **lst_b)
+void	shaker_reverse(t_lst **lst)
 {
 	int	i;
 	int	size;
-	(void) lst_b;
 
-	size = ft_lst_size(*lst_a);
-	//printf("pile A avant boucle\n");
-	//print_lst_TEMP(*lst_a);
-	while (lst_a)
+	size = ft_lst_size(*lst);
+	while (is_r_sort(*lst) != 1)
 	{
-		printf("pile A pendant boucle\n");
-		print_lst_TEMP(*lst_a);
-		i = 0;
-		while (i < (size - 2))
-		{
-			if ((*lst_a)->nb < (*lst_a)->next->nb)
-			{
-				sa(lst_a);
-				ft_putstr("sa\n");
-			}
-			//printf("pile A pendant boucle\n");
-			//print_lst_TEMP(*lst_a);
-			rra(lst_a);
-			//ft_putstr("ra\n");
-			i++;
-		}
-		printf("verif\n");
-		printf("pile A pendant boucle\n");
-		print_lst_TEMP(*lst_a);
 		i = 0;
 		while (i < size - 2)
 		{
-			if ((*lst_a)->nb < (*lst_a)->next->nb)
-			{
-				sa(lst_a);
-				ft_putstr("sa\n");
-			}
-			//printf("pile A pendant boucle\n");
-			//print_lst_TEMP(*lst_a);
-			ra(lst_a);
-			ft_putstr("ra\n");
+			if ((*lst)->nb < (*lst)->next->nb)
+				sa(lst);
+			ra(lst);
 			i++;
 		}
-		if (is_r_sort(*lst_a) == 1)
-			return ;
+		i = 0;
+		while (i < (size - 2))
+		{
+			if ((*lst)->nb < (*lst)->next->nb)
+				sa(lst);
+			rra(lst);
+			i++;
+		}
 	}
 }
 
-void	checker(t_lst **lst_a, t_lst **lst_b)
+void	shaker(t_lst **lst)
 {
-	push_mid_size(lst_a, lst_b);
-	checker_a_b(lst_a, lst_b);
+	int	i;
+	int	size;
+
+	size = ft_lst_size(*lst);
+	while (is_sort(*lst) != 1)
+	{
+		i = 0;
+		while (i < size - 2)
+		{
+			if ((*lst)->nb > (*lst)->next->nb)
+				sa(lst);
+			ra(lst);
+			i++;
+		}
+		i = 0;
+		while (i < (size - 2))
+		{
+			if ((*lst)->nb > (*lst)->next->nb)
+				sa(lst);
+			rra(lst);
+			i++;
+		}
+	}
+}
+
+void	insertion(t_lst **lst_a, t_lst **lst_b)
+{
+	while (*lst_b)
+	{
+		if ((*lst_b)->nb > (*lst_a)->prev->nb)
+			pa(lst_a, lst_b);
+		else
+			rra(lst_a);
+	}
+	while (is_sort(*lst_a) != 1)
+		rra(lst_a);
 }
 
 void	sort(t_lst	**lst_a, t_lst **lst_b)
 {
-	checker(lst_a, lst_b);
+	push_mid_size(lst_a, lst_b);
+	shaker_reverse(lst_b);
+	shaker(lst_a);
+	insertion(lst_a, lst_b);
 }
