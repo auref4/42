@@ -40,6 +40,7 @@ t_lst		*ft_lst_last(t_lst *lst_a);
 t_lst		*ft_lst_new(int number, t_lst **lst_a);
 void		ft_add_back(t_lst **lst_a, t_lst *new);
 void		ft_add_front(t_lst **lst_a, t_lst *new);
+t_lst		*ft_lstmap(t_lst *lst);
 void		sa(t_lst **lst_a);
 void		sb(t_lst **lst_b);
 void		ss(t_lst **lst_a, t_lst **lst_b);

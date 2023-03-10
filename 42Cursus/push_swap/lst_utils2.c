@@ -29,3 +29,32 @@ void	ft_lst_clear(t_lst **lst)
 	}
 	*lst = NULL;
 }
+
+t_lst	*ft_lstmap(t_lst *lst)
+{
+	t_lst	*new_lst;
+	t_lst	*new_element;
+	int	tmp;
+
+	if (!lst)
+		return (NULL);
+	new_lst = NULL;
+	tmp = lst->nb;
+	while (lst)
+	{
+		new_element = ft_lst_new(lst->nb, &new_lst);
+		if (!new_element)
+		{
+			ft_lst_clear(&new_lst);
+			return (NULL);
+		}
+		ft_add_back(&new_lst, new_element);
+		if (lst->next->nb == tmp)
+		{
+			lst = lst->next;
+			return (new_lst);
+		}
+	lst = lst->next;
+	}
+	return (new_lst);
+}
