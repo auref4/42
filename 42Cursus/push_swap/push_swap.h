@@ -55,6 +55,12 @@ void		rrr(t_lst **lst_a, t_lst **lst_b);
 void		sort(t_lst	**lst_a, t_lst **lst_b);
 int			is_sort(t_lst *lst);
 int			is_r_sort(t_lst *lst);
+int			ft_mid_nb(t_lst *lst);
+int			get_first(t_lst *lst);
+int			get_middle(t_lst *lst);
+int			get_last(t_lst *lst);
+void 		push_mid(t_lst **lst_a, t_lst **lst_b, int	mid_nb);
+void		shaker(t_lst **lst);
 void print_lst_TEMP(t_lst *lst_a);
 
 # endif
