@@ -61,7 +61,7 @@ void	shaker(t_lst **lst)
 			i++;
 		}
 		i = 0;
-		while (i < (size - 2))
+		while (i < size - 2)
 		{
 			if ((*lst)->nb > (*lst)->next->nb)
 				sa(lst);

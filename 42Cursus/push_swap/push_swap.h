@@ -24,7 +24,7 @@ typedef struct s_lst
 	int	nb;
 	struct s_lst	*next;
 	struct s_lst	*prev;
-}	t_lst;\
+}	t_lst;
 void		ft_putstr(char *str);
 void		ft_error(void);
 int			check_arg(char **argv);
@@ -61,6 +61,14 @@ int			get_middle(t_lst *lst);
 int			get_last(t_lst *lst);
 void 		push_mid(t_lst **lst_a, t_lst **lst_b, int	mid_nb);
 void		shaker(t_lst **lst);
+void		act_a_b(t_lst **lst_a, t_lst **lst_b, int first_a, int last_b);
+void		no_act(t_lst **lst_a, t_lst **lst_b);
+void		act_b(t_lst **lst_a, t_lst **lst_b, int last_b);
+void		act_a(t_lst **lst_a, t_lst **lst_b, int first_a);
+int			verif_can_sort(t_lst **lst);
+int			verif_can_r_sort(t_lst **lst);
+void		go_sort_b(t_lst **lst_b);
+void		go_sort_a(t_lst **lst_a);
 void print_lst_TEMP(t_lst *lst_a);
 
 # endif

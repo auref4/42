@@ -18,102 +18,47 @@ void	insertion(t_lst **lst_a, t_lst **lst_b)
 	while (*lst_b)
 	{
 		if ((*lst_b)->nb > (*lst_a)->prev->nb)
+		{
 			pa(lst_a, lst_b);
+			ft_putstr("pa\n");
+		}
 		else
+		{
 			rra(lst_a);
+			ft_putstr("rra\n");
+		}
 	}
 	while (is_sort(*lst_a) != 1)
+	{
 		rra(lst_a);
+		ft_putstr("rra\n");
+	}
 }
 
-void	my_algo(t_lst **lst_a, t_lst **lst_b, int first_nb, int last_nb)
+void	my_algo(t_lst **lst_a, t_lst **lst_b, int first_a, int last_b)
 {
-	while (is_sort(*lst_a) != 1 && is_r_sort(*lst_b) != 1)
+	while (is_sort(*lst_a) != 1 || is_r_sort(*lst_b) != 1)
 	{
 		if (((*lst_b)->nb < (*lst_b)->next->nb) && ((*lst_a)->nb > (*lst_a)->next->nb))
-		{
-			ss(lst_a, lst_b);
-			ft_putstr("ss\n");
-			while (((*lst_b)->nb >(*lst_b)->prev->nb) && ((*lst_a)->nb < (*lst_a)->prev->nb))
-			{
-				if ((*lst_b)->nb == first_nb && (*lst_a)->nb == last_nb)
-					break;
-				rrr(lst_a, lst_b);
-				ft_putstr("ss\n");
-				ss(lst_a, lst_b);
-				ft_putstr("ss\n");
-			}
-		}
+			act_a_b(lst_a, lst_b, first_a, last_b);
 		else if (((*lst_b)->nb > (*lst_b)->next->nb) && ((*lst_a)->nb < (*lst_a)->next->nb))
-		{
-			if (is_r_sort(*lst_b) == 1 && is_sort(*lst_a) != 1)
-			{
-				ra(lst_a);
-				ft_putstr("ra\n");
-			}
-			else if (is_r_sort(*lst_b) != 1 && is_sort(*lst_a) == 1)
-			{
-				rb(lst_b);
-				ft_putstr("rb\n");
-			}
-			else
-			{
-				rr(lst_a, lst_b);
-				ft_putstr("rr\n");
-			}
-		}
-		else if (((*lst_b)->nb < (*lst_b)->next->nb) && (*lst_b)->next->nb != last_nb && ((*lst_a)->nb < (*lst_a)->next->nb))
-		{
-			sb(lst_b);
-			ft_putstr("sb\n");
-			while ((*lst_b)->nb > (*lst_b)->prev->nb)
-			{
-				if ((*lst_b)->nb == last_nb)
-					break;
-				rrb(lst_b);
-				ft_putstr("rrb\n");
-				sb(lst_b);
-				ft_putstr("sb\n");
-			}
-			if (is_sort(*lst_a) != 1)
-			{
-				ra(lst_a);
-				ft_putstr("ra\n");
-			}
-		}
-		else if (((*lst_b)->nb < (*lst_b)->next->nb) && (*lst_b)->next->nb == last_nb && ((*lst_a)->nb < (*lst_a)->next->nb)) // POTENTIELLEMENT A SUPPRIMER
-		{
-			rb(lst_b);
-			ft_putstr("rb\n");
-			if (is_sort(*lst_a) != 1)
-			{
-				ra(lst_a);
-				ft_putstr("ra\n");
-			}
-		}
+			no_act(lst_a, lst_b);
+		else if (((*lst_b)->nb < (*lst_b)->next->nb) && ((*lst_a)->nb < (*lst_a)->next->nb))
+			act_b(lst_a, lst_b, last_b);
 		else if (((*lst_b)->nb > (*lst_b)->next->nb) && ((*lst_a)->nb > (*lst_a)->next->nb))
-		{
-			sa(lst_a);
-			ft_putstr("sa\n");
-			while ((*lst_a)->nb < (*lst_a)->prev->nb)
-			{
-				if ((*lst_a)->nb == first_nb)
-					break;
-				rra(lst_a);
-				ft_putstr("rra\n");
-				sa(lst_a);
-				ft_putstr("ss\n");
-			}
-			if (is_r_sort(*lst_b) != 1)
-			{
-				rb(lst_b);
-				ft_putstr("rb\n");
-			}
-		}
-		ft_putstr("lst_a =\n");
-		print_lst_TEMP(*lst_a);
-		ft_putstr("lst_b =\n");
-		print_lst_TEMP(*lst_b);
+			act_a(lst_a, lst_b, first_a);
+		if (verif_can_r_sort(lst_b))
+			go_sort_b(lst_b);
+		if (verif_can_sort(lst_a))
+			go_sort_a(lst_a);
+		//printf("first_a = %d\n", first_a);
+		//printf("last_b = %d\n", last_b);
+		//printf("lst_b->nb = %d\n", (*lst_b)->nb);
+		//printf("lst_a->nb = %d\n", (*lst_a)->nb);
+		//ft_putstr("lst_a =\n");
+		//print_lst_TEMP(*lst_a);
+		//ft_putstr("lst_b =\n");
+		//print_lst_TEMP(*lst_b);
 	}
 }
 
@@ -122,13 +67,15 @@ void	sort(t_lst	**lst_a, t_lst **lst_b)
 	int	first_nb;
 	int	mid_nb;
 	int	last_nb;
+	//(void) last_nb;
+	//(void) first_nb;
 
 	first_nb = get_first(*lst_a);
 	mid_nb = get_middle(*lst_a);
 	last_nb = get_last(*lst_a);
 	push_mid(lst_a, lst_b, mid_nb);
 	my_algo(lst_a, lst_b, first_nb, last_nb);
-	//insertion(lst_a, lst_b);
+	insertion(lst_a, lst_b);
 	//ft_putstr("lst_a =\n");
 	//print_lst_TEMP(*lst_a);
 	//ft_putstr("lst_b =\n");
