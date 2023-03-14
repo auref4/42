@@ -61,6 +61,8 @@ int			get_middle(t_lst *lst);
 int			get_last(t_lst *lst);
 void 		push_mid(t_lst **lst_a, t_lst **lst_b, int	mid_nb);
 void		shaker(t_lst **lst);
+void		algo_for_3(t_lst **lst);
+void		algo_for_5(t_lst **lst_a, t_lst **lst_b);
 void		act_a_b(t_lst **lst_a, t_lst **lst_b, int first_a, int last_b);
 void		no_act(t_lst **lst_a, t_lst **lst_b);
 void		act_b(t_lst **lst_a, t_lst **lst_b, int last_b);

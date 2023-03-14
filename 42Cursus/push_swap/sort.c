@@ -67,15 +67,28 @@ void	sort(t_lst	**lst_a, t_lst **lst_b)
 	int	first_nb;
 	int	mid_nb;
 	int	last_nb;
-	//(void) last_nb;
-	//(void) first_nb;
 
-	first_nb = get_first(*lst_a);
-	mid_nb = get_middle(*lst_a);
-	last_nb = get_last(*lst_a);
-	push_mid(lst_a, lst_b, mid_nb);
-	my_algo(lst_a, lst_b, first_nb, last_nb);
-	insertion(lst_a, lst_b);
+	if (is_sort(*lst_a) != 1)
+	{
+		if (ft_lst_size(*lst_a) == 2)
+		{
+			sa(lst_a);
+			ft_putstr("sa\n");
+		}
+		else if (ft_lst_size(*lst_a) == 3)
+			algo_for_3(lst_a);
+		else if (ft_lst_size(*lst_a) == 5)
+			algo_for_5(lst_a, lst_b);
+		else
+		{
+			first_nb = get_first(*lst_a);
+			mid_nb = get_middle(*lst_a);
+			last_nb = get_last(*lst_a);
+			push_mid(lst_a, lst_b, mid_nb);
+			my_algo(lst_a, lst_b, first_nb, last_nb);
+			insertion(lst_a, lst_b);
+		}
+	}
 	//ft_putstr("lst_a =\n");
 	//print_lst_TEMP(*lst_a);
 	//ft_putstr("lst_b =\n");

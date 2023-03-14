@@ -49,3 +49,22 @@ int	get_last(t_lst *lst)
 	ft_lst_clear(&tmp);
 	return (nb_tmp);
 }
+
+void	algo_for_3(t_lst **lst)
+{
+	while (is_sort(*lst) != 1)
+	{
+		if ((*lst)->nb > (*lst)->next->nb)
+		{
+			sa(lst);
+			ft_putstr("sa\n");
+		}
+		else if (is_sort(*lst) != 1)
+		{
+			rra(lst);
+			ft_putstr("rra\n");
+		}
+	}
+}
+
+void	algo_for_5(t_lst **lst_a, t_lst **lst_b)
