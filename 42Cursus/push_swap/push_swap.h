@@ -54,23 +54,14 @@ void		rrb(t_lst **lst_b);
 void		rrr(t_lst **lst_a, t_lst **lst_b);
 void		sort(t_lst	**lst_a, t_lst **lst_b);
 int			is_sort(t_lst *lst);
-int			is_r_sort(t_lst *lst);
-int			ft_mid_nb(t_lst *lst);
-int			get_first(t_lst *lst);
 int			get_middle(t_lst *lst);
-int			get_last(t_lst *lst);
-void 		push_mid(t_lst **lst_a, t_lst **lst_b, int	mid_nb);
 void		shaker(t_lst **lst);
+t_lst		*ft_lstmap_mid (t_lst *lst, int mid);
 void		algo_for_3(t_lst **lst);
 void		algo_for_5(t_lst **lst_a, t_lst **lst_b);
-void		act_a_b(t_lst **lst_a, t_lst **lst_b, int first_a, int last_b);
-void		no_act(t_lst **lst_a, t_lst **lst_b);
-void		act_b(t_lst **lst_a, t_lst **lst_b, int last_b);
-void		act_a(t_lst **lst_a, t_lst **lst_b, int first_a);
-int			verif_can_sort(t_lst **lst);
-int			verif_can_r_sort(t_lst **lst);
-void		go_sort_b(t_lst **lst_b);
-void		go_sort_a(t_lst **lst_a);
+void		quick_sort(t_lst **lst_a, t_lst **lst_b);
+int			its_sup(t_lst **lst);
+int			search_sup(t_lst **lst);
 void print_lst_TEMP(t_lst *lst_a);
 
 # endif

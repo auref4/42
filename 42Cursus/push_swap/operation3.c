@@ -14,6 +14,7 @@
 
 void	rrr(t_lst **lst_a, t_lst **lst_b)
 {
-	rra(lst_a);
-	rrb(lst_b);
+	*lst_a = (*lst_a)->prev;
+	*lst_b = (*lst_b)->prev;
+	ft_putstr("rrr\n");
 }

@@ -12,34 +12,74 @@
 
 #include "push_swap.h"
 
-int	is_sort(t_lst *lst)
+void	swap_shaker(t_lst **lst)
 {
 	int	tmp;
 
-	tmp = lst->nb;
-	while (lst)
-	{
-		if (lst->next->nb == tmp)
-			return (1);
-		if (lst->nb > lst->next->nb)
-			return (0);
-		lst = lst->next;
-	}
-	return (1);
+	tmp = (*lst)->nb;
+	(*lst)->nb = (*lst)->next->nb;
+	(*lst)->next->nb = tmp;
 }
 
-int	is_r_sort(t_lst *lst)
+void	shaker(t_lst **lst)
 {
-	int	tmp;
+	int	i;
+	int	size;
 
-	tmp = lst->nb;
-	while (lst)
+	size = ft_lst_size(*lst);
+	while (is_sort(*lst) != 1)
 	{
-		if (lst->next->nb == tmp)
-			return (1);
-		if (lst->nb < lst->next->nb)
-			return (0);
-		lst = lst->next;
+		i = 0;
+		while (i < size - 2)
+		{
+			if ((*lst)->nb > (*lst)->next->nb)
+				swap_shaker(lst);
+			*lst = (*lst)->next;
+			i++;
+		}
+		i = 0;
+		while (i < size - 2)
+		{
+			if ((*lst)->nb > (*lst)->next->nb)
+				swap_shaker(lst);
+			*lst = (*lst)->prev;
+			i++;
+		}
 	}
-	return (1);
+}
+
+int	get_middle(t_lst *lst)
+{
+	int	i;
+	int	nb_tmp;
+	t_lst	*tmp;
+
+	i = 0;
+	tmp = ft_lstmap(lst);
+	shaker(&tmp);
+	while (i < ft_lst_size(tmp) / 2)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	nb_tmp = tmp->nb;
+	ft_lst_clear(&tmp);
+	return (nb_tmp);
+}
+
+void	algo_for_3(t_lst **lst)
+{
+	while (is_sort(*lst) != 1)
+	{
+		if ((*lst)->nb > (*lst)->next->nb)
+			sa(lst);
+		else if (is_sort(*lst) != 1)
+			rra(lst);
+	}
+}
+
+void	algo_for_5(t_lst **lst_a, t_lst **lst_b)
+{
+	(void) lst_a;
+	(void) lst_b;
 }

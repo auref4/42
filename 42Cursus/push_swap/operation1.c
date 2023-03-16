@@ -22,6 +22,7 @@ void	sa(t_lst **lst_a)
 	tmp = (*lst_a)->nb;
 	(*lst_a)->nb = (*lst_a)->next->nb;
 	(*lst_a)->next->nb = tmp;
+	ft_putstr("sa\n");
 }
 
 void	sb(t_lst **lst_b)
@@ -33,12 +34,24 @@ void	sb(t_lst **lst_b)
 	tmp = (*lst_b)->nb;
 	(*lst_b)->nb = (*lst_b)->next->nb;
 	(*lst_b)->next->nb = tmp;
+	ft_putstr("sb\n");
 }
 
 void	ss(t_lst **lst_a, t_lst **lst_b)
 {
-	sa(lst_a);
-	sb(lst_b);
+	int	tmp;
+
+	if (!(*lst_a) || ft_lst_size(*lst_a) <= 1)
+		return;
+	if (!(*lst_b) || ft_lst_size(*lst_b) <= 1)
+		return;
+	tmp = (*lst_a)->nb;
+	(*lst_a)->nb = (*lst_a)->next->nb;
+	(*lst_a)->next->nb = tmp;
+	tmp = (*lst_b)->nb;
+	(*lst_b)->nb = (*lst_b)->next->nb;
+	(*lst_b)->next->nb = tmp;
+	ft_putstr("ss\n");
 }
 
 void	pa(t_lst **lst_a, t_lst **lst_b)
@@ -62,6 +75,7 @@ void	pa(t_lst **lst_a, t_lst **lst_b)
 	(*lst_b)->prev = tmp_prev;
 	(*lst_b)->prev->next = *lst_b;
 	(*lst_b)->next->prev = *lst_b;
+	ft_putstr("pa\n");
 }
 
 void	pb(t_lst **lst_a, t_lst **lst_b)
@@ -85,4 +99,5 @@ void	pb(t_lst **lst_a, t_lst **lst_b)
 	(*lst_a)->prev = tmp_prev;
 	(*lst_a)->prev->next = *lst_a;
 	(*lst_a)->next->prev = *lst_a;
+	ft_putstr("pb\n");
 }

@@ -1,115 +1,115 @@
 #include "push_swap.h"
+#include <stdio.h>
 
-void	act_a_b(t_lst **lst_a, t_lst **lst_b, int first_a, int last_b)
+int	is_sort(t_lst *lst)
 {
-	int	last_a;
-	int first_b;
+	int	tmp;
 
-	last_a = get_last(*lst_a);
-	first_b = get_first(*lst_b);
-	if ((*lst_b)->nb == first_b || (*lst_a)->nb == last_a)
+	tmp = lst->nb;
+	while (lst)
 	{
-		if((*lst_b)->nb == first_b)
-		{
-			rb(lst_b);
-			ft_putstr("rb\n");
-		}
-		if((*lst_a)->nb == last_a)
-		{
-			ra(lst_a);
-			ft_putstr("ra\n");
-		}
-		return;
+		if (lst->next->nb == tmp)
+			return (1);
+		if (lst->nb > lst->next->nb)
+			return (0);
+		lst = lst->next;
 	}
-	ss(lst_a, lst_b);
-	ft_putstr("ss\n");
-	while (((*lst_b)->nb >(*lst_b)->prev->nb) && ((*lst_a)->nb < (*lst_a)->prev->nb))
+	return (1);
+}
+
+int	get_mid_midlle(t_lst *lst, int mid)
+{
+	int	i;
+	int	nb_tmp;
+	t_lst	*tmp;
+
+	i = 0;
+	tmp = ft_lstmap_mid(lst, mid);
+	shaker(&tmp);
+	while (i < ft_lst_size(tmp) / 2)
 	{
-		if ((*lst_b)->nb == last_b && (*lst_a)->nb == first_a)
-			break;
-		else if ((*lst_b)->nb == last_b && (*lst_a)->nb != first_a)
+		tmp = tmp->next;
+		i++;
+	}
+	nb_tmp = tmp->nb;
+	ft_lst_clear(&tmp);
+	return (nb_tmp);
+}
+
+void	quick_sort(t_lst **lst_a, t_lst **lst_b)
+{
+	int	mid;
+	int	mid_mid;
+
+	if (*lst_a)
+	{
+		if (ft_lst_size(*lst_a) >= 5)
 		{
-			rra(lst_a);
-			ft_putstr("rra\n");
-			sa(lst_a);
-			ft_putstr("sa\n");
-			rb(lst_b);
-			ft_putstr("rb\n");
-		}
-		else if ((*lst_b)->nb != last_b && (*lst_a)->nb == first_a)
-		{
-			rrb(lst_a);
-			ft_putstr("rrb\n");
-			sb(lst_b);
-			ft_putstr("sb\n");
-			ra(lst_b);
-			ft_putstr("ra\n");
+			mid = get_middle(*lst_a);
+			mid_mid = get_mid_midlle(*lst_a, mid);
 		}
 		else
+			mid_mid = (*lst_a)->nb;
+		if ((*lst_a)->nb == mid_mid)
+			ra(lst_a);
+		while (*lst_a)
 		{
-			rrr(lst_a, lst_b);
-			ft_putstr("ss\n");
-			ss(lst_a, lst_b);
-			ft_putstr("ss\n");
+			printf("mid = %d\n", mid);
+			printf("mid_mid = %d\n", mid_mid);
+			ft_putstr("lst_a =\n");
+			print_lst_TEMP(*lst_a);
+			ft_putstr("lst_b =\n");
+			print_lst_TEMP(*lst_b);
+			if ((*lst_a)->nb == mid_mid)
+			{
+				pb(lst_a, lst_b);
+				quick_sort(lst_a, lst_b);
+			}
+			else if ((*lst_a)->nb < mid_mid)
+				pb(lst_a, lst_b);
+			else if ((*lst_a)->nb > mid_mid)
+				ra(lst_a);
 		}
 	}
 }
 
-void	no_act(t_lst **lst_a, t_lst **lst_b)
+int	its_sup(t_lst **lst)
 {
-	if (is_r_sort(*lst_b) == 1 && is_sort(*lst_a) != 1)
+	t_lst *tmp;
+	int	nb_tmp;
+
+	tmp = ft_lstmap(*lst);
+	nb_tmp = tmp->nb;
+	tmp = tmp->next;
+	while (tmp)
 	{
-		ra(lst_a);
-		ft_putstr("ra\n");
+		if (tmp->nb == nb_tmp)
+		{
+			ft_lst_clear(&tmp);
+			return (1);
+		}
+		if (tmp->nb > nb_tmp)
+			break;
+		tmp = tmp->next;
 	}
-	else if (is_r_sort(*lst_b) != 1 && is_sort(*lst_a) == 1)
-	{
-		rb(lst_b);
-		ft_putstr("rb\n");
-	}
-	else if (is_r_sort(*lst_b) != 1 && is_sort(*lst_a) != 1)
-	{
-		rr(lst_a, lst_b);
-		ft_putstr("rr\n");
-	}
+	ft_lst_clear(&tmp);
+	return (0);
 }
 
-void	act_b(t_lst **lst_a, t_lst **lst_b, int last_b)
+int	search_sup(t_lst **lst)
 {
-	sb(lst_b);
-	ft_putstr("sb\n");
-	while ((*lst_b)->nb > (*lst_b)->prev->nb)
-	{
-		if ((*lst_b)->nb == last_b)
-			break;
-		rrb(lst_b);
-		ft_putstr("rrb\n");
-		sb(lst_b);
-		ft_putstr("sb\n");
-	}
-	if (is_sort(*lst_a) != 1)
-	{
-		ra(lst_a);
-		ft_putstr("ra\n");
-	}
-}
+	t_lst	*tmp;
+	int	i;
 
-void	act_a(t_lst **lst_a, t_lst **lst_b, int first_a)
-{
-	sa(lst_a);
-	ft_putstr("sa\n");
-	while ((*lst_a)->nb < (*lst_a)->prev->nb)
+	tmp = ft_lstmap(*lst);
+	i = 0;
+	while (tmp)
 	{
-		if ((*lst_a)->nb == first_a)
-			break;
-		rra(lst_a);
-		ft_putstr("rra\n");
-		sa(lst_a);
-		ft_putstr("ss\n");
+		if (its_sup(&tmp))
+			break ;
+		tmp = tmp->next;
+		i++;
 	}
-	if (is_r_sort(*lst_b) != 1)
-	{
-		rb(lst_b);
-		ft_putstr("rb\n");
-	}
+	ft_lst_clear(&tmp);
+	return (i);
 }
