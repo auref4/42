@@ -13,11 +13,11 @@ void	quick_sort(t_lst **lst_a, t_lst **lst_b)
 			mid = (*lst_a)->nb;
 		if ((*lst_a)->nb == mid)
 			ra(lst_a);
-		while (*lst_a)
+		while (4)
 		{
 			if (is_sort(*lst_a))
 				return ;
-			if ((*lst_a)->nb == mid)
+			else if ((*lst_a)->nb == mid)
 			{
 				pb(lst_a, lst_b);
 				quick_sort(lst_a, lst_b);
