@@ -13,6 +13,21 @@
 #include "push_swap.h"
 #include <stdio.h>
 
+int	is_sort(t_lst *lst)
+{
+	int	tmp;
+
+	tmp = lst->nb;
+	while (lst)
+	{
+		if (lst->next->nb == tmp)
+			return (1);
+		if (lst->nb > lst->next->nb)
+			return (0);
+		lst = lst->next;
+	}
+	return (1);
+}
 
 void	my_algo(t_lst **lst_a, t_lst **lst_b)
 {
