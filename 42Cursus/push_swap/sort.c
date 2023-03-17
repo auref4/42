@@ -13,32 +13,19 @@
 #include "push_swap.h"
 #include <stdio.h>
 
+
 void	my_algo(t_lst **lst_a, t_lst **lst_b)
 {
+	if (!(*lst_a))
+		return ;
 	quick_sort(lst_a, lst_b);
-	while (*lst_b)
-	{
-		if (its_sup(lst_b))
-			pa(lst_a, lst_b);
-		else if (search_sup(lst_b) > (ft_lst_size(*lst_b) / 2))
-		{
-			while (!its_sup(lst_b))
-				rrb(lst_b);
-		}
-		else if (search_sup(lst_b) <= (ft_lst_size(*lst_b) / 2))
-		{
-			while (!its_sup(lst_b))
-				rb(lst_b);
-		}
-	}
-	//printf("first_a = %d\n", first_a);
-	//printf("last_b = %d\n", last_b);
-	//printf("lst_b->nb = %d\n", (*lst_b)->nb);
-	//printf("lst_a->nb = %d\n", (*lst_a)->nb);
+	sort_and_push(lst_a, lst_b);
 }
 
 void	sort(t_lst	**lst_a, t_lst **lst_b)
 {
+	if (!(*lst_a))
+		return ;
 	if (is_sort(*lst_a) != 1)
 	{
 		if (ft_lst_size(*lst_a) == 2)

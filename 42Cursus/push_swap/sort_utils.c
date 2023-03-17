@@ -52,12 +52,19 @@ int	get_middle(t_lst *lst)
 {
 	int	i;
 	int	nb_tmp;
+	int	div;
 	t_lst	*tmp;
 
 	i = 0;
 	tmp = ft_lstmap(lst);
 	shaker(&tmp);
-	while (i < ft_lst_size(tmp) / 2)
+	if (ft_lst_size(tmp) <= 5)
+		div = ft_lst_size(tmp) / 2;
+	else if (ft_lst_size(tmp) > 5 && ft_lst_size(tmp) <= 100)
+		div = ft_lst_size(tmp) / 4;
+	else if (ft_lst_size(tmp) > 100)
+		div = ft_lst_size(tmp) / 8;
+	while (i < div)
 	{
 		tmp = tmp->next;
 		i++;
@@ -80,6 +87,25 @@ void	algo_for_3(t_lst **lst)
 
 void	algo_for_5(t_lst **lst_a, t_lst **lst_b)
 {
-	(void) lst_a;
-	(void) lst_b;
+	int	i;
+	int	mid;
+
+	i = 0;
+	mid = get_middle(*lst_a);
+	while (i < (ft_lst_size(*lst_a) / 2))
+	{
+		if ((*lst_a)->nb < mid)
+		{
+			pb(lst_a, lst_b);
+			i++;
+		}
+		else
+			ra(lst_a);
+
+	}
+	algo_for_3(lst_a);
+	if ((*lst_b)->nb < (*lst_b)->next->nb)
+		sb(lst_b);
+	pa(lst_a, lst_b);
+	pa(lst_a, lst_b);
 }

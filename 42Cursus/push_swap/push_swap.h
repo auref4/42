@@ -56,12 +56,12 @@ void		sort(t_lst	**lst_a, t_lst **lst_b);
 int			is_sort(t_lst *lst);
 int			get_middle(t_lst *lst);
 void		shaker(t_lst **lst);
-t_lst		*ft_lstmap_mid (t_lst *lst, int mid);
 void		algo_for_3(t_lst **lst);
 void		algo_for_5(t_lst **lst_a, t_lst **lst_b);
 void		quick_sort(t_lst **lst_a, t_lst **lst_b);
 int			its_sup(t_lst **lst);
 int			search_sup(t_lst **lst);
+void		sort_and_push(t_lst **lst_a, t_lst **lst_b);
 void print_lst_TEMP(t_lst *lst_a);
 
 # endif

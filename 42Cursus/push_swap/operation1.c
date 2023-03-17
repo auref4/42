@@ -68,6 +68,7 @@ void	pa(t_lst **lst_a, t_lst **lst_b)
 	ft_add_front(lst_a, *lst_b);
 	if (size == 1)
 	{
+		ft_putstr("pa\n");
 		*lst_b = NULL;
 		return ;
 	}
@@ -92,6 +93,7 @@ void	pb(t_lst **lst_a, t_lst **lst_b)
 	ft_add_front(lst_b, *lst_a);
 	if (size == 1)
 	{
+		ft_putstr("pb\n");
 		*lst_a = NULL;
 		return ;
 	}
