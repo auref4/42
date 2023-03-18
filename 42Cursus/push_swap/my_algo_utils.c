@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   my_algo_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/17 22:28:13 by auferran          #+#    #+#             */
+/*   Updated: 2023/03/18 04:00:29 by auferran         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 #include <stdio.h>
 
@@ -5,7 +17,7 @@ void	quick_sort(t_lst **lst_a, t_lst **lst_b)
 {
 	int	mid;
 
-	if (*lst_a)
+	while (*lst_a)
 	{
 		if (ft_lst_size(*lst_a) >= 5)
 			mid = get_middle(*lst_a);
@@ -15,12 +27,10 @@ void	quick_sort(t_lst **lst_a, t_lst **lst_b)
 			ra(lst_a);
 		while (4)
 		{
-			if (is_sort(*lst_a))
-				return ;
-			else if ((*lst_a)->nb == mid)
+			if ((*lst_a)->nb == mid)
 			{
 				pb(lst_a, lst_b);
-				quick_sort(lst_a, lst_b);
+				break ;
 			}
 			else if ((*lst_a)->nb < mid)
 				pb(lst_a, lst_b);
@@ -32,8 +42,8 @@ void	quick_sort(t_lst **lst_a, t_lst **lst_b)
 
 int	its_sup(t_lst **lst)
 {
-	t_lst *tmp;
-	int	nb_tmp;
+	t_lst	*tmp;
+	int		nb_tmp;
 
 	tmp = ft_lstmap(*lst);
 	nb_tmp = tmp->nb;
@@ -46,7 +56,7 @@ int	its_sup(t_lst **lst)
 			return (1);
 		}
 		if (tmp->nb > nb_tmp)
-			break;
+			break ;
 		tmp = tmp->next;
 	}
 	ft_lst_clear(&tmp);
@@ -56,7 +66,7 @@ int	its_sup(t_lst **lst)
 int	search_sup(t_lst **lst)
 {
 	t_lst	*tmp;
-	int	i;
+	int		i;
 
 	tmp = ft_lstmap(*lst);
 	i = 0;

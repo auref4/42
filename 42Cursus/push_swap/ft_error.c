@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auferran <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 20:15:03 by auferran          #+#    #+#             */
-/*   Updated: 2023/01/20 20:27:15 by auferran         ###   ########.fr       */
+/*   Updated: 2023/03/17 23:45:19 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void ft_putstr(char *str)
+void	ft_putstr(char *str)
 {
 	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 		i++;
 	write(1, str, i);
 }
 
 void	ft_error(void)
 {
-		ft_putstr("Error\n");
+	ft_putstr("Error\n");
 }

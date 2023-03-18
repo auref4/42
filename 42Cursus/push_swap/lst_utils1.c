@@ -14,9 +14,9 @@
 
 int	ft_lst_size(t_lst *lst_a)
 {
-	int	i;
-
+	int		i;
 	t_lst	*tmp;
+
 	if (!lst_a)
 		return (0);
 	i = 1;

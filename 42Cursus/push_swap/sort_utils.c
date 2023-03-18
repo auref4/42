@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 05:49:52 by auferran          #+#    #+#             */
-/*   Updated: 2023/03/07 06:46:49 by auferran         ###   ########.fr       */
+/*   Updated: 2023/03/18 04:17:05 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,13 @@ void	shaker(t_lst **lst)
 
 int	get_middle(t_lst *lst)
 {
-	int	i;
-	int	nb_tmp;
-	int	div;
+	int		i;
+	int		nb_tmp;
+	int		div;
 	t_lst	*tmp;
 
 	i = 0;
+	div = 0;
 	tmp = ft_lstmap(lst);
 	shaker(&tmp);
 	if (ft_lst_size(tmp) <= 5)
@@ -101,7 +102,6 @@ void	algo_for_5(t_lst **lst_a, t_lst **lst_b)
 		}
 		else
 			ra(lst_a);
-
 	}
 	algo_for_3(lst_a);
 	if ((*lst_b)->nb < (*lst_b)->next->nb)

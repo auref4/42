@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 04:12:42 by auferran          #+#    #+#             */
-/*   Updated: 2023/03/07 04:13:16 by auferran         ###   ########.fr       */
+/*   Updated: 2023/03/17 23:50:43 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 void	ft_lst_clear(t_lst **lst)
 {
 	t_lst	*tmp;
-	int	i;
-	int size;
+	int		i;
+	int		size;
 
+	if (!*lst)
+		return ;
 	i = 0;
 	size = ft_lst_size(*lst);
 	while (i < size)
@@ -34,7 +36,7 @@ t_lst	*ft_lstmap(t_lst *lst)
 {
 	t_lst	*new_lst;
 	t_lst	*new_element;
-	int	tmp;
+	int		tmp;
 
 	if (!lst)
 		return (NULL);

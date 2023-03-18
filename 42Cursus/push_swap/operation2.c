@@ -6,12 +6,11 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 04:18:57 by auferran          #+#    #+#             */
-/*   Updated: 2023/03/07 06:46:50 by auferran         ###   ########.fr       */
+/*   Updated: 2023/03/17 23:51:39 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 
 void	ra(t_lst **lst_a)
 {
@@ -43,4 +42,3 @@ void	rrb(t_lst **lst_b)
 	*lst_b = (*lst_b)->prev;
 	ft_putstr("rrb\n");
 }
-

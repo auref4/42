@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auferran <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 14:11:30 by auferran          #+#    #+#             */
-/*   Updated: 2023/01/19 01:21:04 by auferran         ###   ########.fr       */
+/*   Updated: 2023/03/17 23:51:14 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	jump_whitespace_sign(const char *s, int *i, int *sign)
 
 int	ft_atoi(const char *s, int *nb)
 {
-	int	i;
-	int	sign;
+	int		i;
+	int		sign;
 	long	max;
 	long	nbr;
 
@@ -49,5 +49,5 @@ int	ft_atoi(const char *s, int *nb)
 		return (0);
 	}
 	*nb = nbr;
-		return (1);
+	return (1);
 }

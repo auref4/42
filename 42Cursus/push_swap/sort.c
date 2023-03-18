@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 04:36:49 by auferran          #+#    #+#             */
-/*   Updated: 2023/03/07 06:46:46 by auferran         ###   ########.fr       */
+/*   Updated: 2023/03/18 05:48:58 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,4 @@ void	sort(t_lst	**lst_a, t_lst **lst_b)
 		else
 			my_algo(lst_a, lst_b);
 	}
-	//ft_putstr("lst_a =\n");
-	//print_lst_TEMP(*lst_a);
-	//ft_putstr("lst_b =\n");
-	//print_lst_TEMP(*lst_b);
 }

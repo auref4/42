@@ -6,22 +6,22 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 23:31:40 by auferran          #+#    #+#             */
-/*   Updated: 2023/03/07 06:46:52 by auferran         ###   ########.fr       */
+/*   Updated: 2023/03/17 23:44:44 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stddef.h>
-#include <stdint.h>
-#include <limits.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stddef.h>
+# include <stdint.h>
+# include <limits.h>
 
 typedef struct s_lst
 {
-	int	nb;
+	int				nb;
 	struct s_lst	*next;
 	struct s_lst	*prev;
 }	t_lst;
@@ -62,6 +62,6 @@ void		quick_sort(t_lst **lst_a, t_lst **lst_b);
 int			its_sup(t_lst **lst);
 int			search_sup(t_lst **lst);
 void		sort_and_push(t_lst **lst_a, t_lst **lst_b);
-void print_lst_TEMP(t_lst *lst_a);
+void		print_lst_TEMP(t_lst *lst_a);
 
-# endif
+#endif

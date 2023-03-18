@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 00:48:28 by auferran          #+#    #+#             */
-/*   Updated: 2023/03/04 00:48:29 by auferran         ###   ########.fr       */
+/*   Updated: 2023/03/18 07:13:37 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	free_dest(char **dest)
 	int	i;
 
 	i = 0;
+	if (!dest)
+		return ;
 	while (dest[i])
 	{
 		free(dest[i]);
@@ -60,7 +62,7 @@ static int	ft_nb_words(char const *s, char c)
 	return (j);
 }
 
-static void	ft_split_words(char const *s, char c, char **dest, int actual_word)
+static int	ft_split_words(char const *s, char c, char **dest, int actual_word)
 {
 	int	i;
 	int	j;
@@ -75,7 +77,7 @@ static void	ft_split_words(char const *s, char c, char **dest, int actual_word)
 		if (!dest)
 		{
 			free_dest(dest);
-			return ;
+			return (0);
 		}
 		while (s[i] && s[i] != c)
 		{
@@ -86,6 +88,7 @@ static void	ft_split_words(char const *s, char c, char **dest, int actual_word)
 		dest[actual_word][j] = '\0';
 		actual_word++;
 	}
+	return (1);
 }
 
 char	**ft_split(char const *s, char c)
@@ -100,7 +103,8 @@ char	**ft_split(char const *s, char c)
 	nb_words = ft_nb_words(s, c);
 	dest = malloc(sizeof(char *) * (nb_words + 1));
 	if (nb_words > 0)
-		ft_split_words(s, c, dest, actual_word);
+		if (!ft_split_words(s, c, dest, actual_word))
+			return (NULL);
 	dest[nb_words] = NULL;
 	return (dest);
 }

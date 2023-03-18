@@ -6,19 +6,18 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 22:00:24 by auferran          #+#    #+#             */
-/*   Updated: 2023/03/07 06:46:50 by auferran         ###   ########.fr       */
+/*   Updated: 2023/03/17 23:55:09 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 
 void	sa(t_lst **lst_a)
 {
 	int	tmp;
 
 	if (!(*lst_a) || ft_lst_size(*lst_a) <= 1)
-		return;
+		return ;
 	tmp = (*lst_a)->nb;
 	(*lst_a)->nb = (*lst_a)->next->nb;
 	(*lst_a)->next->nb = tmp;
@@ -30,7 +29,7 @@ void	sb(t_lst **lst_b)
 	int	tmp;
 
 	if (!(*lst_b) || ft_lst_size(*lst_b) <= 1)
-		return;
+		return ;
 	tmp = (*lst_b)->nb;
 	(*lst_b)->nb = (*lst_b)->next->nb;
 	(*lst_b)->next->nb = tmp;
@@ -42,9 +41,9 @@ void	ss(t_lst **lst_a, t_lst **lst_b)
 	int	tmp;
 
 	if (!(*lst_a) || ft_lst_size(*lst_a) <= 1)
-		return;
+		return ;
 	if (!(*lst_b) || ft_lst_size(*lst_b) <= 1)
-		return;
+		return ;
 	tmp = (*lst_a)->nb;
 	(*lst_a)->nb = (*lst_a)->next->nb;
 	(*lst_a)->next->nb = tmp;
@@ -56,7 +55,7 @@ void	ss(t_lst **lst_a, t_lst **lst_b)
 
 void	pa(t_lst **lst_a, t_lst **lst_b)
 {
-	int	size;
+	int		size;
 	t_lst	*tmp_next;
 	t_lst	*tmp_prev;
 
@@ -81,7 +80,7 @@ void	pa(t_lst **lst_a, t_lst **lst_b)
 
 void	pb(t_lst **lst_a, t_lst **lst_b)
 {
-	int	size;
+	int		size;
 	t_lst	*tmp_next;
 	t_lst	*tmp_prev;
 

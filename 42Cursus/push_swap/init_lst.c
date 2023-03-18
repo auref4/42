@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 03:15:34 by auferran          #+#    #+#             */
-/*   Updated: 2023/03/04 03:28:01 by auferran         ###   ########.fr       */
+/*   Updated: 2023/03/18 06:48:31 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	free_str(char **dest)
 	int	i;
 
 	i = 0;
+	if (!dest)
+		return ;
 	while (dest[i])
 	{
 		free(dest[i]);
@@ -27,11 +29,11 @@ void	free_str(char **dest)
 
 void	init_lst(char **argv, t_lst **lst_a)
 {
-	int	i;
-	int	j;
-	int	nb;
-	char **tmp;
-	t_lst *new;
+	int		i;
+	int		j;
+	int		nb;
+	char	**tmp;
+	t_lst	*new;
 
 	i = 1;
 	nb = 0;
@@ -39,11 +41,11 @@ void	init_lst(char **argv, t_lst **lst_a)
 	{
 		tmp = ft_split(argv[i++], ' ');
 		j = 0;
-		while (tmp[j])
+		while (tmp && tmp[j])
 		{
 			nb = 0;
 			if (!ft_atoi(tmp[j++], &nb))
-				return (ft_error());
+				return (free_str(tmp), ft_error());
 			new = ft_lst_new(nb, lst_a);
 			if (!new)
 				return (ft_lst_clear(lst_a), ft_error());
