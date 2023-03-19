@@ -27,7 +27,7 @@ void	free_str(char **dest)
 	free (dest);
 }
 
-void	init_lst(char **argv, t_lst **lst_a)
+int	init_lst(char **argv, t_lst **lst_a)
 {
 	int		i;
 	int		j;
@@ -45,12 +45,13 @@ void	init_lst(char **argv, t_lst **lst_a)
 		{
 			nb = 0;
 			if (!ft_atoi(tmp[j++], &nb))
-				return (free_str(tmp), ft_error());
+				return (free_str(tmp), ft_lst_clear(lst_a), 0);
 			new = ft_lst_new(nb, lst_a);
 			if (!new)
-				return (ft_lst_clear(lst_a), ft_error());
+				return (ft_lst_clear(lst_a), free_str(tmp), 0);
 			ft_add_back(lst_a, new);
 		}
 		free_str(tmp);
 	}
+	return (1);
 }

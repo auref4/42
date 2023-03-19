@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 void	quick_sort(t_lst **lst_a, t_lst **lst_b)
 {

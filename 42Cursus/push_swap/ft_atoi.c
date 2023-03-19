@@ -44,10 +44,7 @@ int	ft_atoi(const char *s, int *nb)
 	if (sign == 1)
 		nbr = nbr * -1;
 	if (nbr < INT_MIN || nbr > INT_MAX)
-	{
-		ft_error();
 		return (0);
-	}
 	*nb = nbr;
 	return (1);
 }

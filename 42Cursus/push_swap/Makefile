@@ -35,12 +35,12 @@ OBJS = $(SRCS:.c=.o)
 
 CC = cc
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g
 
 $(NAME) : $(OBJS) $(HEADER)
 		 $(CC) $(FLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.c $(SRCS)
+%.o: %.c
 		$(CC) $(FLAGS) -c -o $@ $<
 
 all : $(NAME)

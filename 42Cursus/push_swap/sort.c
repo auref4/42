@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 int	is_sort(t_lst *lst)
 {
@@ -39,15 +38,18 @@ void	my_algo(t_lst **lst_a, t_lst **lst_b)
 
 void	sort(t_lst	**lst_a, t_lst **lst_b)
 {
+	int	size;
+
 	if (!(*lst_a))
 		return ;
+	size = ft_lst_size(*lst_a);
 	if (is_sort(*lst_a) != 1)
 	{
-		if (ft_lst_size(*lst_a) == 2)
+		if (size == 2)
 			sa(lst_a);
-		else if (ft_lst_size(*lst_a) == 3)
+		else if (size == 3)
 			algo_for_3(lst_a);
-		else if (ft_lst_size(*lst_a) == 5)
+		else if (size == 5)
 			algo_for_5(lst_a, lst_b);
 		else
 			my_algo(lst_a, lst_b);

@@ -53,18 +53,20 @@ int	get_middle(t_lst *lst)
 	int		i;
 	int		nb_tmp;
 	int		div;
+	int		size;
 	t_lst	*tmp;
 
 	i = 0;
 	div = 0;
 	tmp = ft_lstmap(lst);
 	shaker(&tmp);
-	if (ft_lst_size(tmp) <= 5)
-		div = ft_lst_size(tmp) / 2;
-	else if (ft_lst_size(tmp) > 5 && ft_lst_size(tmp) <= 100)
-		div = ft_lst_size(tmp) / 4;
-	else if (ft_lst_size(tmp) > 100)
-		div = ft_lst_size(tmp) / 8;
+	size = ft_lst_size(tmp);
+	if (size <= 5)
+		div = size / 2;
+	else if (size > 5 && size <= 100)
+		div = size / 4;
+	else if (size > 100)
+		div = size / 8;
 	while (i < div)
 	{
 		tmp = tmp->next;

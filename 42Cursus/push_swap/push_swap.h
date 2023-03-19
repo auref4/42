@@ -32,7 +32,7 @@ char		**ft_split(char const *s, char c);
 int			ft_strlen(char *str);
 int			ft_atoi(const char *s, int *nb);
 int			check_doublon(t_lst *lst_a);
-void		init_lst(char **argv, t_lst **lst_a);
+int			init_lst(char **argv, t_lst **lst_a);
 void		push_swap(char **dest);
 void		ft_lst_clear(t_lst **lst);
 int			ft_lst_size(t_lst *lst_a);

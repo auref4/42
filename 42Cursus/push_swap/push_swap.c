@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 void	push_swap(char **argv)
 {
@@ -20,7 +19,8 @@ void	push_swap(char **argv)
 
 	lst_a = NULL;
 	lst_b = NULL;
-	init_lst(argv, &lst_a);
+	if (!init_lst(argv, &lst_a))
+		return (ft_error());
 	if (!check_doublon(lst_a))
 		return (ft_lst_clear(&lst_a), ft_error());
 	sort(&lst_a, &lst_b);
