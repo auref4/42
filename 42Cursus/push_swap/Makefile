@@ -6,7 +6,7 @@
 #    By: auferran <auferran@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 23:32:07 by auferran          #+#    #+#              #
-#    Updated: 2023/03/18 07:00:45 by auferran         ###   ########.fr        #
+#    Updated: 2023/03/21 03:50:30 by auferran         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS =	check_arg.c\
 		sort.c
 
 OBJS = $(SRCS:.c=.o)
+DEPS = $(SRCS:.c=.d)
 
 CC = cc
 
@@ -41,7 +42,7 @@ $(NAME) : $(OBJS) $(HEADER)
 		 $(CC) $(FLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.c
-		$(CC) $(FLAGS) -c -o $@ $<
+		$(CC) $(FLAGS) -MMP -MD -c -o $@ $<
 
 all : $(NAME)
 
@@ -52,5 +53,7 @@ fclean : clean
 		rm -f $(NAME)
 
 re : fclean all
+
+-include : $(DEPS)
 
 .PHONY: all clean fclean re
