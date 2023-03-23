@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/22 21:22:58 by auferran          #+#    #+#             */
-/*   Updated: 2023/03/23 03:25:34 by auferran         ###   ########.fr       */
+/*   Created: 2023/03/23 02:33:04 by auferran          #+#    #+#             */
+/*   Updated: 2023/03/23 02:48:05 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	main(int argc, char **argv)
+void	ft_putstr(char *str)
 {
-	int	nb;
+	int	i;
 
-	if (argc == 2)
+	i = 0;
+	while (str[i])
+		i++;
+	write(1, str, i);
+}
+
+void	error(int nb)
+{
+	if (nb == 0)
 	{
-		nb = check_arg(argv);
-		if (nb == 0)
-			return (error(0), 0);
-		fractol(nb);
+		ft_putstr("incorrect name of fractal, ");
+		ft_putstr("only 'Julia' or 'Mandelbrot' its available.\n");
 	}
-	else
-		error(1);
-	return (0);
+	if (nb == 1)
+		ft_putstr("incorrect number of arguments.\n");
 }
