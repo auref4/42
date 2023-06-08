@@ -16,13 +16,13 @@ void	fractol(int nb)
 {
 	t_data	img;
 	t_vars	vars;
+	t_fract	fract;
 
 	vars.mlx = NULL;
 	vars.win = NULL;
-	create_win_img(&vars, &img);
+	create_win_img(&vars, &img, nb);
 	mlx_hook(vars.win, 2, 1L<<0, close, &vars);
-	if (nb == 1)
-		manage_pixel(vars, &img);
-	if (nb == 2)
-		manage_pixel(vars, &img);
+	mlx_hook(vars.win, 17, 1L<<0, closer, &vars);
+	mandelbrot(fract, &img, vars);
+	//manage_pixel(vars, &img);
 }

@@ -22,7 +22,7 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-int	ft_strncmp(const char *first, const char *second, size_t lenght)
+int	ft_strcmp(const char *first, const char *second)
 {
 	size_t			i;
 	unsigned char	*ufirst;
@@ -31,9 +31,7 @@ int	ft_strncmp(const char *first, const char *second, size_t lenght)
 	i = 0;
 	ufirst = (unsigned char *)first;
 	usecond = (unsigned char *)second;
-	if (lenght == 0)
-		return (0);
-	while (ufirst[i] && usecond[i] && ufirst[i] == usecond[i] && i < lenght - 1)
+	while (ufirst[i] && usecond[i] && ufirst[i] == usecond[i])
 		i++;
 	return (ufirst[i] - usecond[i]);
 }
@@ -45,13 +43,9 @@ int	check_arg(char **argv)
 
 	mand = "Mandelbrot";
 	julia = "Julia";
-	if (ft_strlen(argv[1]) > ft_strlen(mand))
-		return (0);
-	if (ft_strlen(argv[1]) > ft_strlen(julia))
-		return (0);
-	if (!ft_strncmp(argv[1], mand, ft_strlen(mand)))
+	if (!ft_strcmp(argv[1], mand))
 		return (1);
-	if (!ft_strncmp(argv[1], julia, ft_strlen(julia)))
+	if (!ft_strcmp(argv[1], julia))
 		return (2);
 	return (0);
 }
