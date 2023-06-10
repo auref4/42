@@ -16,7 +16,7 @@ int	main(int argc, char **argv)
 {
 	int	nb;
 
-	if (argc == 2)
+	if (argc > 1 && argc < 4)
 	{
 		nb = check_arg(argv);
 		if (nb == 0)

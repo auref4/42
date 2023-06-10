@@ -12,16 +12,6 @@
 
 #include "fractol.h"
 
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
 int	ft_strcmp(const char *first, const char *second)
 {
 	size_t			i;
@@ -40,12 +30,20 @@ int	check_arg(char **argv)
 {
 	char	*mand;
 	char	*julia;
+	char	*deux;
+	char	*trois;
 
 	mand = "Mandelbrot";
 	julia = "Julia";
-	if (!ft_strcmp(argv[1], mand))
+	deux = "2";
+	trois = "3";
+	if (!ft_strcmp(argv[1], mand) && !argv[2])
 		return (1);
-	if (!ft_strcmp(argv[1], julia))
+	else if (!ft_strcmp(argv[1], julia) && !argv[2])
 		return (2);
+	else if (!ft_strcmp(argv[1], julia) && !ft_strcmp(argv[2], deux))
+		return (3);
+	else if (!ft_strcmp(argv[1], julia) && !ft_strcmp(argv[2], trois))
+		return (4);
 	return (0);
 }

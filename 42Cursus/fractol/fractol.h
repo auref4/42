@@ -16,6 +16,9 @@
 #include <mlx.h>
 #include <stddef.h>
 #include <unistd.h>
+#include <stdlib.h>
+#include <X11/keysymdef.h>
+#include <X11/keysym.h>
 
 typedef struct	s_data {
 	void	*img;
@@ -54,8 +57,16 @@ void	error(int nb);
 int		check_arg(char **argv);
 void	fractol(int nb);
 void	create_win_img(t_vars *vars, t_data *img, int nb);
-int		closer(int keycode, t_vars *vars);
-void	manage_pixel(t_vars, t_data *img);
-void	mandelbrot(t_fract fract, t_data *img, t_vars vars);
+int		closer(t_vars *vars);
+int		mouse_hook(int keycode, t_fract *fract);
+void	value_mandelbrot(t_fract *fract);
+void	value_julia(t_fract *fract);
+void	calcul_mandelbrot(t_fract fract, t_data *img, t_vars *vars);
+void	calcul_julia(t_fract fract, t_data *img, t_vars *vars);
+void	calcul_julia_2(t_fract fract, t_data *img, t_vars *vars);
+void	calcul_julia_3(t_fract fract, t_data *img, t_vars *vars);
+void	create_fractal(t_fract fract, t_data *img, t_vars *vars, int nb);
+void	color_mandelbrot(t_fract fract, t_data *img);
+void	color_julia(t_fract fract, t_data *img);
 
 # endif

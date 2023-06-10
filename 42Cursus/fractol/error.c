@@ -29,7 +29,8 @@ void	error(int nb)
 	if (nb == 0)
 	{
 		ft_putstr("incorrect name of fractal, ");
-		ft_putstr("only 'Julia' and 'Mandelbrot' are available.\n");
+		ft_putstr("only 'Mandelbrot', 'Julia', 'Julia 2' and 'Julia 3' ");
+		ft_putstr("are available/n");
 	}
 	if (nb == 1)
 		ft_putstr("incorrect number of arguments.\n");
