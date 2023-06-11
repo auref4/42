@@ -33,8 +33,8 @@ void	value_mandelbrot(t_fract *fract)
 	(*fract).x2 = 0.6;
 	(*fract).y1 = -1.2;
 	(*fract).y2 = 1.2;
-	(*fract).image_x = 800;
-	(*fract).image_y = 800;
+	(*fract).image_x = 400;
+	(*fract).image_y = 400;
 	(*fract).i_max = 50;
 	(*fract).zoom_x = (*fract).image_x / ((*fract).x2 - (*fract).x1);
 	(*fract).zoom_y = (*fract).image_y / ((*fract).y2 - (*fract).y1);
@@ -66,7 +66,6 @@ void	calcul_mandelbrot(t_fract fract, t_data *img, t_vars *vars)
 		}
 	}
 	mlx_put_image_to_window((*vars).mlx, (*vars).win, img->img, 0, 0);
-	mlx_loop((*vars).mlx);
 }
 
 void	create_fractal(t_fract fract, t_data *img, t_vars *vars, int nb)
@@ -75,20 +74,17 @@ void	create_fractal(t_fract fract, t_data *img, t_vars *vars, int nb)
 	{
 		value_mandelbrot(&fract);
 		calcul_mandelbrot(fract, img, vars);
+		mlx_loop((*vars).mlx);
 	}
-	if (nb == 2)
+	if (nb == 2 || nb == 3 || nb == 4)
 	{
 		value_julia(&fract);
-		calcul_julia(fract, img, vars);
-	}
-	if (nb == 3)
-	{
-		value_julia(&fract);
-		calcul_julia_2(fract, img, vars);
-	}
-	if (nb == 4)
-	{
-		value_julia(&fract);
-		calcul_julia_3(fract, img, vars);
+		if(nb == 2)
+			calcul_julia(fract, img, vars);
+		if (nb == 3)
+			calcul_julia_2(fract, img, vars);
+		if (nb == 4)
+			calcul_julia_3(fract, img, vars);
+		mlx_loop((*vars).mlx);
 	}
 }

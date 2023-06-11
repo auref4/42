@@ -19,6 +19,7 @@
 #include <stdlib.h>
 #include <X11/keysymdef.h>
 #include <X11/keysym.h>
+#include "stdio.h"
 
 typedef struct	s_data {
 	void	*img;
@@ -31,34 +32,63 @@ typedef struct	s_data {
 typedef struct	s_vars {
 	void	*mlx;
 	void	*win;
+	int		keycode;
 }				t_vars;
 
 typedef struct	s_fract {
-	long double	x1;
-	long double	x2;
-	long double	y1;
-	long double	y2;
+	double	x1;
+	double	x2;
+	double	y1;
+	double	y2;
 	int	image_x;
 	int	image_y;
-	long double zoom_x;
-	long double zoom_y;
+	double	zoom_x;
+	double	zoom_y;
 	int	x;
 	int	y;
-	long double	c_r;
-	long double	c_i;
-	long double	z_r;
-	long double	z_i;
+	double	c_r;
+	double	c_i;
+	double	z_r;
+	double	z_i;
 	int	i;
 	int	i_max;
-	long double tmp;
+	int	i_zoom;
+	double	tmp;
+	double	mouse_zoom_x;
+	double	mouse_zoom_y;
+	double	mouse_dezoom_x;
+	double	mouse_dezoom_y;
+	double	move_x1;
+	double	move_x1_n;
+	double	move_x2;
+	double	move_x2_n;
+	double	move_y1;
+	double	move_y1_n;
+	double	move_y2;
+	double	move_y2_n;
+	double	center_x;
+	double	center_y;
+	double	zoom_factor;
+	double	width;
+	double	height;
+	double	new_width;
+	double	new_height;
 }				t_fract;
+
+typedef struct	s_all {
+	t_data	img;
+	t_vars	vars;
+	t_fract	fract;
+	int		nb;
+}				t_all;
 
 void	error(int nb);
 int		check_arg(char **argv);
 void	fractol(int nb);
 void	create_win_img(t_vars *vars, t_data *img, int nb);
 int		closer(t_vars *vars);
-int		mouse_hook(int keycode, t_fract *fract);
+void	init_mouse_hook(t_all all);
+int		mouse_hook(int keycode, int x, int y, t_all *all);
 void	value_mandelbrot(t_fract *fract);
 void	value_julia(t_fract *fract);
 void	calcul_mandelbrot(t_fract fract, t_data *img, t_vars *vars);

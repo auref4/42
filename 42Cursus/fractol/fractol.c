@@ -12,12 +12,10 @@
 
 #include "fractol.h"
 
-int	check_key(int keycode, t_vars *vars, t_fract fract)
+int	check_key(int keycode, t_all *all)
 {
-	if (keycode == 4 || keycode == 5)
-		mouse_hook(keycode, &fract);
 	if (keycode == XK_Escape)
-		closer(vars);
+		closer(&all->vars);
 	return (0);
 }
 
@@ -28,27 +26,18 @@ int	closer(t_vars *vars)
 	return (0);
 }
 
-int	mouse_hook(int keycode, t_fract *fract)
-{
-	if (keycode == 4)
-		(*fract).x1++;
-	if (keycode == 5)
-		(*fract).y2--;
-	return (0);
-}
-
 void	create_win_img(t_vars *vars, t_data *img, int nb)
 {
 	vars->mlx = mlx_init();
 	if (nb == 1)
-		vars->win = mlx_new_window(vars->mlx, 800, 800, "Mandelbrot");
+		vars->win = mlx_new_window(vars->mlx, 400, 400, "Mandelbrot");
 	else if (nb == 2)
-		vars->win = mlx_new_window(vars->mlx, 800, 800, "Julia");
+		vars->win = mlx_new_window(vars->mlx, 400, 400, "Julia");
 	else if (nb == 3)
-		vars->win = mlx_new_window(vars->mlx, 800, 800, "Julia 2");
+		vars->win = mlx_new_window(vars->mlx, 400, 400, "Julia 2");
 	else if (nb == 4)
-		vars->win = mlx_new_window(vars->mlx, 800, 800, "Julia 3");
-	img->img = mlx_new_image(vars->mlx, 800, 800);
+		vars->win = mlx_new_window(vars->mlx, 400, 400, "Julia 3");
+	img->img = mlx_new_image(vars->mlx, 400, 400);
 	img->addr = (int *)mlx_get_data_addr(img->img,
 		&img->bits_per_pixel, &img->line_length, &img->endian);
 }
@@ -56,18 +45,18 @@ void	create_win_img(t_vars *vars, t_data *img, int nb)
 
 void	fractol(int nb)
 {
-	t_data	img;
-	t_vars	vars;
-	t_fract	fract;
+	t_all all;
 
-	vars.mlx = NULL;
-	vars.win = NULL;
-	create_win_img(&vars, &img, nb);
-	mlx_hook(vars.win, 2, 1L<<0, check_key, &vars);
-	mlx_hook(vars.win, 17, 1L<<0, closer, &vars);
-	mlx_mouse_hook(vars.win, check_key, &vars);
-	create_fractal(fract, &img, &vars, nb);
-	mlx_destroy_image(vars.mlx, img.img);
-	mlx_destroy_display(vars.mlx);
-	free(vars.mlx);
+	all.nb = nb;
+	all.vars.mlx = NULL;
+	all.vars.win = NULL;
+	create_win_img(&all.vars, &all.img, nb);
+	mlx_hook(all.vars.win, 2, 1L<<0, check_key, &all);
+	mlx_hook(all.vars.win, 17, 1L<<0, closer, &all.vars);
+	init_mouse_hook(all);
+	mlx_mouse_hook(all.vars.win, mouse_hook, &all);
+	create_fractal(all.fract, &all.img, &all.vars, nb);
+	mlx_destroy_image(all.vars.mlx, all.img.img);
+	mlx_destroy_display(all.vars.mlx);
+	free(all.vars.mlx);
 }
