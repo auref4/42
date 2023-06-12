@@ -40,7 +40,6 @@ int	check_key(int keycode, t_all *all)
 int	closer(t_vars *vars)
 {
 	mlx_loop_end (vars->mlx);
-	mlx_destroy_window(vars->mlx, vars->win);
 	return (0);
 }
 
@@ -75,6 +74,7 @@ void	fractol(int nb)
 	init_hook(&all);
 	mlx_mouse_hook(all.vars.win, mouse_hook, &all);
 	create_fractal(all.fract, &all.img, &all.vars, nb);
+	mlx_destroy_window(all.vars.mlx, all.vars.win);
 	mlx_destroy_image(all.vars.mlx, all.img.img);
 	mlx_destroy_display(all.vars.mlx);
 	free(all.vars.mlx);
