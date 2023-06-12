@@ -10,15 +10,15 @@ void	color_julia(t_fract fract, t_data *img)
 
 void	value_julia(t_fract *fract)
 {
-	(*fract).x1 = -1;
-	(*fract).x2 = 1;
-	(*fract).y1 = -1.2;
-	(*fract).y2 = 1.2;
-	(*fract).image_x = 400;
-	(*fract).image_y = 400;
-	(*fract).i_max = 70;
-	(*fract).zoom_x = (*fract).image_x / ((*fract).x2 - (*fract).x1);
-	(*fract).zoom_y = (*fract).image_y / ((*fract).y2 - (*fract).y1);
+	fract->x1 = -1;
+	fract->x2 = 1;
+	fract->y1 = -1.2;
+	fract->y2 = 1.2;
+	fract->image_x = 400;
+	fract->image_y = 400;
+	fract->i_max = 70;
+	fract->zoom_x = fract->image_x / (fract->x2 - fract->x1);
+	fract->zoom_y = fract->image_y / (fract->y2 - fract->y1);
 }
 
 void	calcul_julia_3(t_fract fract, t_data *img, t_vars *vars)

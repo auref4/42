@@ -12,14 +12,20 @@
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
+# define UP 65362
+# define DOWN 65364
+# define RIGHT 65363
+# define LEFT 65361
+# define ZOOM 4
+# define DEZOOM 5
 
-#include <mlx.h>
-#include <stddef.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <X11/keysymdef.h>
-#include <X11/keysym.h>
-#include "stdio.h"
+# include <mlx.h>
+# include <stddef.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <X11/keysymdef.h>
+# include <X11/keysym.h>
+# include "stdio.h"
 
 typedef struct	s_data {
 	void	*img;
@@ -51,28 +57,18 @@ typedef struct	s_fract {
 	double	z_r;
 	double	z_i;
 	int	i;
+	int	j;
+	int	j_max;
 	int	i_max;
 	int	i_zoom;
 	double	tmp;
 	double	mouse_zoom_x;
 	double	mouse_zoom_y;
-	double	mouse_dezoom_x;
-	double	mouse_dezoom_y;
-	double	move_x1;
-	double	move_x1_n;
-	double	move_x2;
-	double	move_x2_n;
-	double	move_y1;
-	double	move_y1_n;
-	double	move_y2;
-	double	move_y2_n;
-	double	center_x;
-	double	center_y;
-	double	zoom_factor;
-	double	width;
-	double	height;
-	double	new_width;
-	double	new_height;
+	double	value_zoom;
+	long double	move;
+	int		check;
+	int		check_2;
+
 }				t_fract;
 
 typedef struct	s_all {
@@ -87,8 +83,9 @@ int		check_arg(char **argv);
 void	fractol(int nb);
 void	create_win_img(t_vars *vars, t_data *img, int nb);
 int		closer(t_vars *vars);
-void	init_mouse_hook(t_all all);
+void	init_hook(t_all *all);
 int		mouse_hook(int keycode, int x, int y, t_all *all);
+int		move_hook(int keycode, t_all *all);
 void	value_mandelbrot(t_fract *fract);
 void	value_julia(t_fract *fract);
 void	calcul_mandelbrot(t_fract fract, t_data *img, t_vars *vars);

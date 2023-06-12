@@ -12,8 +12,26 @@
 
 #include "fractol.h"
 
+void	init_hook(t_all *all)
+{
+	(void) all;
+	all->fract.j = 1;
+	all->fract.j_max = 3;
+	all->fract.check = 0;
+	all->fract.check_2 = 0;
+	all->fract.move = 0.02;
+	all->fract.mouse_zoom_x = 20;
+	all->fract.mouse_zoom_y = 20;
+	all->fract.i_zoom = 1;
+	all->fract.value_zoom = 200;
+}
+
 int	check_key(int keycode, t_all *all)
 {
+	if (keycode == UP || keycode == DOWN)
+		move_hook(keycode, all);
+	if (keycode == RIGHT || keycode == LEFT)
+		move_hook(keycode, all);
 	if (keycode == XK_Escape)
 		closer(&all->vars);
 	return (0);
@@ -21,7 +39,7 @@ int	check_key(int keycode, t_all *all)
 
 int	closer(t_vars *vars)
 {
-	mlx_loop_end ((*vars).mlx);
+	mlx_loop_end (vars->mlx);
 	mlx_destroy_window(vars->mlx, vars->win);
 	return (0);
 }
@@ -52,8 +70,9 @@ void	fractol(int nb)
 	all.vars.win = NULL;
 	create_win_img(&all.vars, &all.img, nb);
 	mlx_hook(all.vars.win, 2, 1L<<0, check_key, &all);
+	mlx_hook(all.vars.win, 2, 1L<<0, check_key, &all);
 	mlx_hook(all.vars.win, 17, 1L<<0, closer, &all.vars);
-	init_mouse_hook(all);
+	init_hook(&all);
 	mlx_mouse_hook(all.vars.win, mouse_hook, &all);
 	create_fractal(all.fract, &all.img, &all.vars, nb);
 	mlx_destroy_image(all.vars.mlx, all.img.img);
