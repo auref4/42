@@ -25,7 +25,6 @@
 # include <stdlib.h>
 # include <X11/keysymdef.h>
 # include <X11/keysym.h>
-# include "stdio.h"
 
 typedef struct	s_data {
 	void	*img;
@@ -42,32 +41,32 @@ typedef struct	s_vars {
 }				t_vars;
 
 typedef struct	s_fract {
-	double	x1;
-	double	x2;
-	double	y1;
-	double	y2;
-	int	image_x;
-	int	image_y;
-	double	zoom_x;
-	double	zoom_y;
-	int	x;
-	int	y;
-	double	c_r;
-	double	c_i;
-	double	z_r;
-	double	z_i;
-	int	i;
-	int	j;
-	int	j_max;
-	int	i_max;
-	int	i_zoom;
-	double	tmp;
-	double	mouse_zoom_x;
-	double	mouse_zoom_y;
-	double	value_zoom;
+	double		x1;
+	double		x2;
+	double		y1;
+	double		y2;
+	int			image_x;
+	int			image_y;
+	double		zoom_x;
+	double		zoom_y;
+	int			x;
+	int			y;
+	double		c_r;
+	double		c_i;
+	double		z_r;
+	double		z_i;
+	int			i;
+	int			j;
+	int			j_max;
+	int			i_max;
+	int			i_zoom;
+	double		tmp;
+	double		mouse_zoom_x;
+	double		mouse_zoom_y;
+	double		value_zoom;
 	long double	move;
-	int		check;
-	int		check_2;
+	int			check;
+	int			check_2;
 
 }				t_fract;
 
@@ -80,7 +79,7 @@ typedef struct	s_all {
 
 void	error(int nb);
 int		check_arg(char **argv);
-void	fractol(int nb);
+int		fractol(int nb);
 void	create_win_img(t_vars *vars, t_data *img, int nb);
 int		closer(t_vars *vars);
 void	init_hook(t_all *all);
@@ -95,5 +94,8 @@ void	calcul_julia_3(t_fract fract, t_data *img, t_vars *vars);
 void	create_fractal(t_fract fract, t_data *img, t_vars *vars, int nb);
 void	color_mandelbrot(t_fract fract, t_data *img);
 void	color_julia(t_fract fract, t_data *img);
+void	color_julia_2(t_fract fract, t_data *img);
+void	color_julia_3(t_fract fract, t_data *img);
+
 
 # endif

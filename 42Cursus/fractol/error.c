@@ -34,4 +34,6 @@ void	error(int nb)
 	}
 	if (nb == 1)
 		ft_putstr("incorrect number of arguments.\n");
+	if (nb == 2)
+		ft_putstr("malloc failure ?\n");
 }

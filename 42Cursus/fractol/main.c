@@ -21,7 +21,8 @@ int	main(int argc, char **argv)
 		nb = check_arg(argv);
 		if (nb == 0)
 			return (error(0), 0);
-		fractol(nb);
+		if (!fractol(nb))
+			return(error(2), 0);
 	}
 	else
 		error(1);

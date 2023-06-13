@@ -1,13 +1,5 @@
 #include "fractol.h"
 
-void	color_julia(t_fract fract, t_data *img)
-{
-	if (fract.i == fract.i_max)
-		img->addr[(fract.y * fract.image_x) + fract.x] = 0x6C00FF;
-	else
-		img->addr[(fract.y * fract.image_x) + fract.x] = 0x000000;
-}
-
 void	value_julia(t_fract *fract)
 {
 	fract->x1 = -1;
@@ -43,7 +35,7 @@ void	calcul_julia_3(t_fract fract, t_data *img, t_vars *vars)
 				fract.z_i = (2 * fract.tmp * fract.z_i) + fract.c_i;
 				fract.i++;
 			}
-			color_julia(fract, img);
+			color_julia_3(fract, img);
 		}
 	}
 	mlx_put_image_to_window((*vars).mlx, (*vars).win, img->img, 0, 0);
@@ -71,7 +63,7 @@ void	calcul_julia_2(t_fract fract, t_data *img, t_vars *vars)
 				fract.z_i = (2 * fract.tmp * fract.z_i) + fract.c_i;
 				fract.i++;
 			}
-			color_julia(fract, img);
+			color_julia_2(fract, img);
 		}
 	}
 	mlx_put_image_to_window((*vars).mlx, (*vars).win, img->img, 0, 0);

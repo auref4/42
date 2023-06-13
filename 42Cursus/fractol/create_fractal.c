@@ -12,21 +12,6 @@
 
 #include "fractol.h"
 
-void	color_mandelbrot(t_fract fract, t_data *img)
-{
-	if (fract.i == fract.i_max)
-		img->addr[(fract.y * fract.image_x) + fract.x] = 0x000000;
-	else if (fract.i % 3 == 0 && fract.i % 5 == 0)
-		img->addr[(fract.y * fract.image_x) + fract.x] = 0x00BAC6;
-	else if (fract.i % 3 == 0)
-		img->addr[(fract.y * fract.image_x) + fract.x] = 0x00F0FF;
-	else if (fract.i % 5 == 0)
-		img->addr[(fract.y * fract.image_x) + fract.x] = 0x00DDEC;
-	else
-		img->addr[(fract.y * fract.image_x) + fract.x] = 0x00F0FF;
-}
-
-
 void	value_mandelbrot(t_fract *fract)
 {
 	fract->x1 = -2.1;

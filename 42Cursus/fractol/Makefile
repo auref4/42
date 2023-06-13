@@ -18,6 +18,7 @@ SRCS =	main.c\
 		fractol.c\
 		create_fractal.c\
 		create_fractal2.c\
+		colors.c\
 		zoom_and_dezoom.c\
 		move.c\
 		error.c\

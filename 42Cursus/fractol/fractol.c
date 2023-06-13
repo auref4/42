@@ -46,6 +46,8 @@ int	closer(t_vars *vars)
 void	create_win_img(t_vars *vars, t_data *img, int nb)
 {
 	vars->mlx = mlx_init();
+	if (!vars->mlx)
+		return (free(vars->mlx));
 	if (nb == 1)
 		vars->win = mlx_new_window(vars->mlx, 400, 400, "Mandelbrot");
 	else if (nb == 2)
@@ -54,13 +56,24 @@ void	create_win_img(t_vars *vars, t_data *img, int nb)
 		vars->win = mlx_new_window(vars->mlx, 400, 400, "Julia 2");
 	else if (nb == 4)
 		vars->win = mlx_new_window(vars->mlx, 400, 400, "Julia 3");
+	if (!vars->win)
+	{
+		mlx_destroy_window(vars->mlx, vars->win);
+		return (free(vars->mlx));
+	}
 	img->img = mlx_new_image(vars->mlx, 400, 400);
+	if (!img->img)
+	{
+		mlx_destroy_window(vars->mlx, vars->win);
+		mlx_destroy_image(vars->mlx, img->img);
+		return (free(vars->mlx));
+	}
 	img->addr = (int *)mlx_get_data_addr(img->img,
 		&img->bits_per_pixel, &img->line_length, &img->endian);
 }
 
 
-void	fractol(int nb)
+int	fractol(int nb)
 {
 	t_all all;
 
@@ -68,6 +81,8 @@ void	fractol(int nb)
 	all.vars.mlx = NULL;
 	all.vars.win = NULL;
 	create_win_img(&all.vars, &all.img, nb);
+	if (!all.vars.mlx || !all.vars.win || !all.img.img)
+		return (0);
 	mlx_hook(all.vars.win, 2, 1L<<0, check_key, &all);
 	mlx_hook(all.vars.win, 2, 1L<<0, check_key, &all);
 	mlx_hook(all.vars.win, 17, 1L<<0, closer, &all.vars);
@@ -78,4 +93,5 @@ void	fractol(int nb)
 	mlx_destroy_image(all.vars.mlx, all.img.img);
 	mlx_destroy_display(all.vars.mlx);
 	free(all.vars.mlx);
+	return(1);
 }
