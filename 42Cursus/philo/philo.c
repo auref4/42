@@ -1,7 +1,9 @@
 #include "philo.h"
 
-int	init_value(int argc, char **argv, t_value *value)
+int	init_value(int argc, char **argv)
 {
+	t_value	*value;
+
 	if (!ft_atoi(argv[1], &value->nb_of_p))
 		return (0);
 	if (!ft_atoi(argv[2], &value->t_to_d))
@@ -14,7 +16,7 @@ int	init_value(int argc, char **argv, t_value *value)
 	{
 		if (!ft_atoi(argv[5], &value->nb_of_t_e_p_m_e))
 			return (0);
-		if(value->nb_of_t_e_p_m_e <1)
+		if(value->nb_of_t_e_p_m_e < 1)
 			return (error(1), 0);
 	}
 	else
@@ -27,14 +29,21 @@ int	init_value(int argc, char **argv, t_value *value)
 
 int	philo(int argc, char **argv)
 {
-	t_value	value;
+	int		i;
+	int		tid;
 
-	if(!init_value(argc, argv, &value))
+	i = 0;
+	if(!init_value(argc, argv))
 		return (0);
-	printf("nb = %d\n", value.nb_of_p);
+	while (i < value.nb_of_p)
+	{
+		tid = pthread_create()
+	}
+	/*printf("nb = %d\n", value.nb_of_p);
+	printf("nb = %f\n", value.nb_of_f);
 	printf("nb = %d\n", value.t_to_d);
 	printf("nb = %d\n", value.t_to_e);
 	printf("nb = %d\n", value.t_to_s);
-	printf("nb = %d\n", value.nb_of_t_e_p_m_e);
+	printf("nb = %d\n", value.nb_of_t_e_p_m_e);*/
 	return (1);
 }

@@ -31,12 +31,12 @@ int	ft_atoi(const char *s, int *nb)
 	}
 	while (s[i] == ' ')
 		i++;
-	if (s[i] != '\0')
-			return (error (1), 0);
 	if (sign == 1)
 		nbr = nbr * -1;
 	if (nbr < INT_MIN || nbr > INT_MAX)
 		return (error (2), 0);
+	if (s[i] != '\0' || nbr == 0)
+			return (error (1), 0);
 	*nb = nbr;
 	return (1);
 }
