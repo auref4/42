@@ -5,9 +5,10 @@ HEADER = philo.h
 SRCS =	main.c\
 		check_arg.c\
 		error.c\
+		ft_atoi.c\
 		philo.c\
-		ft_atoi.c
-
+		init.c\
+		manage_thread.c
 
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)
