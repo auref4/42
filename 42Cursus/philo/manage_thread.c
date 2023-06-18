@@ -11,7 +11,7 @@ void	manage_thread(t_philo *philo)
 
 	i = 0;
 
-	while (i < philo->value.nb_philo - 1)
+	while (i < philo->value.nb_philo)
 	{
 		pthread_mutex_init(&philo[i].fork, NULL);
 		pthread_create(&philo[i].thread_id, start_thread, philo);
