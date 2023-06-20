@@ -6,7 +6,6 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include <sys/time.h>
-#include <unistd.h>
 
 typedef struct	s_value {
 	int				nb_philo;
