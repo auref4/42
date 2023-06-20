@@ -12,6 +12,6 @@ int	philo(int argc, char **argv)
 		return (0);
 	init_philo(philo, value);
 	manage_thread(philo);
-	free(philo);
+	//free(philo);
 	return (1);
 }
