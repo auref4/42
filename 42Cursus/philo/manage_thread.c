@@ -5,8 +5,6 @@ void	*start_thread(void *philo)
 	t_philo	*philo_thread;
 
 	philo_thread = (t_philo *)philo;
-	printf("avant mutex\n");
-	pthread_mutex_lock(&philo_thread->value.synchro);
 	printf("thread_id = %ld\n", (philo_thread->thread_id));
 	return (NULL);
 }
@@ -14,10 +12,10 @@ void	*start_thread(void *philo)
 void	manage_thread(t_philo *philo)
 {
 	int	i;
-	timeval	start;
+	struct timeval	start;
 
 	i = 0;
-	pthread_mutex_init(&philo->value.synchro, NULL);
+	gettimeofday(&start, NULL);
 	while (i < philo->value.nb_philo)
 	{
 		pthread_mutex_init(&philo[i].fork, NULL);
