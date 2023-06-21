@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 22:35:29 by auferran          #+#    #+#             */
-/*   Updated: 2023/03/23 05:31:48 by auferran         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:46:18 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	calcul_mandelbrot(t_fract fract, t_data *img, t_vars *vars)
 			fract.z_r = 0;
 			fract.z_i = 0;
 			fract.i = 0;
-			while((fract.z_r * fract.z_r) + (fract.z_i * fract.z_i)
+			while ((fract.z_r * fract.z_r) + (fract.z_i * fract.z_i)
 				< 4 && fract.i < fract.i_max)
 			{
 				fract.tmp = fract.z_r;
@@ -63,7 +63,7 @@ void	create_fractal(t_fract fract, t_data *img, t_vars *vars, int nb)
 	if (nb == 2 || nb == 3 || nb == 4)
 	{
 		value_julia(&fract);
-		if(nb == 2)
+		if (nb == 2)
 			calcul_julia(fract, img, vars);
 		if (nb == 3)
 			calcul_julia_2(fract, img, vars);

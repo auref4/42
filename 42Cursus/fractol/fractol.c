@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 22:36:46 by auferran          #+#    #+#             */
-/*   Updated: 2023/03/23 05:30:36 by auferran         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:50:38 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,13 @@ void	create_win_img(t_vars *vars, t_data *img, int nb)
 		mlx_destroy_image(vars->mlx, img->img);
 		return (free(vars->mlx));
 	}
-	img->addr = (int *)mlx_get_data_addr(img->img,
-		&img->bits_per_pixel, &img->line_length, &img->endian);
+	img->addr = (int *)mlx_get_data_addr(img->img, \
+	&img->bits_per_pixel, &img->line_length, &img->endian);
 }
-
 
 int	fractol(int nb)
 {
-	t_all all;
+	t_all	all;
 
 	all.nb = nb;
 	all.vars.mlx = NULL;
@@ -83,9 +82,9 @@ int	fractol(int nb)
 	create_win_img(&all.vars, &all.img, nb);
 	if (!all.vars.mlx || !all.vars.win || !all.img.img)
 		return (0);
-	mlx_hook(all.vars.win, 2, 1L<<0, check_key, &all);
-	mlx_hook(all.vars.win, 2, 1L<<0, check_key, &all);
-	mlx_hook(all.vars.win, 17, 1L<<0, closer, &all.vars);
+	mlx_hook(all.vars.win, 2, 1L << 0, check_key, &all);
+	mlx_hook(all.vars.win, 2, 1L << 0, check_key, &all);
+	mlx_hook(all.vars.win, 17, 1L << 0, closer, &all.vars);
 	init_hook(&all);
 	mlx_mouse_hook(all.vars.win, mouse_hook, &all);
 	create_fractal(all.fract, &all.img, &all.vars, nb);
@@ -93,5 +92,5 @@ int	fractol(int nb)
 	mlx_destroy_image(all.vars.mlx, all.img.img);
 	mlx_destroy_display(all.vars.mlx);
 	free(all.vars.mlx);
-	return(1);
+	return (1);
 }

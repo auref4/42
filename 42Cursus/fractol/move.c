@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   move.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/21 16:30:16 by auferran          #+#    #+#             */
+/*   Updated: 2023/06/21 16:45:48 by auferran         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 void	up_and_down(int keycode, t_all *all)
@@ -38,7 +50,7 @@ void	go_move(int keycode, t_all *all)
 
 int	move_hook(int keycode, t_all *all)
 {
-	if(all->fract.check > 0)
+	if (all->fract.check > 0)
 	{
 		go_move(keycode, all);
 		if (all->nb == 1)

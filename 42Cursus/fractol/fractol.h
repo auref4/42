@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 21:23:05 by auferran          #+#    #+#             */
-/*   Updated: 2023/03/23 05:30:41 by auferran         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:52:12 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <X11/keysymdef.h>
 # include <X11/keysym.h>
 
-typedef struct	s_data {
+typedef struct s_data {
 	void	*img;
 	int		*addr;
 	int		bits_per_pixel;
@@ -34,13 +34,13 @@ typedef struct	s_data {
 	int		endian;
 }				t_data;
 
-typedef struct	s_vars {
+typedef struct s_vars {
 	void	*mlx;
 	void	*win;
 	int		keycode;
 }				t_vars;
 
-typedef struct	s_fract {
+typedef struct s_fract {
 	double		x1;
 	double		x2;
 	double		y1;
@@ -70,7 +70,7 @@ typedef struct	s_fract {
 
 }				t_fract;
 
-typedef struct	s_all {
+typedef struct s_all {
 	t_data	img;
 	t_vars	vars;
 	t_fract	fract;
@@ -97,5 +97,4 @@ void	color_julia(t_fract fract, t_data *img);
 void	color_julia_2(t_fract fract, t_data *img);
 void	color_julia_3(t_fract fract, t_data *img);
 
-
-# endif
+#endif

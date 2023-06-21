@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   zoom_and_dezoom.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/21 16:30:25 by auferran          #+#    #+#             */
+/*   Updated: 2023/06/21 16:45:28 by auferran         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 void	calcul_mouse_zoom(t_all *all)
@@ -23,14 +35,14 @@ void	go_zoom(t_all *all)
 {
 	if (all->nb == 1)
 	{
-		if(all->fract.check == 0)
+		if (all->fract.check == 0)
 			value_mandelbrot(&all->fract);
 		calcul_mouse_zoom(all);
 		calcul_mandelbrot(all->fract, &all->img, &all->vars);
 	}
 	if (all->nb == 2 || all->nb == 3 || all->nb == 4)
 	{
-		if(all->fract.check == 0)
+		if (all->fract.check == 0)
 			value_julia(&all->fract);
 		calcul_mouse_zoom(all);
 		if (all->nb == 2)
@@ -66,14 +78,14 @@ void	go_dezoom(t_all *all)
 {
 	if (all->nb == 1)
 	{
-		if(all->fract.check == 0)
+		if (all->fract.check == 0)
 			value_mandelbrot(&all->fract);
 		calcul_mouse_dezoom(all);
 		calcul_mandelbrot(all->fract, &all->img, &all->vars);
 	}
 	if (all->nb == 2 || all->nb == 3 || all->nb == 4)
 	{
-		if(all->fract.check == 0)
+		if (all->fract.check == 0)
 			value_julia(&all->fract);
 		calcul_mouse_dezoom(all);
 		if (all->nb == 2)

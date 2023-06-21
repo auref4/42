@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 21:22:58 by auferran          #+#    #+#             */
-/*   Updated: 2023/03/23 04:09:42 by auferran         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:52:23 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 		if (nb == 0)
 			return (error(0), 0);
 		if (!fractol(nb))
-			return(error(2), 0);
+			return (error(2), 0);
 	}
 	else
 		error(1);
