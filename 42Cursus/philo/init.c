@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/23 19:03:20 by auferran          #+#    #+#             */
+/*   Updated: 2023/06/23 19:05:38 by auferran         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	init_philo(t_philo *philo, t_value value)
@@ -28,7 +40,7 @@ int	init_value(int argc, char **argv, t_value *value)
 	{
 		if (!ft_atoi(argv[5], &value->nb_meal))
 			return (0);
-		if(value->nb_meal < 1)
+		if (value->nb_meal < 1)
 			return (error(1), 0);
 	}
 	else

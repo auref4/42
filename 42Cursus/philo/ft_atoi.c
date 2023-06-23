@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/23 19:03:17 by auferran          #+#    #+#             */
+/*   Updated: 2023/06/23 19:04:41 by auferran         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	jump_whitespace_sign(const char *s, int *i, int *sign)
@@ -34,9 +46,9 @@ int	ft_atoi(const char *s, int *nb)
 	if (sign == 1)
 		nbr = nbr * -1;
 	if (nbr < INT_MIN || nbr > INT_MAX)
-		return (error (2), 0);
+		return (error(2), 0);
 	if (s[i] != '\0' || nbr == 0)
-			return (error (1), 0);
+		return (error(1), 0);
 	*nb = nbr;
 	return (1);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   manage_thread.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/23 19:03:26 by auferran          #+#    #+#             */
+/*   Updated: 2023/06/23 19:06:02 by auferran         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	*start_thread(void *philo)
@@ -11,7 +23,7 @@ void	*start_thread(void *philo)
 
 void	manage_thread(t_philo *philo)
 {
-	int	i;
+	int				i;
 	struct timeval	start;
 
 	i = 0;

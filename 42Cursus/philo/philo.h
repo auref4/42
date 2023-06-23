@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/23 19:03:32 by auferran          #+#    #+#             */
+/*   Updated: 2023/06/23 19:06:40 by auferran         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
-#include <stdio.h>
-#include <limits.h>
-#include <pthread.h>
-#include <stdlib.h>
-#include <sys/time.h>
+# include <stdio.h>
+# include <limits.h>
+# include <pthread.h>
+# include <stdlib.h>
+# include <sys/time.h>
 
-typedef struct	s_value {
+typedef struct s_value {
 	int				nb_philo;
 	int				time_die;
 	int				time_eat;
@@ -16,7 +28,7 @@ typedef struct	s_value {
 	pthread_mutex_t	synchro;
 }				t_value;
 
-typedef struct	s_philo {
+typedef struct s_philo {
 	int				index;
 	pthread_mutex_t	fork;
 	pthread_t		thread_id;
@@ -31,4 +43,4 @@ void	init_philo(t_philo *philo, t_value value);
 int		ft_atoi(const char *s, int *nb);
 void	manage_thread(t_philo *philo);
 
-# endif
+#endif
