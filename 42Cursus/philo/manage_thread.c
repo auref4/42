@@ -17,6 +17,7 @@ void	*start_thread(void *philo)
 	t_philo	*philo_thread;
 
 	philo_thread = (t_philo *)philo;
+	(void) philo_thread;
 	printf("thread_id = %ld\n", (philo_thread->thread_id));
 	return (NULL);
 }
@@ -25,6 +26,7 @@ void	manage_thread(t_philo *philo)
 {
 	int				i;
 	struct timeval	start;
+	struct timeval	inwhile;
 
 	i = 0;
 	gettimeofday(&start, NULL);
@@ -35,5 +37,10 @@ void	manage_thread(t_philo *philo)
 		i++;
 	}
 	pthread_mutex_unlock(&philo->value.synchro);
-	while (1);
+	while (1)
+	{
+		gettimeofday(&inwhile, NULL);
+		printf("time = %ld\n", ((inwhile.tv_sec - start.tv_sec) * 1000) +
+			((inwhile.tv_usec - start.tv_usec) / 1000));
+	}
 }
