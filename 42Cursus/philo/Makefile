@@ -8,7 +8,8 @@ SRCS =	main.c\
 		ft_atoi.c\
 		philo.c\
 		init.c\
-		manage_thread.c
+		manage_thread.c\
+		manage_time.c
 
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)
