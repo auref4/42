@@ -26,13 +26,10 @@ typedef struct s_value {
 	int				time_sleep;
 	int				nb_meal;
 	pthread_mutex_t	synchro;
-}				t_value;
-
-typedef struct s_timer {
+	long int		timer_start;
 	struct timeval	start;
 	struct timeval	inwhile;
-	long long int	timer_start;
-}				t_timer;
+}				t_value;
 
 typedef struct s_philo {
 	int				index;
@@ -40,7 +37,6 @@ typedef struct s_philo {
 	pthread_t		thread_id;
 	struct timeval	start_philo;
 	t_value			value;
-	t_timer			timer;
 }				t_philo;
 
 void	error(int nb);
@@ -49,7 +45,7 @@ int		philo(int argc, char **argv);
 int		init_value(int argc, char **argv, t_value *value);
 void	init_philo(t_philo *philo, t_value value);
 int		ft_atoi(const char *s, int *nb);
-void	manage_thread(t_philo *philo);
+void	manage_thread(t_philo *philo, t_value value);
 void	print_timer(t_philo *philo);
 
 #endif

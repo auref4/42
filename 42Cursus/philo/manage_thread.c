@@ -17,40 +17,36 @@ void	*start_thread(void *philo)
 	t_philo	*philo_thread;
 
 	philo_thread = (t_philo *)philo;
-	//gettimeofday(&philo_thread->start_philo, NULL);
-	printf("timer_start = %lld\n", philo_thread->timer.timer_start);
 	while (4)
 	{
-		gettimeofday(&philo_thread->timer.inwhile, NULL);
-		//gettimeofday(&philo_thread->inwhile_philo, NULL);
-		//print_timer(philo_thread);
-		//printf("Philosopher %d thinking\n", philo_thread->index);
+	 	gettimeofday(&philo_thread->value.inwhile, NULL);
+		print_timer(philo_thread);
+		printf("Philosopher %d thinking\n", philo_thread->index);
+		while(4);
 		//while (time_before_eat(philo_thread) <= philo_thread->time_eat);
 	}
 	return (NULL);
 }
 
-void	create_thread(t_philo *philo)
+void	create_thread(t_philo *philo, t_value value)
 {
 	int	i;
 
 	i = 0;
 	while (i < philo->value.nb_philo)
 	{
+		philo[i].value = value;
 		pthread_mutex_init(&philo[i].fork, NULL);
 		pthread_create(&philo[i].thread_id, NULL, start_thread, &philo[i]);
 		i++;
 	}
 }
 
-void	manage_thread(t_philo *philo)
+void	manage_thread(t_philo *philo, t_value value)
 {
-	gettimeofday(&philo->timer.start, NULL);
-	philo->timer.timer_start = (philo->timer.start.tv_sec * 1000) +
-		(philo->timer.start.tv_usec / 1000);
-	printf("timer_start = %lld\n", philo->timer.timer_start);
-	create_thread(philo);
+	gettimeofday(&value.start, NULL);
+	value.timer_start = (value.start.tv_sec * 1000) +
+		(value.start.tv_usec / 1000);
+	create_thread(philo, value);
 	while (4);
-		//gettimeofday(&philo->timer.inwhile, NULL);
-		//print_timer(philo);
 }
