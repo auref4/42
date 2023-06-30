@@ -23,7 +23,7 @@ int	philo(int argc, char **argv)
 	if (!philo)
 		return (0);
 	init_philo(philo, value);
-	manage_thread(philo, value);
+	create_thread(philo, value);
 	free(philo);
 	return (1);
 }

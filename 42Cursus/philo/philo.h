@@ -18,6 +18,7 @@
 # include <pthread.h>
 # include <stdlib.h>
 # include <sys/time.h>
+# include <unistd.h>
 
 typedef struct s_value {
 	int				nb_philo;
@@ -25,7 +26,7 @@ typedef struct s_value {
 	int				time_eat;
 	int				time_sleep;
 	int				nb_meal;
-	pthread_mutex_t	synchro;
+	pthread_mutex_t	print;
 	long int		timer_start;
 	struct timeval	start;
 	struct timeval	inwhile;
@@ -35,7 +36,14 @@ typedef struct s_philo {
 	int				index;
 	pthread_mutex_t	fork;
 	pthread_t		thread_id;
+	struct timeval	eating;
+	struct timeval	inwhile_eating;
 	struct timeval	start_philo;
+	struct timeval	last_meal;
+	struct timeval	sleeping;
+	struct timeval	inwhile_sleeping;
+	struct timeval	inwhile_death;
+	int				i;
 	t_value			value;
 }				t_philo;
 
@@ -45,7 +53,15 @@ int		philo(int argc, char **argv);
 int		init_value(int argc, char **argv, t_value *value);
 void	init_philo(t_philo *philo, t_value value);
 int		ft_atoi(const char *s, int *nb);
-void	manage_thread(t_philo *philo, t_value value);
+void	create_thread(t_philo *philo, t_value value);
 void	print_timer(t_philo *philo);
+int		eating_timer(t_philo *philo_thread);
+int		sleeping_timer(t_philo *philo_thread);
+void	lock_modulo_2(t_philo * philo_thread);
+void	unlock_modulo_2(t_philo *philo_thread);
+void	lock(t_philo * philo_thread);
+void	unlock(t_philo *philo_thread);
+int		death_timer_1(t_philo *philo);
+int		death_timer_2(t_philo *philo);
 
 #endif
