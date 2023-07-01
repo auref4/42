@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 19:03:20 by auferran          #+#    #+#             */
-/*   Updated: 2023/06/23 19:05:38 by auferran         ###   ########.fr       */
+/*   Updated: 2023/07/01 01:07:54 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	init_value(int argc, char **argv, t_value *value)
 			return (error(1), 0);
 	}
 	else
-		value->nb_meal = 0;
+		value->nb_meal = -1;
 	if (value->nb_philo < 1 || value->time_die < 1 || value->time_eat < 1
 		|| value->time_sleep < 1)
 		return (error(1), 0);

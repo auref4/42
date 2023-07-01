@@ -9,6 +9,7 @@ SRCS =	main.c\
 		philo.c\
 		init.c\
 		create_thread.c\
+		create_thread_utils.c\
 		manage_time.c\
 		lock_unlock.c\
 
