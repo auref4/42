@@ -6,12 +6,14 @@ SRCS =	main.c\
 		check_arg.c\
 		error.c\
 		ft_atoi.c\
-		philo.c\
+		ft_strcmp.c\
+		prep_philo.c\
 		init.c\
-		create_thread.c\
-		create_thread_utils.c\
+		philosophers.c\
+		philosophers_2.c\
 		manage_time.c\
 		lock_unlock.c\
+		death.c
 
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)

@@ -22,6 +22,9 @@ void	init_philo(t_philo *philo, t_value value)
 		philo[i].index = i + 1;
 		philo[i].thread_id = 0;
 		philo[i].value = value;
+		philo[i].start_p = 0;
+		philo[i].last_m = 0;
+		philo[i].i = 0;
 		i++;
 	}
 }

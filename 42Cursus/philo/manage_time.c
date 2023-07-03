@@ -12,31 +12,6 @@
 
 #include "philo.h"
 
-int	death_timer_2(t_philo *philo)
-{
-	long int	time;
-
-	gettimeofday(&philo->inwhile_death, NULL);
-	time = (philo->inwhile_death.tv_sec * 1000) + \
-		(philo->inwhile_death.tv_usec / 1000);
-	if (time - philo->last_m > philo->value.time_die)
-		return (1);
-	return (0);
-}
-
-int	death_timer_1(t_philo *philo)
-{
-	long int	time;
-
-	gettimeofday(&philo->inwhile_death, NULL);
-	time = (philo->inwhile_death.tv_sec * 1000) + \
-		(philo->inwhile_death.tv_usec / 1000);
-	if (time - philo->start_p > philo->value.time_die)
-		return (1);
-	return (0);
-
-}
-
 void	timer_last_meal(t_philo *philo_thread)
 {
 	gettimeofday(&philo_thread->last_meal, NULL);

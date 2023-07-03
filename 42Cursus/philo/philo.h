@@ -28,12 +28,15 @@ typedef struct s_value {
 	int				nb_meal;
 	int				*philo_eated;
 	int				*is_dead;
-	pthread_mutex_t	protect;
-	pthread_mutex_t	print;
 	long int		timer_start;
 	struct timeval	start;
 	struct timeval	inwhile;
 }				t_value;
+
+typedef struct s_mutex {
+	pthread_mutex_t	protect;
+	pthread_mutex_t	print;
+}				t_mutex;
 
 typedef struct s_philo {
 	int				index;
@@ -47,22 +50,27 @@ typedef struct s_philo {
 	int				meal_eated;
 	int				i;
 	t_value			value;
+	t_mutex			mutex;
 }				t_philo;
 
 void	error(int nb);
 int		check_arg(char **argv);
-int		philo(int argc, char **argv);
+int		prep_philo(int argc, char **argv);
 int		init_value(int argc, char **argv, t_value *value);
 void	init_philo(t_philo *philo, t_value value);
 int		ft_atoi(const char *s, int *nb);
-void	create_thread(t_philo *philo, t_value value);
+int		ft_strcmp(const char *first, const char *second);
+void	philosophers(t_philo *philo, t_value value, t_mutex mutex);
+void	*start_thread(void *philo);
 void	print(t_philo *philo, char *str);
 void	lock_modulo_2(t_philo *philo_thread);
 void	unlock_modulo_2(t_philo *philo_thread);
 void	lock(t_philo *philo_thread);
 void	unlock(t_philo *philo_thread);
+void	meal_eated(t_philo *philo_thread);
 void	timer_start_philo(t_philo *philo_thread);
 void	timer_last_meal(t_philo *philo_thread);
+int		checker_death(t_philo *philo);
 int		death_timer_1(t_philo *philo);
 int		death_timer_2(t_philo *philo);
 int		is_dead(t_philo *philo_thread);
