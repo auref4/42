@@ -12,13 +12,13 @@
 
 #include "philo.h"
 
-void	destroy_mutex(t_philo *philo, t_mutex mutex, int index)
+void	destroy_mutex(t_philo *philo, t_mutex *mutex, int index)
 {
 	int	i;
 
 	i = 0;
-	pthread_mutex_destroy(&mutex.print);
-	pthread_mutex_destroy(&mutex.protect);
+	pthread_mutex_destroy(&mutex->print);
+	pthread_mutex_destroy(&mutex->protect);
 	while (i < index)
 	{
 		pthread_mutex_destroy(&philo[i].fork);
@@ -52,23 +52,20 @@ void	infinit_while(t_philo *philo, t_value value, t_mutex mutex)
 	pthread_mutex_unlock(&mutex.protect);
 }
 
-int	create_thread(t_philo *philo, t_value value, t_mutex mutex)
+int	create_thread(t_philo *philo, t_value *value, t_mutex *mutex)
 {
 	int	i;
 
 	i = 0;
-	if (pthread_mutex_init(&mutex.print, NULL) != 0)
-		return (0);
-	if (pthread_mutex_init(&mutex.protect, NULL) != 0)
-		return (0);
 	while (i < philo->value.nb_philo)
 	{
-		philo[i].value = value;
+		philo[i].value = *value;
+		philo[i].mutex = *mutex;
 		if (pthread_mutex_init(&philo[i].fork, NULL) != 0)
 		{
-			pthread_mutex_lock(&mutex.print);
-			(*value.is_dead)++;
-			pthread_mutex_unlock(&mutex.print);
+			pthread_mutex_lock(&mutex->print);
+			(*value->is_dead)++;
+			pthread_mutex_unlock(&mutex->print);
 			waiting_close_thread(philo);
 			destroy_mutex(philo, mutex, i);
 			return (0);
@@ -84,12 +81,16 @@ void	philosophers(t_philo *philo, t_value value, t_mutex mutex)
 	int	i;
 
 	i = 0;
+	if (pthread_mutex_init(&mutex.print, NULL) != 0)
+		return ;
+	if (pthread_mutex_init(&mutex.protect, NULL) != 0)
+		return ;
 	gettimeofday(&value.start, NULL);
 	value.timer_start = (value.start.tv_sec * 1000) + \
 		(value.start.tv_usec / 1000);
-	if (!create_thread(philo, value, mutex))
+	if (!create_thread(philo, &value, &mutex))
 		return ;
 	infinit_while(philo, value, mutex);
 	waiting_close_thread(philo);
-	destroy_mutex(philo, mutex, i);
+	destroy_mutex(philo, &mutex, i);
 }
