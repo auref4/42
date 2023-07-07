@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   death.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/07 16:51:41 by auferran          #+#    #+#             */
+/*   Updated: 2023/07/07 21:09:16 by auferran         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	death_timer_2(t_philo *philo)
@@ -7,7 +19,7 @@ int	death_timer_2(t_philo *philo)
 	gettimeofday(&philo->inwhile_death, NULL);
 	time = (philo->inwhile_death.tv_sec * 1000) + \
 		(philo->inwhile_death.tv_usec / 1000);
-	if ((time - philo->last_m) > philo->value.time_die)
+	if ((time - philo->last_m) > philo->value->time_die)
 		return (1);
 	return (0);
 }
@@ -19,7 +31,7 @@ int	death_timer_1(t_philo *philo)
 	gettimeofday(&philo->inwhile_death, NULL);
 	time = (philo->inwhile_death.tv_sec * 1000) + \
 		(philo->inwhile_death.tv_usec / 1000);
-	if (time - philo->start_p > philo->value.time_die)
+	if (time - philo->start_p > philo->value->time_die)
 		return (1);
 	return (0);
 
@@ -27,8 +39,13 @@ int	death_timer_1(t_philo *philo)
 
 int	is_dead(t_philo *philo_thread)
 {
-	if (*philo_thread->value.is_dead > 0)
+	pthread_mutex_lock(&philo_thread->mutex->is_dead);
+	if (*philo_thread->value->is_dead > 0)
+	{
+		pthread_mutex_unlock(&philo_thread->mutex->is_dead);
 		return (1);
+	}
+	pthread_mutex_unlock(&philo_thread->mutex->is_dead);
 	return (0);
 }
 
@@ -37,24 +54,28 @@ int	checker_death(t_philo *philo)
 	int	i;
 
 	i = 0;
-	while (i < philo->value.nb_philo)
+	while (i < philo->value->nb_philo)
 	{
-		if (philo[i].i == 0 && philo[i].start_p > 0)
+		pthread_mutex_lock(&philo[i].mutex->timer);
+		if (philo[i].start_p > 0 && philo[i].last_m == 0)
 		{
 			if (death_timer_1(&philo[i]))
 			{
 				print(&philo[i], "died\n");
+				pthread_mutex_unlock(&philo[i].mutex->timer);
 				return (1);
 			}
 		}
-		if (philo[i].i == 1 && philo[i].last_m > 0)
+		if (philo[i].last_m > 0)
 		{
 			if (death_timer_2(&philo[i]))
 			{
 				print(&philo[i], "died\n");
+				pthread_mutex_unlock(&philo[i].mutex->timer);
 				return (1);
 			}
 		}
+		pthread_mutex_unlock(&philo[i].mutex->timer);
 		i++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 19:03:32 by auferran          #+#    #+#             */
-/*   Updated: 2023/07/01 05:08:16 by auferran         ###   ########.fr       */
+/*   Updated: 2023/07/07 21:17:49 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ typedef struct s_value {
 }				t_value;
 
 typedef struct s_mutex {
-	pthread_mutex_t	protect;
-	pthread_mutex_t	print;
+	pthread_mutex_t	timer;
+	pthread_mutex_t	philo_eated;
+	pthread_mutex_t	is_dead;
 }				t_mutex;
 
 typedef struct s_philo {
@@ -48,19 +49,19 @@ typedef struct s_philo {
 	long int		last_m;
 	struct timeval	inwhile_death;
 	int				meal_eated;
-	int				i;
-	t_value			value;
-	t_mutex			mutex;
+	t_value			*value;
+	t_mutex			*mutex;
 }				t_philo;
 
 void	error(int nb);
 int		check_arg(char **argv);
 int		prep_philo(int argc, char **argv);
 int		init_value(int argc, char **argv, t_value *value);
-void	init_philo(t_philo *philo, t_value value);
+void	init_philo(t_philo *philo, t_value *value);
 int		ft_atoi(const char *s, int *nb);
 int		ft_strcmp(const char *first, const char *second);
-void	philosophers(t_philo *philo, t_value value, t_mutex mutex);
+void	philosophers(t_philo *philo, t_value value);
+int		init_mutex(t_philo *philo, t_mutex *mutex);
 void	*start_thread(void *philo);
 void	print(t_philo *philo, char *str);
 void	lock_modulo_2(t_philo *philo_thread);

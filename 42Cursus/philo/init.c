@@ -6,25 +6,24 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 19:03:20 by auferran          #+#    #+#             */
-/*   Updated: 2023/07/01 01:07:54 by auferran         ###   ########.fr       */
+/*   Updated: 2023/07/07 21:09:30 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	init_philo(t_philo *philo, t_value value)
+void	init_philo(t_philo *philo, t_value *value)
 {
 	int	i;
 
 	i = 0;
-	while (i < value.nb_philo)
+	while (i < value->nb_philo)
 	{
 		philo[i].index = i + 1;
 		philo[i].thread_id = 0;
 		philo[i].value = value;
 		philo[i].start_p = 0;
 		philo[i].last_m = 0;
-		philo[i].i = 0;
 		i++;
 	}
 }
