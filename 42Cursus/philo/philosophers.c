@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 19:03:26 by auferran          #+#    #+#             */
-/*   Updated: 2023/07/07 21:18:14 by auferran         ###   ########.fr       */
+/*   Updated: 2023/07/08 16:28:42 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,17 @@ void	create_thread(t_philo *philo, t_value *value, t_mutex *mutex)
 
 void	philosophers(t_philo *philo, t_value value)
 {
-	int		i;
-	t_mutex	mutex;
+	int				i;
+	t_mutex			mutex;
+	struct timeval	start;
+
 
 	i = 0;
 	if (!init_mutex(philo, &mutex))
 		return (error(3));
-	gettimeofday(&value.start, NULL);
-	value.timer_start = (value.start.tv_sec * 1000) + \
-		(value.start.tv_usec / 1000);
+	gettimeofday(&start, NULL);
+	value.timer_start = (start.tv_sec * 1000) + \
+		(start.tv_usec / 1000);
 	create_thread(philo, &value, &mutex);
 	infinit_while(philo, value, &mutex);
 	waiting_close_thread(philo);

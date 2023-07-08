@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 05:02:04 by auferran          #+#    #+#             */
-/*   Updated: 2023/07/07 21:17:59 by auferran         ###   ########.fr       */
+/*   Updated: 2023/07/08 16:59:13 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	*start_thread(void *philo)
 	while (4)
 	{
 		if (philo_thread->index % 2)
-			usleep(3000);
+			usleep(500);
 		print(philo_thread, "is thinking\n");
 		usleep(200);
 		eating(philo_thread);
@@ -67,19 +67,21 @@ void	*start_thread(void *philo)
 
 void	print(t_philo *philo_thread, char *str)
 {
+	struct timeval	inwhile;
+
 	pthread_mutex_lock(&philo_thread->mutex->is_dead);
 	if (*philo_thread->value->is_dead == 0)
 	{
-		gettimeofday(&philo_thread->value->inwhile, NULL);
-		printf("%ld %d %s", ((philo_thread->value->inwhile.tv_sec * 1000) + \
-			(philo_thread->value->inwhile.tv_usec / 1000) - \
+		gettimeofday(&inwhile, NULL);
+		printf("%ld %d %s", ((inwhile.tv_sec * 1000) + \
+			(inwhile.tv_usec / 1000) - \
 			philo_thread->value->timer_start), philo_thread->index, str);
 	}
 	else if (*philo_thread->value->is_dead > 0 && !ft_strcmp(str, "died\n"))
 	{
-		gettimeofday(&philo_thread->value->inwhile, NULL);
-		printf("%ld %d %s", ((philo_thread->value->inwhile.tv_sec * 1000) + \
-			(philo_thread->value->inwhile.tv_usec / 1000) - \
+		gettimeofday(&inwhile, NULL);
+		printf("%ld %d %s", ((inwhile.tv_sec * 1000) + \
+			(inwhile.tv_usec / 1000) - \
 			philo_thread->value->timer_start), philo_thread->index, str);
 	}
 	pthread_mutex_unlock(&philo_thread->mutex->is_dead);

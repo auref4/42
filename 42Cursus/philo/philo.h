@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 19:03:32 by auferran          #+#    #+#             */
-/*   Updated: 2023/07/07 21:17:49 by auferran         ###   ########.fr       */
+/*   Updated: 2023/07/08 16:41:59 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ typedef struct s_value {
 	int				*philo_eated;
 	int				*is_dead;
 	long int		timer_start;
-	struct timeval	start;
-	struct timeval	inwhile;
 }				t_value;
 
 typedef struct s_mutex {
@@ -43,11 +41,8 @@ typedef struct s_philo {
 	int				index;
 	pthread_mutex_t	fork;
 	pthread_t		thread_id;
-	struct timeval	start_philo;
 	long int		start_p;
-	struct timeval	last_meal;
 	long int		last_m;
-	struct timeval	inwhile_death;
 	int				meal_eated;
 	t_value			*value;
 	t_mutex			*mutex;

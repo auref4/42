@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 16:51:41 by auferran          #+#    #+#             */
-/*   Updated: 2023/07/07 21:09:16 by auferran         ###   ########.fr       */
+/*   Updated: 2023/07/08 16:32:29 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 int	death_timer_2(t_philo *philo)
 {
-	long int	time;
+	long int		time;
+	struct timeval	inwhile_death;
 
-	gettimeofday(&philo->inwhile_death, NULL);
-	time = (philo->inwhile_death.tv_sec * 1000) + \
-		(philo->inwhile_death.tv_usec / 1000);
+	gettimeofday(&inwhile_death, NULL);
+	time = (inwhile_death.tv_sec * 1000) + \
+		(inwhile_death.tv_usec / 1000);
 	if ((time - philo->last_m) > philo->value->time_die)
 		return (1);
 	return (0);
@@ -26,11 +27,12 @@ int	death_timer_2(t_philo *philo)
 
 int	death_timer_1(t_philo *philo)
 {
-	long int	time;
+	long int		time;
+	struct timeval	inwhile_death;
 
-	gettimeofday(&philo->inwhile_death, NULL);
-	time = (philo->inwhile_death.tv_sec * 1000) + \
-		(philo->inwhile_death.tv_usec / 1000);
+	gettimeofday(&inwhile_death, NULL);
+	time = (inwhile_death.tv_sec * 1000) + \
+		(inwhile_death.tv_usec / 1000);
 	if (time - philo->start_p > philo->value->time_die)
 		return (1);
 	return (0);
