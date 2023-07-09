@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 16:51:41 by auferran          #+#    #+#             */
-/*   Updated: 2023/07/08 16:32:29 by auferran         ###   ########.fr       */
+/*   Updated: 2023/07/09 16:32:46 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	death_timer_1(t_philo *philo)
 	if (time - philo->start_p > philo->value->time_die)
 		return (1);
 	return (0);
-
 }
 
 int	is_dead(t_philo *philo_thread)
@@ -51,6 +50,31 @@ int	is_dead(t_philo *philo_thread)
 	return (0);
 }
 
+int	in_checker_death(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->mutex->timer);
+	if (philo->start_p > 0 && philo->last_m == 0)
+	{
+		if (death_timer_1(philo))
+		{
+			print(philo, "died\n");
+			pthread_mutex_unlock(&philo->mutex->timer);
+			return (1);
+		}
+	}
+	if (philo->last_m > 0)
+	{
+		if (death_timer_2(philo))
+		{
+			print(philo, "died\n");
+			pthread_mutex_unlock(&philo->mutex->timer);
+			return (1);
+		}
+	}
+	pthread_mutex_unlock(&philo->mutex->timer);
+	return (0);
+}
+
 int	checker_death(t_philo *philo)
 {
 	int	i;
@@ -58,26 +82,8 @@ int	checker_death(t_philo *philo)
 	i = 0;
 	while (i < philo->value->nb_philo)
 	{
-		pthread_mutex_lock(&philo[i].mutex->timer);
-		if (philo[i].start_p > 0 && philo[i].last_m == 0)
-		{
-			if (death_timer_1(&philo[i]))
-			{
-				print(&philo[i], "died\n");
-				pthread_mutex_unlock(&philo[i].mutex->timer);
-				return (1);
-			}
-		}
-		if (philo[i].last_m > 0)
-		{
-			if (death_timer_2(&philo[i]))
-			{
-				print(&philo[i], "died\n");
-				pthread_mutex_unlock(&philo[i].mutex->timer);
-				return (1);
-			}
-		}
-		pthread_mutex_unlock(&philo[i].mutex->timer);
+		if (in_checker_death(&philo[i]))
+			return (1);
 		i++;
 	}
 	return (0);

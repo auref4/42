@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 19:03:26 by auferran          #+#    #+#             */
-/*   Updated: 2023/07/08 16:28:42 by auferran         ###   ########.fr       */
+/*   Updated: 2023/07/09 16:32:33 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void	philosophers(t_philo *philo, t_value value)
 	int				i;
 	t_mutex			mutex;
 	struct timeval	start;
-
 
 	i = 0;
 	if (!init_mutex(philo, &mutex))
