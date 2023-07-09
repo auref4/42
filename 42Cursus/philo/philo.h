@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 19:03:32 by auferran          #+#    #+#             */
-/*   Updated: 2023/07/08 16:41:59 by auferran         ###   ########.fr       */
+/*   Updated: 2023/07/09 17:00:32 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ void	philosophers(t_philo *philo, t_value value);
 int		init_mutex(t_philo *philo, t_mutex *mutex);
 void	*start_thread(void *philo);
 void	print(t_philo *philo, char *str);
-void	lock_modulo_2(t_philo *philo_thread);
+int		lock_modulo_2(t_philo *philo_thread);
 void	unlock_modulo_2(t_philo *philo_thread);
-void	lock(t_philo *philo_thread);
+int		lock(t_philo *philo_thread);
 void	unlock(t_philo *philo_thread);
 void	meal_eated(t_philo *philo_thread);
 void	timer_start_philo(t_philo *philo_thread);

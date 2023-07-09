@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 05:02:04 by auferran          #+#    #+#             */
-/*   Updated: 2023/07/08 16:59:13 by auferran         ###   ########.fr       */
+/*   Updated: 2023/07/09 18:18:20 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	eating(t_philo *philo_thread)
 {
 	if (philo_thread->index % 2 == 0)
 	{
-		lock_modulo_2(philo_thread);
+		if (!lock_modulo_2(philo_thread))
+			return ;
 		timer_last_meal(philo_thread);
 		print(philo_thread, "is eating\n");
 		usleep(philo_thread->value->time_eat * 1000);
@@ -34,7 +35,8 @@ void	eating(t_philo *philo_thread)
 	}
 	else
 	{
-		lock(philo_thread);
+		if (!lock(philo_thread))
+			return ;
 		timer_last_meal(philo_thread);
 		print(philo_thread, "is eating\n");
 		usleep(philo_thread->value->time_eat * 1000);
@@ -56,11 +58,11 @@ void	*start_thread(void *philo)
 		print(philo_thread, "is thinking\n");
 		usleep(200);
 		eating(philo_thread);
+		if (is_dead(philo_thread))
+			break ;
 		meal_eated(philo_thread);
 		print(philo_thread, "is sleeping\n");
 		usleep(philo_thread->value->time_sleep * 1000);
-		if (is_dead(philo_thread))
-			break ;
 	}
 	return (NULL);
 }

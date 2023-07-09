@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 19:03:14 by auferran          #+#    #+#             */
-/*   Updated: 2023/07/07 18:49:56 by auferran         ###   ########.fr       */
+/*   Updated: 2023/07/09 17:48:05 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,6 @@ void	error(int nb)
 		printf("the intenger should be between INT_MIN and INT_MAX\n");
 	if (nb == 3)
 		printf("init_mutex failure ?\n");
+	if (nb == 4)
+		printf("pthread_create failure ?\n");
 }
