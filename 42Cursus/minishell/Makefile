@@ -4,7 +4,7 @@ HEADER = minishell.h
 
 SRCS =	main.c\
 		minishell.c\
-		sig_and_exit.c\
+		manage_sig.c\
 		utils.c
 
 OBJS = $(SRCS:.c=.o)

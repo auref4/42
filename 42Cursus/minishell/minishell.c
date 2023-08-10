@@ -11,7 +11,8 @@ void	minishell(char **env)
 		prompt = readline("minishell$ ");
 		if (!prompt || !ft_strcmp("exit", prompt))
 		{
-			free(prompt);
+			if (!ft_strcmp("exit", prompt))
+				free(prompt);
 			printf("exit\n");
 			break ;
 		}
