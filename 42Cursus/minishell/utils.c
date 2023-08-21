@@ -1,5 +1,20 @@
 #include "minishell.h"
 
+void	*ft_memset(void *pointer, int value, size_t count)
+{
+	size_t			i;
+	unsigned char	*p;
+
+	i = 0;
+	p = (unsigned char *)pointer;
+	while (i < count)
+	{
+		p[i] = (unsigned char)value;
+		i++;
+	}
+	return (pointer);
+}
+
 int	ft_strcmp(const char *first, const char *second)
 {
 	size_t			i;

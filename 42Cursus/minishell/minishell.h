@@ -21,6 +21,7 @@ typedef struct t_env_pipex
 void	minishell(char **env);
 int		manage_sig();
 int		ft_strcmp(const char *first, const char *second);
+void	*ft_memset(void *pointer, int value, size_t count);
 int		check_prompt(char *prompt, s_env_pipex *env_pipex);
 
 #endif

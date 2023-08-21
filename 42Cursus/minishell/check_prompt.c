@@ -21,7 +21,7 @@ void	init_struct(s_env_pipex *env_pipex, int nb_cmd)
 	i = 0;
 	while (i < nb_cmd)
 	{
-		ft_memset(&env_pipex[i], nb_cmd, 5);
+		ft_memset(&env_pipex[i], 0, 5);
 		i++;
 	}
 }
