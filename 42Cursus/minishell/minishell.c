@@ -2,9 +2,11 @@
 
 void	minishell(char **env)
 {
-	char	*prompt;
+	char		*prompt;
+	s_env_pipex	*env_pipex;
 
 	(void) env;
+	init_struct(env_pipex)
 	manage_sig();
 	while (1)
 	{
@@ -16,6 +18,7 @@ void	minishell(char **env)
 			printf("exit\n");
 			break ;
 		}
-		free(prompt);
+		else if (prompt && check_prompt(prompt, env_pipex))
+			printf("go pipex !\n");
 	}
 }

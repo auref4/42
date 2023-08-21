@@ -5,7 +5,8 @@ HEADER = minishell.h
 SRCS =	main.c\
 		minishell.c\
 		manage_sig.c\
-		utils.c
+		utils.c\
+		check_prompt.c
 
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)
