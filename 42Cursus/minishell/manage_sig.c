@@ -3,7 +3,7 @@
 void	sig_handler(int signal)
 {
 	if (signal == SIGINT)
-		printf("\nminishell$ ");
+		printf("\n(auferran&malancar)-[~/minishell]$ ");
 }
 
 int	manage_sig()
