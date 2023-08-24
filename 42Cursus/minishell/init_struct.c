@@ -31,5 +31,11 @@ int	init_struct(char *prompt, s_env_pipex *env_pipex)
 		ft_memset(&env_pipex[i], 0, 5);
 		i++;
 	}
+	/*printf("infile = %s\n", env_pipex->infile);
+	printf("outfile = %s\n", env_pipex->outfile);
+	printf("open_outfile_type = %d\n", env_pipex->open_outfile_type);
+	printf("heredoc = %d\n", env_pipex->heredoc);
+	printf("limiter = %s\n", env_pipex->limiter);
+	printf("cmd = %s\n", env_pipex->cmd[0]);*/
 	return (1);
 }
