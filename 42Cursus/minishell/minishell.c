@@ -1,22 +1,26 @@
 #include "minishell.h"
 
-int	manage_prompt(char *prompt, s_env_pipex *env_pipex)
+int	manage_prompt(char *prompt)
 {
-	if (!init_struct(prompt, env_pipex))
-		return (free(prompt), error(ERROR_MALLOC), 0);
+	s_env_pipex	*env_pipex;
+
+	env_pipex = NULL;
+	if (particular_case(prompt))
+		return (1);
+	if (!init_struct(prompt, &env_pipex))
+		return (error(ERROR_MALLOC), 0);
 	if (!check_prompt(prompt, env_pipex))
-		return (error(ERROR_PROMPT), 1);
+		return (free(env_pipex), error(ERROR_PROMPT), 1);
 	printf("go pipex !\n");
+	free(env_pipex);
 	return (1);
 }
 
 void	minishell(char **env)
 {
 	char		*prompt;
-	s_env_pipex	*env_pipex;
 
 	(void) env;
-	env_pipex = NULL;
 	manage_sig();
 	while (1)
 	{
@@ -28,11 +32,11 @@ void	minishell(char **env)
 			printf("exit\n");
 			return ;
 		}
-		else
+		else if (prompt && !manage_prompt(prompt))
 		{
-			if (!manage_prompt(prompt, env_pipex))
-				return ;
+			free(prompt);
+			return ;
 		}
-		free_all(prompt, env_pipex);
+		free(prompt);
 	}
 }

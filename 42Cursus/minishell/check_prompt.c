@@ -4,5 +4,5 @@ int	check_prompt(char *prompt, s_env_pipex *env_pipex)
 {
 	(void) prompt;
 	(void) env_pipex;
-	return (0);
+	return (1);
 }
