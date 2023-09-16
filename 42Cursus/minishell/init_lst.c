@@ -1,51 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   init_lst.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/16 17:10:25 by auferran          #+#    #+#             */
+/*   Created: 2023/09/16 17:10:15 by auferran          #+#    #+#             */
 /*   Updated: 2023/09/16 20:04:48 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	manage_prompt(char *prompt)
+int	check_nb_cmd(char *prompt)
 {
-	t_lst_cmd	*cmd;
+	int	i;
+	int	pipe;
 
-	cmd = NULL;
-	if (!init_struct(prompt, &cmd))
-		return (0);
-	if (!check_prompt(prompt, cmd))
-		return (1);
-	//PAS OUBLIER DE FREE
-	return (1);
+	i = 0;
+	pipe = 0;
+	while (prompt[i])
+	{
+		if (prompt[i] == '|')
+			pipe++;
+		i++;
+	}
+	return (pipe);
 }
 
-void	minishell(char **env)
+int	init_lst(char *prompt, t_lst_pipex **pipex)
 {
-	char		*prompt;
+	int			i;
+	int			nb_cmd;
+	t_lst_pipex	*new;
 
-	(void) env;
-	manage_sig();
-	while (1)
+	i = 0;
+	nb_cmd = check_nb_cmd(prompt) + 1;
+	while (i < nb_cmd)
 	{
-		prompt = readline("(auferran&malancar)-[~/minishell]$ ");
-		if (!prompt || !ft_strcmp("exit", prompt))
-		{
-			if (!ft_strcmp("exit", prompt))
-				free(prompt);
-			printf("exit\n");
-			return ;
-		}
-		else if (prompt && !manage_prompt(prompt))
-		{
-			free(prompt);
-			return ;
-		}
-		free(prompt);
+		new = ft_lst_new(pipex);
+		if (!new)
+			return (0);
+		ft_lst_add_back(new, pipex);
 	}
+	ft_memset(*env_pipex, 0, sizeof(s_env_pipex) * nb_cmd);
+	return (1);
 }
