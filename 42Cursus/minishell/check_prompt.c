@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-int	check_prompt(char *prompt, s_env_pipex *env_pipex)
+int	check_prompt(char *prompt, t_lst_cmd *cmd)
 {
 	(void) prompt;
-	(void) env_pipex;
+	(void) cmd;
 	return (1);
 }

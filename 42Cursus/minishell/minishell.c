@@ -12,16 +12,18 @@
 
 #include "minishell.h"
 
-int	manage_prompt(char *prompt)
+int	manage_prompt(char *prompt, char **env)
 {
+	(void) env;
 	t_lst_cmd	*cmd;
 
 	cmd = NULL;
-	if (!init_struct(prompt, &cmd))
+	if (!init_lst(prompt, &cmd))
 		return (0);
 	if (!check_prompt(prompt, cmd))
-		return (1);
-	//PAS OUBLIER DE FREE
+		return (ft_lst_clear(&cmd), 1);
+	//GO PIPEX !
+	ft_lst_clear(&cmd);
 	return (1);
 }
 
@@ -41,7 +43,7 @@ void	minishell(char **env)
 			printf("exit\n");
 			return ;
 		}
-		else if (prompt && !manage_prompt(prompt))
+		else if (prompt && !manage_prompt(prompt, env))
 		{
 			free(prompt);
 			return ;

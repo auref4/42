@@ -12,8 +12,8 @@
 
 #include "minishell.h"
 
-void	free_all(char **prompt, s_env_pipex **env_pipex)
+void	free_all(char **prompt, t_lst_cmd **cmd)
 {
 	free(prompt);
-	free(env_pipex);
+	free(cmd);
 }

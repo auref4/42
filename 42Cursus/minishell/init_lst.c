@@ -28,21 +28,23 @@ int	check_nb_cmd(char *prompt)
 	return (pipe);
 }
 
-int	init_lst(char *prompt, t_lst_pipex **pipex)
+int	init_lst(char *prompt, t_lst_cmd **cmd)
 {
 	int			i;
 	int			nb_cmd;
-	t_lst_pipex	*new;
+	t_lst_cmd	*lst_new;
 
 	i = 0;
+	lst_new = NULL;
 	nb_cmd = check_nb_cmd(prompt) + 1;
 	while (i < nb_cmd)
 	{
-		new = ft_lst_new(pipex);
-		if (!new)
-			return (0);
-		ft_lst_add_back(new, pipex);
+		lst_new = ft_lst_new();
+		if (!lst_new)
+			return (ft_lst_clear(cmd), 0);
+		ft_memset(lst_new, 0, sizeof(t_lst_cmd));
+		ft_lst_add_back(lst_new, cmd);
+		i++;
 	}
-	ft_memset(*env_pipex, 0, sizeof(s_env_pipex) * nb_cmd);
 	return (1);
 }
