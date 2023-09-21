@@ -20,6 +20,9 @@
 # include <readline/history.h>
 # include <signal.h>
 
+# define SINGLE_QUOTE 0
+# define DOUBLE_QUOTE 1
+
 typedef struct s_lst_arg
 {
 	char		*arg;
@@ -49,9 +52,18 @@ typedef struct s_lst_cmd
 	struct		s_lst_cmd *next;
 }				t_lst_cmd;
 
-void	error(char *str);
+typedef struct s_struct_quote
+{
+	int	i;
+	int	s_quote;
+	int	d_quote;
+	int	x_s;
+	int	x_d;
+}				t_struct_quote;
 
-void	free_all(char **prompt, t_lst_cmd **cmd);
+void		error(char *str);
+
+void		free_all(char **prompt, t_lst_cmd **cmd);
 
 void		minishell(char **env);
 int			manage_sig(void);
@@ -66,5 +78,8 @@ int			check_prompt(char *prompt, t_lst_cmd *cmd);
 t_lst_cmd	*ft_lst_new(void);
 void		ft_lst_add_back(t_lst_cmd *lst_new, t_lst_cmd **lst);
 void		ft_lst_clear(t_lst_cmd **cmd);
+
+int			in_quote(char *str, int c, int *in_s_quote, int *in_d_quote);
+int			count_quote(char *str, int nb);
 
 #endif
