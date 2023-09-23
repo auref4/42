@@ -22,32 +22,29 @@
 
 # define SINGLE_QUOTE 0
 # define DOUBLE_QUOTE 1
+# define INFILE 1
+# define OUTFILE 2
 
 typedef struct s_lst_arg
 {
+	char		*name;
 	char		*arg;
 	struct		s_lst_arg *next;
 }				t_lst_arg;
-
-typedef struct s_lst_hd
-{
-	char		*limiter;
-	struct		s_lst_hd *next;
-}				t_lst_hd;
 
 typedef struct s_lst_file
 {
 	char		*infile;
 	char		*outfile;
 	int			outfile_type;
+	int			heredoc;
+	char		*limiter;
 	struct		s_lst_file *next;
 }				t_lst_file;
 
 typedef struct s_lst_cmd
 {
-	char		*name;
-	struct		s_lst_arg *arg;
-	struct		s_lst_hd *heredoc;
+	struct		s_lst_name *name;
 	struct		s_lst_files *file;
 	struct		s_lst_cmd *next;
 }				t_lst_cmd;
@@ -73,13 +70,16 @@ void		*ft_memset(void *pointer, int value, size_t count);
 int			ft_strcmp(const char *first, const char *second);
 
 int			init_lst(char *prompt, t_lst_cmd **cmd);
-int			check_prompt(char *prompt, t_lst_cmd *cmd);
+int			check_prompt(char *prompt, t_lst_cmd **cmd);
 
 t_lst_cmd	*ft_lst_new(void);
-void		ft_lst_add_back(t_lst_cmd *lst_new, t_lst_cmd **lst);
+void		ft_lst_add_back(t_lst_cmd *lst_new, t_lst_cmd *lst);
 void		ft_lst_clear(t_lst_cmd **cmd);
 
 int			in_quote(char *str, int c, int *in_s_quote, int *in_d_quote);
 int			count_quote(char *str, int nb);
+
+int			white_space(char c);
+int			file(char c);
 
 #endif

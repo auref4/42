@@ -12,9 +12,10 @@
 
 #include "minishell.h"
 
-int	check_prompt(char *prompt, t_lst_cmd *cmd)
+int	check_prompt(char *prompt, t_lst_cmd **cmd)
 {
-	(void) cmd;
 	(void) prompt;
+	(void) cmd;
+
 	return (1);
 }

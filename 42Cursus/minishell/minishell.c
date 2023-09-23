@@ -22,6 +22,8 @@ int	manage_prompt(char *prompt, char **env)
 		return (0);
 	if (!check_prompt(prompt, cmd))
 		return (ft_lst_clear(&cmd), 1);
+	if (!fill_lst(prompt, &cmd))
+		return (1);
 	//GO PIPEX !
 	ft_lst_clear(&cmd);
 	return (1);
