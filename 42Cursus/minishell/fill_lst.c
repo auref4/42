@@ -5,9 +5,9 @@ t_lst_cmd	*fill_file(char *prompt, int *i)
 	s_lst_file	*file;
 
 	file = malloc(sizeof(t_lst_file));
-	ft_memset(file, 0, sizeof(file));
 	if (!file)
 		return (error("ERROR MALLOC\n"));
+	ft_memset(file, 0, sizeof(file));
 	if (file(prompt[*i] == INFILE) && !file(prompt[*i + 1]))
 		if (file->infile = file_dup(prompt, *i) == NULL)
 			return (NULL);
