@@ -37,7 +37,6 @@ typedef struct s_lst_file
 	char		*infile;
 	char		*outfile;
 	int			outfile_type;
-	int			heredoc;
 	char		*limiter;
 	struct		s_lst_file *next;
 }				t_lst_file;
@@ -58,6 +57,14 @@ typedef struct s_struct_quote
 	int	x_d;
 }				t_struct_quote;
 
+typedef struct s_struct_file_dup
+{
+	int		j;
+	int		count;
+	int		len;
+	char	*str;
+}				t_struct_file_dup;
+
 void		error(char *str);
 
 void		free_all(char **prompt, t_lst_cmd **cmd);
@@ -75,11 +82,15 @@ int			check_prompt(char *prompt, t_lst_cmd **cmd);
 t_lst_cmd	*ft_lst_new(void);
 void		ft_lst_add_back(t_lst_cmd *lst_new, t_lst_cmd *lst);
 void		ft_lst_clear(t_lst_cmd **cmd);
+void		ft_lst_add_back_file(t_lst_file *file_new, t_lst_file **file);
+void		ft_lst_clear_file(t_lst_file **file);
 
 int			in_quote(char *str, int c, int *in_s_quote, int *in_d_quote);
 int			count_quote(char *str, int nb);
 
 int			white_space(char c);
 int			file(char c);
+
+void		fill_lst(char *prompt, t_lst_cmd **cmd);
 
 #endif
