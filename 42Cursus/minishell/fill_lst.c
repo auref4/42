@@ -59,6 +59,7 @@ char	*dup_arg(char *prompt, int *i)
 {
 	t_struct_dup_arg	s;
 
+	ft_memset(&s, 0, sizeof(t_struct_dup_arg));
 	while (prompt[*i] && white_space(prompt[i]))
 		(i++);
 	s.len = 0;
