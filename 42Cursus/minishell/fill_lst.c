@@ -23,7 +23,8 @@ char	*dup_file(char *prompt, char c, int *i)
 		(*i)++;
 	}
 	if (s.count > 1)
-		error("minishell: syntax error near unexpecter token\n");
+		return (error("minishell: syntax error \
+			near unexpecter token\n"), NULL);
 	while (prompt[*i] && its_white_space(prompt[*i]))
 		(*i)++;
 	while (prompt[*i] && prompt[*i] != '|' && !its_white_space(prompt[*i]))
