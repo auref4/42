@@ -1,66 +1,105 @@
 #include "minishell"
 
-char	*file_dup(char *prompt, char c, int *i)
+char	*dup_file(char *prompt, char c, int *i)
 {
-	t_struct_file_dup d;
+	t_struct_dup_file	s;
 
-	ft_memset(&d, 0, sizeof(t_struct_file_dup));
-	while (prompt[*i] == c)
+	ft_memset(&s, 0, sizeof(t_struct_file_dup));
+	while (prompt[*i] && prompt[*i] == c)
 	{
-		d.count++;
+		s.count++;
 		(*i)++;
 	}
-	if (d.count > 1)
+	if (s.count > 1)
 		error("minishell: syntax error near unexpecter token\n");
 	while (prompt[*i] && white_space(prompt[*i]))
 		(*i)++;
 	while (prompt[*i] && !white_space(prompt[*i]))
 	{
 		(*i)++;
-		d.len++;
+		s.len++;
 	}
-	d.str = malloc(sizeof(char) * len + 1);
-	if (!d.str)
+	s.str = malloc(sizeof(char) * len + 1);
+	if (!s.str)
 		return (error("MALLOC FAILURE\n"));
-	*i -= d.len;
+	*i -= s.len;
 	while (prompt[*i] && !white_space(prompt[*i]))
-		str[d.j++] = prompt[(*i)++];
-	str[d.j] = 0;
-	return (d.str);
+		str[s.j++] = prompt[(*i)++];
+	str[s.j] = 0;
+	return (s.str);
 }
 
 void	*fill_file(char *prompt, s_lst_file	**file, int *i)
 {
-	s_lst_file	*new;
+	t_lst_file	*new;
 
-	file = malloc(sizeof(t_lst_file));
-	if (!file)
+	new = malloc(sizeof(t_lst_file));
+	if (!new)
 		return (error("ERROR MALLOC\n"));
-	ft_memset(file, 0, sizeof(file));
+	ft_memset(new, 0, sizeof(t_lst_file));
 	if (file(prompt[*i] == INFILE) && !file(prompt[*i + 1]))
-		if (new->infile = file_dup(prompt, prompt[*i], i) == NULL)
+		if (new->infile = dup_file(prompt, prompt[*i], i) == NULL)
 			return ;
 	else if (file(prompt[*i] == OUTFILE) && !file(prompt[*i + 1]))
-		if (new->outfile = file_dup(prompt, prompt[*i], i) == NULL)
+		if (new->outfile = dup_file(prompt, prompt[*i], i) == NULL)
 			return ;
 	else if (file(prompt[*i] == INFILE) && file(prompt[*i + 1] == INFILE))
-		if (new->limiter = file_dup(prompt, prompt[*i], i) == NULL)
+		if (new->limiter = dup_file(prompt, prompt[*i], i) == NULL)
 			return ;
 	else if (file(prompt[*i] == OUTFILE) && file(prompt[*i + 1] == OUTFILE))
 	{
 		new->outfile_type == 1;
-		if (new->infile = file_dup(prompt, prompt[*i], i) == NULL)
+		if (new->infile = dup_file(prompt, prompt[*i], i) == NULL)
 			return ;
 	}
 	ft_lst_add_back_file(new, file);
 }
 
+char	*dup_arg(char *prompt, int *i)
+{
+	t_struct_dup_arg	s;
+
+	while (prompt[*i] && white_space(prompt[i]))
+		(i++);
+	s.len = 0;
+	while (prompt[*i] && prompt[*i] != '|' && !white_space(prompt[*i]))
+	{
+		s.len++;
+		(*i)++;
+	}
+	s.str = malloc(sizeof(char) * s.len + 1);
+	if (!s.str)
+		return (error("MALLOC FAILURE\n"));
+	s.j = 0;
+	*i -= len;
+	while (prompt[*i] && prompt[*i] != '|' && !white_space(prompt[*i]))
+		s.str[s.j++] = prompt[(*i)++];
+	s.str[s.j] = 0;
+	return (s.str);
+}
+
+void	fill_arg(char *prompt, t_lst_arg **arg, int *i)
+{
+	int			j;
+	int			len;
+	t_lst_arg	*new;
+
+	new = malloc(sizeof(t_lst_arg));
+	if (!new)
+		return (error("ERROR MALLOC\n"));
+	ft_memset(new, 0, sizeof(t_lst_arg));
+	if (new->name = dup_arg(prompt, i) == NULL)
+		return ;
+}
+
 void	fill_lst(char *prompt, t_lst_cmd **cmd)
 {
 	int			i;
-	s_lst_file	*file;
+	t_lst_arg	*arg;
+	t_lst_file	*file;
 
 	i = 0;
+	arg = NULL;
 	file = NULL;
 	while (prompt[i])
 	{
@@ -68,7 +107,11 @@ void	fill_lst(char *prompt, t_lst_cmd **cmd)
 			*cmd = *cmd->next;
 		while (white_space(prompt[i]))
 			i++;
-		if (file(prompt[i]))
+		if (prompt[i] && !file(prompt[i]))
+			fill_arg(prompt, &arg, *i);
+		else if (prompt[i])
 			fill_file(prompt, &file, *i);
+		(*cmd)->arg = arg;
+		(*cmd)->file = file;
 	}
 }

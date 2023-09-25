@@ -22,8 +22,8 @@
 
 # define SINGLE_QUOTE 0
 # define DOUBLE_QUOTE 1
-# define INFILE 1
-# define OUTFILE 2
+# define INFILE <
+# define OUTFILE >
 
 typedef struct s_lst_arg
 {
@@ -57,13 +57,20 @@ typedef struct s_struct_quote
 	int	x_d;
 }				t_struct_quote;
 
-typedef struct s_struct_file_dup
+typedef struct s_struct_dup_arg
+{
+	int		j;
+	int		len;
+	char	*str;
+}				t_struct_dup_arg;
+
+typedef struct s_struct_dup_file
 {
 	int		j;
 	int		count;
 	int		len;
 	char	*str;
-}				t_struct_file_dup;
+}				t_struct_dup_file;
 
 void		error(char *str);
 
