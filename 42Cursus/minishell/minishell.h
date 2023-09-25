@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 17:15:11 by auferran          #+#    #+#             */
-/*   Updated: 2023/09/16 20:04:45 by auferran         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:58:41 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,31 @@
 
 # define SINGLE_QUOTE 0
 # define DOUBLE_QUOTE 1
-# define INFILE <
-# define OUTFILE >
+# define INFILE 1
+# define OUTFILE 2
 
 typedef struct s_lst_arg
 {
-	char		*name;
-	char		*arg;
-	struct		s_lst_arg *next;
-}				t_lst_arg;
+	char				*name;
+	char				*arg;
+	struct s_lst_arg	*next;
+}						t_lst_arg;
 
 typedef struct s_lst_file
 {
-	char		*infile;
-	char		*outfile;
-	int			outfile_type;
-	char		*limiter;
-	struct		s_lst_file *next;
-}				t_lst_file;
+	char				*infile;
+	char				*outfile;
+	int					outfile_type;
+	char				*limiter;
+	struct s_lst_file	*next;
+}						t_lst_file;
 
 typedef struct s_lst_cmd
 {
-	struct		s_lst_name *name;
-	struct		s_lst_files *file;
-	struct		s_lst_cmd *next;
-}				t_lst_cmd;
+	struct s_lst_arg	*arg;
+	struct s_lst_file	*file;
+	struct s_lst_cmd	*next;
+}						t_lst_cmd;
 
 typedef struct s_struct_quote
 {
@@ -83,21 +83,23 @@ int			ft_strlen(char *str);
 void		*ft_memset(void *pointer, int value, size_t count);
 int			ft_strcmp(const char *first, const char *second);
 
-int			init_lst(char *prompt, t_lst_cmd **cmd);
-int			check_prompt(char *prompt, t_lst_cmd **cmd);
+int			check_prompt(char *prompt, t_lst_cmd *cmd);
+int			fill_lst(char *prompt, t_lst_cmd **cmd);
 
-t_lst_cmd	*ft_lst_new(void);
-void		ft_lst_add_back(t_lst_cmd *lst_new, t_lst_cmd *lst);
-void		ft_lst_clear(t_lst_cmd **cmd);
+t_lst_cmd	*ft_lst_new_cmd(void);
+t_lst_cmd	*ft_lst_last_cmd(t_lst_cmd *cmd);
+void		ft_lst_add_back_cmd(t_lst_cmd *lst_new, t_lst_cmd **lst);\
+void		ft_lst_add_back_arg(t_lst_arg *arg_new, t_lst_arg **arg);
 void		ft_lst_add_back_file(t_lst_file *file_new, t_lst_file **file);
+void		ft_lst_clear_cmd(t_lst_cmd **cmd);
+void		ft_lst_clear_arg(t_lst_arg **arg);
 void		ft_lst_clear_file(t_lst_file **file);
+int			ft_lst_size_arg(t_lst_arg *arg);
 
 int			in_quote(char *str, int c, int *in_s_quote, int *in_d_quote);
 int			count_quote(char *str, int nb);
 
-int			white_space(char c);
-int			file(char c);
-
-void		fill_lst(char *prompt, t_lst_cmd **cmd);
+int			its_white_space(char c);
+int			its_file(char c);
 
 #endif

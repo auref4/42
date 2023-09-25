@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   quote.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/25 15:02:29 by auferran          #+#    #+#             */
+/*   Updated: 2023/09/25 15:02:34 by auferran         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	count_quote(char *str, int nb)
@@ -19,7 +31,7 @@ int	count_quote(char *str, int nb)
 			nb_quote++;
 		i++;
 	}
-	return(nb_quote);
+	return (nb_quote);
 }
 
 void	value_in_quote(int booleen1, int booleen2, int *value1, int *value2)
@@ -58,7 +70,7 @@ int	in_quote(char *str, int c, int *in_s_quote, int *in_d_quote)
 	t_struct_quote	s;
 
 	if (!str)
-		return(-1);
+		return (-1);
 	ft_memset(&s, 0, sizeof(t_struct_quote));
 	while (str[s.i])
 	{

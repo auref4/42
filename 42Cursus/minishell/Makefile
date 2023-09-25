@@ -6,7 +6,7 @@
 #    By: auferran <auferran@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 17:16:20 by auferran          #+#    #+#              #
-#    Updated: 2023/09/16 20:04:44 by auferran         ###   ########.fr        #
+#    Updated: 2023/09/25 16:31:14 by auferran         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,9 @@ NAME = minishell
 HEADER = minishell.h
 
 SRCS =	main.c minishell.c manage_sig.c utils.c\
-		init_lst.c check_prompt.c error.c free_all.c\
-		lst_utils.c lst_utils_2.c quote.c prompt_utils.c\
-		fill_lst.c
+		fill_lst.c check_prompt.c error.c free_all.c\
+		lst_utils_cmd.c lst_utils_arg.c lst_utils_file.c quote.c\
+		prompt_utils.c
 
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)
