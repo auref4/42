@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:02:38 by auferran          #+#    #+#             */
-/*   Updated: 2023/09/25 17:10:58 by auferran         ###   ########.fr       */
+/*   Updated: 2023/09/25 18:13:29 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	fill_arg(char *prompt, t_lst_arg **arg, int *i)
 	ft_lst_add_back_arg(new, arg);
 }
 
-int	fill_lst(char *prompt, t_lst_cmd **cmd)
+int	fill_lst(char *prompt, t_lst_cmd *cmd)
 {
 	int			i;
 	t_lst_cmd	*new;
@@ -132,7 +132,8 @@ int	fill_lst(char *prompt, t_lst_cmd **cmd)
 			new = ft_lst_new_cmd();
 			if (!new)
 				return (0);
-			ft_lst_add_back_cmd(new, cmd);
+			ft_memset(new, 0, sizeof(t_lst_cmd));
+			ft_lst_add_back_cmd(new, &cmd);
 			arg = NULL;
 			file = NULL;
 			i++;
@@ -143,7 +144,7 @@ int	fill_lst(char *prompt, t_lst_cmd **cmd)
 			fill_arg(prompt, &arg, &i);
 		else if (prompt[i] && prompt[i] != '|')
 			fill_file(prompt, &file, &i);
-		tmp = ft_lst_last_cmd(*cmd);
+		tmp = ft_lst_last_cmd(cmd);
 		tmp->arg = arg;
 		tmp->file = file;
 	}

@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 17:10:25 by auferran          #+#    #+#             */
-/*   Updated: 2023/09/25 17:01:52 by auferran         ###   ########.fr       */
+/*   Updated: 2023/09/25 18:06:17 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	manage_prompt(char *prompt, char **env)
 		return (1);
 	if (!init_lst(&cmd))
 		return (0);
-	if (!fill_lst(prompt, &cmd))
+	if (!fill_lst(prompt, cmd))
 		return (1);
 	test_pipex(cmd, env);
 	//PAS OUBLIER DE FREE
