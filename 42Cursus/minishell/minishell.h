@@ -22,6 +22,7 @@
 
 # define SINGLE_QUOTE 0
 # define DOUBLE_QUOTE 1
+# define FILE 1
 # define INFILE 1
 # define OUTFILE 2
 
@@ -57,19 +58,14 @@ typedef struct s_struct_quote
 	int	x_d;
 }				t_struct_quote;
 
-typedef struct s_struct_dup_arg
+typedef struct s_struct_strdup
 {
 	int		j;
 	int		len;
+	int		in_s_quote;
+	int		in_d_quote;
 	char	*str;
-}				t_struct_dup_arg;
-
-typedef struct s_struct_dup_file
-{
-	int		j;
-	int		len;
-	char	*str;
-}				t_struct_dup_file;
+}				t_struct_strdup;
 
 typedef struct s_struct_fill
 {
@@ -94,8 +90,7 @@ int			check_prompt(char *prompt, t_lst_cmd *cmd);
 
 int			fill_lst(char *prompt, t_lst_cmd *cmd);
 
-char		*dup_arg(char *prompt, int *i);
-char		*dup_file(char *prompt, char c, int *i);
+char		*ft_strdup(char *prompt, char c, int *i, int nb);
 
 t_lst_cmd	*ft_lst_new_cmd(void);
 t_lst_arg	*ft_lst_new_arg(void);

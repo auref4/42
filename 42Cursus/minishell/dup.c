@@ -15,50 +15,57 @@ int	count_c(char *prompt, char c, int *i)
 	return (1);
 }
 
-char	*dup_file(char *prompt, char c, int *i)
+int	dup_in_quote(char *prompt, t_struct_strdup *s, int *i)
 {
-	t_struct_dup_file	s;
-
-	ft_memset(&s, 0, sizeof(t_struct_dup_file));
-	if (!count_c(prompt, c, i))
-		return (NULL);
-	while (prompt[*i] && its_white_space(prompt[*i]))
-		(*i)++;
-	while (prompt[*i] && prompt[*i] != '|' && !its_white_space(prompt[*i]))
+	while (in_quote(prompt, *i, &s->in_s_quote, &s->in_s_quote))
 	{
 		(*i)++;
-		s.len++;
+		s->len++;
 	}
-	s.str = malloc(sizeof(char) * s.len + 1);
-	if (!s.str)
-		return (error("MALLOC FAILURE\n"), NULL);
-	*i -= s.len;
+	s->str = malloc(sizeof(char) * s->len + 1);
+	if (!s->str)
+		return (error("MALLOC FAILURE\n"), 0);
+	*i -= s->len;
 	while (prompt[*i] && !its_white_space(prompt[*i]))
-		s.str[s.j++] = prompt[(*i)++];
-	s.str[s.j] = 0;
-	return (s.str);
+		s->str[s->j++] = prompt[(*i)++];
+	s->str[s->j] = 0;
+	return (1);
 }
 
-char	*dup_arg(char *prompt, int *i)
+int	dup_no_quote(char *prompt, t_struct_strdup *s, int *i)
 {
-	t_struct_dup_arg	s;
-
-	ft_memset(&s, 0, sizeof(t_struct_dup_arg));
-	while (prompt[*i] && its_white_space(prompt[*i]))
-		(*i)++;
-	s.len = 0;
 	while (prompt[*i] && prompt[*i] != '|' && !its_white_space(prompt[*i]))
 	{
-		s.len++;
 		(*i)++;
+		s->len++;
 	}
-	s.str = malloc(sizeof(char) * s.len + 1);
-	if (!s.str)
-		return (error("MALLOC FAILURE\n"), NULL);
-	s.j = 0;
-	*i -= s.len;
-	while (prompt[*i] && prompt[*i] != '|' && !its_white_space(prompt[*i]))
-		s.str[s.j++] = prompt[(*i)++];
-	s.str[s.j] = 0;
+	s->str = malloc(sizeof(char) * s->len + 1);
+	if (!s->str)
+		return (error("MALLOC FAILURE\n"), 0);
+	*i -= s->len;
+	while (prompt[*i] && !its_white_space(prompt[*i]))
+		s->str[s->j++] = prompt[(*i)++];
+	s->str[s->j] = 0;
+	return (1);
+}
+
+char	*ft_strdup(char *prompt, char c, int *i, int nb)
+{
+	t_struct_strdup	s;
+
+	ft_memset(&s, 0, sizeof(t_struct_strdup));
+	if (nb == FILE)
+		if (!count_c(prompt, c, i))
+			return (NULL);
+	while (prompt[*i] && its_white_space(prompt[*i]))
+		(*i)++;
+	if (in_quote(prompt, *i, &s.in_s_quote, &s.in_s_quote))
+	{
+		if (!dup_in_quote(prompt, &s, i))
+			return (NULL);
+	}
+	else
+		if (!dup_no_quote(prompt, &s, i))
+			return (NULL);
 	return (s.str);
 }

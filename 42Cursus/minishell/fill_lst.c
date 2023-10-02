@@ -20,18 +20,18 @@ int	fill_file(char *prompt, t_lst_file	**file, int *i)
 	if (!new)
 		return (0);
 	if (its_file(prompt[*i]) == INFILE && !its_file(prompt[*i + 1]))
-		if ((new->infile = dup_file(prompt, prompt[*i], i)) == NULL)
+		if ((new->infile = ft_strdup(prompt, prompt[*i], i, FILE)) == NULL)
 			return (0);
 	if (its_file(prompt[*i]) == OUTFILE && !its_file(prompt[*i + 1]))
-		if ((new->outfile = dup_file(prompt, prompt[*i], i)) == NULL)
+		if ((new->outfile = ft_strdup(prompt, prompt[*i], i, FILE)) == NULL)
 			return (0);
 	if (its_file(prompt[*i]) == INFILE && its_file(prompt[*i + 1]) == INFILE)
-		if ((new->limiter = dup_file(prompt, prompt[*i], i)) == NULL)
+		if ((new->limiter = ft_strdup(prompt, prompt[*i], i, FILE)) == NULL)
 			return (0);
 	if (its_file(prompt[*i]) == OUTFILE && its_file(prompt[*i + 1]) == OUTFILE)
 	{
 		new->outfile_type = 1;
-		if ((new->infile = dup_file(prompt, prompt[*i], i)) == NULL)
+		if ((new->infile = ft_strdup(prompt, prompt[*i], i, FILE)) == NULL)
 			return (0);
 	}
 	ft_lst_add_back_file(new, file);
@@ -46,11 +46,11 @@ int	fill_arg(char *prompt, t_lst_arg **arg, int *i)
 	if (!new)
 		return (0);
 	if (ft_lst_size_arg(*arg) == 0)
-		if ((new->name = dup_arg(prompt, i)) == NULL)
+		if ((new->name = ft_strdup(prompt, prompt[*i], i, 0)) == NULL)
 			return (0);
 	if (ft_lst_size_arg(*arg) > 0)
 	{
-		if ((new->arg = dup_arg(prompt, i)) == NULL)
+		if ((new->arg = ft_strdup(prompt, prompt[*i], i, 0)) == NULL)
 			return (0);
 	}
 	ft_lst_add_back_arg(new, arg);
