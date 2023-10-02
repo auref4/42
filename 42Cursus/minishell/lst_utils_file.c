@@ -74,3 +74,13 @@ void	ft_lst_add_back_file(t_lst_file *file_new, t_lst_file **file)
 	tmp = ft_lst_last_file(*file);
 	tmp->next = file_new;
 }
+t_lst_file	*ft_lst_new_file(void)
+{
+	t_lst_file	*lst_new;
+
+	lst_new = malloc(sizeof(t_lst_file));
+	if (!lst_new)
+		return (error("MALLOC FAILURE\n"), NULL);
+	ft_memset(lst_new, 0, sizeof(t_lst_file));
+	return (lst_new);
+}

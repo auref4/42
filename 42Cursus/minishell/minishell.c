@@ -20,7 +20,6 @@ int	init_lst(t_lst_cmd **cmd)
 	lst_new = ft_lst_new_cmd();
 	if (!lst_new)
 		return (0);
-	ft_memset(lst_new, 0, sizeof(t_lst_cmd));
 	ft_lst_add_back_cmd(lst_new, cmd);
 	return (1);
 }

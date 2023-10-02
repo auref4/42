@@ -82,5 +82,6 @@ t_lst_cmd	*ft_lst_new_cmd(void)
 	lst_new = malloc(sizeof(t_lst_cmd));
 	if (!lst_new)
 		return (error("MALLOC FAILURE\n"), NULL);
+	ft_memset(lst_new, 0, sizeof(t_lst_cmd));
 	return (lst_new);
 }

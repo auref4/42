@@ -15,9 +15,9 @@ NAME = minishell
 HEADER = minishell.h
 
 SRCS =	main.c minishell.c manage_sig.c utils.c\
-		fill_lst.c check_prompt.c error.c free_all.c\
+		fill_lst.c dup.c check_prompt.c error.c \
 		lst_utils_cmd.c lst_utils_arg.c lst_utils_file.c quote.c\
-		prompt_utils.c
+		prompt_utils.c free_all.c
 
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)

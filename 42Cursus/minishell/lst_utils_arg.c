@@ -74,3 +74,14 @@ void	ft_lst_add_back_arg(t_lst_arg *arg_new, t_lst_arg **arg)
 	tmp = ft_lst_last_arg(*arg);
 	tmp->next = arg_new;
 }
+
+t_lst_arg	*ft_lst_new_arg(void)
+{
+	t_lst_arg	*lst_new;
+
+	lst_new = malloc(sizeof(t_lst_arg));
+	if (!lst_new)
+		return (error("MALLOC FAILURE\n"), NULL);
+	ft_memset(lst_new, 0, sizeof(t_lst_arg));
+	return (lst_new);
+}
