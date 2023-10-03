@@ -20,8 +20,8 @@
 # include <readline/history.h>
 # include <signal.h>
 
-# define SINGLE_QUOTE 0
-# define DOUBLE_QUOTE 1
+# define SINGLE_QUOTE 39
+# define DOUBLE_QUOTE 34
 # define FILE 1
 # define INFILE 1
 # define OUTFILE 2
@@ -64,6 +64,7 @@ typedef struct s_struct_strdup
 	int		len;
 	int		in_s_quote;
 	int		in_d_quote;
+	char	c;
 	char	*str;
 }				t_struct_strdup;
 
@@ -79,7 +80,8 @@ void		error(char *str);
 
 void		free_all(char **prompt, t_lst_cmd **cmd);
 
-void		minishell(char **env);
+int			manage(char *prompt, char **env);
+
 int			manage_sig(void);
 
 int			ft_strlen(char *str);
@@ -106,7 +108,6 @@ int			ft_lst_size_cmd(t_lst_cmd *cmd);
 int			ft_lst_size_arg(t_lst_arg *arg);
 
 int			in_quote(char *str, int c, int *in_s_quote, int *in_d_quote);
-int			count_quote(char *str, int nb);
 
 int			its_white_space(char c);
 int			its_file(char c);
