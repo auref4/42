@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 17:15:11 by auferran          #+#    #+#             */
-/*   Updated: 2023/09/25 18:06:49 by auferran         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:11:51 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ typedef struct s_struct_strdup
 
 typedef struct s_struct_fill
 {
-	int					i;
-	t_lst_cmd		*tmp;
-	t_lst_arg		*arg;
-	t_lst_file		*file;
-}						t_struct_fill;
+	int			i;
+	t_lst_cmd	*tmp;
+	t_lst_arg	*arg;
+	t_lst_file	*file;
+}				t_struct_fill;
 
 void		error(char *str);
 
@@ -92,7 +92,7 @@ int			check_prompt(char *prompt, t_lst_cmd *cmd);
 
 int			fill_lst(char *prompt, t_lst_cmd *cmd);
 
-char		*ft_strdup(char *prompt, char c, int *i, int nb);
+char		*dup_str(char *prompt, char c, int *i, int nb);
 
 t_lst_cmd	*ft_lst_new_cmd(void);
 t_lst_arg	*ft_lst_new_arg(void);

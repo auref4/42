@@ -59,7 +59,7 @@ int	dup_no_quote(char *prompt, t_struct_strdup *s, int *i)
 	return (1);
 }
 
-char	*ft_strdup(char *prompt, char c, int *i, int nb)
+char	*dup_str(char *prompt, char c, int *i, int nb)
 {
 	int				n;
 	t_struct_strdup	s;

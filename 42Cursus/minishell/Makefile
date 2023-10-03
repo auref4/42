@@ -6,7 +6,7 @@
 #    By: auferran <auferran@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 17:16:20 by auferran          #+#    #+#              #
-#    Updated: 2023/09/25 18:14:50 by auferran         ###   ########.fr        #
+#    Updated: 2023/10/03 17:12:55 by auferran         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = minishell
 HEADER = minishell.h
 
 SRCS =	main.c manage.c manage_sig.c utils.c\
-		fill_lst.c dup.c check_prompt.c error.c \
+		fill_lst.c dup_str.c check_prompt.c error.c \
 		lst_utils_cmd.c lst_utils_arg.c lst_utils_file.c quote.c\
 		prompt_utils.c free_all.c
 

@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:02:38 by auferran          #+#    #+#             */
-/*   Updated: 2023/09/25 18:13:29 by auferran         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:14:53 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ int	fill_file(char *prompt, t_lst_file	**file, int *i)
 	if (!new)
 		return (0);
 	if (its_file(prompt[*i]) == INFILE && !its_file(prompt[*i + 1]))
-		if ((new->infile = ft_strdup(prompt, prompt[*i], i, FILE)) == NULL)
+		if ((new->infile = dup_str(prompt, prompt[*i], i, FILE)) == NULL)
 			return (0);
 	if (its_file(prompt[*i]) == OUTFILE && !its_file(prompt[*i + 1]))
-		if ((new->outfile = ft_strdup(prompt, prompt[*i], i, FILE)) == NULL)
+		if ((new->outfile = dup_str(prompt, prompt[*i], i, FILE)) == NULL)
 			return (0);
 	if (its_file(prompt[*i]) == INFILE && its_file(prompt[*i + 1]) == INFILE)
-		if ((new->limiter = ft_strdup(prompt, prompt[*i], i, FILE)) == NULL)
+		if ((new->limiter = dup_str(prompt, prompt[*i], i, FILE)) == NULL)
 			return (0);
 	if (its_file(prompt[*i]) == OUTFILE && its_file(prompt[*i + 1]) == OUTFILE)
 	{
 		new->outfile_type = 1;
-		if ((new->infile = ft_strdup(prompt, prompt[*i], i, FILE)) == NULL)
+		if ((new->infile = dup_str(prompt, prompt[*i], i, FILE)) == NULL)
 			return (0);
 	}
 	ft_lst_add_back_file(new, file);
@@ -46,11 +46,11 @@ int	fill_arg(char *prompt, t_lst_arg **arg, int *i)
 	if (!new)
 		return (0);
 	if (ft_lst_size_arg(*arg) == 0)
-		if ((new->name = ft_strdup(prompt, prompt[*i], i, 0)) == NULL)
+		if ((new->name = dup_str(prompt, prompt[*i], i, 0)) == NULL)
 			return (0);
 	if (ft_lst_size_arg(*arg) > 0)
 	{
-		if ((new->arg = ft_strdup(prompt, prompt[*i], i, 0)) == NULL)
+		if ((new->arg = dup_str(prompt, prompt[*i], i, 0)) == NULL)
 			return (0);
 	}
 	ft_lst_add_back_arg(new, arg);
