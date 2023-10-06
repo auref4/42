@@ -82,7 +82,7 @@ int	fill_lst(char *prompt, t_lst_cmd *cmd)
 	{
 		while (its_white_space(prompt[s.i]))
 			s.i++;
-		if (prompt[s.i] == '|')
+		if (prompt[s.i] && prompt[s.i] == '|')
 			if (!new_cmd(&s.arg, &s.file, &cmd, &s.i))
 				return (0);
 		if (prompt[s.i] && prompt[s.i] != '|' && !its_file(prompt[s.i]))

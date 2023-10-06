@@ -62,8 +62,9 @@ typedef struct s_struct_strdup
 {
 	int		j;
 	int		len;
-	int		in_s_quote;
-	int		in_d_quote;
+	int		s_q;
+	int		d_q;
+	int		count;
 	char	c;
 	char	*str;
 }				t_struct_strdup;
@@ -71,6 +72,8 @@ typedef struct s_struct_strdup
 typedef struct s_struct_fill
 {
 	int			i;
+	int			s_q;
+	int			d_q;
 	t_lst_cmd	*tmp;
 	t_lst_arg	*arg;
 	t_lst_file	*file;
@@ -108,6 +111,9 @@ int			ft_lst_size_cmd(t_lst_cmd *cmd);
 int			ft_lst_size_arg(t_lst_arg *arg);
 
 int			in_quote(char *str, int c, int *in_s_quote, int *in_d_quote);
+int			update_quote(char *prompt, int i, t_struct_strdup *s);
+
+int			token(char *prompt, int i);
 
 int			its_white_space(char c);
 int			its_file(char c);
