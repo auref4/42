@@ -12,13 +12,14 @@ int	init_lst(t_lst_cmd **cmd)
 	return (1);
 }
 
-void	test_pipex(t_lst_cmd *cmd, char **env)
+void	test_pipex(t_lst_cmd *cmd, char **env, t_lst_env *lst_env)
 {
 	int	i;
 	int	y;
 	int	x;
 
 	(void) env;
+	(void) lst_env;
 	i = 1;
 	y = 1;
 	x = 1;
@@ -51,19 +52,21 @@ void	test_pipex(t_lst_cmd *cmd, char **env)
 	}
 }
 
-int	manage(char *prompt, char **env)
+int	manage(char *prompt, char **env, t_lst_env **lst_env)
 {
 	t_lst_cmd	*cmd;
 
 	(void) env;
 	cmd = NULL;
+	if (!init_lst_env(env, lst_env))
+		return (0);
 	if (!check_prompt(prompt, cmd))
 		return (1);
 	if (!init_lst(&cmd))
 		return (0);
 	if (!fill_lst(prompt, cmd))
 		return (1);
-	test_pipex(cmd, env);
+	test_pipex(cmd, env, *lst_env);
 	//PAS OUBLIER DE FREE
 	return (1);
 }

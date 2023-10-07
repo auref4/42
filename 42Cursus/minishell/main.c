@@ -14,10 +14,11 @@
 
 int	main(int argc, char **argv, char **env)
 {
-	char	*prompt;
+	char		*prompt;
+	t_lst_env	*lst_env;
 
 	(void) argv;
-	(void) env;
+	lst_env = NULL;
 	if (argc == 1)
 	{
 		manage_sig();
@@ -31,7 +32,7 @@ int	main(int argc, char **argv, char **env)
 				printf("exit\n");
 				return (0) ;
 			}
-			else if (prompt && !manage(prompt, env))
+			else if (prompt && !manage(prompt, env, &lst_env))
 			{
 				free(prompt);
 				return (0) ;
