@@ -27,6 +27,8 @@ void	ft_lst_clear_env(t_lst_env **lst_env)
 	size = ft_lst_size_env(*lst_env);
 	while (i < size)
 	{
+		if ((*lst_env)->line)
+			free((*lst_env)->line);
 		tmp = (*lst_env)->next;
 		free(*lst_env);
 		*lst_env = tmp;

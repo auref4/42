@@ -59,14 +59,14 @@ int	manage(char *prompt, char **env, t_lst_env **lst_env)
 	(void) env;
 	cmd = NULL;
 	if (!init_lst_env(env, lst_env))
-		return (0);
+		return (1);
 	if (!check_prompt(prompt, cmd))
 		return (1);
 	if (!init_lst(&cmd))
-		return (0);
-	if (!fill_lst(prompt, cmd, *lst_env))
 		return (1);
+	if (!fill_lst(prompt, cmd, *lst_env))
+		return (free_all(&cmd), 1);
 	test_pipex(cmd, env, *lst_env);
-	//PAS OUBLIER DE FREE
+	free_all(&cmd);
 	return (1);
 }

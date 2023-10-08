@@ -81,6 +81,6 @@ char	*dup_str(char *prompt, int *i, int nb, t_lst_env *lst_env)
 	if (!s.str)
 		return (error("MALLOC FAILURE\n"), NULL);
 	if (!fill_str(prompt, &s, i))
-		return (0);
+		return (free(s.str), NULL);
 	return (s.str);
 }

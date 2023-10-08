@@ -92,7 +92,7 @@ typedef struct s_struct_fill
 
 void		error(char *str);
 
-void		free_all(char **prompt, t_lst_cmd **cmd);
+void		free_all(t_lst_cmd **cmd);
 
 int			manage(char *prompt, char **env, t_lst_env **lst_env);
 
@@ -116,18 +116,17 @@ char		*dup_str(char *prompt, int *i, int nb, t_lst_env *lst_env);
 t_lst_cmd	*ft_lst_new_cmd(void);
 t_lst_cmd	*ft_lst_last_cmd(t_lst_cmd *cmd);
 void		ft_lst_add_back_cmd(t_lst_cmd *lst_new, t_lst_cmd **lst);
-void		ft_lst_clear_cmd(t_lst_cmd **cmd);
 int			ft_lst_size_cmd(t_lst_cmd *cmd);
 
 t_lst_arg	*ft_lst_new_arg(void);
 void		ft_lst_add_back_arg(t_lst_arg *arg_new, t_lst_arg **arg);
-void		ft_lst_clear_arg(t_lst_arg **arg);
 int			ft_lst_size_arg(t_lst_arg *arg);
+void		ft_lst_clear_arg(t_lst_arg **arg);
 
 t_lst_file	*ft_lst_new_file(void);
 void		ft_lst_add_back_file(t_lst_file *file_new, t_lst_file **file);
+int			ft_lst_size_file(t_lst_file *file);
 void		ft_lst_clear_file(t_lst_file **file);
-
 
 t_lst_env	*ft_lst_new_env(void);
 void		ft_lst_add_back_env(t_lst_env *env_new, t_lst_env **lst_env);

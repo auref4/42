@@ -29,11 +29,13 @@ int	main(int argc, char **argv, char **env)
 			{
 				if (!ft_strcmp("exit", prompt))
 					free(prompt);
+				ft_lst_clear_env(&lst_env);
 				printf("exit\n");
 				return (0) ;
 			}
 			else if (prompt && !manage(prompt, env, &lst_env))
 			{
+				ft_lst_clear_env(&lst_env);
 				free(prompt);
 				return (0) ;
 			}
