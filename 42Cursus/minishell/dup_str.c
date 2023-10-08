@@ -21,28 +21,42 @@ int	prep_malloc(char *prompt, t_struct_strdup *s, int *i)
 	{
 		if (prompt[*i] == ' ' && !in_quote(prompt, *i, &s->s_q, &s->d_q))
 			break ;
+		if (prompt[*i] == '$')
+			if (check_dollar(prompt, i, s) == -1)
+				return (0);
 		if (!update_quote(prompt, *i, s))
 			return (0);
-		if (prompt[*i] == s->c)
+		if (prompt[*i] && prompt[*i] == s->c)
 			s->count++;
-		else
+		else if (prompt[*i])
 			s->len++;
 		(*i)++;
+	}
+	if (s->env_type == 1)
+	{
+		*i = s->index_dollar;
+		s->len += s->len_env;
 	}
 	return (1);
 }
 
 int	fill_str(char *prompt, t_struct_strdup *s, int *i)
 {
-	*i -= s->len;
-	*i -= s->count;
+	if (s->env_type == 0)
+	{
+		*i -= s->len;
+		*i -= s->count;
+	}
 	while (prompt[*i] && !token(prompt, *i))
 	{
 		if (prompt[*i] == ' ' && !in_quote(prompt, *i, &s->s_q, &s->d_q))
 			break ;
+		if (prompt[*i] == '$')
+			if (check_dollar(prompt, i, s) == -1)
+				return (0);
 		if (!update_quote(prompt, *i, s))
 			return (0);
-		if (prompt[*i] != s->c)
+		if (prompt [*i] && prompt[*i] != s->c)
 			s->str[s->j++] = prompt[*i];
 		(*i)++;
 	}
@@ -50,13 +64,14 @@ int	fill_str(char *prompt, t_struct_strdup *s, int *i)
 	return (1);
 }
 
-char	*dup_str(char *prompt, char c, int *i, int nb)
+char	*dup_str(char *prompt, int *i, int nb, t_lst_env *lst_env)
 {
 	t_struct_strdup	s;
 
 	ft_memset(&s, 0, sizeof(t_struct_strdup));
+	s.lst_env = lst_env;
 	if (nb == FILE)
-		if (!count_c(prompt, c, i))
+		if (!count_c(prompt, prompt[*i], i))
 			return (NULL);
 	while (prompt[*i] && its_white_space(prompt[*i]))
 		(*i)++;

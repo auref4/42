@@ -66,13 +66,17 @@ typedef struct s_struct_quote
 
 typedef struct s_struct_strdup
 {
-	int		j;
-	int		len;
-	int		s_q;
-	int		d_q;
-	int		count;
-	char	c;
-	char	*str;
+	int			j;
+	int			len;
+	int			len_env;
+	int			index_dollar;
+	int			env_type;
+	int			s_q;
+	int			d_q;
+	int			count;
+	char		c;
+	char		*str;
+	t_lst_env	*lst_env;
 }				t_struct_strdup;
 
 typedef struct s_struct_fill
@@ -98,13 +102,16 @@ int			ft_strlen(char *str);
 void		*ft_memset(void *pointer, int value, size_t count);
 int			ft_strcmp(const char *first, const char *second);
 
+int			strlen_env(char *str);
+int			cmp_env(char *first, int *i, char *second, t_struct_strdup *s);
+
 int			init_lst_env(char **env, t_lst_env **lst_env);
 
 int			check_prompt(char *prompt, t_lst_cmd *cmd);
 
-int			fill_lst(char *prompt, t_lst_cmd *cmd);
+int			fill_lst(char *prompt, t_lst_cmd *cmd, t_lst_env *lst_env);
 
-char		*dup_str(char *prompt, char c, int *i, int nb);
+char		*dup_str(char *prompt, int *i, int nb, t_lst_env *lst_env);
 
 t_lst_cmd	*ft_lst_new_cmd(void);
 t_lst_cmd	*ft_lst_last_cmd(t_lst_cmd *cmd);
@@ -129,9 +136,13 @@ void		ft_lst_clear_env(t_lst_env **lst_env);
 int			in_quote(char *str, int c, int *in_s_quote, int *in_d_quote);
 int			update_quote(char *prompt, int i, t_struct_strdup *s);
 
+int			check_dollar(char *prompt, int *i, t_struct_strdup *s);
+
 int			token(char *prompt, int i);
 
 int			its_white_space(char c);
 int			its_file(char c);
+
+int			its_valid_expand(char c);
 
 #endif

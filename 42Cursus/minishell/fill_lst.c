@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	fill_file(char *prompt, t_lst_file	**file, int *i)
+int	fill_file(char *prompt, t_lst_file	**file, int *i, t_lst_env *lst_env)
 {
 	t_lst_file	*new;
 
@@ -20,25 +20,25 @@ int	fill_file(char *prompt, t_lst_file	**file, int *i)
 	if (!new)
 		return (0);
 	if (its_file(prompt[*i]) == INFILE && !its_file(prompt[*i + 1]))
-		if ((new->infile = dup_str(prompt, prompt[*i], i, FILE)) == NULL)
+		if ((new->infile = dup_str(prompt, i, FILE, lst_env)) == NULL)
 			return (0);
 	if (its_file(prompt[*i]) == OUTFILE && !its_file(prompt[*i + 1]))
-		if ((new->outfile = dup_str(prompt, prompt[*i], i, FILE)) == NULL)
+		if ((new->outfile = dup_str(prompt, i, FILE, lst_env)) == NULL)
 			return (0);
 	if (its_file(prompt[*i]) == INFILE && its_file(prompt[*i + 1]) == INFILE)
-		if ((new->limiter = dup_str(prompt, prompt[*i], i, FILE)) == NULL)
+		if ((new->limiter = dup_str(prompt, i, FILE, lst_env)) == NULL)
 			return (0);
 	if (its_file(prompt[*i]) == OUTFILE && its_file(prompt[*i + 1]) == OUTFILE)
 	{
 		new->outfile_type = 1;
-		if ((new->infile = dup_str(prompt, prompt[*i], i, FILE)) == NULL)
+		if ((new->infile = dup_str(prompt, i, FILE, lst_env)) == NULL)
 			return (0);
 	}
 	ft_lst_add_back_file(new, file);
 	return (1);
 }
 
-int	fill_arg(char *prompt, t_lst_arg **arg, int *i)
+int	fill_arg(char *prompt, t_lst_arg **arg, int *i, t_lst_env *lst_env)
 {
 	t_lst_arg	*new;
 
@@ -46,11 +46,11 @@ int	fill_arg(char *prompt, t_lst_arg **arg, int *i)
 	if (!new)
 		return (0);
 	if (ft_lst_size_arg(*arg) == 0)
-		if ((new->name = dup_str(prompt, prompt[*i], i, 0)) == NULL)
+		if ((new->name = dup_str(prompt, i, 0, lst_env)) == NULL)
 			return (0);
 	if (ft_lst_size_arg(*arg) > 0)
 	{
-		if ((new->arg = dup_str(prompt, prompt[*i], i, 0)) == NULL)
+		if ((new->arg = dup_str(prompt, i, 0, lst_env)) == NULL)
 			return (0);
 	}
 	ft_lst_add_back_arg(new, arg);
@@ -72,8 +72,25 @@ int	new_cmd(t_lst_arg **arg, t_lst_file **file, t_lst_cmd **cmd, int *i)
 	(*i)++;
 	return (1);
 }
+int	check_and_new_cmd(char *prompt, t_struct_fill *s, t_lst_cmd **cmd)
+{
+	int	i;
 
-int	fill_lst(char *prompt, t_lst_cmd *cmd)
+	i = s->i;
+	i++;
+	while (prompt[i] && prompt[i] != '|')
+	{
+		if (prompt[i] != ' ')
+			break ;
+	}
+	if (prompt[i] == '|')
+		return (0);
+	if (!new_cmd(&s->arg, &s->file, cmd, &s->i))
+				return (0);
+	return (1);
+}
+
+int	fill_lst(char *prompt, t_lst_cmd *cmd, t_lst_env *lst_env)
 {
 	t_struct_fill	s;
 
@@ -83,15 +100,15 @@ int	fill_lst(char *prompt, t_lst_cmd *cmd)
 		while (its_white_space(prompt[s.i]))
 			s.i++;
 		if (prompt[s.i] && prompt[s.i] == '|')
-			if (!new_cmd(&s.arg, &s.file, &cmd, &s.i))
+			if (!check_and_new_cmd(prompt, &s, &cmd))
 				return (0);
 		if (prompt[s.i] && prompt[s.i] != '|' && !its_file(prompt[s.i]))
 		{
-			if (!fill_arg(prompt, &s.arg, &s.i))
+			if (!fill_arg(prompt, &s.arg, &s.i, lst_env))
 				return (0);
 		}
 		else if (prompt[s.i] && prompt[s.i] != '|')
-			if (!fill_file(prompt, &s.file, &s.i))
+			if (!fill_file(prompt, &s.file, &s.i, lst_env))
 				return (0);
 		s.tmp = ft_lst_last_cmd(cmd);
 		s.tmp->arg = s.arg;
