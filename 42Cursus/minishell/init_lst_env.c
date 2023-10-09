@@ -21,7 +21,7 @@ char	*dup_str_env(char *env)
 	return (str);
 }
 
-int	init_lst_env(char **env, t_lst_env **lst_env)
+void	init_lst_env(char **env, t_lst_env **lst_env)
 {
 	int			i;
 	t_lst_env	*new;
@@ -32,11 +32,10 @@ int	init_lst_env(char **env, t_lst_env **lst_env)
 	{
 		new = ft_lst_new_env();
 		if (!new)
-			return (0);
+			return ;
 		if ((new->line = dup_str_env(env[i])) == NULL)
-			return (0);
+			return ;
 		ft_lst_add_back_env(new, lst_env);
 		i++;
 	}
-	return (1);
 }

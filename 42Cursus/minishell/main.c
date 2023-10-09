@@ -18,29 +18,28 @@ int	main(int argc, char **argv, char **env)
 	t_lst_env	*lst_env;
 
 	(void) argv;
+	prompt = NULL;
 	lst_env = NULL;
+	init_lst_env(env, &lst_env);
 	if (argc == 1)
 	{
 		manage_sig();
 		while (1)
 		{
 			prompt = readline("(auferran&malancar)-[~/minishell]$ ");
-			if (!prompt || !ft_strcmp("exit", prompt))
+			add_history(prompt);
+			if (!prompt)
 			{
-				if (!ft_strcmp("exit", prompt))
-					free(prompt);
-				ft_lst_clear_env(&lst_env);
 				printf("exit\n");
-				return (0) ;
+				break;
 			}
-			else if (prompt && !manage(prompt, env, &lst_env))
-			{
-				ft_lst_clear_env(&lst_env);
-				free(prompt);
-				return (0) ;
-			}
+			manage(prompt, env, &lst_env);
 			free(prompt);
 		}
+		if (prompt)
+			free(prompt);
+		rl_clear_history();
+		ft_lst_clear_env(&lst_env);
 	}
 	return (0);
 }

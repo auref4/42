@@ -94,7 +94,7 @@ void		error(char *str);
 
 void		free_all(t_lst_cmd **cmd);
 
-int			manage(char *prompt, char **env, t_lst_env **lst_env);
+void		manage(char *prompt, char **env, t_lst_env **lst_env);
 
 int			manage_sig(void);
 
@@ -105,7 +105,7 @@ int			ft_strcmp(const char *first, const char *second);
 int			strlen_env(char *str);
 int			cmp_env(char *first, int *i, char *second, t_struct_strdup *s);
 
-int			init_lst_env(char **env, t_lst_env **lst_env);
+void		init_lst_env(char **env, t_lst_env **lst_env);
 
 int			check_prompt(char *prompt, t_lst_cmd *cmd);
 
@@ -143,5 +143,9 @@ int			its_white_space(char c);
 int			its_file(char c);
 
 int			its_valid_expand(char c);
+
+void		search_builtins(t_lst_cmd *cmd, t_lst_env **lst_env);
+
+void		builtins_env(t_lst_arg *arg, t_lst_env *lst_env);
 
 #endif
