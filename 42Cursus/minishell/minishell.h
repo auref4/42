@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 17:15:11 by auferran          #+#    #+#             */
-/*   Updated: 2023/10/03 17:11:51 by auferran         ###   ########.fr       */
+/*   Updated: 2023/10/11 15:10:54 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,9 +143,5 @@ int			its_white_space(char c);
 int			its_file(char c);
 
 int			its_valid_expand(char c);
-
-void		search_builtins(t_lst_cmd *cmd, t_lst_env **lst_env);
-
-void		builtins_env(t_lst_arg *arg, t_lst_env *lst_env);
 
 #endif

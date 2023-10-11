@@ -64,7 +64,6 @@ void	manage(char *prompt, char **env, t_lst_env **lst_env)
 		return ;
 	if (!fill_lst(prompt, cmd, *lst_env))
 		return (free_all(&cmd));
-	search_builtins(cmd, lst_env);
 	test_pipex(cmd, env, *lst_env);
 	free_all(&cmd);
 	return ;
