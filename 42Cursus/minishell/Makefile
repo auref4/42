@@ -34,11 +34,12 @@ SOURCES_PARSING =	main.c					\
 					prompt_utils.c			\
 					free_all.c				\
 					init_lst_env.c			\
+					init_lst_env_2.c		\
 					lst_env_utils.c			\
 					manage_dollar.c			\
 					manage_dollar_utils.c	\
 					token.c					\
-					quote2.c				\
+					quote_2.c				\
 
 
 SOURCES_EXEC =		check.c								\
@@ -57,6 +58,8 @@ SOURCES_EXEC =		check.c								\
 					search_builtins.c					\
 					builtins_echo.c						\
 					builtins_pwd.c						\
+					builtins_export.c					\
+					builtins_export_2.cc				\
 					builtins_env.c
 
 SRCS_PARSING = $(addprefix ./Sources/Parsing/, $(SOURCES_PARSING))

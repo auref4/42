@@ -113,6 +113,13 @@ int		search_builtins(t_cmd *cmd, t_struct_env *s);
 void	builtins_echo(char **argv);
 
 int		builtins_pwd(char **argv);
+int		its_option(char **argv);
+
+void	builtins_export(char **argv, t_struct_env *s);
+
+void	print_export(t_lst_env *lst_export);
+int		its_valid(char *str);
+int		check_egal(char *str);
 
 int		builtins_env(char **argv, t_lst_env *env_list);
 

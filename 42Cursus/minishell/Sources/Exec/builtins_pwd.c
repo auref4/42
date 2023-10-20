@@ -1,7 +1,7 @@
 #include "pipex.h"
 #include "minishell.h"
 
-int	its_option_pwd(char **argv)
+int	its_option(char **argv)
 {
 	int	i;
 
@@ -19,7 +19,7 @@ int	builtins_pwd(char **argv)
 {
 	char	*pwd;
 
-	if (its_option_pwd(argv))
+	if (its_option(argv))
 		return (0);
 	pwd = malloc (sizeof(char) * 2048);
 	if (!pwd)

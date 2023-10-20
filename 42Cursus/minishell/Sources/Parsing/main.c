@@ -40,6 +40,7 @@ int	main(int argc, char **argv, char **env)
 			free(prompt);
 		rl_clear_history();
 		ft_lst_clear_env(&s.lst_env);
+		ft_lst_clear_env(&s.lst_export);
 	}
 	return (0);
 }

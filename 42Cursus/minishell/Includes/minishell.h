@@ -106,6 +106,7 @@ void		manage(char *prompt, char **env, t_struct_env *s);
 int			manage_sig(void);
 
 int			ft_strlen(char *str);
+int			ft_isalpha(int character);
 void		*ft_memset(void *pointer, int value, size_t count);
 int			ft_strcmp(const char *first, const char *second);
 
@@ -113,6 +114,10 @@ int			strlen_env(char *str);
 int			cmp_env(char *first, int *i, char *second, t_struct_strdup *s);
 
 void		init_lst_env(char **env, t_struct_env *s);
+
+void		swap_export(char **str1, char **str2);
+void		sort_export(t_lst_env **lst_export);
+void		join_declare_x(t_lst_env **lst_export);
 
 int			check_prompt(char *prompt, t_lst_cmd *cmd);
 
