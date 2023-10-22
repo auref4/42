@@ -66,7 +66,7 @@ int	fill_file(char *prompt, t_lst_file	**file, int *i, t_lst_env *lst_env)
 	if (its_file(prompt[*i]) == OUTFILE && its_file(prompt[*i + 1]) == OUTFILE)
 	{
 		new->outfile_type = 1;
-		if ((new->infile = dup_str(prompt, i, FILE, lst_env)) == NULL)
+		if ((new->outfile = dup_str(prompt, i, FILE, lst_env)) == NULL)
 			return (ft_lst_clear_file(&new), 0);
 	}
 	ft_lst_add_back_file(new, file);
