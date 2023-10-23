@@ -29,7 +29,7 @@ void	builtins_echo(char **argv)
 	{
 		if (its_option_echo(argv[i]) && arg == 0)
 			option = 1;
-		else
+		else if (argv[i])
 		{
 			arg = 1;
 			printf("%s", argv[i]);

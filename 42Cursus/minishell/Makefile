@@ -59,7 +59,7 @@ SOURCES_EXEC =		check.c								\
 					builtins_echo.c						\
 					builtins_pwd.c						\
 					builtins_export.c					\
-					builtins_export_2.cc				\
+					builtins_export_2.c				\
 					builtins_env.c
 
 SRCS_PARSING = $(addprefix ./Sources/Parsing/, $(SOURCES_PARSING))

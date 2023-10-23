@@ -1,76 +1,84 @@
 #include "pipex.h"
 #include "minishell.h"
 
-int	doublon_content(char *str, char *tmp, char *line)
+int	doublon_var_content(char *str, t_lst_env *lst_env)
 {
 	int	i;
-	int	j;
 
-	i = 0;
-	j = 0;
-	while (tmp[j] && line[j])
-		j++;
-	while (str[i] && str[i] != '=')
-		i++;
-	i++;
-	while (line[j] && line[j] != '"')
-		j++;
-	j++;
-	while(str[i] && line[j] && line[j] != '"')
+	while (lst_env)
 	{
-		if (str[i] != line[j])
-			return (1);
-		i++;
-		j++;
-	}
-	if !(str[i] && line[j] == '"')
-		return (2);
-	return (1);
-}
-
-int	doublon_export(char *str, t_lst_env *lst_export, int *replace)
-{
-	int		i;
-	int		j;
-	char	*tmp;
-
-	tmp = "declare -x ";
-	*replace = 1;
-	while (lst_export)
-	{
-		j = 0;
 		i = 0;
-		while (tmp[j] && lst_export->line[j])
-			j++;
-		while (str[i] && lst_export->line[j] && lst_export[j] != '=')
-			if (str[i++] != lst_export->line[j++])
-				break;
-		if (str[i] && str[i] == '=' &&
-		lst_export->line[j] && lst_export->line[j] == '=')
+		while (lst_env->line[i] && str[i])
 		{
-			*replace = doublon_content(str, tmp, lst_export->line);
-			return (1);
+			if (lst_env->line[i] != str[i])
+				break ;
+			i++;
 		}
-		lst_export = lst_export->next;
+		if (!lst_env->line[i] && !str[i])
+			return (1);
+		lst_env = lst_env->next;
 	}
 	return (0);
 }
 
-void	push_export(char *str, t_lst_env **lst_export)
+char	*replace_line(char *str)
 {
-	int	replace;
+	int		i;
+	char	*line;
 
-	replace = 0;
-	if (doublon_export(str, *lst_export, &replace) && replace == 1)
-		return ;
-	if (replace == 2)
+	i = 0;
+	line = malloc(sizeof(char) * ft_strlen(str) + 1);
+	if (!line)
+		return (error("MALLOC FALURE\n"), NULL);
+	while (str[i])
 	{
-		delete_line(str, lst_export);
-		add_line(str, lst_export);
+		line[i] = str[i];
+		i++;
 	}
-	else
-		add_line(str, lst_export);
-	sort_export(lst_export);
+	line[i] = 0;
+	return (line);
+}
+
+int	doublon_var(char *str, t_lst_env **lst_env)
+{
+	int			i;
+	t_lst_env	*tmp;
+
+	tmp = *lst_env;
+	while (tmp)
+	{
+		i = 0;
+		while (tmp->line[i] && str[i] && tmp->line[i] != '=')
+		{
+			if (tmp->line[i] != str[i])
+				break ;
+			i++;
+		}
+		if (tmp->line[i] && tmp->line[i] == '=')
+		{
+			printf("coucou\n");
+			free(tmp->line);
+			printf("%s\n", str);
+			tmp->line = replace_line(str);
+			printf("%s\n", tmp->line);
+			return (1);
+		}
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+void	push_env(char *str, t_lst_env **lst_env)
+{
+	if (doublon_var_content(str, *lst_env))
+	{
+		printf("doublon var content! \n");
+		return ;
+	}
+	if (doublon_var(str, lst_env))
+	{
+		printf("doublon var");
+	}
 }
 
 void	builtins_export(char **argv, t_struct_env *s)
@@ -83,19 +91,16 @@ void	builtins_export(char **argv, t_struct_env *s)
 		print_export(s->lst_export);
 		return ;
 	}
-	if (its_option(argv[i]))
+	if (its_option(argv))
 		return ;
 	while (argv[i])
 	{
 		if (its_valid(argv[i]))
 		{
 			if (check_egal(argv[i]))
-			{
 				push_env(argv[i], &s->lst_env);
-				push_export(argv[i], &s->lst_export)
-			}
-			else
-				push_export(argv[i], &s->lst_export);
+			//else
+			//	push_export(argv[i], &s->lst_export);
 		}
 		i++;
 	}
