@@ -27,6 +27,8 @@
 # include "minishell.h"
 # include <string.h>
 
+extern	int g_exit;
+
 typedef struct s_files {
 	int		here_doc;
 	char	rand_name[7];
@@ -110,12 +112,12 @@ int		list_size(t_lst_cmd*list);
 
 int		search_builtins(t_cmd *cmd, t_struct_env *s);
 
-void	builtins_echo(char **argv);
+int	builtins_echo(char **argv);
 
 int		builtins_pwd(char **argv);
 int		its_option(char **argv);
 
-void	builtins_export(char **argv, t_struct_env *s);
+int		builtins_export(char **argv, t_struct_env *s);
 
 void	print_export(t_lst_env *lst_export);
 int		its_valid(char *str);

@@ -56,32 +56,32 @@ int	doublon_var(char *str, t_lst_env **lst_env)
 		}
 		if (tmp->line[i] && tmp->line[i] == '=')
 		{
-			printf("coucou\n");
 			free(tmp->line);
-			printf("%s\n", str);
 			tmp->line = replace_line(str);
-			printf("%s\n", tmp->line);
+			if (!tmp->line)
+				return (0);
 			return (1);
 		}
 		tmp = tmp->next;
 	}
-	return (0);
+	return (-1);
 }
 
-void	push_env(char *str, t_lst_env **lst_env)
+int	push_env(char *str, t_lst_env **lst_env)
 {
+	int	nb;
+
 	if (doublon_var_content(str, *lst_env))
-	{
-		printf("doublon var content! \n");
-		return ;
-	}
-	if (doublon_var(str, lst_env))
-	{
-		printf("doublon var");
-	}
+		return (1);
+	nb = doublon_var(str, lst_env);
+	if (nb == 0)
+		return (0);
+	if (nb == 1)
+		return (1);
+	return (1);
 }
 
-void	builtins_export(char **argv, t_struct_env *s)
+int	builtins_export(char **argv, t_struct_env *s)
 {
 	int	i;
 
@@ -89,19 +89,23 @@ void	builtins_export(char **argv, t_struct_env *s)
 	if (!argv[i])
 	{
 		print_export(s->lst_export);
-		return ;
+		return (1);
 	}
 	if (its_option(argv))
-		return ;
+		return (1);
 	while (argv[i])
 	{
 		if (its_valid(argv[i]))
 		{
 			if (check_egal(argv[i]))
-				push_env(argv[i], &s->lst_env);
+			{
+				if (!push_env(argv[i], &s->lst_env))
+					return (0);
+			}
 			//else
 			//	push_export(argv[i], &s->lst_export);
 		}
 		i++;
 	}
+	return (1);
 }

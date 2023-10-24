@@ -16,7 +16,7 @@ int	its_option_echo(char *str)
 	return (1);
 }
 
-void	builtins_echo(char **argv)
+int	builtins_echo(char **argv)
 {
 	int	i;
 	int	option;
@@ -40,4 +40,5 @@ void	builtins_echo(char **argv)
 	}
 	if (option == 0)
 		printf("\n");
+	return (1);
 }

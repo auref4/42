@@ -27,6 +27,8 @@
 # define INFILE 1
 # define OUTFILE 2
 
+extern	int g_exit;
+
 typedef struct s_lst_arg
 {
 	char				*name;

@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+int	g_exit;
+
 int	main(int argc, char **argv, char **env)
 {
 	char			*prompt;
