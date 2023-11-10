@@ -158,4 +158,7 @@ int			its_file(char c);
 
 int			its_valid_expand(char c);
 
+char		*lets_join(char *s1, char *s2);
+void		sort_export(t_lst_env **lst_export);
+
 #endif

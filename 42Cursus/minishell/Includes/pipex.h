@@ -112,12 +112,16 @@ int		list_size(t_lst_cmd*list);
 
 int		search_builtins(t_cmd *cmd, t_struct_env *s);
 
-int	builtins_echo(char **argv);
+int		builtins_echo(char **argv);
 
 int		builtins_pwd(char **argv);
 int		its_option(char **argv);
 
 int		builtins_export(char **argv, t_struct_env *s);
+
+int		new_line_env(char *str, t_struct_env *s);
+int		new_line_export(char *str, t_struct_env *s, int nb);
+int		search_replace_export(char *str, t_struct_env *s);
 
 void	print_export(t_lst_env *lst_export);
 int		its_valid(char *str);
