@@ -127,6 +127,8 @@ void	print_export(t_lst_env *lst_export);
 int		its_valid(char *str);
 int		check_egal(char *str);
 
+int		builtins_unset(char	**argv, t_struct_env *s);
+
 int		builtins_env(char **argv, t_lst_env *env_list);
 
 #endif

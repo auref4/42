@@ -20,7 +20,7 @@ int	builtins_pwd(char **argv)
 	char	*pwd;
 
 	if (its_option(argv))
-		return (0);
+		return (1);
 	pwd = malloc (sizeof(char) * 2048);
 	if (!pwd)
 		return (error("MALLOC FAILURE\n"), 0);
