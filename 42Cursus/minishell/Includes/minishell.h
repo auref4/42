@@ -78,8 +78,9 @@ typedef struct s_struct_strdup
 	int			j;
 	int			len;
 	int			len_env;
-	int			index_dollar;
 	int			env_type;
+	int			index_dollar;
+	int			after_space;
 	int			s_q;
 	int			d_q;
 	int			count;
@@ -113,7 +114,7 @@ void		*ft_memset(void *pointer, int value, size_t count);
 int			ft_strcmp(const char *first, const char *second);
 
 int			strlen_env(char *str);
-int			cmp_env(char *first, int *i, char *second, t_struct_strdup *s);
+int			cmp_env(char *str, int *i, char *line);
 
 void		init_lst_env(char **env, t_struct_env *s);
 
@@ -149,7 +150,11 @@ void		ft_lst_clear_env(t_lst_env **lst_env);
 int			in_quote(char *str, int c, int *in_s_quote, int *in_d_quote);
 int			update_quote(char *prompt, int i, t_struct_strdup *s);
 
-int			check_dollar(char *prompt, int *i, t_struct_strdup *s);
+int			check_dollar_count(char *prompt, int *i, t_struct_strdup *s);
+int			check_dollar_expand(char *prompt, int *i, t_struct_strdup *s);
+
+void		count_env(char *line, t_struct_strdup *s);
+void		expand(t_struct_strdup *s, char *line);
 
 int			token(char *prompt, int i);
 

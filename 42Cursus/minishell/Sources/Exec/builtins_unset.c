@@ -1,16 +1,6 @@
 #include "pipex.h"
 #include "minishell.h"
 
-void	print_env(t_lst_env *env)
-{
-	while (env)
-	{
-		printf("%s\n", env->line);
-		env = env->next;
-	}
-	printf("end\n");
-}
-
 int	valid_unset(char *str)
 {
 	int	i;
@@ -25,11 +15,35 @@ int	valid_unset(char *str)
 	return (1);
 }
 
+void	free_link(t_lst_env **lst_env, t_lst_env **link)
+{
+	t_lst_env	*tmp;
+
+	tmp = *lst_env;
+	if (tmp == *link)
+	{
+		*lst_env = (*lst_env)->next;
+		free(tmp->line);
+		free(tmp);
+		return ;
+	}
+	while (tmp->next)
+	{
+		if (tmp->next == *link)
+		{
+			tmp->next = (*link)->next;
+			free((*link)->line);
+			free(*link);
+			return ;
+		}
+		tmp = tmp->next;
+	}
+}
+
 void	lets_unset_env(char *str, t_struct_env *s)
 {
 	int			i;
 	t_lst_env	*tmp;
-	t_lst_env	*swap;
 
 	tmp = s->lst_env;
 	while (tmp)
@@ -40,11 +54,7 @@ void	lets_unset_env(char *str, t_struct_env *s)
 			i++;
 		if (!str[i] && tmp->line[i] == '=')
 		{
-			printf("line = %s\n", tmp->line);
-			free(tmp->line);
-			swap = tmp->next;
-			free(tmp);
-			tmp = swap;
+			free_link(&s->lst_env, &tmp);
 			return ;
 		}
 		tmp = tmp->next;
@@ -56,7 +66,6 @@ void	lets_unset_export(char *str, t_struct_env *s)
 	int			i;
 	int			j;
 	t_lst_env	*tmp;
-	t_lst_env	*swap;
 
 	tmp = s->lst_export;
 	while (tmp)
@@ -71,11 +80,7 @@ void	lets_unset_export(char *str, t_struct_env *s)
 		}
 		if (!str[i] && tmp->line[j] == '=')
 		{
-			printf("line = %s\n", tmp->line);
-			free(tmp->line);
-			swap = tmp->next;
-			free(tmp);
-			tmp = swap;
+			free_link(&s->lst_export, &tmp);
 			return ;
 		}
 		tmp = tmp->next;
@@ -98,10 +103,5 @@ int	builtins_unset(char	**argv, t_struct_env *s)
 		}
 		i++;
 	}
-	printf("coucou\n");
-	print_env(s->lst_env);
-	printf("coucou1\n");
-	print_env(s->lst_export);
-	printf("coucou2\n");
 	return (1);
 }
