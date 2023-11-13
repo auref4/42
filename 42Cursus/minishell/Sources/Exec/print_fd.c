@@ -6,7 +6,7 @@
 /*   By: malancar <malancar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:44:47 by malancar          #+#    #+#             */
-/*   Updated: 2023/11/08 16:45:49 by malancar         ###   ########.fr       */
+/*   Updated: 2023/11/13 17:46:51 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_putstr_fd(char *str, int fd)
 {
 	int	len;
 
-	if (!str)
+	if (str == NULL)
 		return ;
 	len = ft_strlen(str);
 	if (write(fd, str, len) == -1)

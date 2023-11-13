@@ -42,9 +42,9 @@ SOURCES_PARSING =	main.c                  \
                     token.c				    \
                     quote_2.c               \
                     itoa.c                  \
-
-
-
+                    
+					
+					
 SOURCES_EXEC =		check.c							\
                     init.c							\
                     convert.c						\

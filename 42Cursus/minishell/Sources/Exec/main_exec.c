@@ -16,7 +16,7 @@
 int	main_exec(t_lst_cmd *argv, t_struct_env *s)
 {
 	t_cmd	cmd;
-	int		status;
+	int		status; 
 
 
 	convert_list_env(&cmd, s);
@@ -34,14 +34,22 @@ int	main_exec(t_lst_cmd *argv, t_struct_env *s)
 		free(cmd.argv);
 		return (0);
 	}
-
+	
 	cmd.index_pid--;
 	while (cmd.index_pid >= 0)
 	{
 		waitpid(cmd.pid[cmd.index_pid], &status, 0);
 		cmd.index_pid--;
 	}
+	
+	// if (WIFEXITED(status))
+	// {
+	// 	//printf("status = %d\n", WEXITSTATUS(status));
+	// 	g_exit = WEXITSTATUS(status);
+	// }
+	// if (WISIGNALED(status)) 
+	// 	g_exit = WTERMSIG(status);
 	free(cmd.pid);
-	free(cmd.env);
+	free(cmd.env); 
 	return (0);
 }

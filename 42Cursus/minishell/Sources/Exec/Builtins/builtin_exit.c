@@ -6,7 +6,7 @@
 /*   By: malancar <malancar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 13:50:22 by malancar          #+#    #+#             */
-/*   Updated: 2023/11/09 17:20:29 by malancar         ###   ########.fr       */
+/*   Updated: 2023/11/13 17:21:18 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	check_exit_code(t_cmd *cmd, unsigned long exit_code)
 	if (exit_code > 255)
 		exit_code = exit_code % 256;
 	//probleme :
-	//if (exit_code < 0)
-	//	exit_code = exit_code % 256;
+	// if (exit_code < 0)
+	// 	exit_code = exit_code % 256;
 	return (exit_code);
 }
 
@@ -77,7 +77,7 @@ int	is_arg_numeric(t_cmd *cmd)
 int	check_arg(t_cmd *cmd, unsigned long *exit_code)
 {
 	int	nbr_arg;
-
+	
 	nbr_arg = builtin_arg_nbr(cmd);
 	if (nbr_arg > 1)
 	{
@@ -96,14 +96,14 @@ int	check_arg(t_cmd *cmd, unsigned long *exit_code)
 			return (0);
 		}
 	}
-
+	
 	return (1);
 }
 
 int	builtin_exit(t_lst_cmd *argv, t_cmd *cmd)
 {
 	unsigned long	exit_code;
-
+	
 	exit_code = 0;
 	if (check_arg(cmd, &exit_code) == 0)
 		return (0);
