@@ -88,7 +88,7 @@ RM = rm -rf
 all:	 $(NAME)
 
 $(NAME):	Objects/ $(OBJS)
-			$(CC) $(FLAGS) -o $(NAME) $(OBJS) -lreadline -fsanitize=address
+			$(CC) $(FLAGS) -o $(NAME) $(OBJS) -lreadline
 
 Objects/%.o: 	%.c
 				@mkdir -p $(dir $@)
