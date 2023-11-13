@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malancar <malancar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 17:15:11 by auferran          #+#    #+#             */
-/*   Updated: 2023/10/11 15:10:54 by auferran         ###   ########.fr       */
+/*   Updated: 2023/11/13 15:13:40 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void		error(char *str);
 
 void		free_all(t_lst_cmd **cmd);
 
-void		manage(char *prompt, char **env, t_struct_env *s);
+void		manage(char *prompt, t_struct_env *s);
 
 int			manage_sig(void);
 

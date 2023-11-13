@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "exec.h"
 
 int	ft_strchr(char *str, char c)
 {
@@ -24,15 +24,6 @@ int	ft_strchr(char *str, char c)
 		i++;
 	}
 	return (0);
-}
-
-void	ft_putstr_fd(char *str, int fd)
-{
-	int	len;
-
-	len = ft_strlen(str);
-	if (write(fd, str, len) == -1)
-		perror("write");
 }
 
 char	*ft_strcat(char *dest, char *src)

@@ -6,36 +6,42 @@
 /*   By: malancar <malancar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 18:52:07 by malancar          #+#    #+#             */
-/*   Updated: 2023/10/11 15:31:18 by malancar         ###   ########.fr       */
+/*   Updated: 2023/11/13 16:01:23 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "exec.h"
 
-void	set_fd(t_cmd *cmd)
+void	init_fd(t_cmd *cmd)
 {
-	if (cmd->index_pid == cmd->first)
+	if (cmd->nbr == 1)
+	{
+		cmd->fd.read = 0;
+		cmd->fd.write = 1;
+		cmd->fd.other_pipe = -1;
+	}
+	else if (cmd->index_pid == cmd->first)
 	{
 		cmd->fd.read = 0;
 		cmd->fd.write = cmd->fd.pipe[1];
-		cmd->fd.close = cmd->fd.pipe[0];
+		cmd->fd.other_pipe = cmd->fd.pipe[0];
 	}
 	else if (cmd->index_pid == cmd->last)
 	{
 		cmd->fd.read = cmd->fd.pipe[0];
 		cmd->fd.write = 1;
-		cmd->fd.close = cmd->fd.pipe[1];
+		cmd->fd.other_pipe = cmd->fd.pipe[1];
 	}
 	else if ((cmd->index_pid != cmd->first)
 		&& (cmd->index_pid != cmd->last))
 	{
 		cmd->fd.read = cmd->fd.previous;
 		cmd->fd.write = cmd->fd.pipe[1];
-		cmd->fd.close = cmd->fd.pipe[0];
+		cmd->fd.other_pipe = cmd->fd.pipe[0];
 	}
 }
 
-void	set_files(t_lst_cmd *argv, t_cmd *cmd)
+int	set_redirections(t_lst_cmd *argv, t_cmd *cmd)
 {
 	if (argv->file)
 	{
@@ -44,21 +50,25 @@ void	set_files(t_lst_cmd *argv, t_cmd *cmd)
 		else
 			cmd->if_here_doc = 0;
 		if (argv->file->infile)
-			open_infile(argv, cmd);
+		{
+			if (open_infile(argv, cmd) == 0)
+				return (0);
+		}
 		if (argv->file->outfile)
 			open_outfile(argv, cmd);
 	}
+	return (1);
 }
 
 void	init_struct(t_cmd *cmd, t_lst_cmd *argv)
 {
-	
 	cmd->nbr = list_size(argv);
 	cmd->index = 0;
 	cmd->index_pid = 0;
 	cmd->first = 0;
 	cmd->path = NULL;
 	cmd->last = cmd->nbr - 1;
-	// set_fd(cmd);
-	// set_files(argv, cmd);
+	cmd->if_here_doc = 0;
+	cmd->fd.tmp = -1;
+	cmd->argv = NULL;
 }

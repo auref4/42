@@ -6,7 +6,7 @@
 #    By: malancar <malancar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/03 19:06:48 by malancar          #+#    #+#              #
-#    Updated: 2023/10/11 16:02:24 by malancar         ###   ########.fr        #
+#    Updated: 2023/11/13 16:01:26 by malancar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,54 +17,60 @@ FLAGS	:= -Wextra -Werror -Wall -g
 NAME	= minishell
 
 HEADER = ./Includes
-HDR = $(HEADER)/pipex.h $(HEADER)/minishell.h
+HDR = $(HEADER)/exec.h $(HEADER)/minishell.h
 
-SOURCES_PARSING =	main.c					\
-					manage.c				\
-					manage_sig.c			\
-					utils.c					\
-					itoa.c					\
-					fill_lst.c				\
-					dup_str.c				\
-					check_prompt.c			\
-					error.c					\
-					lst_cmd_utils.c			\
-					lst_arg_utils.c			\
-					lst_file_utils.c		\
-					quote.c					\
-					quote_2.c				\
-					prompt_utils.c			\
-					free_all.c				\
-					init_lst_env.c			\
-					init_lst_env_2.c		\
-					lst_env_utils.c			\
-					manage_dollar.c			\
-					manage_dollar_utils.c	\
-					manage_dollar_query.c	\
-					token.c					\
+SOURCES_PARSING =	main.c                  \
+                    manage.c                \
+                    manage_sig.c            \
+                    utils.c				    \
+                    fill_lst.c			    \
+                    dup_str.c               \
+                    check_prompt.c          \
+                    error.c		            \
+                    lst_cmd_utils.c		    \
+                    lst_arg_utils.c		    \
+                    lst_file_utils.c        \
+                    quote.c			        \
+                    prompt_utils.c	        \
+                    free_all.c	            \
+                    init_lst_env.c	        \
+                    init_lst_env_2.c		\
+                    lst_env_utils.c	        \
+                    manage_dollar.c		    \
+                    manage_dollar_utils.c	\
+                    manage_dollar_query.c   \
+                    token.c				    \
+                    quote_2.c               \
+                    itoa.c                  \
 
 
-SOURCES_EXEC =		check.c								\
-					init.c								\
-					convert.c							\
-					new_exec_cmds.c						\
-					pipex_utils.c						\
-					pipex_utils_2.c						\
-					ft_split.c							\
-					open_files.c						\
-					error_and_free.c					\
-					main_pipex.c						\
-					here_doc.c							\
-					Get_next_line/get_next_line.c		\
-					Get_next_line/get_next_line_utils.c	\
-					search_builtins.c					\
-					builtins_echo.c						\
-					builtins_pwd.c						\
-					builtins_export.c					\
-					builtins_export_2.c					\
-					builtins_export_3.c					\
-					builtins_env.c						\
-					builtins_unset.c
+
+SOURCES_EXEC =		check.c							\
+                    init.c							\
+                    convert.c						\
+                    cmds.c					        \
+                    exec_utils.c					\
+                    exec_utils_2.c					\
+                    ft_split.c						\
+                    open_files.c					\
+                    error_and_free.c				\
+                    main_exec.c						\
+                    here_doc.c						\
+                    close.c							\
+					print_fd.c						\
+					Builtins/builtin_echo.c			\
+					Builtins/builtin_env.c			\
+					Builtins/builtin_export.c		\
+					Builtins/builtin_pwd.c			\
+					Builtins/builtin_export_2.c		\
+                    Builtins/builtin_export_3.c     \
+                    Builtins/builtin_unset.c        \
+                    Builtins/builtin_cd.c			\
+                    Builtins/builtin_exit.c			\
+					Builtins/builtins.c				\
+					Builtins/builtins_utils.c		\
+                    Get_next_line/get_next_line.c	\
+                    Get_next_line/get_next_line_utils.c
 
 SRCS_PARSING = $(addprefix ./Sources/Parsing/, $(SOURCES_PARSING))
 
@@ -82,7 +88,7 @@ RM = rm -rf
 all:	 $(NAME)
 
 $(NAME):	Objects/ $(OBJS)
-			$(CC) $(FLAGS) -o $(NAME) $(OBJS) -lreadline
+			$(CC) $(FLAGS) -o $(NAME) $(OBJS) -lreadline -fsanitize=address
 
 Objects/%.o: 	%.c
 				@mkdir -p $(dir $@)

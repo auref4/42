@@ -1,4 +1,4 @@
-#include "pipex.h"
+#include "exec.h"
 #include "minishell.h"
 
 int	doublon_var_content(char *str, t_lst_env *lst_env)
@@ -93,28 +93,28 @@ int	push_env(char *str, t_struct_env *s)
 	return (1);
 }
 
-int	builtins_export(char **argv, t_struct_env *s)
+int	builtin_export(t_cmd *cmd, t_struct_env *s)
 {
 	int	i;
 
 	i = 1;
-	if (!argv[i])
+	if (!cmd->argv[i])
 	{
-		print_export(s->lst_export);
+		print_export(cmd, s->lst_export);
 		return (1);
 	}
-	if (its_option(argv))
+	if (its_option(cmd->argv))
 		return (1);
-	while (argv[i])
+	while (cmd->argv[i])
 	{
-		if (its_valid(argv[i]))
+		if (its_valid(cmd->argv[i]))
 		{
-			if (check_egal(argv[i]))
+			if (check_egal(cmd->argv[i]))
 			{
-				if (!push_env(argv[i], s))
+				if (!push_env(cmd->argv[i], s))
 					return (0);
 			}
-			else if (!new_line_export(argv[i], s, 0))
+			else if (!new_line_export(cmd->argv[i], s, 0))
 				return (0);
 		}
 		i++;

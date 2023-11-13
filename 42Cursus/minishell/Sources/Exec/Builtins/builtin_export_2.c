@@ -1,4 +1,4 @@
-#include "pipex.h"
+#include "exec.h"
 #include "minishell.h"
 
 int	search_content_export(char *str, t_struct_env *s)

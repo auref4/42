@@ -1,4 +1,4 @@
-#include "pipex.h"
+#include "exec.h"
 #include "minishell.h"
 
 int	valid_unset(char *str)
@@ -87,7 +87,7 @@ void	lets_unset_export(char *str, t_struct_env *s)
 	}
 }
 
-int	builtins_unset(char	**argv, t_struct_env *s)
+int	builtin_unset(char	**argv, t_struct_env *s)
 {
 	int	i;
 

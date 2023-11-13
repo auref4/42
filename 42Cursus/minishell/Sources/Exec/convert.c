@@ -6,53 +6,66 @@
 /*   By: malancar <malancar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 19:05:44 by malancar          #+#    #+#             */
-/*   Updated: 2023/10/11 15:31:18 by malancar         ###   ########.fr       */
+/*   Updated: 2023/11/08 17:10:33 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "exec.h"
 
-char	**convert_list(t_lst_cmd *argv)
+void	convert_list(t_cmd *cmd, t_lst_cmd *argv)
 {
-	int	i;
-	char **argv_name;
-	int	size_list;
+	int			i;
+	int			size_list;
 	t_lst_arg	*start;
 
 	start = argv->arg;
 	size_list = ft_lst_size_arg(argv->arg) + 1;
-	//printf("size list = %d\n", size_list);
-	argv_name = NULL;
+	if (cmd->argv != NULL)
+		free(cmd->argv);//pas freetab parce que free dans liste chainee
 	i = 0;
-	argv_name = malloc(sizeof(char*) * size_list);
-	if (!argv_name)
-		return (NULL);
-	//printf("argv->arg->arg = %s\n", argv->arg->arg);
+	cmd->argv = malloc(sizeof(char *) * size_list);
+	if (!cmd->argv)
+		return ;
 	while (argv->arg != NULL)
 	{
 		if (argv->arg->name != NULL)
 		{
-			argv_name[i] = argv->arg->name;
-			// printf("argv->arg->name = %s\n", argv->arg->name);
-			// printf("argv_name = %s\n", argv_name[i]);
+			cmd->argv[i] = argv->arg->name;
 			i++;
 		}
 		else if (argv->arg->arg != NULL)
 		{
-			argv_name[i] = argv->arg->arg;
-			// printf("argv->arg->arg = %s\n", argv->arg->arg);
-			// printf("argv_arg = %s\n", argv_name[i]);
+			cmd->argv[i] = argv->arg->arg;
 			i++;
 		}
 		argv->arg = argv->arg->next;
 	}
-	argv_name[i] = NULL;
-	// i = 0;
-	// while (argv_name[i])
-	// {
-	// 	//printf("argv_name = %s\n", argv_name[i]);
-	// 	i++;
-	// }
+	cmd->argv[i] = NULL;
 	argv->arg = start;
-	return (argv_name);
+}
+
+void	convert_list_env(t_cmd *cmd, t_struct_env *s)
+{
+	int			i;
+	int			size_list;
+	t_lst_env	*start;
+
+	start = s->lst_env;
+	size_list = ft_lst_size_env(s->lst_env) + 1;
+	cmd->env = NULL;
+	i = 0;
+	cmd->env = malloc(sizeof(char *) * size_list);
+	if (!cmd->env)
+		return ;
+	while (s->lst_env != NULL)
+	{
+		if (s->lst_env->line != NULL)
+		{
+			cmd->env[i] = s->lst_env->line;
+			i++;
+		}
+		s->lst_env = s->lst_env->next;
+	}
+	cmd->env[i] = NULL;
+	s->lst_env = start;
 }

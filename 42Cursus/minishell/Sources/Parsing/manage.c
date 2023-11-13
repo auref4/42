@@ -1,5 +1,5 @@
 #include "minishell.h"
-#include "pipex.h"
+#include "exec.h"
 
 int	init_lst(t_lst_cmd **cmd)
 {
@@ -13,13 +13,12 @@ int	init_lst(t_lst_cmd **cmd)
 	return (1);
 }
 
-void	test_pipex(t_lst_cmd *cmd, char **env, t_lst_env *lst_env)
+void	test_pipex(t_lst_cmd *cmd, t_lst_env *lst_env)
 {
 	int	i;
 	int	y;
 	int	x;
 
-	(void) env;
 	(void) lst_env;
 	i = 1;
 	y = 1;
@@ -53,7 +52,7 @@ void	test_pipex(t_lst_cmd *cmd, char **env, t_lst_env *lst_env)
 	}
 }
 
-void	manage(char *prompt, char **env, t_struct_env *s)
+void	manage(char *prompt, t_struct_env *s)
 {
 	t_lst_cmd	*cmd;
 
@@ -64,8 +63,8 @@ void	manage(char *prompt, char **env, t_struct_env *s)
 		return ;
 	if (!fill_lst(prompt, cmd, s->lst_env))
 		return (free_all(&cmd));
-	//test_pipex(cmd, env, s->lst_env);
-	main_pipex(cmd, env, s);
+	//test_pipex(cmd, s->lst_env);
+	main_exec(cmd, s);
 	free_all(&cmd);
 	return ;
 }
