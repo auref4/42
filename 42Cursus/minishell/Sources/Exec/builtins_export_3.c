@@ -5,7 +5,8 @@ void	print_export(t_lst_env *lst_export)
 {
 	while (lst_export)
 	{
-		printf("%s\n", lst_export->line);
+		ft_putstr(lst_export->line);
+		ft_putstr("\n");
 		lst_export = lst_export->next;
 	}
 }

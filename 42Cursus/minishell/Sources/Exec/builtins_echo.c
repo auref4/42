@@ -32,13 +32,13 @@ int	builtins_echo(char **argv)
 		else if (argv[i])
 		{
 			arg = 1;
-			printf("%s", argv[i]);
+			ft_putstr(argv[i]);
 			if (argv[i + 1])
-				printf(" ");
+				ft_putstr(" ");
 		}
 		i++;
 	}
 	if (option == 0)
-		printf("\n");
+		ft_putstr("\n");
 	return (1);
 }

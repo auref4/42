@@ -6,7 +6,8 @@ int	builtins_env(char **argv, t_lst_env *env_list)
 		return (1);
 	while (env_list)
 	{
-		printf("%s\n", env_list->line);
+		ft_putstr(env_list->line);
+		ft_putstr("\n");
 		env_list = env_list->next;
 	}
 	return (1);

@@ -29,7 +29,8 @@ int	builtins_pwd(char **argv)
 		free(pwd);
 		return (error("getcwd FAILURE\n"), 0);
 	}
-	printf("%s\n", pwd);
+	ft_putstr(pwd);
+	ft_putstr("\n");
 	free (pwd);
 	return (1);
 }

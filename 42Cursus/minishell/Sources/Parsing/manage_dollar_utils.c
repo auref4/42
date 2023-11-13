@@ -13,7 +13,7 @@ void	count_env(char *line, t_struct_strdup *s)
 		s->len_env++;
 		i++;
 	}
-	s->env_type = 1;
+	s->dollar_type = 1;
 }
 
 void	expand(t_struct_strdup *s, char *line)
@@ -27,7 +27,7 @@ void	expand(t_struct_strdup *s, char *line)
 		s->j++;
 		i++;
 	}
-	s->env_type = 0;
+	s->dollar_type = 0;
 }
 
 int	strlen_env(char *str)

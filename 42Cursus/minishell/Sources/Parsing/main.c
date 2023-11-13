@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "pipex.h"
 
 int	g_exit;
 
@@ -28,11 +29,14 @@ int	main(int argc, char **argv, char **env)
 		manage_sig();
 		while (1)
 		{
-			prompt = readline("(auferran&malancar)-[~/minishell]$ ");
+			if (!isatty(0))
+				prompt = get_next_line(0, 0);
+			else
+				prompt = readline("(auferran&malancar)-[~/minishell]$ ");
 			add_history(prompt);
 			if (!prompt)
 			{
-				printf("exit\n");
+				ft_putstr("exit\n");
 				break;
 			}
 			manage(prompt, env, &s);

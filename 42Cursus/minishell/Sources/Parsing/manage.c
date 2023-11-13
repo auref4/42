@@ -64,7 +64,7 @@ void	manage(char *prompt, char **env, t_struct_env *s)
 		return ;
 	if (!fill_lst(prompt, cmd, s->lst_env))
 		return (free_all(&cmd));
-	test_pipex(cmd, env, s->lst_env);
+	//test_pipex(cmd, env, s->lst_env);
 	main_pipex(cmd, env, s);
 	free_all(&cmd);
 	return ;

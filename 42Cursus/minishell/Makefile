@@ -23,6 +23,7 @@ SOURCES_PARSING =	main.c					\
 					manage.c				\
 					manage_sig.c			\
 					utils.c					\
+					itoa.c					\
 					fill_lst.c				\
 					dup_str.c				\
 					check_prompt.c			\
@@ -31,6 +32,7 @@ SOURCES_PARSING =	main.c					\
 					lst_arg_utils.c			\
 					lst_file_utils.c		\
 					quote.c					\
+					quote_2.c				\
 					prompt_utils.c			\
 					free_all.c				\
 					init_lst_env.c			\
@@ -38,8 +40,8 @@ SOURCES_PARSING =	main.c					\
 					lst_env_utils.c			\
 					manage_dollar.c			\
 					manage_dollar_utils.c	\
+					manage_dollar_query.c	\
 					token.c					\
-					quote_2.c				\
 
 
 SOURCES_EXEC =		check.c								\
