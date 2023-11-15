@@ -6,7 +6,7 @@
 /*   By: malancar <malancar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 13:50:22 by malancar          #+#    #+#             */
-/*   Updated: 2023/11/13 17:21:18 by malancar         ###   ########.fr       */
+/*   Updated: 2023/11/14 17:57:54 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,13 @@
 // For Example: If we execute a statement exit(9999)
 // then it will execute exit(15) as 9999%256 = 15.
 
-int	check_exit_code(t_cmd *cmd, unsigned long exit_code)
+int	check_exit_code(t_cmd *cmd, long exit_code)
 {
 	(void)cmd;
 	if (exit_code > 255)
 		exit_code = exit_code % 256;
-	//probleme :
-	// if (exit_code < 0)
-	// 	exit_code = exit_code % 256;
+	if (exit_code < 0)
+		exit_code = exit_code % 256;
 	return (exit_code);
 }
 
@@ -41,7 +40,7 @@ void	free_exec_and_parsing(t_lst_cmd *argv, t_cmd *cmd)
 void	error_numeric_arg(t_cmd *cmd)
 {
 	ft_putstr_fd("exit\n", 2);
-	ft_putstr_fd("minihsell: ", 2);
+	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(cmd->argv[0], 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(cmd->argv[1], 2);
@@ -74,7 +73,7 @@ int	is_arg_numeric(t_cmd *cmd)
 	return (1);
 }
 
-int	check_arg(t_cmd *cmd, unsigned long *exit_code)
+int	check_arg(t_cmd *cmd, long *exit_code)
 {
 	int	nbr_arg;
 	
@@ -83,8 +82,7 @@ int	check_arg(t_cmd *cmd, unsigned long *exit_code)
 	{
 		if (is_arg_numeric(cmd) == 0)
 			free_and_exit(cmd, 2);
-		*exit_code = ft_atol(cmd->argv[1]);
-		if (*exit_code > ULLONG_MAX || *exit_code < ULLONG_MAX)
+		if (ft_atol(cmd->argv[1], exit_code) == 0)
 		{
 			error_numeric_arg(cmd);
 			free_and_exit(cmd, 2);
@@ -102,7 +100,7 @@ int	check_arg(t_cmd *cmd, unsigned long *exit_code)
 
 int	builtin_exit(t_lst_cmd *argv, t_cmd *cmd)
 {
-	unsigned long	exit_code;
+	long	exit_code;
 	
 	exit_code = 0;
 	if (check_arg(cmd, &exit_code) == 0)

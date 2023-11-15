@@ -42,9 +42,9 @@ SOURCES_PARSING =	main.c                  \
                     token.c				    \
                     quote_2.c               \
                     itoa.c                  \
-                    
-					
-					
+
+
+
 SOURCES_EXEC =		check.c							\
                     init.c							\
                     convert.c						\
@@ -83,7 +83,6 @@ DEPENDENCIES = $(SOURCES_PARSING:.c=.d) $(SOURCES_EXEC:.c=.d)
 DEPS = $(addprefix ./Objects/, $(DEPENDENCIES))
 
 RM = rm -rf
-
 
 all:	 $(NAME)
 

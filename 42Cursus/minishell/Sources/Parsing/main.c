@@ -15,35 +15,43 @@
 
 int	g_exit;
 
+char	*init_prompt()
+{
+	char	*prompt;
+
+	if (!isatty(0))
+		prompt = get_next_line(0, 0);
+	else
+		prompt = readline("(auferran&malancar)-[~/minishell]$ ");
+	add_history(prompt);
+	if (!prompt)
+	{
+		ft_putstr("exit\n");
+			return (NULL);
+	}
+	return (prompt);
+}
+
 int	main(int argc, char **argv, char **env)
 {
-	char			*prompt;
-	t_struct_env	s;
+	t_struct_data	s;
 
 	(void) argv;
-	prompt = NULL;
-	ft_memset(&s, 0, sizeof(t_struct_env));
+	ft_memset(&s, 0, sizeof(t_struct_data));
 	init_lst_env(env, &s);
 	if (argc == 1)
 	{
-		manage_sig();
 		while (1)
 		{
-			if (!isatty(0))
-				prompt = get_next_line(0, 0);
-			else
-				prompt = readline("(auferran&malancar)-[~/minishell]$ ");
-			add_history(prompt);
-			if (!prompt)
-			{
-				ft_putstr("exit\n");
-				break;
-			}
-			manage(prompt, &s);
-			free(prompt);
+			manage_sig();
+			s.prompt = init_prompt();
+			if (!s.prompt)
+				break ;
+			manage(s.prompt, &s);
+			free(s.prompt);
 		}
-		if (prompt)
-			free(prompt);
+		if (s.prompt)
+			free(s.prompt);
 		rl_clear_history();
 		ft_lst_clear_env(&s.lst_env);
 		ft_lst_clear_env(&s.lst_export);

@@ -6,7 +6,7 @@
 /*   By: malancar <malancar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 12:53:39 by malancar          #+#    #+#             */
-/*   Updated: 2023/11/13 17:52:34 by malancar         ###   ########.fr       */
+/*   Updated: 2023/11/14 19:10:28 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	free_in_builtin(t_cmd *cmd)
 	free(cmd->env);
 }
 
-void	one_cmd_and_builtin(t_cmd *cmd, t_struct_env *s, t_lst_cmd *argv)
+void	one_cmd_and_builtin(t_cmd *cmd, t_struct_data *s, t_lst_cmd *argv)
 {
 	(void)s;
 	if (exec_builtins(cmd, s, argv) == 0)
@@ -49,7 +49,7 @@ void	one_cmd_and_builtin(t_cmd *cmd, t_struct_env *s, t_lst_cmd *argv)
 	return ;
 }
 
-void	exec_cmd(t_cmd *cmd, t_struct_env *s, t_lst_cmd *argv)
+void	exec_cmd(t_cmd *cmd, t_struct_data *s, t_lst_cmd *argv)
 {
 	if (check_builtins(cmd) == 1)
 	{
@@ -68,7 +68,7 @@ void	exec_cmd(t_cmd *cmd, t_struct_env *s, t_lst_cmd *argv)
 	}
 }
 
-int	setup_cmd(t_lst_cmd *argv, t_cmd *cmd, t_struct_env *s)
+int	setup_cmd(t_lst_cmd *argv, t_cmd *cmd, t_struct_data *s)
 {
 	init_fd(cmd);
 	if (redirections(argv, cmd) == 0)
@@ -93,6 +93,8 @@ int	setup_cmd(t_lst_cmd *argv, t_cmd *cmd, t_struct_env *s)
 		error_cmd(argv, cmd, 1);
 	if (cmd->pid[cmd->index_pid] == 0)
 	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		if (check_builtins(cmd) == 0)
 		{
 			if (dup2(cmd->fd.read, 0) == -1 || dup2(cmd->fd.write, 1) == -1)
@@ -102,15 +104,16 @@ int	setup_cmd(t_lst_cmd *argv, t_cmd *cmd, t_struct_env *s)
 		exec_cmd(cmd, s, argv);
 	}
 	else
-	{
-		g_exit = 0;
 		close_fd_parent(cmd);
-	}
 	return (1);
 }
 
-void	pipe_cmd(t_lst_cmd *argv, t_cmd *cmd, t_struct_env *s)
+void	pipe_cmd(t_lst_cmd *argv, t_cmd *cmd, t_struct_data *s)
 {
+	//proteger ?
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+
 	if (cmd->index_pid != cmd->nbr - 1 && pipe(cmd->fd.pipe) == -1)
 		error_cmd(argv, cmd, 1);
 	while (cmd->index_pid < cmd->nbr)

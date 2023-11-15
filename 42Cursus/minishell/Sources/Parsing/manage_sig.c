@@ -17,7 +17,10 @@ void	sig_handler(int signal)
 	if (signal == SIGINT)
 	{
 		g_exit = 130;
-		ft_putstr("\n(auferran&malancar)-[~/minishell]$ ");
+		ft_putstr("\n");
+		rl_replace_line("", 1);
+		rl_on_new_line();
+		rl_redisplay();
 	}
 }
 
