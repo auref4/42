@@ -75,6 +75,7 @@ void	open_and_fill_here_doc(t_cmd *cmd, char *limiter);
 void	here_doc(char *limiter, t_cmd *cmd, t_lst_cmd *argv);
 void	fill_here_doc(char **read_line, char *limiter, t_cmd *cmd, t_lst_cmd *argv);
 int		is_limiter(char *str, char *limiter);
+void	get_rand_name(t_cmd *cmd);
 
 int		check_command(t_lst_cmd *argv, t_cmd *cmd);
 int		check_access(t_lst_cmd *argv, t_cmd *cmd, char *path);
@@ -126,7 +127,7 @@ char	*lets_join_no_egal(char *s1, char *s2);
 int		builtin_env(t_cmd *cmd, t_lst_env *env_list);
 int		builtin_cd(t_cmd *cmd);
 int		builtin_unset(t_cmd *cmd, t_struct_data *s);
-int		builtin_exit(t_lst_cmd *argv, t_cmd *cmd);
+int		builtin_exit(t_lst_cmd *argv, t_cmd *cmd, t_struct_data *s);
 int		check_builtins(t_cmd *cmd);
 int		exec_builtins(t_cmd *cmd, t_struct_data *s, t_lst_cmd *argv);
 void	error_builtins(t_cmd *cmd);

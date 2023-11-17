@@ -34,17 +34,20 @@ int	main_exec(t_lst_cmd *argv, t_struct_data *s)
 		free(cmd.argv);
 		return (0);
 	}
-
-	cmd.index_pid--;
-	while (cmd.index_pid >= 0)
+	if (cmd.pid[cmd.index_pid] != -1)
 	{
-		waitpid(cmd.pid[cmd.index_pid], &status, 0);
 		cmd.index_pid--;
+		while (cmd.index_pid >= 0)
+		{
+			waitpid(cmd.pid[cmd.index_pid], &status, 0);
+			cmd.index_pid--;
+		}
+		if (WIFEXITED(status))
+			g_exit = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			g_exit = 128 + WTERMSIG(status);
+
 	}
-	if (WIFEXITED(status))
-		g_exit = WEXITSTATUS(status);
-	else if (WIFSIGNALED(status))
-		g_exit = 128 + WTERMSIG(status);
 	free(cmd.pid);
 	free(cmd.env);
 	return (0);
