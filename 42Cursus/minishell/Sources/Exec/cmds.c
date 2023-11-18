@@ -6,7 +6,7 @@
 /*   By: malancar <malancar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 12:53:39 by malancar          #+#    #+#             */
-/*   Updated: 2023/11/15 18:57:41 by malancar         ###   ########.fr       */
+/*   Updated: 2023/11/17 20:01:09 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,50 @@
 
 int	redirections(t_lst_cmd *argv, t_cmd *cmd)
 {
-	//boucle remplir heredoc ici ou parsing
+	//boucle remplir heredoc ici ou parsing 
 	//lancer buitins avec sans option pas \n ou erreur
-	while (argv->file)
+	t_lst_cmd	*start;
+
+	start = argv;
+	while (argv)
 	{
-		if (set_redirections(argv, cmd) == 0)
-			return (0);
-		if (cmd->if_here_doc == 1)
+		init_fd(cmd);
+		set_redirections(argv, cmd);
+		//printf("argv = %s\n", argv->arg->name);
+		while (argv->file)
 		{
-			//get_rand_name(cmd);
-			here_doc(argv->file->limiter, cmd, argv);
-			if (g_exit == 130)
-				return (-1);
-			check_close(cmd, cmd->fd.read);
-			cmd->fd.read = cmd->fd.tmp;
-			unlink(cmd->files.rand_name);
+			//printf("file = %s\n", argv->file->limiter);
+			// if (set_redirections(argv, cmd) == 0)
+			// 	return (0);
+			if (cmd->if_here_doc == 1)
+			{
+				//printf("cc heredoc\n");
+				get_rand_name(cmd);
+				here_doc(argv->file->limiter, cmd, argv);
+				if (g_exit == 130)
+					return (-1);
+				check_close(cmd, cmd->fd.read);
+				//printf("fd.tmp = %d\n", cmd->fd.tmp);
+				check_close(cmd, cmd->fd.tmp);
+				cmd->fd.tmp = open(cmd->files.rand_name, O_RDONLY);
+				if (cmd->fd.tmp == -1)
+					free_and_exit(cmd, 1);//pas exit process principal?
+				check_close(cmd, cmd->fd.read);
+				cmd->fd.read = cmd->fd.tmp;
+				//check_close(cmd, cmd->fd.tmp);
+				//printf("fd.read = %d\n", cmd->fd.read);
+				unlink(cmd->files.rand_name);				
+			}
+			
+			argv->file = argv->file->next;
+			//printf("cc iic\n");
+			//printf("file = %p\n", argv->file);
 		}
-		argv->file = argv->file->next;
+		//printf("ccccc\n");
+		argv = argv->next;
 	}
+	//printf("cc la\n");
+	argv = start;
 	return (1);
 }
 
@@ -76,9 +102,15 @@ void	exec_cmd(t_cmd *cmd, t_struct_data *s, t_lst_cmd *argv)
 int	setup_cmd(t_lst_cmd *argv, t_cmd *cmd, t_struct_data *s)
 {
 	int	redir;
-
-	init_fd(cmd);
-	redir = redirections(argv, cmd);
+	
+	redir = 1;
+	if (cmd->if_here_doc == 0)
+	{
+		init_fd(cmd);
+		redir = set_redirections(argv, cmd);
+	}
+	if (g_exit == 130)
+		return (-1);
 	if (redir == 0)
 	{
 		cmd->pid[cmd->index_pid] = -1;
@@ -110,6 +142,8 @@ int	setup_cmd(t_lst_cmd *argv, t_cmd *cmd, t_struct_data *s)
 			if (dup2(cmd->fd.read, 0) == -1 || dup2(cmd->fd.write, 1) == -1)
 				error_cmd(argv, cmd, 126);
 			close_fd_child(cmd);
+			check_close(cmd, cmd->fd.tmp);
+			close(cmd->fd.tmp);
 		}
 		exec_cmd(cmd, s, argv);
 	}
@@ -123,12 +157,20 @@ void	pipe_cmd(t_lst_cmd *argv, t_cmd *cmd, t_struct_data *s)
 	//proteger ?
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
-
 	if (cmd->index_pid != cmd->nbr - 1 && pipe(cmd->fd.pipe) == -1)
 		error_cmd(argv, cmd, 1);
 	while (cmd->index_pid < cmd->nbr)
 	{
 		convert_list(cmd, argv);
+		if (argv->file)
+		{
+			if (argv->file->limiter)
+				cmd->if_here_doc = 1;
+			else
+				cmd->if_here_doc = 0;
+		}
+		if(cmd->if_here_doc == 1)
+			redirections(argv, cmd);
 		cmd->fd.previous = cmd->fd.pipe[0];
 		if ((cmd->index_pid != cmd->first)
 			&& (cmd->index_pid != cmd->last))
@@ -142,5 +184,7 @@ void	pipe_cmd(t_lst_cmd *argv, t_cmd *cmd, t_struct_data *s)
 		cmd->index_pid++;
 		if (argv != NULL)
 			argv = argv->next;
+		//printf("cc par la\n");
 	}
+	//printf("cc par ici\n");
 }

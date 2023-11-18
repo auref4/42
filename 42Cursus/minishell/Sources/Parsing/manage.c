@@ -54,7 +54,7 @@ void	test_pipex(t_lst_cmd *cmd, t_lst_env *lst_env)
 
 void	manage(char *prompt, t_struct_data *s)
 {
-	if (!check_prompt(prompt, s->cmd))
+	if (!check_prompt(prompt))
 		return ;
 	if (!init_lst(&s->cmd))
 		return ;

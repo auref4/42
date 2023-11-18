@@ -15,7 +15,7 @@ NAME = minishell
 HEADER = minishell.h
 
 SRCS =	main.c manage.c manage_sig.c utils.c\
-		utils_2.c fill_lst.c dup_str.c check_prompt.c \
+		utils_2.c fill_lst.c dup_str.c check_prompt.c\
 		lst_cmd_utils.c lst_arg_utils.c lst_file_utils.c lst_env_utils.c\
 		quote.c quote_2.c prompt_utils.c token.c\
 		init_lst_env.c init_lst_env_2.c init_lst_env_2.c manage_dollar.c\
