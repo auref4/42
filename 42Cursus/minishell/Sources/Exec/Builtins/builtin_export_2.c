@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 17:20:31 by auferran          #+#    #+#             */
-/*   Updated: 2023/11/19 00:46:24 by auferran         ###   ########.fr       */
+/*   Updated: 2023/11/19 01:12:45 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	new_line_export(char *str, t_struct_data *s, int nb)
 	t_lst_env	*new;
 
 	if (!search_content_export(str, s))
-		return (0);
+		return (1);
 	new = ft_lst_new_env();
 	if (!new)
 		return (0);
