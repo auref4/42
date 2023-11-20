@@ -124,6 +124,7 @@ char		*ft_itoa(int n);
 int			ft_strlen(char *str);
 void		ft_putstr(char *str);
 int			ft_isalpha(int character);
+int			ft_isdigit(int character);
 void		*ft_memset(void *pointer, int value, size_t count);
 int			ft_strcmp(const char *first, const char *second);
 char		*ft_strjoin_libft(char const *s1, char const *s2);
@@ -178,6 +179,8 @@ int			update_quote(char *prompt, int i, t_struct_strdup *s);
 
 int			check_dollar_count(char *prompt, int *i, int file, t_struct_strdup *s);
 int			check_dollar_expand(char *prompt, int *i, int file, t_struct_strdup *s);
+
+int			update_i_dollar(char *prompt, int *i, t_struct_strdup *s);
 
 void		dollar_query_prep(int *i, t_struct_strdup *s);
 int			dollar_query_fill(int *i, t_struct_strdup *s);

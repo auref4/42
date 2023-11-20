@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 17:24:00 by auferran          #+#    #+#             */
-/*   Updated: 2023/11/18 21:03:27 by auferran         ###   ########.fr       */
+/*   Updated: 2023/11/19 12:35:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	manage(char *prompt, t_struct_data *s)
 	if (!fill_lst(prompt, s->cmd, s->lst_env))
 		return (ft_lst_clear_cmd(&s->cmd));
 	//test_pipex(s->cmd, s->lst_env);
-	main_exec(s->cmd, s);
+	start_exec(s->cmd, s);
 	ft_lst_clear_cmd(&s->cmd);
 	return ;
 }
