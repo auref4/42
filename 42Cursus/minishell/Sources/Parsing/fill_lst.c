@@ -17,7 +17,10 @@ int	new_cmd(t_lst_arg **arg, t_lst_file **file, t_lst_cmd **cmd, int *i)
 	t_lst_cmd	*new;
 
 	if (!(*arg) && !(*file))
+	{
+		g_exit = 2;
 		return (error("minishell: syntax error near unexpected token\n"), 0);
+	}
 	new = ft_lst_new_cmd();
 	if (!new)
 		return (0);
@@ -40,8 +43,11 @@ int	check_and_new_cmd(char *prompt, t_struct_fill *s, t_lst_cmd **cmd)
 			break ;
 		i++;
 	}
-	if (prompt[i] == '|')
+	if (prompt[i] == '|' || !prompt[i])
+	{
+		g_exit = 2;
 		return (error("minishell: syntax error near unexpected token\n"), 0);
+	}
 	if (!new_cmd(&s->arg, &s->file, cmd, &s->i))
 		return (0);
 	return (1);
@@ -57,8 +63,10 @@ int	fill_lst(char *prompt, t_lst_cmd *cmd, t_lst_env *lst_env)
 		while (its_white_space(prompt[s.i]))
 			s.i++;
 		if (prompt[s.i] && prompt[s.i] == '|')
+		{
 			if (!check_and_new_cmd(prompt, &s, &cmd))
 				return (0);
+		}
 		if (prompt[s.i] && prompt[s.i] != '|' && !its_file(prompt[s.i]))
 		{
 			if (!fill_arg(prompt, &s.arg, &s.i, lst_env))

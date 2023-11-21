@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 17:15:11 by auferran          #+#    #+#             */
-/*   Updated: 2023/11/18 21:15:34 by auferran         ###   ########.fr       */
+/*   Updated: 2023/11/20 21:11:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ typedef struct s_struct_fill
 
 void		error(char *str);
 
-void		free_all(t_struct_data *s);
+void		free_parsing(t_struct_data *s);
 void		free_my_env(char **my_env);
 void		free_dest_env(char ***dest);
 
@@ -124,7 +124,6 @@ char		*ft_itoa(int n);
 int			ft_strlen(char *str);
 void		ft_putstr(char *str);
 int			ft_isalpha(int character);
-int			ft_isdigit(int character);
 void		*ft_memset(void *pointer, int value, size_t count);
 int			ft_strcmp(const char *first, const char *second);
 char		*ft_strjoin_libft(char const *s1, char const *s2);
@@ -141,7 +140,7 @@ int			init_my_env(char **env, t_struct_data *s);
 char		**create_env(void);
 char		**old_env(char **env);
 void		swap_export(char **str1, char **str2);
-
+int			update_i_dollar(char *prompt, int *i, t_struct_strdup *s);
 int			update_shlvl(t_struct_data *s);
 
 int			check_prompt(char *prompt);
@@ -180,15 +179,14 @@ int			update_quote(char *prompt, int i, t_struct_strdup *s);
 int			check_dollar_count(char *prompt, int *i, int file, t_struct_strdup *s);
 int			check_dollar_expand(char *prompt, int *i, int file, t_struct_strdup *s);
 
-int			update_i_dollar(char *prompt, int *i, t_struct_strdup *s);
-
 void		dollar_query_prep(int *i, t_struct_strdup *s);
 int			dollar_query_fill(int *i, t_struct_strdup *s);
 
 void		count_env(char *line, t_struct_strdup *s);
 void		expand(t_struct_strdup *s, char *line);
-
+int			ft_isdigit(int character);
 int			token(char *prompt, int i);
+int			check_reverse_file(char *prompt, int i);
 
 int			its_white_space(char c);
 int			its_file(char c);

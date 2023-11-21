@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/03 19:06:48 by malancar          #+#    #+#              #
-#    Updated: 2023/11/19 12:37:56 by marvin           ###   ########.fr        #
+#    Updated: 2023/11/20 21:10:23 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ SOURCES_PARSING =	main.c                  \
                     lst_env_utils.c	        \
 					update_shlvl.c			\
                     manage_dollar.c		    \
-					manage_dollar_2.c		\
+                    manage_dollar_2.c       \
                     manage_dollar_utils.c	\
                     manage_dollar_query.c   \
                     token.c				    \
@@ -61,6 +61,7 @@ SOURCES_EXEC =		check.c							\
                     open_files.c					\
                     error_and_free.c				\
                     main_exec.c						\
+                    exec.c                          \
                     here_doc.c						\
                     close.c							\
 					print_fd.c						\
@@ -73,6 +74,7 @@ SOURCES_EXEC =		check.c							\
                     Builtins/builtin_export_3.c     \
                     Builtins/builtin_unset.c        \
                     Builtins/builtin_cd.c			\
+					Builtins/builtin_cd_2.c			\
                     Builtins/builtin_exit.c			\
 					Builtins/builtins.c				\
 					Builtins/builtins_utils.c		\
