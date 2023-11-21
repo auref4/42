@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 18:53:30 by malancar          #+#    #+#             */
-/*   Updated: 2023/11/21 17:13:32 by auferran         ###   ########.fr       */
+/*   Updated: 2023/11/21 19:31:05 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char	*find_pwd(t_lst_env *env)
 
 int	set_oldpwd(t_struct_data *s)
 {
+	char		*str_tmp;
 	t_lst_env	*tmp;
 
 	tmp = s->lst_env;
@@ -41,10 +42,11 @@ int	set_oldpwd(t_struct_data *s)
 	{
 		if (its_oldpwd(tmp->line))
 		{
-			free(tmp->line);
-			tmp->line = find_pwd(s->lst_env);
-			if (!tmp->line)
+			str_tmp = find_pwd(s->lst_env);
+			if (!str_tmp)
 				return (0);
+			free(tmp->line);
+			tmp->line = str_tmp;
 			if (!search_replace_export(tmp->line, s))
 				return (0);
 			break ;
@@ -56,32 +58,21 @@ int	set_oldpwd(t_struct_data *s)
 
 int	set_pwd(t_struct_data *s)
 {
-	char		*pwd;
 	t_lst_env	*tmp;
 
-	pwd = getcwd(NULL, 0);
 	tmp = s->lst_env;
-	if (!pwd)
-	{
-		free(pwd);
-		return (error("getcwd FAILURE\n"), 0);
-	}
 	while (tmp)
 	{
 		if (its_pwd(tmp->line))
 		{
 			free(tmp->line);
-			tmp->line = ft_strjoin_libft("PWD=", pwd);
+			tmp->line = create_pwd();
 			if (!tmp->line || !search_replace_export(tmp->line, s))
-			{
-				free(pwd);
 				return (0);
-			}
 			break ;
 		}
 		tmp = tmp->next;
 	}
-	free(pwd);
 	return (1);
 }
 
