@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malancar <malancar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 18:53:30 by malancar          #+#    #+#             */
-/*   Updated: 2023/11/20 15:12:29 by malancar         ###   ########.fr       */
+/*   Updated: 2023/11/21 17:13:32 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 char	*find_pwd(t_lst_env *env)
 {
-	char 	*dest;
+	char	*dest;
 
 	dest = NULL;
 	while (env)
@@ -73,7 +73,10 @@ int	set_pwd(t_struct_data *s)
 			free(tmp->line);
 			tmp->line = ft_strjoin_libft("PWD=", pwd);
 			if (!tmp->line || !search_replace_export(tmp->line, s))
+			{
+				free(pwd);
 				return (0);
+			}
 			break ;
 		}
 		tmp = tmp->next;
