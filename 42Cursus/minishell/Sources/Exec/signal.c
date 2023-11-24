@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmds.c                                             :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malancar <malancar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/18 12:53:39 by malancar          #+#    #+#             */
-/*   Updated: 2023/11/21 18:03:29 by malancar         ###   ########.fr       */
+/*   Created: 2023/11/22 13:24:06 by malancar          #+#    #+#             */
+/*   Updated: 2023/11/22 21:07:39 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-void	one_cmd_builtin(t_cmd *cmd, t_struct_data *s, t_lst_cmd *cmd_list)
+void	ignore_signal(void)
 {
-	if (exec_builtins(cmd, s) == 0)
-		error_cmd(s, cmd_list, cmd, 126);
-	close_fd_parent(cmd);
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 }
 
-void	pipe_cmd(t_struct_data *s, t_cmd *cmd, t_lst_cmd *cmd_list)
+void	restore_signal(void)
 {
-	if (cmd->nbr != 1)
-		cmd->fd.previous = cmd->fd.pipe[0];
-	if ((cmd->index_pid != cmd->first)
-		&& (cmd->index_pid != cmd->last))
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+}
+
+void	signal_heredoc(int signal)
+{
+	if (signal == SIGINT)
 	{
-		if (pipe(cmd->fd.pipe) == -1)
-			error_cmd(s, cmd_list, cmd, 1);
+		ft_putstr_fd("\n", 0);
+		ft_singleton(1, NULL, NULL, NULL);
+		get_next_line(0, 1);
+		exit(130);
 	}
 }
