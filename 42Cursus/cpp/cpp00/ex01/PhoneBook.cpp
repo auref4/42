@@ -98,7 +98,7 @@ void	PhoneBook::print_set_darkest_secret(Contact &contact)
 
 void	PhoneBook::print_value(int index, int nb)
 {
-	int			len;
+	int			len = 0;
 	int			tmp = 10;
 	std::string	str;
 
@@ -106,13 +106,13 @@ void	PhoneBook::print_value(int index, int nb)
 	str = m_contact[index].ret_string(nb);
 	tmp = tmp - len;
 	std::cout<<"|";
-	if (len >=0)
+	if (tmp >=0)
 	{
-		for (int i = 0; i < len; i++)
+		for (int i = 0; i < tmp; i++)
 			std::cout<<" ";
 		std::cout<<str;
 	}
-	if (len < 0)
+	if (tmp < 0)
 	{
 		for (int i = 0; i < 9; i++)
 			std::cout<<str[i];

@@ -23,8 +23,8 @@ void	search_contact(PhoneBook phonebook)
 		nb++;
 		phonebook.print_value(i, nb);
 		std::cout<<"|"<<std::endl;
+		std::cout<<"   ---------------------------------------------   "<<std::endl;
 	}
-	std::cout<<"   ----------------------------------------------  "<<std::endl;
 }
 
 void	add_contact(PhoneBook &phonebook)
