@@ -1,9 +1,8 @@
 NAME = phonebook
 
-SRCS =	PhoneBook.cpp		\
+SRCS =	main.cpp			\
 		Contact.cpp			\
-		main.cpp			\
-		add_and_seach.cpp
+		PhoneBook.cpp		\
 
 OBJS = $(SRCS:.cpp=.o)
 DEPS = $(SRCS:.cpp=.d)
