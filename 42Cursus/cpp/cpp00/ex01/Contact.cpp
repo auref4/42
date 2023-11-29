@@ -1,41 +1,78 @@
 #include "Contact.hpp"
+#include "PhoneBook.hpp"
 #include <iostream>
 #include <string>
 #include <cstring>
+#include <stdlib.h>
 
 Contact::Contact() : m_first_name(""), m_last_name(""), m_nickname(""),
 m_phone_number(""), m_darkest_secret ("")
 {
 }
 
-void	Contact::add_first_name(std::string str)
+void	Contact::add_first_name(void)
 {
-	m_first_name = str;
-	str = "";
+	for (;;)
+	{
+		std::cin>>m_first_name;
+		if (!m_first_name.empty())
+			break ;
+	}
 }
 
-void	Contact::add_last_name(std::string str)
+void	Contact::add_last_name(void)
 {
-	m_last_name = str;
-	str = "";
+	for (;;)
+	{
+		std::cin>>m_last_name;
+		if (!m_last_name.empty())
+			break ;
+	}
 }
 
-void	Contact::add_nickname(std::string str)
+void	Contact::add_nickname(void)
 {
-	m_nickname = str;
-	str = "";
+	for (;;)
+	{
+		std::cin>>m_nickname;
+		if (!m_nickname.empty())
+			break ;
+	}
 }
 
-void	Contact::add_phone_number(std::string str)
+void	Contact::add_phone_number(void)
 {
-	m_phone_number = str;
-	str = "";
+	unsigned int	i;
+	PhoneBook		phonebook = PhoneBook();
+
+	for (;;)
+	{
+		std::cin>>m_phone_number;
+		if (!m_phone_number.empty())
+			for (i = 0; std::isdigit(m_phone_number[i]); i++);
+		if (i == m_phone_number.size())
+					break ;
+		else
+		{
+			phonebook.print_header();
+			std::cout<<"                      - ADD -                      "<<std::endl;
+			std::cout<<std::endl;
+			std::cout<<"                 Your phone number :               "<<std::endl;
+			std::cout<<std::endl;
+			std::cout<<"       !try again, only digit are required!        "<<std::endl;
+			std::cout<<std::endl;
+		}
+	}
 }
 
-void	Contact::add_darkest_secret(std::string str)
+void	Contact::add_darkest_secret(void)
 {
-	m_darkest_secret = str;
-	str = "";
+	for (;;)
+	{
+		std::cin>>m_darkest_secret;
+		if (!m_darkest_secret.empty())
+			break ;
+	}
 }
 
 int		Contact::ret_len(int nb)
@@ -43,11 +80,14 @@ int		Contact::ret_len(int nb)
 	int	len = 0;
 
 	if (nb == 1)
-		len = m_first_name.size();
+		if (!m_first_name.empty())
+			len = m_first_name.size();
 	if (nb == 2)
-		len = m_last_name.size();
+		if (!m_last_name.empty())
+			len = m_last_name.size();
 	if (nb == 3)
-		len = m_nickname.size();
+		if (!m_nickname.empty())
+			len = m_nickname.size();
 	return (len);
 }
 
