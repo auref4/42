@@ -6,35 +6,23 @@
 
 int	search_contact(PhoneBook &phonebook)
 {
-	int			nb;
 	std::string	str;
 
-	phonebook.print_header();
-	std::cout<<"                    - SEARCH -                     "<<std::endl;
-	std::cout<<std::endl;
-	std::cout<<"   ---------------------------------------------   "<<std::endl;
-	for (int i = 1; i < 9; i++)
-	{
-		nb = 0;
-		std::cout<<"   |        "<<i<<".";
-		nb++;
-		phonebook.print_value(i, nb);
-		nb++;
-		phonebook.print_value(i, nb);
-		nb++;
-		phonebook.print_value(i, nb);
-		std::cout<<"|"<<std::endl;
-		std::cout<<"   ---------------------------------------------   "<<std::endl;
-	}
-	std::cout<<std::endl;
-	std::cout<<"chooses a number to display the corresponding contact"<<std::endl;
-	std::cout<<"or choose HOME to go home."<<std::endl;
-	std::cout<<std::endl;
+	phonebook.print_search_header_value(phonebook);
 	while (std::cin.eof() == false)
 	{
 		std::cin>>str;
-		if (str == "HOME")
+		if (str == "HOME" || str == "BACK")
 			return (1);
+		else if (str.size() == 1 && str[0] >= '1' && str[0] <= '8')
+		{
+			if (phonebook.print_deep_value(str[0] - 48) == false)
+				return (1);
+			else
+				phonebook.print_search_header_value(phonebook);
+		}
+		else
+			phonebook.print_search_header_value(phonebook);
 	}
 	return (0);
 }
@@ -43,11 +31,16 @@ int	add_contact(PhoneBook &phonebook)
 {
 	Contact	contact = Contact();
 
-	phonebook.print_set_first_name(contact);
-	phonebook.print_set_last_name(contact);
-	phonebook.print_set_nickname(contact);
-	phonebook.print_set_phone_number(contact);
-	phonebook.print_set_darkest_secret(contact);
+	if (phonebook.print_set_first_name(contact) == false)
+		return (0);
+	if (phonebook.print_set_last_name(contact) == false)
+		return (0);
+	if (phonebook.print_set_nickname(contact) == false)
+		return (0);
+	if (phonebook.print_set_phone_number(contact) == false)
+		return (0);
+	if (phonebook.print_set_darkest_secret(contact) == false)
+		return (0);
 	phonebook.contact_to_phonebook(contact);
 	return (1);
 }
@@ -68,7 +61,10 @@ int	main(void)
 		if (str == "EXIT")
 			break ;
 		if (str == "ADD")
-			add_contact(phonebook);
+		{
+			if (add_contact(phonebook) == false)
+				break ;
+		}
 		if (str == "SEARCH")
 			search_contact(phonebook);
 	}
