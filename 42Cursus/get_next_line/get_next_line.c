@@ -77,7 +77,7 @@ char	*get_next_line(int fd)
 	}
 	return (NULL);
 }
-/*
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -95,15 +95,5 @@ int	main(void)
 		free(line);
 	}
 }
-	while (a)
-	{
-		line = get_next_line(fd);
-		printf("testdefoufurieux = %s", line);
-		if (line == NULL)
-			a = 0;
-		free(line);
-	}
-	free(line);
-	return (0);
-}
-*/
+
+

@@ -1,0 +1,5 @@
+Ceci est un générateur de phrases aléatoires, respectueux des règles syntaxiques du français.
+Pour ce faire, il s'appuie sur la vieille méthode des surréalistes, le "cadavre exquis".
+Mais s'il est capable de générer des phrases grammaticalement correctes, il n'a en revanche pas plus de bon sens que ma chaise, et sa frénésie de combinaisons le fait fréquemment errer sur les sentiers de l'incongru et du mystique.
+De nombreux générateurs de texte sont spécifiques à un thème donné (générateurs de citations, générateurs de poèmes ou de haikus, générateurs de phrases scientifiques ou médicales, générateurs d'insultes, de mots d'amour ou d'excuses ou autre "pipotron"), mais celui-ci est universel et produit de tout.
+Amateurs de fatrasies, d'humour absurde, de poésie conceptuelle, cerbères de la Grammaire, linguistes anarchistes, philologues échevelés, plus ou moins déjà adeptes de la génération de phrases et de textes, ceci est pour vous !
