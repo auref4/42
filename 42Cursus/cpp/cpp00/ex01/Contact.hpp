@@ -10,14 +10,16 @@ class	Contact
 
 	Contact(); //Constructeur
 
-	void		add_first_name(void);
-	void		add_last_name(void);
-	void		add_nickname(void);
-	void		add_phone_number(void);
-	void		add_darkest_secret(void);
+	int		add_first_name(void);
+	int		add_last_name(void);
+	int		add_nickname(void);
+	int		add_phone_number(void);
+	int		add_darkest_secret(void);
 
-	int			ret_len(int nb);
-	std::string	ret_string(int nb);
+	int			ret_len(int nb) const;
+	std::string	ret_string(int nb) const;
+
+	void	print_all_value(int nb) const;
 
 	private:
 
