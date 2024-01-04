@@ -9,6 +9,9 @@ class	Contact
 	public:
 
 	Contact(); //Constructeur
+	~Contact() //Destructeur
+	{
+	}
 
 	int		add_first_name(void);
 	int		add_last_name(void);

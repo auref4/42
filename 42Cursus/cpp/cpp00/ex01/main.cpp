@@ -11,7 +11,7 @@ int	search_contact(PhoneBook &phonebook)
 	phonebook.print_search_header_value(phonebook);
 	while (std::cin.eof() == false)
 	{
-		std::cin>>str;
+		std::getline(std::cin, str);
 		if (str == "HOME" || str == "BACK")
 			return (1);
 		else if (str.size() == 1 && str[0] >= '1' && str[0] <= '8')
@@ -57,7 +57,7 @@ int	main(void)
 		std::cout<<std::endl;
 		std::cout<<"                SEARCH | ADD | EXIT"               <<std::endl;
 		std::cout<<std::endl;
-		std::cin>>str;
+		std::getline(std::cin, str);
 		if (str == "EXIT")
 			break ;
 		if (str == "ADD")
@@ -66,7 +66,10 @@ int	main(void)
 				break ;
 		}
 		if (str == "SEARCH")
-			search_contact(phonebook);
+		{
+			if (search_contact(phonebook) == false)
+				break ;
+		}
 	}
 	system("clear");
 	std::cout<<std::endl;
