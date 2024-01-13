@@ -11,16 +11,13 @@ HumanB::~HumanB()
 
 void	HumanB::setWeapon(Weapon &weapon)
 {
-	std::string	tmp;
-
-	tmp = weapon.getType();
-	m_weapon.setType(tmp);
+	m_weapon = &weapon;
 }
 
 void	HumanB::attack(void) const
 {
 	std::string	tmp;
 
-	tmp = m_weapon.getType();
+	tmp = m_weapon->getType();
 	std::cout<<m_name<<" attack with their "<<tmp<<std::endl;
 }
