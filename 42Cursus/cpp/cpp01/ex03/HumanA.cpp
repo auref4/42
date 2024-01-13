@@ -1,11 +1,11 @@
 #include "HumanA.hpp"
 
-HumanA::HumanA(const std::string &name, Weapon weapon) : m_name(name), m_weapon(weapon)
+HumanA::HumanA(const std::string &name, Weapon &weapon) : m_name(name), m_weapon(weapon)
 {
 	std::string	tmp;
 
 	tmp = m_weapon.getType();
-	std::cout<<m_name<<" with "<<tmp<<" are created"<<std::endl;
+	std::cout<<m_name<<" with "<<tmp<<" is created"<<std::endl;
 }
 
 HumanA::~HumanA()

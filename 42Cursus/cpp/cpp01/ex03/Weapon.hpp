@@ -8,6 +8,7 @@ class	Weapon
 {
 	public :
 
+	Weapon();
 	Weapon(const std::string &name);
 	~Weapon();
 
