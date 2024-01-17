@@ -28,7 +28,7 @@ int	replace_argv(std::ifstream &ifs, std::ofstream &ofs, char *s1, char *s2)
 				if (str2.size() > 0)
 					word = str2;
 			}
-				ofs<<word;
+			ofs<<word;
 			j++;
 		}
 		i++;

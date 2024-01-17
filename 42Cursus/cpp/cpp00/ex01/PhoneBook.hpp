@@ -10,9 +10,7 @@ class	PhoneBook
 	public:
 
 	PhoneBook(); //Constructeur
-	~PhoneBook() //Destructeur
-	{
-	}
+	~PhoneBook(); //Destructeur
 
 	void	print_header(void) const;
 	int		print_set_first_name(Contact &contact) const;

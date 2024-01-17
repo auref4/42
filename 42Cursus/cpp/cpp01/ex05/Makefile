@@ -1,6 +1,7 @@
 NAME = harl2.0
 
-SRCS =	main.cpp
+SRCS =	main.cpp	\
+		Harl.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 DEPS = $(SRCS:.cpp=.d)

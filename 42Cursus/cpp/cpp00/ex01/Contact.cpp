@@ -10,6 +10,10 @@ m_phone_number(""), m_darkest_secret ("")
 {
 }
 
+Contact::~Contact()
+{
+}
+
 int	Contact::add_first_name(void)
 {
 	while (std::cin.eof() == false)

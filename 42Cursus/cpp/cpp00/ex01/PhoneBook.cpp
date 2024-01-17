@@ -9,6 +9,10 @@ PhoneBook::PhoneBook() : m_i(0)
 {
 }
 
+PhoneBook::~PhoneBook()
+{
+}
+
 void	PhoneBook::print_header(void) const
 {
 	system("clear");
