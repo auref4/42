@@ -20,8 +20,8 @@ class	Fixed
 
 	private :
 
-	int				m_nb;
-	int const static fract = 8;
+	int					m_nb;
+	int const static	fract = 8;
 };
 
 #endif
