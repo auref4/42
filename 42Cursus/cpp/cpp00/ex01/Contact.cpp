@@ -5,8 +5,7 @@
 #include <cstring>
 #include <stdlib.h>
 
-Contact::Contact() : m_first_name(""), m_last_name(""), m_nickname(""),
-m_phone_number(""), m_darkest_secret ("")
+Contact::Contact()
 {
 }
 
@@ -102,7 +101,7 @@ int	Contact::ret_len(int nb) const
 
 std::string	Contact::ret_string(int nb) const
 {
-	std::string	str = "";
+	std::string	str;
 
 	if (nb == 1)
 		str = m_first_name;

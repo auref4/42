@@ -48,7 +48,7 @@ int	add_contact(PhoneBook &phonebook)
 int	main(void)
 {
 	PhoneBook	phonebook = PhoneBook();
-	std::string	str = "";
+	std::string	str;
 
 	while (std::cin.eof() == false)
 	{
