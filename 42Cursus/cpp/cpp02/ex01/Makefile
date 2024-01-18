@@ -1,4 +1,4 @@
-NAME = canon
+NAME = usefull
 
 SRCS =	main.cpp	\
 		Fixed.cpp

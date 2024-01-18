@@ -5,9 +5,14 @@ Fixed::Fixed() : m_nb(0)
 	std::cout<<"Default constructor called"<<std::endl;
 }
 
-Fixed::Fixed(int nb) : m_nb(nb)
+Fixed::Fixed(int const nb) : m_nb(nb<<m_fract)
 {
-	std::cout<<"Constructor with int "<<m_nb<<" in parameter called"<<std::endl;
+	std::cout<<"Int constructor called"<<std::endl;
+}
+
+Fixed::Fixed(float const nb) : m_nb(roundf(nb * (1<<m_fract)))
+{
+	std::cout<<"Float constructor called"<<std::endl;
 }
 
 Fixed::Fixed(Fixed const &src)
@@ -27,6 +32,7 @@ Fixed::~Fixed()
 Fixed&	Fixed::operator=(Fixed const &rhs)
 {
 	std::cout<<"Copy assignement operator called"<<std::endl;
+
 	this->m_nb = rhs.getRawBits();
 
 	return (*this);
@@ -34,7 +40,26 @@ Fixed&	Fixed::operator=(Fixed const &rhs)
 
 Fixed	Fixed::operator+(Fixed const &rhs)
 {
+	std::cout<<"Addition operator called"<<std::endl;
+
 	return (this->m_nb + rhs.getRawBits());
+}
+
+std::ostream&	operator<<(std::ostream &o, Fixed const &rhs)
+{
+	o << rhs.toFloat();
+
+	return (o);
+}
+
+float	Fixed::toFloat(void) const
+{
+	return (float)(this->m_nb) / (1<<m_fract);
+}
+
+int	Fixed::toInt(void) const
+{
+	return (m_nb>>m_fract);
 }
 
 int	Fixed::getRawBits(void) const
