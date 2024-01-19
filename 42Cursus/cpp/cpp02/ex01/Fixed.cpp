@@ -1,5 +1,7 @@
 #include "Fixed.hpp"
 
+// CONSTRUCTORS
+
 Fixed::Fixed() : m_nb(0)
 {
 	std::cout<<"Default constructor called"<<std::endl;
@@ -24,10 +26,14 @@ Fixed::Fixed(Fixed const &src)
 	return ;
 }
 
+// DESTRUCTOR
+
 Fixed::~Fixed()
 {
 	std::cout<<"Destructor called"<<std::endl;
 }
+
+// OPERATORS
 
 Fixed&	Fixed::operator=(Fixed const &rhs)
 {
@@ -45,12 +51,7 @@ Fixed	Fixed::operator+(Fixed const &rhs)
 	return (this->m_nb + rhs.getRawBits());
 }
 
-std::ostream&	operator<<(std::ostream &o, Fixed const &rhs)
-{
-	o << rhs.toFloat();
-
-	return (o);
-}
+// MEMBER FUNCTIONS
 
 float	Fixed::toFloat(void) const
 {
@@ -72,4 +73,13 @@ int	Fixed::getRawBits(void) const
 void	Fixed::setRawBits(int const raw)
 {
 	this->m_nb = raw;
+}
+
+// OPERATOR OSTREAM
+
+std::ostream&	operator<<(std::ostream &o, Fixed const &rhs)
+{
+	o << rhs.toFloat();
+
+	return (o);
 }

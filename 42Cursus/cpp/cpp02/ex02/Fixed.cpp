@@ -9,12 +9,12 @@ Fixed::Fixed() : m_nb(0)
 
 Fixed::Fixed(int const nb) : m_nb(nb<<m_fract)
 {
-	std::cout<<"Int constructor called"<<std::endl;
+	std::cout<<"Int constructor called"<<" with value "<<m_nb<<std::endl;
 }
 
 Fixed::Fixed(float const nb) : m_nb(roundf(nb * (1<<m_fract)))
 {
-	std::cout<<"Float constructor called"<<std::endl;
+	std::cout<<"Float constructor called"<<" with value "<<m_nb<<std::endl;
 }
 
 Fixed::Fixed(Fixed const &src)
@@ -78,28 +78,28 @@ Fixed	Fixed::operator+(Fixed const &rhs) const
 {
 	std::cout<<"Addition operator called"<<std::endl;
 
-	return (this->m_nb + rhs.getRawBits());
+	return (Fixed(this->m_nb + rhs.getRawBits()));
 }
 
 Fixed	Fixed::operator-(Fixed const &rhs) const
 {
 	std::cout<<"Substraction operator called"<<std::endl;
 
-	return (this->m_nb - rhs.getRawBits());
+	return (Fixed(this->m_nb - rhs.getRawBits()));
 }
 
 Fixed	Fixed::operator*(Fixed const &rhs) const
 {
 	std::cout<<"Multiplication operator called"<<std::endl;
 
-	return (this->m_nb * rhs.getRawBits());
+	return (Fixed((this->m_nb * rhs.getRawBits())>>m_fract));
 }
 
 Fixed	Fixed::operator/(Fixed const &rhs) const
 {
 	std::cout<<"Division operator called"<<std::endl;
 
-	return (this->m_nb / rhs.getRawBits());
+	return (Fixed(this->m_nb<<m_fract / rhs.getRawBits()));
 }
 
 Fixed&	Fixed::operator++(void)

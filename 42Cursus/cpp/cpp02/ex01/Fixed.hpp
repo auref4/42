@@ -16,7 +16,6 @@ class	Fixed
 
 	Fixed&					operator=(Fixed const &rhs);
 	Fixed					operator+(Fixed const &rhs);
-	friend std::ostream&	operator<<(std::ostream &i, Fixed const &rhs);
 
 	float	toFloat(void) const;
 	int		toInt(void) const;
@@ -28,5 +27,7 @@ class	Fixed
 	int					m_nb;
 	int const static	m_fract = 8;
 };
+
+std::ostream&	operator<<(std::ostream &i, Fixed const &rhs);
 
 #endif
