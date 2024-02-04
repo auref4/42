@@ -5,14 +5,14 @@ int	main(void)
 	Harl harl;
 
 	std::cout<<std::endl;
-	harl.complain("debug");
+	harl.complain("DEBUG");
 	std::cout<<std::endl;
-	harl.complain("info");
+	harl.complain("INFO");
 	std::cout<<std::endl;
-	harl.complain("warning");
+	harl.complain("WARNING");
 	std::cout<<std::endl;
-	harl.complain("error");
+	harl.complain("ERROR");
 	std::cout<<std::endl;
-	harl.complain("test");
+	harl.complain("TEST");
 	std::cout<<std::endl;
 }

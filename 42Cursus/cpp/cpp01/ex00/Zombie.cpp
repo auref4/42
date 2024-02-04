@@ -1,6 +1,6 @@
 #include "Zombie.h"
 
-Zombie::Zombie(const std::string &name) : m_name(name)
+Zombie::Zombie(const std::string name) : m_name(name)
 {
 	std::cout<<m_name<<" Zombie created"<<std::endl;
 }

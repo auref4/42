@@ -1,82 +1,68 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <sstream>
 #include <cstring>
-#include <exception>
 
-int	replace_argv(std::ifstream &ifs, std::ofstream &ofs, char *s1, char *s2)
+void	replace_occurence(std::ifstream &ifs, std::ofstream &ofs, char *s1, char *s2)
 {
 	int			i = 0;
-	int			j;
+	size_t		start_pos;
+	size_t		pos;
 	std::string	str_tmp;
+	std::string	str1 = (const char *)s1;
 	std::string	str2 = (const char *)s2;
 
 	while (getline(ifs, str_tmp))
 	{
-		std::istringstream	line(str_tmp);
-		std::string			word;
 		if (i > 0)
-			ofs<<std::endl;
-		j = 0;
-		while (line>>word)
+			ofs << "\n";
+		start_pos = 0;
+		while (start_pos < str_tmp.length())
 		{
-			if (j > 0)
-				ofs<<" ";
-			if (word == (const char *)s1)
-			{
-				if (str2.size() > 0)
-					word = str2;
-			}
-			ofs<<word;
-			j++;
+			pos = str_tmp.find(s1, start_pos);
+			if (pos != std::string::npos)
+				str_tmp.replace(pos, str1.length(), str2);
+			else
+				break ;
+			start_pos = pos + str2.length();
 		}
+		ofs << str_tmp;
 		i++;
 	}
-	if (i > 0)
-		ofs<<std::endl;
-	return (1);
+	ofs << "\n";
 }
 
-int	open_files(char **argv)
+bool	open_files(std::ifstream &ifs, std::ofstream &ofs)
 {
-	std::string		str_tmp;
+	if (ifs.is_open() == false)
+	{
+		std::cerr << "infile error" << std::endl;
+		return false;
+	}
+	if (ofs.is_open() == false)
+	{
+		std::cerr << "outfile error" << std::endl;
+		return false;
+	}
+	return true;
+}
+
+int	main(int argc, char **argv)
+{
 	std::string		replace = ".replace";
 	std::string		join = (const char *)argv[1] + replace;
 	std::ifstream	ifs(argv[1]);
 	std::ofstream	ofs(join.c_str());
 
-	if (ifs.is_open() == false)
-	{
-		std::cerr<<"file '"<<argv[1]<<"' doesn't exist"<<std::endl;
-		return (0);
-	}
-	if (ofs.is_open() == false)
-	{
-		std::cerr<<"file '"<<join<<"' failed to be create"<<std::endl;
-		return (0);
-	}
-	replace_argv(ifs, ofs, argv[2], argv[3]);
-	ifs.close();
-	ofs.close();
-	return (1);
-}
-
-int	main(int argc, char **argv)
-{
 	if (argc == 4)
 	{
-		try
-		{
-			open_files(argv);
-		}
-		catch (std::exception &error)
-		{
-			std::cout<<"ERROR "<<error.what()<<std::endl;
-			return (0);
-		}
+		if (open_files(ifs, ofs) == false)
+			return 1;
+		replace_occurence(ifs, ofs, argv[2], argv[3]);
+		ifs.close();
+		ofs.close();
 	}
 	else
-		std::cerr<<"Incorrect number of arguments"<<std::endl;
-	return (0);
+		std::cerr << "Incorrect number of arguments" << std::endl;
+	return 0;
 }
