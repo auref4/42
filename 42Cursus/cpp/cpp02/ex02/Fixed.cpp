@@ -20,9 +20,7 @@ Fixed::Fixed(float const nb) : m_nb(roundf(nb * (1<<m_fract)))
 Fixed::Fixed(Fixed const &src)
 {
 	std::cout<<"Copy constructor called"<<std::endl;
-
 	*this = src;
-
 	return ;
 }
 
@@ -68,44 +66,37 @@ bool	Fixed::operator!=(Fixed const &rhs) const
 Fixed&	Fixed::operator=(Fixed const &rhs)
 {
 	std::cout<<"Copy assignement operator called"<<std::endl;
-
 	this->m_nb = rhs.getRawBits();
-
 	return (*this);
 }
 
 Fixed	Fixed::operator+(Fixed const &rhs) const
 {
 	std::cout<<"Addition operator called"<<std::endl;
-
-	return (Fixed(this->m_nb + rhs.getRawBits()));
+	return (Fixed(this->toFloat() + rhs.toFloat()));
 }
 
 Fixed	Fixed::operator-(Fixed const &rhs) const
 {
 	std::cout<<"Substraction operator called"<<std::endl;
-
-	return (Fixed(this->m_nb - rhs.getRawBits()));
+	return (Fixed(this->toFloat() - rhs.toFloat()));
 }
 
 Fixed	Fixed::operator*(Fixed const &rhs) const
 {
 	std::cout<<"Multiplication operator called"<<std::endl;
-
-	return (Fixed((this->m_nb * rhs.getRawBits())>>m_fract));
+	return (Fixed(this->toFloat() * rhs.toFloat()));
 }
 
 Fixed	Fixed::operator/(Fixed const &rhs) const
 {
 	std::cout<<"Division operator called"<<std::endl;
-
-	return (Fixed(this->m_nb<<m_fract / rhs.getRawBits()));
+	return (Fixed(this->toFloat() / rhs.toFloat()));
 }
 
 Fixed&	Fixed::operator++(void)
 {
 	this->m_nb += 1;
-
 	return (*this);
 }
 
@@ -113,14 +104,12 @@ Fixed	Fixed::operator++(int)
 {
 	Fixed	tmp(*this);
 	this->m_nb += 1;
-
 	return (tmp);
 }
 
 Fixed&	Fixed::operator--(void)
 {
 	this->m_nb -= 1;
-
 	return (*this);
 }
 
@@ -128,7 +117,6 @@ Fixed	Fixed::operator--(int)
 {
 	Fixed	tmp(*this);
 	this->m_nb -= 1;
-
 	return (tmp);
 }
 
@@ -181,6 +169,5 @@ Fixed	Fixed::max(Fixed const &rhs1, const Fixed &rhs2)
 std::ostream&	operator<<(std::ostream &o, Fixed const &rhs)
 {
 	o << rhs.toFloat();
-
 	return (o);
 }

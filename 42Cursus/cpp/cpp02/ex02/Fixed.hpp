@@ -8,11 +8,11 @@ class	Fixed
 {
 	public :
 
-	Fixed();
+	Fixed();											//Canonical
 	Fixed(int const nb);
 	Fixed(float const nb);
-	Fixed(Fixed const &src);
-	~Fixed();
+	Fixed(Fixed const &src);							//Canonical
+	~Fixed();											//Canonical
 
 	bool	operator>(Fixed const &rhs) const;
 	bool	operator<(Fixed const &rhs) const;
@@ -20,7 +20,7 @@ class	Fixed
 	bool	operator<=(Fixed const &rhs) const;
 	bool	operator==(Fixed const &rhs) const;
 	bool	operator!=(Fixed const &rhs) const;
-	Fixed&	operator=(Fixed const &rhs);
+	Fixed&	operator=(Fixed const &rhs);				//Canonical
 	Fixed	operator+(Fixed const &rhs) const;
 	Fixed	operator-(Fixed const &rhs) const;
 	Fixed	operator*(Fixed const &rhs) const;

@@ -8,12 +8,12 @@ class	Fixed
 {
 	public :
 
-	Fixed();
+	Fixed();									//Canonical
 	Fixed(int nb);
-	Fixed(Fixed const &src);
-	~Fixed();
+	Fixed(Fixed const &src);					//Canonical
+	~Fixed();									//Canonical
 
-	Fixed&	operator=(Fixed const &rhs);
+	Fixed&	operator=(Fixed const &rhs);		//Canonical
 	Fixed	operator+(Fixed const &rhs);
 
 	int		getRawBits(void) const;

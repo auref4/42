@@ -8,14 +8,14 @@ class	Fixed
 {
 	public :
 
-	Fixed();
+	Fixed();									//Canonical
 	Fixed(int const nb);
 	Fixed(float const nb);
-	Fixed(Fixed const &src);
-	~Fixed();
+	Fixed(Fixed const &src);					//Canonical
+	~Fixed();									//Canonical
 
-	Fixed&					operator=(Fixed const &rhs);
-	Fixed					operator+(Fixed const &rhs);
+	Fixed&	operator=(Fixed const &rhs);		//Canonical
+	Fixed	operator+(Fixed const &rhs);
 
 	float	toFloat(void) const;
 	int		toInt(void) const;
