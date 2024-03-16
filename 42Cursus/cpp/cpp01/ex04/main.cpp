@@ -36,12 +36,13 @@ bool	open_files(std::ifstream &ifs, std::ofstream &ofs)
 {
 	if (ifs.is_open() == false)
 	{
-		std::cerr << "infile error" << std::endl;
+		std::cerr << "Infile error" << std::endl;
 		return false;
 	}
 	if (ofs.is_open() == false)
 	{
-		std::cerr << "outfile error" << std::endl;
+		std::cerr << "Outfile error" << std::endl;
+		ifs.close();
 		return false;
 	}
 	return true;
@@ -49,18 +50,25 @@ bool	open_files(std::ifstream &ifs, std::ofstream &ofs)
 
 int	main(int argc, char **argv)
 {
-	std::string		replace = ".replace";
-	std::string		join = (const char *)argv[1] + replace;
-	std::ifstream	ifs(argv[1]);
-	std::ofstream	ofs(join.c_str());
-
 	if (argc == 4)
 	{
-		if (open_files(ifs, ofs) == false)
-			return 1;
-		replace_occurence(ifs, ofs, argv[2], argv[3]);
-		ifs.close();
-		ofs.close();
+		if (argv[2][0] == 0)
+		{
+			std::cerr << "Impossible to replace void occurence" << std::endl;
+			return 0;
+		}
+
+		std::string		replace = ".replace";
+		std::string		join = (const char *)argv[1] + replace;
+		std::ifstream	ifs(argv[1]);
+		std::ofstream	ofs(join.c_str());
+
+		if (open_files(ifs, ofs) == true)
+		{
+			replace_occurence(ifs, ofs, argv[2], argv[3]);
+			ifs.close();
+			ofs.close();
+		}
 	}
 	else
 		std::cerr << "Incorrect number of arguments" << std::endl;
