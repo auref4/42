@@ -70,6 +70,10 @@ int	main(void)
 	std::cout << std::endl;
 	robot_5.call_ScavAttack("Robocop");
 	std::cout << std::endl;
+	robot_5.highFivesGuys();
+	std::cout << std::endl;
+	robot_5.guardGate();
+	std::cout << std::endl;
 
 	return 0;
 }

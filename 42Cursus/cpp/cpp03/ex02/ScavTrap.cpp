@@ -47,6 +47,26 @@ ScavTrap&	ScavTrap::operator=(ScavTrap const &rhs)
 
 //MEMBER FUNCTIONS
 
+void	ScavTrap::attack(const std::string& target)
+{
+	std::cout << "Hit_point " << this->m_name << " before attack : " << this->m_hit_point << std::endl;
+	std::cout << "Energy_point " << this->m_name << " before attack : " << this->m_energy_point << std::endl;
+
+	if (this->m_energy_point == 0 || this->m_hit_point == 0)
+	{
+		std::cout <<"ScavTrap " << this->m_name <<" cant attack " << target << std::endl;
+		return ;
+	}
+
+	std::cout <<"ScavTrap " << this->m_name <<" attacks " << target;
+	std::cout <<" causing " << this->m_attack_damage << " points of damage!" << std::endl;
+
+	this->m_energy_point -= 1;
+
+	std::cout << "Hit_point " << this->m_name << " after attack : " << this->m_hit_point << std::endl;
+	std::cout << "Energy_point " << this->m_name << " after attack : " << this->m_energy_point << std::endl;
+}
+
 void	ScavTrap::guardGate(void)
 {
 	std::cout << this->m_name << " is now in Gate keeper mode." << std::endl;

@@ -23,6 +23,8 @@ int	main(void)
 		std::cout << std::endl;
 	}
 	{
+		std::cout << std::endl;
+
 		const Animal* meta = new Animal();
 		const Animal* j = new Dog();
 		const Animal* i = new Cat();
