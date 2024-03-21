@@ -19,7 +19,7 @@ class	Cat : public Animal
 
 	private :
 
-	Brain	*m_brain;
+	Brain *m_brain;
 };
 
 #endif
