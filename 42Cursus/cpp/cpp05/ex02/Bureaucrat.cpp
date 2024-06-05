@@ -7,9 +7,9 @@ Bureaucrat::Bureaucrat() : m_name("Unknow"), m_grade(150)
 	std::cout << "Bureaucrat default constructor called" << std::endl;
 }
 
-Bureaucrat::Bureaucrat(std::string const name, int const nb) : m_name(name)
+Bureaucrat::Bureaucrat(std::string const name, int nb) : m_name(name)
 {
-	std::cout << "Bureaucrat assignement constructor called" << std::endl;
+	std::cout << "Assignement constructor called" << std::endl;
 
 	if (nb > 150)
 		throw Bureaucrat::GradeTooLowException();
@@ -42,7 +42,7 @@ Bureaucrat&	Bureaucrat::operator=(Bureaucrat const &rhs)
 	return *this;
 }
 
-//FUNCTIONS
+//MEMBER FUNCTIONS
 
 std::string	Bureaucrat::getName(void) const
 {
@@ -70,16 +70,25 @@ void	Bureaucrat::decrementGrade(void)
 		m_grade += 1;
 }
 
-//EXCEPTION
+void	Bureaucrat::signForm(Form &x, bool y) const
+{
+	if (y == true)
+		std::cout << "Bureaucrat " << this->m_name << " signed Form " << x.getName() << std::endl;
+	else
+		std::cout << "Bureaucrat " << this->m_name << " couldn't sign Form " << x.getName() <<
+		" because the grade to sign is to high" << std::endl;
+}
+
+//EXCEPTIONS
 
 const char*	Bureaucrat::GradeTooHighException::what() const throw()
 {
-	return "Impossible, the grade is to high";
+	return "(Bureaucrat) Impossible, the grade is to high";
 }
 
 const char*	Bureaucrat::GradeTooLowException::what() const throw()
 {
-	return "Impossible, the grade is to low";
+	return "(Bureaucrat) Impossible, the grade is to low";
 }
 
 //OSTREAM OPERATOR

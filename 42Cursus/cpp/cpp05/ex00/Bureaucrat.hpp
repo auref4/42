@@ -9,7 +9,7 @@ class	Bureaucrat
 	public:
 
 	Bureaucrat();										//CANONICAL
-	Bureaucrat(std::string const name, int nb);
+	Bureaucrat(std::string const name, int const nb);
 	Bureaucrat(Bureaucrat const &src);					//CANONICAL
 	~Bureaucrat();										//CANONICAL
 

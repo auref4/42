@@ -4,13 +4,13 @@
 
 Form::Form() : m_name("Unknow"), m_signed(false), m_grade_to_sign(150), m_grade_to_execute(150)
 {
-	std::cout << "Form default constructor called" << std::endl;
+	std::cout << "Aform default constructor called" << std::endl;
 }
 
 Form::Form(std::string const name, int const grade_to_sign, int const grade_to_execute) : m_name(name), m_signed(false),
 m_grade_to_sign(grade_to_sign), m_grade_to_execute(grade_to_execute)
 {
-	std::cout << "Assignement constructor called" << std::endl;
+	std::cout << "Aform assignement constructor called" << std::endl;
 
 	if (grade_to_sign > 150)
 		throw Form::GradeTooLowException();
@@ -25,14 +25,14 @@ m_grade_to_sign(grade_to_sign), m_grade_to_execute(grade_to_execute)
 Form::Form(Form const &src) : m_name(src.m_name), m_signed(false), m_grade_to_sign(src.m_grade_to_sign),
 m_grade_to_execute(src.m_grade_to_execute)
 {
-	std::cout << "Form copy constructor called" << std::endl;
+	std::cout << "Aform copy constructor called" << std::endl;
 }
 
 //DESTRUCTOR
 
 Form::~Form()
 {
-	std::cout << "Form default destructor called" << std::endl;
+	std::cout << "Aform default destructor called" << std::endl;
 }
 
 //OPERATOR
@@ -41,7 +41,7 @@ Form& Form::operator=(Form const &rhs)
 {
 	(void) rhs;
 
-	std::cout << "Form assignement operator called" << std::endl;
+	std::cout << "Aform assignement operator called" << std::endl;
 
 	return *this;
 }
@@ -51,6 +51,11 @@ Form& Form::operator=(Form const &rhs)
 std::string	Form::getName(void) const
 {
 	return this->m_name;
+}
+
+std::string	Form::getName(void) const
+{
+	return this->m_target;
 }
 
 bool	Form::getSigned(void) const
@@ -86,6 +91,14 @@ void	Form::beSigned(Bureaucrat const &x)
 	}
 }
 
+void	Form::checkRequirements(Bureaucrat const &x)
+{
+	if (this->m_signed == true)
+		throw Form::FormAlreadySigned();
+	if (this->m_grade_to_execute < x.getGradeToExecute())
+		throw Form::GradeTooHighException();
+}
+
 //EXCEPTIONS
 
 const char*	Form::GradeTooHighException::what() const throw()
@@ -97,7 +110,6 @@ const char*	Form::GradeTooLowException::what() const throw()
 {
 	return "(Form) Impossible, the grade is to low";
 }
-
 const char*	Form::FormAlreadySigned::what() const throw()
 {
 	return "Form already signed";

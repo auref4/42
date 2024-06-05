@@ -4,12 +4,12 @@
 
 Bureaucrat::Bureaucrat() : m_name("Unknow"), m_grade(150)
 {
-	std::cout << "Default constructor called" << std::endl;
+	std::cout << "Bureaucrat default constructor called" << std::endl;
 }
 
-Bureaucrat::Bureaucrat(std::string const name, int nb) : m_name(name)
+Bureaucrat::Bureaucrat(std::string const name, int const nb) : m_name(name)
 {
-	std::cout << "Assignement constructor called" << std::endl;
+	std::cout << "Bureaucrat assignement constructor called" << std::endl;
 
 	if (nb > 150)
 		throw Bureaucrat::GradeTooLowException();
@@ -21,21 +21,21 @@ Bureaucrat::Bureaucrat(std::string const name, int nb) : m_name(name)
 
 Bureaucrat::Bureaucrat(Bureaucrat const &src) : m_name(src.m_name), m_grade(src.m_grade)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << "Bureaucrat copy constructor called" << std::endl;
 }
 
 //DESTRUCTOR
 
 Bureaucrat::~Bureaucrat()
 {
-	std::cout << "Default destructor called" << std::endl;
+	std::cout << "Bureaucrat default destructor called" << std::endl;
 }
 
 //OPERATOR
 
 Bureaucrat&	Bureaucrat::operator=(Bureaucrat const &rhs)
 {
-	std::cout << "Copy assignement operator called" << std::endl;
+	std::cout << "Bureaucrat copy assignement operator called" << std::endl;
 
 	(void) rhs;
 
@@ -70,7 +70,7 @@ void	Bureaucrat::decrementGrade(void)
 		m_grade += 1;
 }
 
-void	Bureaucrat::signForm(Form &x, bool y) const
+void	Bureaucrat::signForm(Form const &x, bool const y) const
 {
 	if (y == true)
 		std::cout << "Bureaucrat " << this->m_name << " signed Form " << x.getName() << std::endl;

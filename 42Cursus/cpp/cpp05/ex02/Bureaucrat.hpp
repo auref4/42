@@ -12,7 +12,7 @@ class	Bureaucrat
 	public:
 
 	Bureaucrat();										//CANONICAL
-	Bureaucrat(std::string const name, int const nb);
+	Bureaucrat(std::string const name, int nb);
 	Bureaucrat(Bureaucrat const &src);					//CANONICAL
 	~Bureaucrat();										//CANONICAL
 
@@ -22,7 +22,7 @@ class	Bureaucrat
 	int			getGrade(void) const;
 	void		incrementGrade(void);
 	void		decrementGrade(void);
-	void		signForm(Form const &x, bool const y) const;
+	void		signForm(Form &x, bool y) const;
 
 	class	GradeTooHighException : public std::exception
 	{

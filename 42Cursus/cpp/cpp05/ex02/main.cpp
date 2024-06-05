@@ -69,9 +69,4 @@ int	main(void)
 	{
 		std::cout << e.what() << std::endl;
 	}
-	std::cout << std::endl;
-	std::cout << "TEST 6 :" << std::endl;
-	Form x("X", 44, 44);
-	Form y = x;
-	std::cout << y << std::endl;
 }
