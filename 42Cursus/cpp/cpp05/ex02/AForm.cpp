@@ -93,8 +93,8 @@ void	Form::beSigned(Bureaucrat const &x)
 
 void	Form::checkRequirements(Bureaucrat const &x)
 {
-	if (this->m_signed == true)
-		throw Form::FormAlreadySigned();
+	if (this->m_signed == false)
+		throw Form::FormNotSigned();
 	if (this->m_grade_to_execute < x.getGradeToExecute())
 		throw Form::GradeTooHighException();
 }
@@ -110,9 +110,15 @@ const char*	Form::GradeTooLowException::what() const throw()
 {
 	return "(Form) Impossible, the grade is to low";
 }
+
 const char*	Form::FormAlreadySigned::what() const throw()
 {
 	return "Form already signed";
+}
+
+const char*	Form::FormNotSigned::what() const throw()
+{
+	return "Form not signed";
 }
 
 //OSTREAM OPERATOR
@@ -120,6 +126,7 @@ const char*	Form::FormAlreadySigned::what() const throw()
 std::ostream&	operator<<(std::ostream &i, Form const &rhs)
 {
 	i << rhs.getName() << " Form :" << std::endl <<
+	"Target : " << rhs.getTarget() << std::endl <<
 	"Bool signed : " << rhs.getSigned() << std::endl <<
 	"Grade to sign : " << rhs.getGradeToSign() << std::endl <<
 	"Grade to execute : " << rhs.getGradeToExecute() << std::endl;

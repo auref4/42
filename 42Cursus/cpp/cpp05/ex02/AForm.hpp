@@ -45,6 +45,12 @@ class	Form
 
 		virtual const char*	what() const throw();
 	};
+	class	FormNotSigned : public std::exception
+	{
+		public :
+
+		virtual const char*	what() const throw();
+	};
 
 	private :
 
