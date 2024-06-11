@@ -1,4 +1,4 @@
-NAME = AForm
+NAME = makeForm
 
 SRCS =	main.cpp					\
 		Bureaucrat.cpp				\
