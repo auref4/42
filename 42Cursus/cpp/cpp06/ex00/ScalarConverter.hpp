@@ -5,6 +5,7 @@
 #include <string>
 #include <cctype>
 #include <cstdlib>
+#include <cmath>
 #include <limits>
 #include <iomanip>
 
@@ -25,8 +26,8 @@ class	ScalarConverter
 	static bool	checkIntDoubleFloat(std::string const &arg, std::string &type);
 	static void	extractCharAndPrint(std::string const &arg);
 	static void	extractIntAndPrint(std::string const &arg);
-	static void	extractDoubleAndPrint(std::string const &arg, int i);
-	static void	extractFloatAndPrint(std::string const &arg, int i);
+	static void	extractDoubleAndPrint(std::string const &arg, int special);
+	static void	extractFloatAndPrint(std::string const &arg, int special);
 
 	class	OverflowUnderflow : public std::exception
 	{
