@@ -35,7 +35,9 @@ class	Span
 
 	private :
 
-	int	*elements;
+	unsigned int	*elements;
+	unsigned int	index_elements;
+	unsigned int	nb_elements;
 };
 
 #endif
