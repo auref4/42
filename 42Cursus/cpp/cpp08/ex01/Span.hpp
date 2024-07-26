@@ -2,7 +2,9 @@
 #define	SPAN_HPP
 
 #include <iostream>
+#include <vector>
 #include <exception>
+#include <algorithm>
 
 class	Span
 {
@@ -16,28 +18,27 @@ class	Span
 	Span&	operator=(Span const &rhs);		//CANONICAL
 
 	void	addNumber(int nb);
-	void	addMultipleNumbers();
+	void	addMultipleNumbers(unsigned int range);
 	int		shortestSpan(void) const;
-	int		largestSpan(void) const;
+	int		longestSpan(void) const;
 
 	class	FullElements : public std::exception
 	{
 		public :
 
 		virtual const char*	what() const throw();
-	}
+	};
 	class	VoidElements : public std::exception
 	{
 		public :
 
 		virtual const char*	what() const throw();
-	}
+	};
 
 	private :
 
-	unsigned int	*elements;
-	unsigned int	index_elements;
-	unsigned int	nb_elements;
+	std::vector<int>	m_vec;
+	unsigned int		m_n;
 };
 
 #endif
