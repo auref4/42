@@ -1,7 +1,6 @@
 NAME = MutantStack
 
-SRCS =	main.cpp		\
-		MutantStack.tpp
+SRCS =	main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 DEPS = $(SRCS:.cpp=.d)
