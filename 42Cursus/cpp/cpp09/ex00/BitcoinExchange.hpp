@@ -24,8 +24,8 @@ class	BitcoinExchange
 
 	private :
 
-	std::map<std::string, float>	databtc;
-	int								nb_error;
+	std::map<std::string, float>	_databtc;
+	int								_nb_error;
 };
 
 #endif

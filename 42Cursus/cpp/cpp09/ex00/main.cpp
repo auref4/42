@@ -1,5 +1,44 @@
 #include "BitcoinExchange.hpp"
 
+bool	check_line(std::string line)
+{
+	int	i = 0;
+	int	nb_dot = 0;
+
+	while (i < line.size() && i < 14)
+	{
+		if ((i == 4 || i == 7) && line[i] != '.')
+			return false;
+		else if ((i == 10 || i == 12) && line[i] != ' ')
+			return false;
+		else if ((i == 11 && line[i] != '.'))
+			return false;
+		else if (isdigit(line[i] == false))
+			return false;
+		i++;
+	}
+	while (i < line.size() && (isdigit(line[i]) || line[i] == '.'))
+	{
+		if (line[i] == '.')
+			nb_dot += 1;
+		i++;
+	}
+	if (nb_dot >= 2 || i != line.size())
+		return false;
+	return true;
+}
+
+bool	stock_print_data(std::ifstream& ifs1, std::ifstream& ifs2, BitcoinExchange& btcex)
+{
+	std::string	line;
+
+	while (getline(ifs1, line))
+	{
+		if (check_line(line) == false)
+			btcex.set_nb_error(1);
+	}
+}
+
 bool	open_files(std::ifstream& ifs1, std::ifstream& ifs2)
 {
 	if (ifs1.is_open() == false)
@@ -16,38 +55,6 @@ bool	open_files(std::ifstream& ifs1, std::ifstream& ifs2)
 	return true;
 }
 
-bool	check_line(std::string line)
-{
-	int	i = 0;
-
-	while (line[i] && isdigit(line[i]))
-		i++;
-	if (i != 4 || line[i] != '.')
-		return false;
-	i++;
-	while (line[i] && isdigit(line[i]))
-		i++;
-	if (i != 7 || line[i] != '.')
-		return false;
-	i++;
-	while (line[i] && isdigit(line[i]))
-		i++;
-	if (i != 10 || line[i] != ' ')
-		return false;
-	return true;
-}
-
-bool	find_stock_data(std::ifstream& ifs1, std::ifstream& ifs2, BitcoinExchange& btcex)
-{
-	std::string	line;
-
-	while (getline(ifs1, line))
-	{
-		if (check_line(line) == false)
-			btcex.set_nb_error(1);
-	}
-}
-
 int	main(int agrc, char** argv)
 {
 	if (argc != 2)
@@ -60,7 +67,7 @@ int	main(int agrc, char** argv)
 	if (open_files(ifs1, ifs2) == true)
 	{
 		BitcoinExchange	btcex;
-		if (find_stock_data(ifs1, ifs2, btcex) == false)
+		if (stock_print_data(ifs1, ifs2, btcex) == false)
 			return 0;
 		ifs1.close();
 		ifs2.close();

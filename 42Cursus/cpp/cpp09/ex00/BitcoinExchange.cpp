@@ -2,12 +2,12 @@
 
 //CONSTRUCTOR
 
-BitcoinExchange::BitcoinExchange() : nb_error(0)
+BitcoinExchange::BitcoinExchange() : _nb_error(0)
 {
 	std::cout << "BitcoinExchange default constructor called" << std::endl;
 }
 
-BitcoinExchange::BitcoinExchange(BitcoinExchange const src) : databtc(src.databtc), nb_error(src.nb_error)
+BitcoinExchange::BitcoinExchange(BitcoinExchange const src) : _databtc(src.databtc), _nb_error(src.nb_error)
 {
 	std::cout << "BitcoinExchange copy constuctor called" << std::endl;
 }
@@ -27,8 +27,8 @@ BitcoinExchange&	BitcoinExchange::operator=(BitcoinExchange const &rhs)
 
 	if (this!= &rhs)
 	{
-		this->databtc = rhs.databtc;
-		this->nb_error = rhs.nb_error;
+		this->_databtc = rhs._databtc;
+		this->_nb_error = rhs._nb_error;
 	}
 	return *this;
 }
@@ -37,10 +37,10 @@ BitcoinExchange&	BitcoinExchange::operator=(BitcoinExchange const &rhs)
 
 void	BitcoinExchange::set_nb_error(int nb)
 {
-	this->nb_error = nb;
+	this->_nb_error = nb;
 }
 
 int	BitcoinExchange::get_nb_error(void) const
 {
-	return this->nb_error;
+	return this->_nb_error;
 }
