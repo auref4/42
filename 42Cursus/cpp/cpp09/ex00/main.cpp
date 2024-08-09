@@ -5,18 +5,17 @@ bool	check_line(std::string line)
 	int	i = 0;
 	int	nb_dot = 0;
 
-	while (i < line.size() && i < 14)
+	while (i < line.size() && i < 10)
 	{
 		if ((i == 4 || i == 7) && line[i] != '.')
-			return false;
-		else if ((i == 10 || i == 12) && line[i] != ' ')
-			return false;
-		else if ((i == 11 && line[i] != '.'))
 			return false;
 		else if (isdigit(line[i] == false))
 			return false;
 		i++;
 	}
+	if (i + 2 > line.size() || line[i] != ' ' || line[i + 1] != '.' || line[i + 2] != ' ')
+		return false;
+	i += 3;
 	while (i < line.size() && (isdigit(line[i]) || line[i] == '.'))
 	{
 		if (line[i] == '.')
@@ -33,20 +32,18 @@ void	stock_print_data(std::ifstream& ifs1, std::ifstream& ifs2)
 	BitcoinExchange	btcex;
 	std::string		line_ifs1;
 	std::string		line_ifs2;
+	std::string		date;
+	int				nb_btc;
 
 	while (getline(ifs1, line_ifs1))
+		btcex.set_databtc(line_ifs1.substr(0, 9), std::stof(line_ifs1.substr(11, line_ifs1.size() - 11)));
+	while (getline(ifs2, line_ifs2))
 	{
-		if (check_line(line_ifs1) == false)
-			btcex.set_nb_error(1);
+		if (check_line(line_ifs2) == false)
+			set_nb_error(1);
 		else
 		{
-			btcex.set_databtc(line_ifs1.substr(0, 10), std::stof(line_ifs1.substr(13, line_ifs1.size() - 13)))
-			while(getline(ifs2, line_ifs2))
-			{
-
-			}
 		}
-
 	}
 }
 
@@ -73,8 +70,8 @@ int	main(int agrc, char** argv)
 		std::cerr << "Error: could not open file." << std::endl;
 		return 0;
 	}
-	std::ifstream	ifs1(argv[1]);
-	std::ifstream	ifs2("data.csv");
+	std::ifstream	ifs1("data.csv");
+	std::ifstream	ifs2(argv[1]);
 	if (open_files(ifs1, ifs2) == true)
 	{
 		stock_print_data(ifs1, ifs2)
