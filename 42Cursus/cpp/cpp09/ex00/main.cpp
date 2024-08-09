@@ -28,14 +28,25 @@ bool	check_line(std::string line)
 	return true;
 }
 
-bool	stock_print_data(std::ifstream& ifs1, std::ifstream& ifs2, BitcoinExchange& btcex)
+void	stock_print_data(std::ifstream& ifs1, std::ifstream& ifs2)
 {
-	std::string	line;
+	BitcoinExchange	btcex;
+	std::string		line_ifs1;
+	std::string		line_ifs2;
 
-	while (getline(ifs1, line))
+	while (getline(ifs1, line_ifs1))
 	{
-		if (check_line(line) == false)
+		if (check_line(line_ifs1) == false)
 			btcex.set_nb_error(1);
+		else
+		{
+			btcex.set_databtc(line_ifs1.substr(0, 10), std::stof(line_ifs1.substr(13, line_ifs1.size() - 13)))
+			while(getline(ifs2, line_ifs2))
+			{
+
+			}
+		}
+
 	}
 }
 
@@ -66,9 +77,7 @@ int	main(int agrc, char** argv)
 	std::ifstream	ifs2("data.csv");
 	if (open_files(ifs1, ifs2) == true)
 	{
-		BitcoinExchange	btcex;
-		if (stock_print_data(ifs1, ifs2, btcex) == false)
-			return 0;
+		stock_print_data(ifs1, ifs2)
 		ifs1.close();
 		ifs2.close();
 	}

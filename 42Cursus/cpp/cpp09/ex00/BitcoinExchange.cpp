@@ -44,3 +44,8 @@ int	BitcoinExchange::get_nb_error(void) const
 {
 	return this->_nb_error;
 }
+
+void	BitcoinExchange::set_databtc(std::string str, float f)
+{
+	this->_databtc.insert(std::pair<std::string, float>(str, f));
+}
