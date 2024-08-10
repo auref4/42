@@ -1,28 +1,48 @@
 #include "BitcoinExchange.hpp"
 
+bool	check_float(std::string& line, int *i)
+{
+	int	nb_dot = 0;
+
+	while (*i < line.size() && (isdigit(line[*i]) || line[*i] == '.'))
+	{
+		if (line[*i] == '.')
+			nb_dot += 1;
+		*(i++);
+	}
+	if (nb_dot >= 2 || *i != line.size())
+		return false;
+	return true;
+}
+
+bool	check_date(std::string& line, int *i)
+{
+	while (*i < line.size() && *i < 10)
+	{
+		if ((*i == 4 || *i == 7) && c != '.')
+			return false;
+		else if (isdigit(line[*i] == false))
+			return false;
+		*(i++);
+	}
+	return true;
+}
+
 bool	check_line(std::string line)
 {
 	int	i = 0;
-	int	nb_dot = 0;
 
-	while (i < line.size() && i < 10)
-	{
-		if ((i == 4 || i == 7) && line[i] != '.')
-			return false;
-		else if (isdigit(line[i] == false))
-			return false;
-		i++;
-	}
-	if (i + 2 > line.size() || line[i] != ' ' || line[i + 1] != '.' || line[i + 2] != ' ')
+	if (check_date(line, &i) == false)
 		return false;
-	i += 3;
-	while (i < line.size() && (isdigit(line[i]) || line[i] == '.'))
+	while (i < line.size() && i < 13)
 	{
-		if (line[i] == '.')
-			nb_dot += 1;
+		if ((i == 10 || i == 12) && line[i] != ' ')
+			return false;
+		else if (i == 11 && line[i] != '.')
+			return false;
 		i++;
 	}
-	if (nb_dot >= 2 || i != line.size())
+	if (check_float(line, &i) == false)
 		return false;
 	return true;
 }
@@ -40,10 +60,8 @@ void	stock_print_data(std::ifstream& ifs1, std::ifstream& ifs2)
 	while (getline(ifs2, line_ifs2))
 	{
 		if (check_line(line_ifs2) == false)
-			set_nb_error(1);
-		else
-		{
-		}
+			set_nb_error(BAD_INPUT);
+		btcex.find_print(line_ifs2);
 	}
 }
 

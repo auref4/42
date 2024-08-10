@@ -49,3 +49,19 @@ void	BitcoinExchange::set_databtc(std::string str, float f)
 {
 	this->_databtc.insert(std::pair<std::string, float>(str, f));
 }
+
+void	BitcoinExchange::find_print(std::string& line)
+{
+	if (this->_nb_error == 0)
+	{
+		std::string	date;
+		float		nb_btc;
+
+		date = line.substr(0, 9);
+		nb_btc = stof(line.substr(13, line.size() - 13));
+		if (nb_btc < 0)
+			this->nb_error = NEGATIVE;
+		else if (nb_btc > 1000)
+			this->nb_error = TOO_LARGE;
+	}
+}
