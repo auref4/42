@@ -1,6 +1,7 @@
 #ifndef	BITCOINEXCHANGE_HPP
 #define	BITCOINEXCHANGE_HPP
 
+#define	NO_ERROR 0
 #define	BAD_INPUT 1
 #define	NEGATIVE 2
 #define	TOO_LARGE 3
@@ -21,7 +22,7 @@ class	BitcoinExchange
 	void	set_nb_error(int nb);
 	int		get_nb_error(void) const;
 	void	set_databtc(std::string str, float f);
-	void	find_print(std::string& line);
+	void	find_good_data(std::map<std::string, float>::iteator& it, std::string& line);
 
 	private :
 

@@ -1,70 +1,5 @@
 #include "BitcoinExchange.hpp"
 
-bool	check_float(std::string& line, int *i)
-{
-	int	nb_dot = 0;
-
-	while (*i < line.size() && (isdigit(line[*i]) || line[*i] == '.'))
-	{
-		if (line[*i] == '.')
-			nb_dot += 1;
-		*(i++);
-	}
-	if (nb_dot >= 2 || *i != line.size())
-		return false;
-	return true;
-}
-
-bool	check_date(std::string& line, int *i)
-{
-	while (*i < line.size() && *i < 10)
-	{
-		if ((*i == 4 || *i == 7) && c != '.')
-			return false;
-		else if (isdigit(line[*i] == false))
-			return false;
-		*(i++);
-	}
-	return true;
-}
-
-bool	check_line(std::string line)
-{
-	int	i = 0;
-
-	if (check_date(line, &i) == false)
-		return false;
-	while (i < line.size() && i < 13)
-	{
-		if ((i == 10 || i == 12) && line[i] != ' ')
-			return false;
-		else if (i == 11 && line[i] != '.')
-			return false;
-		i++;
-	}
-	if (check_float(line, &i) == false)
-		return false;
-	return true;
-}
-
-void	stock_print_data(std::ifstream& ifs1, std::ifstream& ifs2)
-{
-	BitcoinExchange	btcex;
-	std::string		line_ifs1;
-	std::string		line_ifs2;
-	std::string		date;
-	int				nb_btc;
-
-	while (getline(ifs1, line_ifs1))
-		btcex.set_databtc(line_ifs1.substr(0, 9), std::stof(line_ifs1.substr(11, line_ifs1.size() - 11)));
-	while (getline(ifs2, line_ifs2))
-	{
-		if (check_line(line_ifs2) == false)
-			set_nb_error(BAD_INPUT);
-		btcex.find_print(line_ifs2);
-	}
-}
-
 bool	open_files(std::ifstream& ifs1, std::ifstream& ifs2)
 {
 	if (ifs1.is_open() == false)
@@ -79,6 +14,86 @@ bool	open_files(std::ifstream& ifs1, std::ifstream& ifs2)
 		return false;
 	}
 	return true;
+}
+
+bool	check_date(std::string& line, int *i)
+{
+	int	month;
+	int	day;
+
+	while (*i < line.size() && *i < 10)
+	{
+		if ((*i == 4 || *i == 7) && line[i] != '.')
+			return false;
+		else if (isdigit(line[*i] == false))
+			return false;
+		*(i++);
+	}
+	month = std::stoi(line.substr(5, 2), 0);
+	day = std::stoi(line.substr(8, 2), 0);
+	if (month > 12 || day > 31)
+		return false;
+	return true;
+}
+
+bool	check_float(std::string& line, int *i)
+{
+	int		nb_dot = 0;
+	float	nb_btc;
+
+	if (*i + 1 < line.size() && line[*i] == '-')
+		i++;
+	while (*i < line.size() && (isdigit(line[*i]) || line[*i] == '.'))
+	{
+		if (line[*i] == '.')
+			nb_dot += 1;
+		*(i++);
+	}
+	if (nb_dot >= 2 || *i != line.size())
+		return false;
+	return true;
+}
+
+int	check_line(std::string line)
+{
+	int	i = 0;
+
+	if (check_date(line, &i) == false)
+		return BAD_INPUT;
+	while (i < line.size() && i < 13)
+	{
+		if ((i == 10 || i == 12) && line[i] != ' ')
+			return BAD_INPUT;
+		else if (i == 11 && line[i] != '.')
+			return BAD_INPUT;
+		i++;
+	}
+	if (check_float(line, &i) == false)
+		return BAD_INPUT;
+	float	nb_btc = stof(line.substr(13, line.size() - 13), 0);
+	if (nb_btc < 0)
+		return NEGATIVE;
+	else if (nb_btc > 1000)
+		return TOO_LARGE;
+	return NO_ERROR;
+}
+
+void	stock_print_data(std::ifstream& ifs1, std::ifstream& ifs2)
+{
+	BitcoinExchange							btcex;
+	std::string								line_ifs1;
+	std::string								line_ifs2;
+	std::map<std::string, float>::iterator	it;
+
+	while (getline(ifs1, line_ifs1))
+		btcex.set_databtc(line_ifs1.substr(0, 9), std::stof(line_ifs1.substr(11, line_ifs1.size() - 11)));
+	while (getline(ifs2, line_ifs2))
+	{
+		btcex.set_nb_error(check_line(line_ifs2));
+		if (this->_nb_error == NO_ERROR)
+			btcex.find_good_data(it, line_ifs2);
+		btcex.calcul_print(it);
+	}
 }
 
 int	main(int agrc, char** argv)
