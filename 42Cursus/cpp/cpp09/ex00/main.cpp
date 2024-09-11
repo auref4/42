@@ -90,9 +90,13 @@ void	stock_print_data(std::ifstream& ifs1, std::ifstream& ifs2)
 	while (getline(ifs2, line_ifs2))
 	{
 		btcex.set_nb_error(check_line(line_ifs2));
-		if (this->_nb_error == NO_ERROR)
+		if (btcex.get_nb_error() == NO_ERROR)
+		{
 			btcex.find_good_data(it, line_ifs2);
-		btcex.calcul_print(it);
+			btcex.calcul_print(it);
+		}
+		else
+			btcex.print_error();
 	}
 }
 

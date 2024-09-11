@@ -24,6 +24,7 @@ class	BitcoinExchange
 	void	set_databtc(std::string str, float f);
 	void	find_good_data(std::map<std::string, float>::iterator& it, std::string& line);
 	void	calcul_print(std::map<std::string, float>::iterator& it);
+	void	print_error() const;
 
 	private :
 

@@ -58,3 +58,21 @@ void	BitcoinExchange::find_good_data(std::map<std::string, float>::iteator& it, 
 	if (it != this->_databtc.end())
 		it = std::lower_bound(this->_databtc.begin(), this->_databtc.end(), date);
 }
+
+void	BitcoinExchange::calcul_print(std::map<std::string, float>::iterator& it)
+{
+	std::string date = it->first;
+	float		value = it->second;
+
+
+}
+
+void	BitcoinExchange::print_error()
+{
+	if (this->_nb_error == BAD_INPUT)
+		std::cerr << "Error: bad input." << std::endl;
+	if (this->_nb_error == NEGATIVE)
+		std::cerr << "Error: not a positive number." << std::endl;
+	if (this->_nb_error == TOO_LARGE)
+		std::cerr << "Error: too large number." << std::endl;
+}
