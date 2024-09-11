@@ -64,7 +64,7 @@ void	BitcoinExchange::calcul_print(std::map<std::string, float>::iterator& it)
 	std::string date = it->first;
 	float		value = it->second;
 
-
+	std::cout << date <<" => " <<
 }
 
 void	BitcoinExchange::print_error()
