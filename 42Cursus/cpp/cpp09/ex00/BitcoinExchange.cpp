@@ -4,24 +4,21 @@
 
 BitcoinExchange::BitcoinExchange() : _nb_error(0)
 {
-	std::cout << "BitcoinExchange default constructor called" << std::endl;
 }
 
-BitcoinExchange::BitcoinExchange(BitcoinExchange const src) : _databtc(src.databtc), _nb_error(src.nb_error)
+BitcoinExchange::BitcoinExchange(BitcoinExchange const& src) : _databtc(src._databtc), _nb_error(src._nb_error)
 {
-	std::cout << "BitcoinExchange copy constuctor called" << std::endl;
 }
 
 //DESTRUCTOR
 
 BitcoinExchange::~BitcoinExchange()
 {
-	std::cout << "BitcoinExchange default destructor called" << std::endl;
 }
 
 //OPERATOR
 
-BitcoinExchange&	BitcoinExchange::operator=(BitcoinExchange const &rhs)
+BitcoinExchange&	BitcoinExchange::operator=(BitcoinExchange const& rhs)
 {
 	std::cout << "BitcoinExchange copy operator called" << std::endl;
 
@@ -50,24 +47,26 @@ void	BitcoinExchange::set_databtc(std::string str, float f)
 	this->_databtc.insert(std::pair<std::string, float>(str, f));
 }
 
-void	BitcoinExchange::find_good_data(std::map<std::string, float>::iteator& it, std::string& line)
+void	BitcoinExchange::find_good_data(std::map<std::string, float>::iterator& it, std::string& line)
 {
-	std::string	date = line.substr(0, 9);
+	std::string	date = line.substr(0, 10);
 
 	it = this->_databtc.find(date);
-	if (it != this->_databtc.end())
-		it = std::lower_bound(this->_databtc.begin(), this->_databtc.end(), date);
+	//if (it != this->_databtc.end())
+	//	it = std::lower_bound(this->_databtc.begin(), this->_databtc.end(), date);
 }
 
-void	BitcoinExchange::calcul_print(std::map<std::string, float>::iterator& it)
+void	BitcoinExchange::calcul_print(std::map<std::string, float>::iterator& it, std::string& line)
 {
 	std::string date = it->first;
 	float		value = it->second;
+	std::string	tmp = line.substr(13, line.size() - 13);
+	float		nb_btc = strtof(tmp.c_str(), 0);
 
-	std::cout << date <<" => " <<
+	std::cout << date <<" => " << nb_btc << " = " << nb_btc * value << std::endl;
 }
 
-void	BitcoinExchange::print_error()
+void	BitcoinExchange::print_error() const
 {
 	if (this->_nb_error == BAD_INPUT)
 		std::cerr << "Error: bad input." << std::endl;
