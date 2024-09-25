@@ -26,6 +26,8 @@ bool	check_date(std::string& line, int *i)
 			return false;
 		(*i)++;
 	}
+	if (*i != 10)
+		return false;
 	std::string	m = line.substr(5, 2);
 	std::string	d = line.substr(8, 2);
 	int	month = std::atoi(m.c_str());

@@ -51,19 +51,24 @@ void	BitcoinExchange::find_good_data(std::map<std::string, float>::iterator& it,
 {
 	std::string	date = line.substr(0, 10);
 
-	it = this->_databtc.find(date);
-	//if (it != this->_databtc.end())
-	//	it = std::lower_bound(this->_databtc.begin(), this->_databtc.end(), date);
+	it = this->_databtc.lower_bound(date);
+	if (it->first == date)
+		return ;
+	else if (it == this->_databtc.begin())
+		it++;
+	else
+		it--;
 }
 
 void	BitcoinExchange::calcul_print(std::map<std::string, float>::iterator& it, std::string& line)
 {
-	std::string date = it->first;
+	std::string date = line.substr(0, 10);
 	float		value = it->second;
 	std::string	tmp = line.substr(13, line.size() - 13);
 	float		nb_btc = strtof(tmp.c_str(), 0);
+	float		result = nb_btc * value;
 
-	std::cout << date <<" => " << nb_btc << " = " << nb_btc * value << std::endl;
+	std::cout << date <<" => " << nb_btc << " = " << result << std::endl;
 }
 
 void	BitcoinExchange::print_error() const
