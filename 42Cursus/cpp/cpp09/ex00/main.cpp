@@ -32,7 +32,7 @@ bool	check_date(std::string& line, int *i)
 	std::string	d = line.substr(8, 2);
 	int	month = std::atoi(m.c_str());
 	int	day = std::atoi(d.c_str());
-	if (month > 12 || day > 31)
+	if (month > 12 || month < 1 || day > 31 || day < 1)
 		return false;
 	return true;
 }
@@ -87,6 +87,7 @@ void	stock_print_data(std::ifstream& ifs1, std::ifstream& ifs2)
 	std::string								line_ifs1;
 	std::string								line_ifs2;
 	std::map<std::string, float>::iterator	it;
+	int										i = 1;
 
 	while (getline(ifs1, line_ifs1))
 	{
@@ -95,6 +96,8 @@ void	stock_print_data(std::ifstream& ifs1, std::ifstream& ifs2)
 	}
 	while (getline(ifs2, line_ifs2))
 	{
+		if (i == 1 && line_ifs2 == "date | value")
+			getline(ifs2, line_ifs2);
 		btcex.set_nb_error(check_line(line_ifs2));
 		if (btcex.get_nb_error() == NO_ERROR)
 		{
@@ -102,7 +105,8 @@ void	stock_print_data(std::ifstream& ifs1, std::ifstream& ifs2)
 			btcex.calcul_print(it, line_ifs2);
 		}
 		else
-			btcex.print_error();
+			btcex.print_error(line_ifs2);
+		i++;
 	}
 }
 

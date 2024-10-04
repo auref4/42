@@ -71,10 +71,10 @@ void	BitcoinExchange::calcul_print(std::map<std::string, float>::iterator& it, s
 	std::cout << date <<" => " << nb_btc << " = " << result << std::endl;
 }
 
-void	BitcoinExchange::print_error() const
+void	BitcoinExchange::print_error(std::string& line) const
 {
 	if (this->_nb_error == BAD_INPUT)
-		std::cerr << "Error: bad input." << std::endl;
+		std::cerr << "Error: bad input => " << line << std::endl;
 	if (this->_nb_error == NEGATIVE)
 		std::cerr << "Error: not a positive number." << std::endl;
 	if (this->_nb_error == TOO_LARGE)
