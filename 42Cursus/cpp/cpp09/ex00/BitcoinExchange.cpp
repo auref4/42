@@ -20,8 +20,6 @@ BitcoinExchange::~BitcoinExchange()
 
 BitcoinExchange&	BitcoinExchange::operator=(BitcoinExchange const& rhs)
 {
-	std::cout << "BitcoinExchange copy operator called" << std::endl;
-
 	if (this!= &rhs)
 	{
 		this->_databtc = rhs._databtc;

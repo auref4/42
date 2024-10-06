@@ -1,6 +1,7 @@
 NAME = RPN
 
-SRCS =	main.cpp
+SRCS =	main.cpp					\
+		ReversePolishNotation.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 DEPS = $(SRCS:.cpp=.d)

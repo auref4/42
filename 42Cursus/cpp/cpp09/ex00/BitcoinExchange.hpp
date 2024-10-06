@@ -19,7 +19,9 @@ class	BitcoinExchange
 	BitcoinExchange();											//CANONICAL
 	BitcoinExchange(BitcoinExchange const& src);				//CANONICAL
 	~BitcoinExchange();											//CANONICAL
+
 	BitcoinExchange&	operator=(BitcoinExchange const& rhs);	//CANONICAL
+
 	void	set_nb_error(int nb);
 	int		get_nb_error(void) const;
 	void	set_databtc(std::string str, float f);
