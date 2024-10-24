@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <stack>
+#include <list>
 #include <cstring>
 #include <cctype>
 #include <cstdlib>
@@ -22,7 +23,7 @@ class	ReversePolishNotation
 
 	private :
 
-	std::stack<float>	_stack_rpn;
+	std::stack<float, std::list<float> >	_stack_rpn;
 
 	void	manage_stack(int symbol);
 };

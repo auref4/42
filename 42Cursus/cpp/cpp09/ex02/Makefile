@@ -1,7 +1,6 @@
-NAME = RPN
+NAME = PmergeMe
 
-SRCS =	main.cpp					\
-		ReversePolishNotation.cpp
+SRCS =	main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 DEPS = $(SRCS:.cpp=.d)
