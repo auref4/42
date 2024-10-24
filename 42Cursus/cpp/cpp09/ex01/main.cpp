@@ -29,7 +29,7 @@ int	main(int argc, char** argv)
 	if (argc != 2)
 	{
 		std::cerr << "Incorrect number of arguments." << std::endl;
-		return false;
+		return 0;
 	}
 
 	ReversePolishNotation	RPN;
@@ -44,5 +44,5 @@ int	main(int argc, char** argv)
 	}
 	else
 		std::cerr << "Incorrect syntax, please use digits (0-9) and symbols + - * / seraparated by spaces." << std::endl;
-	return true;
+	return 1;
 }
