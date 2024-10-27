@@ -16,7 +16,6 @@ FLAGS = -Wall -Werror -Wextra -g -std=c++98
 $(NAME) : $(OBJS)
 	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 
-# Crée les dossiers obj et dep si nécessaire et compile les fichiers
 $(OBJDIR)/%.o : %.cpp | $(OBJDIR) $(DEPDIR)
 	$(CC) $(FLAGS) -MMD -c $< -o $@
 	mv $(OBJDIR)/$(<:.cpp=.d) $(DEPDIR)/

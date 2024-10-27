@@ -2,16 +2,16 @@
 
 //CONSTRUCTOR
 
-FordJohnson::FordJohnson() : _to_last_element(0), _size_comparaison(0), _power_of_two(0), _pair_odd(0)
+FordJohnson::FordJohnson() : _to_last_element(0), _size_comparaison(0), _pair_odd(0)
 {
 }
 
 FordJohnson::FordJohnson(FordJohnson const &src) : _deque(src._deque), _vector(src._vector), _to_last_element(src._to_last_element),
-_size_comparaison(src._size_comparaison), _power_of_two(src._power_of_two), _pair_odd(src._pair_odd)
+_size_comparaison(src._size_comparaison), _pair_odd(src._pair_odd)
 {
 }
 
-FordJohnson::FordJohnson(char** argv) : _to_last_element(0), _size_comparaison(1), _power_of_two(2)
+FordJohnson::FordJohnson(char** argv) : _to_last_element(0), _size_comparaison(2)
 {
 	double	d;
 	char*	endptr;
@@ -46,6 +46,9 @@ FordJohnson&	FordJohnson::operator=(FordJohnson const& rhs)
 	{
 		this->_deque = rhs._deque;
 		this->_vector = rhs._vector;
+		this->_to_last_element = rhs._to_last_element;
+		this->_size_comparaison = rhs._size_comparaison;
+		this->_pair_odd = rhs._pair_odd;
 	}
 	return *this;
 }
@@ -54,21 +57,29 @@ FordJohnson&	FordJohnson::operator=(FordJohnson const& rhs)
 
 void	FordJohnson::sort(void)
 {
-	for (std::deque<int>::iterator	it = _deque.begin(); it < _deque.end() - _pair_odd; it += _power_of_two)
+	for (std::deque<int>::iterator	it = _deque.begin(); it != _deque.end() - _pair_odd; it += _size_comparaison)
 	{
-		if (_power_of_two * 2 > static_cast<int>(_deque.size()))
-			break ;
 		std::deque<int>::iterator	nb1 = it + _to_last_element;
-		std::deque<int>::iterator	nb2 = it + _size_comparaison + _to_last_element;
+		std::deque<int>::iterator	nb2 = it + (_size_comparaison / 2) + _to_last_element;
 		if (*nb1 > *nb2)
-			std::swap_ranges(_deque.begin(), _deque.begin() + _size_comparaison, _deque.begin() + _size_comparaison);
+			std::swap_ranges(it, it + (_size_comparaison / 2), it + (_size_comparaison / 2));
 	}
-	if (_power_of_two * 2 < static_cast<int>(_deque.size()))
+	std::cout << "dequeu sort = ";
+	for (std::deque<int>::iterator	it = _deque.begin(); it != _deque.end(); it++)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+	if (_size_comparaison < static_cast<int>(_deque.size()))
 	{
 		increment_variable();
 		sort();
 	}
 	decrement_variable();
+	//for (std::deque<int>::iterator	it = _deque.begin() + _size_comparaison / 2; it != _deque.end() - _pair_odd; it += (_size_comparaison / 2))
+	//{
+	//	std::deque<int>::iterator	nb1 = it;
+	//	std::deque<int>::iterator	nb2 = it + (_size_comparaison / 2);
+	//	if (*nb1 > *nb2)
+	//}
 }
 
 void	FordJohnson::increment_variable(void)
@@ -78,7 +89,6 @@ void	FordJohnson::increment_variable(void)
 	else
 		_to_last_element *= 2;
 	_size_comparaison *= 2;
-	_power_of_two *= 2;
 }
 
 void	FordJohnson::decrement_variable(void)
@@ -88,7 +98,6 @@ void	FordJohnson::decrement_variable(void)
 	else
 		_to_last_element /= 2;
 	_size_comparaison /= 2;
-	_power_of_two /= 2;
 }
 
 void	FordJohnson::print_container(void)

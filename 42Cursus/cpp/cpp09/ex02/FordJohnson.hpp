@@ -50,7 +50,6 @@ class	FordJohnson
 	std::vector<int>	_vector;
 	int					_to_last_element;
 	int					_size_comparaison;
-	int					_power_of_two;
 	int					_pair_odd;
 };
 
