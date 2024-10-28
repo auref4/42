@@ -80,7 +80,14 @@ void	FordJohnson::binary_search(int size_comparaison)
 {
 	std::deque<int>	unsorted;
 
-
+	for (std::deque<int>::iterator	it = _deque.begin() + (size_comparaison / 2); it != _deque.end() - _pair_odd; it += (size_comparaison / 2))
+	{
+		for (std::deque<int>::iterator it_tmp = it; it_tmp != it + (size_comparaison / 2) ; it++)
+		{
+			unsorted.push_back(*it);
+			_deque.erase(it);
+		}
+	}
 }
 
 void	FordJohnson::print_container(void)

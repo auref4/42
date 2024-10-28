@@ -7,6 +7,7 @@
 #include <exception>
 #include <climits>
 #include <algorithm>
+#include <iterator>
 #include <deque>
 #include <vector>
 
