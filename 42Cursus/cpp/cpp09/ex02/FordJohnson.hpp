@@ -43,13 +43,11 @@ class	FordJohnson
 
 	private :
 
-	void	increment_variable(void);
-	void	decrement_variable(void);
+	void	recursive_step(int	size_comparaison);
+	void	binary_search(int size_comparaison);
 
 	std::deque<int>		_deque;
 	std::vector<int>	_vector;
-	int					_to_last_element;
-	int					_size_comparaison;
 	int					_pair_odd;
 };
 
