@@ -99,13 +99,8 @@ void	stock_print_data(std::ifstream& ifs1, std::ifstream& ifs2)
 		if (i == 1 && line_ifs2 == "date | value")
 			getline(ifs2, line_ifs2);
 		btcex.set_nb_error(check_line(line_ifs2));
-		if (btcex.get_nb_error() == NO_ERROR)
-		{
-			btcex.find_good_data(it, line_ifs2);
-			btcex.calcul_print(it, line_ifs2);
-		}
-		else
-			btcex.print_error(line_ifs2);
+		btcex.find_good_data(it, line_ifs2);
+		btcex.calcul_print(it, line_ifs2);
 		i++;
 	}
 }

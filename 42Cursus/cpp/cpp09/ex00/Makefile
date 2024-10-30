@@ -3,29 +3,37 @@ NAME = btc
 SRCS =	main.cpp			\
 		BitcoinExchange.cpp
 
-OBJS = $(SRCS:.cpp=.o)
-DEPS = $(SRCS:.cpp=.d)
+OBJDIR = obj
+DEPDIR = dep
+
+OBJS = $(addprefix $(OBJDIR)/,$(SRCS:.cpp=.o))
+DEPS = $(addprefix $(DEPDIR)/,$(SRCS:.cpp=.d))
 
 CC = c++
 
 FLAGS = -Wall -Werror -Wextra -g -std=c++98
 
 $(NAME) : $(OBJS)
-		 $(CC) $(FLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.cpp
-		$(CC) $(FLAGS) -MMD -c $< -o $@
+$(OBJDIR)/%.o : %.cpp | $(OBJDIR) $(DEPDIR)
+	$(CC) $(FLAGS) -MMD -c $< -o $@
+	mv $(OBJDIR)/$(<:.cpp=.d) $(DEPDIR)/
+
+$(OBJDIR) $(DEPDIR):
+	mkdir -p $@
 
 all : $(NAME)
 
 clean :
-		rm -f $(OBJS) $(DEPS)
+	rm -f $(OBJS) $(DEPS)
+	rm -rf $(OBJDIR) $(DEPDIR)
 
 fclean : clean
-		rm -f $(NAME) $(DEPS)
+	rm -f $(NAME)
 
 re : fclean all
 
--include : $(DEPS)
+-include $(DEPS)
 
 .PHONY: all clean fclean re

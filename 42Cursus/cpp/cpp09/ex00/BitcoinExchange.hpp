@@ -5,10 +5,13 @@
 #define	BAD_INPUT 1
 #define	NEGATIVE 2
 #define	TOO_LARGE 3
+#define PAST_DATE 4
+#define FUTURE_DATE 5
 
 #include <iostream>
 #include <string>
 #include <cstdlib>
+#include <cstring>
 #include <fstream>
 #include <map>
 

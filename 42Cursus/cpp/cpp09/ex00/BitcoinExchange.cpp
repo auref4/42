@@ -32,49 +32,59 @@ BitcoinExchange&	BitcoinExchange::operator=(BitcoinExchange const& rhs)
 
 void	BitcoinExchange::set_nb_error(int nb)
 {
-	this->_nb_error = nb;
-}
-
-int	BitcoinExchange::get_nb_error(void) const
-{
-	return this->_nb_error;
+	_nb_error = nb;
 }
 
 void	BitcoinExchange::set_databtc(std::string str, float f)
 {
-	this->_databtc.insert(std::pair<std::string, float>(str, f));
+	_databtc.insert(std::pair<std::string, float>(str, f));
 }
 
 void	BitcoinExchange::find_good_data(std::map<std::string, float>::iterator& it, std::string& line)
 {
 	std::string	date = line.substr(0, 10);
 
-	it = this->_databtc.lower_bound(date);
-	if (it->first == date)
-		return ;
-	else if (it == this->_databtc.begin())
-		it++;
-	else
-		it--;
+	if (strcmp(date.c_str(), "2009-01-02") < 0 && _nb_error == NO_ERROR)
+		_nb_error = PAST_DATE;
+	else if (strcmp(date.c_str(), "2022-03-29") > 0 && _nb_error == NO_ERROR)
+		_nb_error = FUTURE_DATE;
+	else if (this->_nb_error == NO_ERROR)
+	{
+		it = _databtc.lower_bound(date);
+		if (it->first == date)
+			return ;
+		else if (it == _databtc.begin())
+			it++;
+		else
+			it--;
+	}
 }
 
 void	BitcoinExchange::calcul_print(std::map<std::string, float>::iterator& it, std::string& line)
 {
-	std::string date = line.substr(0, 10);
-	float		value = it->second;
-	std::string	tmp = line.substr(13, line.size() - 13);
-	float		nb_btc = strtof(tmp.c_str(), 0);
-	float		result = nb_btc * value;
-
-	std::cout << date <<" => " << nb_btc << " = " << result << std::endl;
-}
-
-void	BitcoinExchange::print_error(std::string& line) const
-{
-	if (this->_nb_error == BAD_INPUT)
-		std::cerr << "Error: bad input => " << line << std::endl;
-	if (this->_nb_error == NEGATIVE)
-		std::cerr << "Error: not a positive number." << std::endl;
-	if (this->_nb_error == TOO_LARGE)
-		std::cerr << "Error: too large number." << std::endl;
+	switch(_nb_error)
+	{
+		case BAD_INPUT :
+			std::cerr << "Error: bad input => " << line << std::endl;
+			break;
+		case NEGATIVE :
+			std::cerr << "Error: not a positive number." << std::endl;
+			break;
+		case TOO_LARGE :
+			std::cerr << "Error: too large number." << std::endl;
+			break;
+		case PAST_DATE :
+			std::cerr << "Error : bitcoin didn't exist before 2009-01-02." << std::endl;
+			break;
+		case FUTURE_DATE :
+			std::cerr << "Error : impossible to predict the price of bicoin after 2022-03-29." << std::endl;
+			break;
+		case NO_ERROR :
+			std::string date = line.substr(0, 10);
+			std::string	tmp = line.substr(13, line.size() - 13);
+			float		value = it->second;
+			float		nb_btc = strtof(tmp.c_str(), 0);
+			float		result = nb_btc * value;
+			std::cout << date <<" => " << nb_btc << " = " << result << std::endl;
+	}
 }
