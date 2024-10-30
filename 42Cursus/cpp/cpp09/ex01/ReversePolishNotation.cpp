@@ -22,34 +22,34 @@ ReversePolishNotation&	ReversePolishNotation::operator=(ReversePolishNotation co
 {
 	if (this != &rhs)
 		this->_stack_rpn = rhs._stack_rpn;
-
 	return *this;
 }
 
 //FUNCTIONS
 
-bool	ReversePolishNotation::calculate(std::string argument)
+int	ReversePolishNotation::calculate(std::string argument)
 {
 	for (int i = 0; i < static_cast<int>(argument.size()); i++)
 	{
 		if (isdigit(argument[i]) == true)
 		{
 			float	f = static_cast<float>(argument[i]) - 48;
-			this->_stack_rpn.push(f);
+			_stack_rpn.push(f);
 		}
 		if (issymbol(argument[i]) == true)
 		{
-			if (this->_stack_rpn.size() < 2)
-				return false;
-			this->manage_stack(argument[i]);
+			if (_stack_rpn.size() < 2)
+				return INCORRECT_RPN;
+			if (this->manage_stack(argument[i]) == false)
+				return DIVISION_ZERO;
 		}
 	}
 	if (this->_stack_rpn.size() > 1)
-		return false;
-	return true;
+		return INCORRECT_RPN;
+	return NO_ERROR;
 }
 
-void	ReversePolishNotation::manage_stack(int symbol)
+bool	ReversePolishNotation::manage_stack(int symbol)
 {
 	float	tmp;
 
@@ -62,9 +62,14 @@ void	ReversePolishNotation::manage_stack(int symbol)
 	if (symbol == '*')
 		tmp = this->_stack_rpn.top() * tmp;
 	if (symbol == '/')
+	{
+		if (tmp == 0)
+			return false;
 		tmp = this->_stack_rpn.top() / tmp;
+	}
 	this->_stack_rpn.pop();
 	this->_stack_rpn.push(tmp);
+	return true;
 }
 
 void	ReversePolishNotation::print_result(void) const

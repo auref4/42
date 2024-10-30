@@ -37,10 +37,14 @@ int	main(int argc, char** argv)
 
 	if (parsing(argument) == true)
 	{
-		if (RPN.calculate(argument) == true)
+		int nb_error = RPN.calculate(argument);
+
+		if (nb_error == NO_ERROR)
 			RPN.print_result();
-		else
+		if (nb_error == INCORRECT_RPN)
 			std::cerr << "Incorrect association of digits and symbols, they must respect the reverse polish notation." << std::endl;
+		if (nb_error == DIVISION_ZERO)
+			std::cerr << "Division by zero is impossible." << std::endl;
 	}
 	else
 		std::cerr << "Incorrect syntax, please use digits (0-9) and symbols + - * / seraparated by spaces." << std::endl;
