@@ -54,35 +54,36 @@ FordJohnson&	FordJohnson::operator=(FordJohnson const& rhs)
 
 void	FordJohnson::sort(void)
 {
-	int	size_comparaison = 2;
+	int	size_comparison = 2;
 
-	this->recursive_step(size_comparaison);
+	this->recursive_step(size_comparison);
 }
 
-void	FordJohnson::recursive_step(int	size_comparaison)
+void	FordJohnson::recursive_step(int	size_comparison)
 {
-	for (std::deque<int>::iterator	it = _deque.begin(); it != _deque.end() - _pair_odd; it += size_comparaison)
+	std::cout << "size_comparison = " << size_comparison << std::endl;
+	for (std::deque<int>::iterator	it = _deque.begin(); it != _deque.end() - _pair_odd; it += size_comparison)
 	{
-		if (*(it + (size_comparaison / 2) - 1) > *(it + size_comparaison - 1))
-			std::swap_ranges(it, it + (size_comparaison / 2), it + (size_comparaison / 2));
+		if (*(it + (size_comparison / 2) - 1) > *(it + size_comparison - 1))
+			std::swap_ranges(it, it + (size_comparison / 2), it + (size_comparison / 2));
 	}
 	std::cout << "dequeu sort = ";
 	for (std::deque<int>::iterator	it = _deque.begin(); it != _deque.end(); it++)
 		std::cout << *it << " ";
-	std::cout << std::endl;
-	if (size_comparaison < static_cast<int>(_deque.size()))
-		this->recursive_step(size_comparaison * 2);
-	if (size_comparaison <= static_cast<int>(_deque.size() - _pair_odd) / 2)
-		this->binary_search(size_comparaison);
+	std::cout << std::endl << std::endl;
+	if (size_comparison < static_cast<int>(_deque.size()))
+		this->recursive_step(size_comparison * 2);
+	//if (size_comparison <= static_cast<int>(_deque.size() - _pair_odd) / 2)
+	//	this->binary_search(size_comparison);
 }
 
-void	FordJohnson::binary_search(int size_comparaison)
+void	FordJohnson::binary_search(int size_comparison)
 {
 	std::deque<int>	unsorted;
 
-	for (std::deque<int>::iterator	it = _deque.begin() + (size_comparaison / 2); it != _deque.end() - _pair_odd; it += (size_comparaison / 2))
+	for (std::deque<int>::iterator	it = _deque.begin() + (size_comparison / 2); it != _deque.end() - _pair_odd; it += (size_comparison / 2))
 	{
-		for (std::deque<int>::iterator it_tmp = it; it_tmp != it + (size_comparaison / 2) ; it++)
+		for (std::deque<int>::iterator it_tmp = it; it_tmp != it + (size_comparison / 2) ; it++)
 		{
 			unsorted.push_back(*it);
 			_deque.erase(it);
