@@ -73,22 +73,33 @@ void	FordJohnson::recursive_step(int	size_comparison)
 	std::cout << std::endl << std::endl;
 	if (size_comparison < static_cast<int>(_deque.size()))
 		this->recursive_step(size_comparison * 2);
-	//if (size_comparison <= static_cast<int>(_deque.size() - _pair_odd) / 2)
-	//	this->binary_search(size_comparison);
+	if (size_comparison <= static_cast<int>(_deque.size() - _pair_odd) / 2)
+		this->binary_search(size_comparison);
 }
 
 void	FordJohnson::binary_search(int size_comparison)
 {
+	std::cout << "size_comparison = " << size_comparison << std::endl;
 	std::deque<int>	unsorted;
 
-	for (std::deque<int>::iterator	it = _deque.begin() + (size_comparison / 2); it != _deque.end() - _pair_odd; it += (size_comparison / 2))
+	for (std::deque<int>::iterator	it = _deque.begin() + size_comparison; it != _deque.end() - _pair_odd; it += size_comparison / 2)
 	{
-		for (std::deque<int>::iterator it_tmp = it; it_tmp != it + (size_comparison / 2) ; it++)
+		for (int i = 0; i < (size_comparison / 2); i++)
 		{
 			unsorted.push_back(*it);
 			_deque.erase(it);
 		}
+		if (it <= _deque.end())
+			unsorted.push_back(*it);
 	}
+	std::cout << "sorted list = ";
+	for (std::deque<int>::iterator	it = _deque.begin(); it != _deque.end(); it++)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+	std::cout << "unsorted list = ";
+	for (std::deque<int>::iterator	it = unsorted.begin(); it != unsorted.end(); it++)
+		std::cout << *it << " ";
+	std::cout << std::endl << std::endl;
 }
 
 void	FordJohnson::print_container(void)
