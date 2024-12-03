@@ -89,9 +89,10 @@ void	FordJohnson::binary_search(int size_comparison)
 			unsorted.push_back(*it);
 			_deque.erase(it);
 		}
-		if (it <= _deque.end())
+		if (it < _deque.end())
 			unsorted.push_back(*it);
 	}
+
 	std::cout << "sorted list = ";
 	for (std::deque<int>::iterator	it = _deque.begin(); it != _deque.end(); it++)
 		std::cout << *it << " ";
@@ -100,24 +101,46 @@ void	FordJohnson::binary_search(int size_comparison)
 	for (std::deque<int>::iterator	it = unsorted.begin(); it != unsorted.end(); it++)
 		std::cout << *it << " ";
 	std::cout << std::endl << std::endl;
+
+	int half_distance;
 	for (std::deque<int>::iterator it = unsorted.begin(); it != unsorted.end(); it += (size_comparison / 2) + 1)
 	{
-		std::deque<int>::iterator link = std::find(*(it + size_comparison / 2 + 1));
-		link /= 2;
-		if (*(it + 1) > *link)
+		std::deque<int>::iterator	link = std::find(_deque.begin(), _deque.end(), *(it + (size_comparison / 2) + 1));
+		std::deque<int>::iterator	i_binary = link;
+		i_binary -= (i_binary - _deque.begin()) / 2;
+		if (*(it + 1) > *i_binary)
 		{
-			while (*(it + 1) > *link)
+			while (*(it + 1) > *i_binary)
 			{
-				if (*(link + 1) == *(it + size_comparison / 2 + 1))
+				if (*i_binary == *link)
 					break;
-				link += link / 2;
+				half_distance = (link - i_binary) / 2;
+				if (half_distance == 0)
+					break;
+				i_binary += half_distance;
 			}
 		}
 		else
 		{
-			while (*(it + 1) < *link)
-				link /= 2;
+			while (*(it + 1) < *i_binary)
+			{
+				half_distance = (i_binary - _deque.begin()) / 2;
+				if (half_distance == 0)
+					break;
+				i_binary -= half_distance;
+			}
 		}
+		for (std::deque<int>::iterator tmp = it + (size_comparison / 2); it > it - (size_comparison / 2); tmp--)
+			_deque.insert(i_binary, *it);
+
+		std::cout << "sorted list = ";
+		for (std::deque<int>::iterator	it = _deque.begin(); it != _deque.end(); it++)
+			std::cout << *it << " ";
+		std::cout << std::endl;
+		std::cout << "unsorted list = ";
+		for (std::deque<int>::iterator	it = unsorted.begin(); it != unsorted.end(); it++)
+			std::cout << *it << " ";
+		std::cout << std::endl << std::endl;
 	}
 }
 
