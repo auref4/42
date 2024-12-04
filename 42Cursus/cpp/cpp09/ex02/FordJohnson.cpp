@@ -93,15 +93,23 @@ void	FordJohnson::binary_search(int size_comparison)
 
 	for (std::deque<int>::iterator	it = _deque.begin() + size_comparison; it != _deque.end() - _pair_odd; it += size_comparison / 2)
 	{
-		std::cout << "coucou" << std::endl;
 		for (int i = 0; i < (size_comparison / 2); i++)
 		{
-			std::cout << i << std::endl;
+			std::cout << *it << std::endl;
 			unsorted.push_back(*it);
 			_deque.erase(it);
+			std::cout << *it << std::endl;
 		}
 		if (it != _deque.end())
 			unsorted.push_back(*it);
+		std::cout << "sorted list = ";
+		for (std::deque<int>::iterator	it = _deque.begin(); it != _deque.end(); it++)
+			std::cout << *it << " ";
+		std::cout << std::endl;
+		std::cout << "unsorted list = ";
+		for (std::deque<int>::iterator	it = unsorted.begin(); it != unsorted.end(); it++)
+			std::cout << *it << " ";
+		std::cout << std::endl << std::endl;
 	}
 
 	std::cout << "sorted list = ";
