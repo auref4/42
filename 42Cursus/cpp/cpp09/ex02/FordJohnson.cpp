@@ -82,34 +82,15 @@ void	FordJohnson::binary_search(int size_comparison)
 	std::cout << "size_comparison = " << size_comparison << std::endl;
 	std::deque<int>	unsorted;
 
-	std::cout << "sorted list = ";
-	for (std::deque<int>::iterator	it = _deque.begin(); it != _deque.end(); it++)
-		std::cout << *it << " ";
-	std::cout << std::endl;
-	std::cout << "unsorted list = ";
-	for (std::deque<int>::iterator	it = unsorted.begin(); it != unsorted.end(); it++)
-		std::cout << *it << " ";
-	std::cout << std::endl << std::endl;
-
 	for (std::deque<int>::iterator	it = _deque.begin() + size_comparison; it != _deque.end() - _pair_odd; it += size_comparison / 2)
 	{
 		for (int i = 0; i < (size_comparison / 2); i++)
 		{
-			std::cout << *it << std::endl;
 			unsorted.push_back(*it);
-			_deque.erase(it);
-			std::cout << *it << std::endl;
+			it = _deque.erase(it);
 		}
 		if (it != _deque.end())
 			unsorted.push_back(*it);
-		std::cout << "sorted list = ";
-		for (std::deque<int>::iterator	it = _deque.begin(); it != _deque.end(); it++)
-			std::cout << *it << " ";
-		std::cout << std::endl;
-		std::cout << "unsorted list = ";
-		for (std::deque<int>::iterator	it = unsorted.begin(); it != unsorted.end(); it++)
-			std::cout << *it << " ";
-		std::cout << std::endl << std::endl;
 	}
 
 	std::cout << "sorted list = ";
@@ -127,13 +108,11 @@ void	FordJohnson::binary_search(int size_comparison)
 		std::deque<int>::iterator	link = std::find(_deque.begin(), _deque.end(), *(it + (size_comparison / 2)));
 		std::deque<int>::iterator	i_binary = link;
 		i_binary -= (i_binary - _deque.begin()) / 2;
-		if (*(it + 1) > *i_binary)
+		if (*(it + (size_comparison / 2 - 1)) > *i_binary)
 		{
-			while (*(it + 1) > *i_binary)
+			while (*(it + (size_comparison / 2 - 1)) > *i_binary)
 			{
-				std::cout << *i_binary << std::endl;
 				half_distance = (link - i_binary) / 2;
-				std::cout << half_distance << std::endl;
 				if (half_distance == 0)
 					break;
 				i_binary += half_distance;
@@ -142,7 +121,7 @@ void	FordJohnson::binary_search(int size_comparison)
 		}
 		else
 		{
-			while (*(it + 1) < *i_binary)
+			while (*(it + (size_comparison / 2 - 1)) < *i_binary)
 			{
 				half_distance = (i_binary - _deque.begin()) / 2;
 				if (half_distance == 0)
@@ -150,7 +129,6 @@ void	FordJohnson::binary_search(int size_comparison)
 				i_binary -= half_distance;
 			}
 		}
-		std::cout << *i_binary << std::endl;
 		int	i = (size_comparison / 2) - 1;
 		it += (size_comparison / 2) - 1;
 		while (i > 0)
