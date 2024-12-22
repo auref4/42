@@ -49,7 +49,6 @@ class	FordJohnson
 
 	std::deque<int>		_deque;
 	std::vector<int>	_vector;
-	int					_pair_odd;
 };
 
 #endif
