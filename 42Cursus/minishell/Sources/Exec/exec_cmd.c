@@ -14,9 +14,6 @@
 
 void	exec_child(t_cmd *cmd, t_struct_data *s)
 {
-	int	i;
-
-	i = 0;
 	if (check_builtins(cmd) == 1)
 	{
 		if (exec_builtins(cmd, s) == 0)

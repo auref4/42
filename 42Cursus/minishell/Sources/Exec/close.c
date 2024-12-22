@@ -48,9 +48,6 @@ void	close_fd_parent(t_cmd *cmd)
 
 void	close_all_fd(t_cmd *cmd)
 {
-	int	i;
-
-	i = 0;
 	if (cmd->nbr > 0)
 	{
 		check_close(&cmd->fd.pipe[0]);

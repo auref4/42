@@ -21,9 +21,6 @@ void	error_exec(t_struct_data *s, t_cmd *cmd, int exit_code)
 void	error_cmd(t_struct_data *s, t_cmd *cmd,
 	int exit_code)
 {
-	int	i;
-
-	i = 0;
 	if (cmd->name[0])
 		print_error(cmd);
 	close_all_fd(cmd);

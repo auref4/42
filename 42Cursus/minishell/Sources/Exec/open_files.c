@@ -82,8 +82,6 @@ void	get_rand_name(t_struct_data *s, t_cmd *cmd)
 	while (i < 6)
 	{
 		cmd->files.rand_name[i] = cmd->files.rand_name[i] % 26;
-		if (cmd->files.rand_name[i] < 0)
-			cmd->files.rand_name[i] = cmd->files.rand_name[i] + 26;
 		cmd->files.rand_name[i] = cmd->files.rand_name[i] + 97;
 		i++;
 	}
