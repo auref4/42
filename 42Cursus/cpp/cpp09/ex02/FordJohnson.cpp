@@ -124,18 +124,21 @@ void	FordJohnson::binary_search(int size_comparison)
 		{
 			while (*(it + (size_comparison / 2 - 1)) > *(i_binary + (size_comparison / 2 - 1)) && *i_binary != *link)
 			{
+				if (*i_binary == *link)
+					break;
 				std::cout << "coucou" << std::endl;
 				half_distance = (link - i_binary) / 2;
+				half_distance /= size_comparison;
 				std::cout << "half distance = " << half_distance << std::endl;
-				if (half_distance < (size_comparison / 2))
-					half_distance = size_comparison / 2;
+				if (half_distance < 1)
+					half_distance = 1;
 				std::cout << "half distance 1.5 = " << half_distance << std::endl;
-				if (half_distance % size_comparison != 0 && size_comparison > 2)
-					half_distance += half_distance % size_comparison;
+				//if (half_distance % size_comparison != 0 && size_comparison > 2)
+				//	half_distance += (half_distance % size_comparison);
 				std::cout << "half distance 2 = " << half_distance << std::endl;
 				//if (std::distance(_deque.begin(), i_binary) + half_distance > std::distance(_deque.begin(), link))
 				//	break;
-				i_binary += half_distance;
+				i_binary += (half_distance * (size_comparison / 2));
 			}
 		}
 		else
@@ -147,12 +150,10 @@ void	FordJohnson::binary_search(int size_comparison)
 				std::cout << "i_binary + = " << *(i_binary + (size_comparison / 2 - 1)) << std::endl;
 				std::cout << "i_binary = " << *i_binary << std::endl;
 				std::cout << "coucou3" << std::endl;
-				int limit;
+				int	limit = 1;
 				if (size_comparison == 2)
 					limit = 0;
-				else
-					limit = size_comparison / 2 - 1;
-				if (i_binary != _deque.begin() && *(it + (size_comparison / 2 - 1)) > *(i_binary - (size_comparison / 2 - limit)))
+				if (i_binary != _deque.begin() && *(it + (size_comparison / 2 - 1)) > *(i_binary - 1))
 				{
 					std::cout << "coucou4" << std::endl;
 					break;
@@ -163,13 +164,12 @@ void	FordJohnson::binary_search(int size_comparison)
 					break;
 				}
 				half_distance = (i_binary - _deque.begin()) / 2;
+				half_distance /= size_comparison;
 				std::cout << "half distance = " << half_distance << std::endl;
-				if (half_distance < (size_comparison / 2))
-					half_distance = size_comparison / 2;
-				//if (half_distance % 2 == 1 && size_comparison > 2)
-				//	half_distance -= 1;
+				if (half_distance < 1)
+					half_distance = 1;
 				std::cout << "half distance 2 = " << half_distance << std::endl;
-				i_binary -= half_distance;
+				i_binary -= (half_distance * (size_comparison / 2));
 				std::cout << "i_binary = " << *i_binary << std::endl;
 			}
 		}
