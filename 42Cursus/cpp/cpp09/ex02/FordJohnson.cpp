@@ -124,13 +124,16 @@ void	FordJohnson::binary_search(int size_comparison)
 		{
 			while (*(it + (size_comparison / 2 - 1)) > *(i_binary + (size_comparison / 2 - 1)) && *i_binary != *link)
 			{
+				//int	size = 0;
+				//if (size_comparison == 2)
+				//	size = 1;
 				if (*i_binary == *link)
 					break;
 				std::cout << "coucou" << std::endl;
 				half_distance = (link - i_binary) / 2;
 				half_distance /= size_comparison;
 				std::cout << "half distance = " << half_distance << std::endl;
-				if (half_distance < 1)
+				if (half_distance < 1 || size_comparison == 2)
 					half_distance = 1;
 				std::cout << "half distance 1.5 = " << half_distance << std::endl;
 				//if (half_distance % size_comparison != 0 && size_comparison > 2)
@@ -166,7 +169,7 @@ void	FordJohnson::binary_search(int size_comparison)
 				half_distance = (i_binary - _deque.begin()) / 2;
 				half_distance /= size_comparison;
 				std::cout << "half distance = " << half_distance << std::endl;
-				if (half_distance < 1)
+				if (half_distance < 1 || size_comparison == 2)
 					half_distance = 1;
 				std::cout << "half distance 2 = " << half_distance << std::endl;
 				i_binary -= (half_distance * (size_comparison / 2));
