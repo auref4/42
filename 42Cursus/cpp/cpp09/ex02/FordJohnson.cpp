@@ -110,10 +110,12 @@ void	FordJohnson::binary_search(int size_comparison)
 	{
 		std::deque<int>::iterator	link = std::find(_deque.begin(), _deque.end(), *(it + (size_comparison / 2)));
 		std::deque<int>::iterator	i_binary = link - 1;
-		std::cout << "i_binary = " << std::distance(_deque.begin(), i_binary) << std::endl;
+		std::cout << "i_binary distance before / 2 = " << std::distance(_deque.begin(), i_binary) << std::endl;
 		i_binary -= (i_binary - _deque.begin()) / 2;
 		to_insert = *(it + (size_comparison / 2 - 1));
-		std::cout << "i_binary = " << std::distance(_deque.begin(), i_binary) << std::endl;
+		std::cout << "i_binary distance after / 2 = " << std::distance(_deque.begin(), i_binary) << std::endl;
+		std::cout << "i_binary value =  " << *i_binary << std::endl;
+		std::cout << "link = " << *link << std::endl;
 
 		/*if (*(it + (size_comparison / 2 - 1)) > *(i_binary + (size_comparison / 2 - 1)))
 		{
@@ -174,28 +176,29 @@ void	FordJohnson::binary_search(int size_comparison)
 			if (size_comparison == 2)
 				limit = 0;
 			if (*i_binary == *link || i_binary == _deque.end())
+			{
+				std::cout << "coucou1" << std::endl;
 				break;
+			}
 			if (i_binary != _deque.begin() && to_insert < *i_binary && to_insert > *(i_binary - (size_comparison / 2 - limit)))
+			{
+				std::cout << "coucou2" << std::endl;
 				break;
+			}
 			if (i_binary == _deque.begin() && to_insert < *(i_binary + (size_comparison / 2 - limit)))
 			{
-				std::cout << "coucou5" << std::endl;
+				std::cout << "coucou3" << std::endl;
 				break;
 			}
 			if (to_insert > *i_binary)
 			{
-				std::cout << "coucou" << std::endl;
-				std::cout << "half distance = " << half_distance << std::endl;
-				std::cout << "half distance 1.5 = " << half_distance << std::endl;
-				std::cout << "half distance 2 = " << half_distance << std::endl;
+				std::cout << "to_insert superieur a i_binary" << std::endl;
 				i_binary += (half_distance * (size_comparison / 2));
 			}
 			else
 			{
-				std::cout << "half distance = " << half_distance << std::endl;
-				std::cout << "half distance 2 = " << half_distance << std::endl;
+				std::cout << "to_insert inferieur a i_binary" << std::endl;
 				i_binary -= (half_distance * (size_comparison / 2));
-				std::cout << "i_binary = " << *i_binary << std::endl;
 			}
 		}
 		int	i = (size_comparison / 2) - 1;
