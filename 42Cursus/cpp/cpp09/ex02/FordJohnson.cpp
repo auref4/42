@@ -116,90 +116,43 @@ void	FordJohnson::binary_search(int size_comparison)
 		std::cout << "i_binary distance after / 2 = " << std::distance(_deque.begin(), i_binary) << std::endl;
 		std::cout << "i_binary value =  " << *i_binary << std::endl;
 		std::cout << "link = " << *link << std::endl;
+		std::cout << "to_insert = " << to_insert << std::endl;
 
-		/*if (*(it + (size_comparison / 2 - 1)) > *(i_binary + (size_comparison / 2 - 1)))
-		{
-			while (*(it + (size_comparison / 2 - 1)) > *(i_binary + (size_comparison / 2 - 1)) && *i_binary != *link)
-			{
-				if (*i_binary == *link)
-					break;
-				std::cout << "coucou" << std::endl;
-				half_distance = (link - i_binary) / 2;
-				half_distance /= size_comparison;
-				std::cout << "half distance = " << half_distance << std::endl;
-				if (half_distance < 1 || size_comparison == 2)
-					half_distance = 1;
-				std::cout << "half distance 1.5 = " << half_distance << std::endl;
-				std::cout << "half distance 2 = " << half_distance << std::endl;
-				i_binary += (half_distance * (size_comparison / 2));
-			}
-		}
-		else
-		{
-			std::cout << "coucou2" << std::endl;
-			while (*(it + (size_comparison / 2 - 1)) < *(i_binary + (size_comparison / 2 - 1)))
-			{
-				std::cout << "it = " << *(it + (size_comparison / 2 - 1)) << std::endl;
-				std::cout << "i_binary + = " << *(i_binary + (size_comparison / 2 - 1)) << std::endl;
-				std::cout << "i_binary = " << *i_binary << std::endl;
-				std::cout << "coucou3" << std::endl;
-				int	limit = 1;
-				if (size_comparison == 2)
-					limit = 0;
-				if (i_binary != _deque.begin() && *(it + (size_comparison / 2 - 1)) > *(i_binary - 1))
-				{
-					std::cout << "coucou4" << std::endl;
-					break;
-				}
-				if (i_binary == _deque.begin() && *(it + (size_comparison / 2 - 1)) < *(i_binary + (size_comparison / 2 - limit)))
-				{
-					std::cout << "coucou5" << std::endl;
-					break;
-				}
-				half_distance = (i_binary - _deque.begin()) / 2;
-				half_distance /= size_comparison;
-				std::cout << "half distance = " << half_distance << std::endl;
-				if (half_distance < 1 || size_comparison == 2)
-					half_distance = 1;
-				std::cout << "half distance 2 = " << half_distance << std::endl;
-				i_binary -= (half_distance * (size_comparison / 2));
-				std::cout << "i_binary = " << *i_binary << std::endl;
-			}
-		}*/
 		half_distance = (link - i_binary) / 2;
 		half_distance /= size_comparison;
 		if (half_distance < 1 || size_comparison == 2)
 					half_distance = 1;
 		while (1)
 		{
-			int	limit = 1;
-			if (size_comparison == 2)
-				limit = 0;
-			if (*i_binary == *link || i_binary == _deque.end())
+			if (i_binary >= link)
 			{
 				std::cout << "coucou1" << std::endl;
 				break;
 			}
-			if (i_binary != _deque.begin() && to_insert < *i_binary && to_insert > *(i_binary - (size_comparison / 2 - limit)))
+			if (i_binary != _deque.begin() && to_insert < *(i_binary + (size_comparison / 2 - 1)) && to_insert > *(i_binary - 1))
 			{
 				std::cout << "coucou2" << std::endl;
 				break;
 			}
-			if (i_binary == _deque.begin() && to_insert < *(i_binary + (size_comparison / 2 - limit)))
+			if (i_binary == _deque.begin() && to_insert < *(i_binary + (size_comparison / 2 - 1)))
 			{
 				std::cout << "coucou3" << std::endl;
 				break;
 			}
-			if (to_insert > *i_binary)
+			if (to_insert > *(i_binary + (size_comparison / 2 - 1)))
 			{
 				std::cout << "to_insert superieur a i_binary" << std::endl;
+				std::cout << "size_comparison = " << size_comparison << std::endl;
 				i_binary += (half_distance * (size_comparison / 2));
 			}
 			else
 			{
 				std::cout << "to_insert inferieur a i_binary" << std::endl;
+				std::cout << "size_comparison = " << size_comparison << std::endl;
 				i_binary -= (half_distance * (size_comparison / 2));
 			}
+			if (half_distance > 1)
+				half_distance /= 2;
 		}
 		int	i = (size_comparison / 2) - 1;
 		it += (size_comparison / 2) - 1;
@@ -238,4 +191,25 @@ void	FordJohnson::print_container(void)
 	for (std::vector<int>::iterator	it = _vector.begin(); it != _vector.end(); it++)
 		std::cout << *it << " ";
 	std::cout << std::endl;
+}
+
+bool	FordJohnson::bool_sort(void)
+{
+	int	i = 0;
+
+	while (i < static_cast<int>(_deque.size()))
+	{
+		std::deque<int>::iterator it = _deque.begin() + i;
+		while (it < _deque.end() - 1)
+		{
+			if (*it > *(it + 1))
+			{
+				std::cout << "it = " << *it << ", it+1 = " << *(it + 1) << std::endl;
+				return false;
+			}
+			it++;
+		}
+		i++;
+	}
+	return true;
 }

@@ -24,6 +24,7 @@ class	FordJohnson
 
 	void	sort(void);
 	void	print_container(void);
+	bool	bool_sort(void);
 
 	class	ThrowException : public std::exception
 	{
