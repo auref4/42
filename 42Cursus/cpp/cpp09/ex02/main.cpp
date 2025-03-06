@@ -17,7 +17,7 @@ int	main(int argc, char** argv)
 		fj_algo.sort();
 		std::cout << "after sort :" << std::endl;
 		fj_algo.print_container();
-		if (fj_algo.bool_sort() == true)
+		if (fj_algo.check_sort() == true)
 			std::cout << "result : sorted!" << std::endl;
 		else
 			std::cout << "result : unsorted!" << std::endl;

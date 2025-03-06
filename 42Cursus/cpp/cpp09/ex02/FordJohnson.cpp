@@ -25,6 +25,8 @@ FordJohnson::FordJohnson(char** argv)
 		_deque.push_back(static_cast<int>(d));
 		_vector.push_back(static_cast<int>(d));
 	}
+	if (this->check_duplicates() == true)
+		throw ThrowException("invalid inputs, duplicates are not accepted !");
 }
 
 //DESTRUCTOR
@@ -46,6 +48,25 @@ FordJohnson&	FordJohnson::operator=(FordJohnson const& rhs)
 }
 
 //FUNCTIONS
+
+bool	FordJohnson::check_duplicates(void)
+{
+	int	i = 0;
+
+	while (i < static_cast<int>(_deque.size() - 1))
+	{
+		int							nb = *(_deque.begin() + i);
+		std::deque<int>::iterator	it = _deque.begin() + i + 1;
+		while (it < _deque.end())
+		{
+			if (nb == *it)
+				return true;
+			it++;
+		}
+		i++;
+	}
+	return false;
+}
 
 void	FordJohnson::sort(void)
 {
@@ -193,7 +214,7 @@ void	FordJohnson::print_container(void)
 	std::cout << std::endl;
 }
 
-bool	FordJohnson::bool_sort(void)
+bool	FordJohnson::check_sort(void)
 {
 	int	i = 0;
 

@@ -22,9 +22,10 @@ class	FordJohnson
 
 	FordJohnson&	operator=(FordJohnson const& rhs);		//CANONICAL
 
+	bool	check_duplicates(void);
 	void	sort(void);
 	void	print_container(void);
-	bool	bool_sort(void);
+	bool	check_sort(void);
 
 	class	ThrowException : public std::exception
 	{
