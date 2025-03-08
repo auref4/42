@@ -23,7 +23,7 @@ class	FordJohnson
 	FordJohnson&	operator=(FordJohnson const& rhs);		//CANONICAL
 
 	bool	check_duplicates(void);
-	void	sort(void);
+	void	manage(void);
 	void	print_container(void);
 	bool	check_sort(void);
 
@@ -46,8 +46,9 @@ class	FordJohnson
 
 	private :
 
-	void	recursive_step(int	size_comparaison);
-	void	binary_search(int size_comparaison);
+	void	recursive_step(int size_comparaison);
+	void	sort_odd(std::deque<int>& unsorted, int size_comparison);
+	void	binary_search(std::deque<int>& unsorted, int size_comparaison);
 
 	std::deque<int>		_deque;
 	std::vector<int>	_vector;

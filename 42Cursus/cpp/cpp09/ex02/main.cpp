@@ -14,7 +14,7 @@ int	main(int argc, char** argv)
 		std::cout << "before sort :" << std::endl;
 		fj_algo.print_container();
 		std::cout << std::endl;
-		fj_algo.sort();
+		fj_algo.manage();
 		std::cout << "after sort :" << std::endl;
 		fj_algo.print_container();
 		if (fj_algo.check_sort() == true)
@@ -26,6 +26,5 @@ int	main(int argc, char** argv)
 	{
 		std::cerr << e.what() << std::endl;
 	}
-
 	return 1;
 }

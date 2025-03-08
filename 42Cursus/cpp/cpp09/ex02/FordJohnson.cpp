@@ -55,7 +55,7 @@ bool	FordJohnson::check_duplicates(void)
 
 	while (i < static_cast<int>(_deque.size() - 1))
 	{
-		int							nb = *(_deque.begin() + i);
+		int				nb = *(_deque.begin() + i);
 		std::deque<int>::iterator	it = _deque.begin() + i + 1;
 		while (it < _deque.end())
 		{
@@ -68,16 +68,13 @@ bool	FordJohnson::check_duplicates(void)
 	return false;
 }
 
-void	FordJohnson::sort(void)
+void	FordJohnson::manage(void)
 {
-	int	size_comparison = 2;
-
-	this->recursive_step(size_comparison);
+	this->recursive_step(2);
 }
 
 void	FordJohnson::recursive_step(int	size_comparison)
 {
-	std::cout << "size_comparison = " << size_comparison << std::endl;
 	for (std::deque<int>::iterator	it = _deque.begin(); it != _deque.end(); it += size_comparison)
 	{
 		if (std::distance(_deque.begin(), it) + size_comparison > static_cast<int>(_deque.size()))
@@ -85,28 +82,23 @@ void	FordJohnson::recursive_step(int	size_comparison)
 		if (*(it + (size_comparison / 2) - 1) > *(it + size_comparison - 1))
 			std::swap_ranges(it, it + (size_comparison / 2), it + (size_comparison / 2));
 	}
-	std::cout << "dequeu sort = ";
-	for (std::deque<int>::iterator	it = _deque.begin(); it != _deque.end(); it++)
-		std::cout << *it << " ";
-	std::cout << std::endl << std::endl;
 	if (size_comparison < static_cast<int>(_deque.size()))
 		this->recursive_step(size_comparison * 2);
 	if (size_comparison <= static_cast<int>(_deque.size()))
-		this->binary_search(size_comparison);
+	{
+		std::deque<int>	unsorted;
+
+		this->sort_odd(unsorted, size_comparison);
+		this->binary_search(unsorted, size_comparison);
+	}
 }
 
-void	FordJohnson::binary_search(int size_comparison)
+void	FordJohnson::sort_odd(std::deque<int>& unsorted, int size_comparison)
 {
-	std::cout << "size_comparison = " << size_comparison << std::endl;
-	std::deque<int>	unsorted;
-
 	for (std::deque<int>::iterator	it = _deque.begin() + size_comparison; it != _deque.end(); it += size_comparison / 2)
 	{
 		if (std::distance(_deque.begin(), it) + (size_comparison / 2) > static_cast<int>(_deque.size()))
-		{
-			std::cout << "yo" << std::endl;
 			break;
-		}
 		for (int i = 0; i < (size_comparison / 2); i++)
 		{
 			unsorted.push_back(*it);
@@ -115,88 +107,44 @@ void	FordJohnson::binary_search(int size_comparison)
 		if (it != _deque.end())
 			unsorted.push_back(*it);
 	}
+}
 
-	std::cout << "sorted list = ";
-	for (std::deque<int>::iterator	it = _deque.begin(); it != _deque.end(); it++)
-		std::cout << *it << " ";
-	std::cout << std::endl;
-	std::cout << "unsorted list = ";
-	for (std::deque<int>::iterator	it = unsorted.begin(); it != unsorted.end(); it++)
-		std::cout << *it << " ";
-	std::cout << std::endl << std::endl;
-
-	int half_distance;
+void	FordJohnson::binary_search(std::deque<int>& unsorted, int size_comparison)
+{
 	int	to_insert;
+	int 	half_distance;
+
 	for (std::deque<int>::iterator it = unsorted.begin(); it != unsorted.end(); it += (size_comparison / 2) + 1)
 	{
 		std::deque<int>::iterator	link = std::find(_deque.begin(), _deque.end(), *(it + (size_comparison / 2)));
-		std::deque<int>::iterator	i_binary = link - 1;
-		std::cout << "i_binary distance before / 2 = " << std::distance(_deque.begin(), i_binary) << std::endl;
-		i_binary -= (i_binary - _deque.begin()) / 2;
-		to_insert = *(it + (size_comparison / 2 - 1));
-		std::cout << "i_binary distance after / 2 = " << std::distance(_deque.begin(), i_binary) << std::endl;
-		std::cout << "i_binary value =  " << *i_binary << std::endl;
-		std::cout << "link = " << *link << std::endl;
-		std::cout << "to_insert = " << to_insert << std::endl;
+		std::deque<int>::iterator	i_binary = link - 1 - (link - 1 - _deque.begin()) / 2;
 
-		half_distance = (link - i_binary) / 2;
-		half_distance /= size_comparison;
+		to_insert = *(it + (size_comparison / 2 - 1));
+		half_distance = (link - i_binary) / 2 / size_comparison;
 		if (half_distance < 1 || size_comparison == 2)
-					half_distance = 1;
+			half_distance = 1;
 		while (1)
 		{
 			if (i_binary >= link)
-			{
-				std::cout << "coucou1" << std::endl;
 				break;
-			}
 			if (i_binary != _deque.begin() && to_insert < *(i_binary + (size_comparison / 2 - 1)) && to_insert > *(i_binary - 1))
-			{
-				std::cout << "coucou2" << std::endl;
 				break;
-			}
 			if (i_binary == _deque.begin() && to_insert < *(i_binary + (size_comparison / 2 - 1)))
-			{
-				std::cout << "coucou3" << std::endl;
 				break;
-			}
 			if (to_insert > *(i_binary + (size_comparison / 2 - 1)))
-			{
-				std::cout << "to_insert superieur a i_binary" << std::endl;
-				std::cout << "size_comparison = " << size_comparison << std::endl;
 				i_binary += (half_distance * (size_comparison / 2));
-			}
 			else
-			{
-				std::cout << "to_insert inferieur a i_binary" << std::endl;
-				std::cout << "size_comparison = " << size_comparison << std::endl;
 				i_binary -= (half_distance * (size_comparison / 2));
-			}
 			if (half_distance > 1)
 				half_distance /= 2;
 		}
-		int	i = (size_comparison / 2) - 1;
 		it += (size_comparison / 2) - 1;
-		while (i > 0)
+		for (int i = (size_comparison / 2) - 1; i > 0; i--)
 		{
-			std::cout << *it << std::endl;
 			i_binary = _deque.insert(i_binary, *it);
-			it--;
-			i--;
-		}
+			it--;	
+		}		
 		_deque.insert(i_binary, *it);
-		//for (std::deque<int>::iterator tmp = it + (size_comparison / 2) - 1; tmp != tmp - (size_comparison / 2) + 1; tmp--)
-		//	_deque.insert(i_binary, *tmp);
-
-		std::cout << "sorted list = ";
-		for (std::deque<int>::iterator	it = _deque.begin(); it != _deque.end(); it++)
-			std::cout << *it << " ";
-		std::cout << std::endl;
-		std::cout << "unsorted list = ";
-		for (std::deque<int>::iterator	it = unsorted.begin(); it != unsorted.end(); it++)
-			std::cout << *it << " ";
-		std::cout << std::endl << std::endl;
-
 		if (std::distance(unsorted.begin(), it) + (size_comparison / 2) + 1 > static_cast<int>(unsorted.size()))
 			break;
 	}
