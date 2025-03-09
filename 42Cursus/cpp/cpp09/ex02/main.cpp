@@ -1,5 +1,10 @@
 #include "FordJohnson.hpp"
 
+void	manage(FordJohnson& fj)
+{
+	fj.recursive_sort(2);
+}
+
 int	main(int argc, char** argv)
 {
 	if (argc == 1)
@@ -9,15 +14,15 @@ int	main(int argc, char** argv)
 	}
 	try
 	{
-		FordJohnson	fj_algo(argv);
+		FordJohnson	fj(argv);
 
 		std::cout << "before sort :" << std::endl;
-		fj_algo.print_container();
+		fj.print_container();
 		std::cout << std::endl;
-		fj_algo.manage();
+		manage(fj);
 		std::cout << "after sort :" << std::endl;
-		fj_algo.print_container();
-		if (fj_algo.check_sort() == true)
+		fj.print_container();
+		if (fj.check_sort() == true)
 			std::cout << "result : sorted!" << std::endl;
 		else
 			std::cout << "result : unsorted!" << std::endl;

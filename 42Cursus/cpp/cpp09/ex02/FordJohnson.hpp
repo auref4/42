@@ -22,9 +22,9 @@ class	FordJohnson
 
 	FordJohnson&	operator=(FordJohnson const& rhs);		//CANONICAL
 
+	void	print_container();
+	void	recursive_sort(int size_comparaison);
 	bool	check_duplicates(void);
-	void	manage(void);
-	void	print_container(void);
 	bool	check_sort(void);
 
 	class	ThrowException : public std::exception
@@ -46,9 +46,10 @@ class	FordJohnson
 
 	private :
 
-	void	recursive_step(int size_comparaison);
-	void	sort_odd(std::deque<int>& unsorted, int size_comparison);
-	void	binary_search(std::deque<int>& unsorted, int size_comparaison);
+	void				sort_odd(int size_comparison);
+	void				push_unsorted(std::deque<int>& unsorted, int size_comparison);
+	void				insert_sorted(std::deque<int>& unsorted, int size_comparaison);
+	std::deque<int>::iterator	binary_search(std::deque<int>::iterator& it, int size_comparaison);
 
 	std::deque<int>		_deque;
 	std::vector<int>	_vector;
