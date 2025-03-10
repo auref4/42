@@ -4,7 +4,6 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
-#include <exception>
 #include <climits>
 #include <algorithm>
 #include <iterator>
@@ -15,44 +14,28 @@ class	FordJohnson
 {
 	public :
 
-	FordJohnson();											//CANONICAL
+	FordJohnson();								//CANONICAL
 	FordJohnson(FordJohnson const& src);					//CANONICAL
 	FordJohnson(char** argv);
-	~FordJohnson();											//CANONICAL
+	~FordJohnson();								//CANONICAL
 
-	FordJohnson&	operator=(FordJohnson const& rhs);		//CANONICAL
+	FordJohnson&	operator=(FordJohnson const& rhs);			//CANONICAL
 
-	void	print_container();
-	void	recursive_sort(int size_comparaison);
-	bool	check_duplicates(void);
-	bool	check_sort(void);
-
-	class	ThrowException : public std::exception
-	{
-		public :
-
-		explicit ThrowException(const std::string& message) : _error_message(message){}
-		virtual ~ThrowException() throw() {}
-
-		const char*	what() const throw()
-		{
-			return _error_message.c_str();
-		}
-
-		private :
-
-		std::string	_error_message;
-	};
+	template <typename C>
+	void	recursive_sort(C& container, int size_comparaison);	
 
 	private :
 
-	void				sort_odd(int size_comparison);
-	void				push_unsorted(std::deque<int>& unsorted, int size_comparison);
-	void				insert_sorted(std::deque<int>& unsorted, int size_comparaison);
-	std::deque<int>::iterator	binary_search(std::deque<int>::iterator& it, int size_comparaison);
-
-	std::deque<int>		_deque;
-	std::vector<int>	_vector;
+	template <typename C>
+	void	sort_odd(C& container, const int& size_comparison);
+	template <typename C>		
+	void	push_unsorted(C& container, C& unsorted, const int& size_comparison);
+	template <typename C>
+	void	insert_sorted(C& container, C& unsorted, const int& size_comparaison);
+	template <typename C>
+	typename C::iterator	binary_search(C& container, const int& nb_link, const int& to_insert, const int& size_comparaison);
 };
+
+#include "FordJohnson.tpp"
 
 #endif

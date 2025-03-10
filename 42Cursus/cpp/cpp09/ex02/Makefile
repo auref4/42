@@ -1,7 +1,7 @@
 NAME = PmergeMe
 
-SRCS =	main.cpp 		\
-		FordJohnson.cpp
+SRCS =	main.cpp 	\
+	FordJohnson.cpp	
 
 OBJDIR = obj
 DEPDIR = dep
