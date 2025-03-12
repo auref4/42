@@ -16,13 +16,12 @@ class	FordJohnson
 
 	FordJohnson();								//CANONICAL
 	FordJohnson(FordJohnson const& src);					//CANONICAL
-	FordJohnson(char** argv);
 	~FordJohnson();								//CANONICAL
 
 	FordJohnson&	operator=(FordJohnson const& rhs);			//CANONICAL
 
 	template <typename C>
-	void	recursive_sort(C& container, int size_comparaison);	
+	void	sort(C& container);
 
 	private :
 

@@ -26,8 +26,8 @@ void	manage(std::deque<int>& deque, std::vector<int>& vector)
 {
 	FordJohnson	fj;
 
-	fj.recursive_sort(deque, 2);
-	fj.recursive_sort(vector, 2);
+	fj.sort(deque);
+	fj.sort(vector);
 }
 
 void	print_container(std::deque<int>& deque, std::vector<int>& vector)

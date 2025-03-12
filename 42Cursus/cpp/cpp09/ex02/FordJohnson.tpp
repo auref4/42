@@ -84,16 +84,21 @@ void	FordJohnson::insert_sorted(C& container, C& unsorted, const int& size_compa
 }
 
 template <typename C>
-void	FordJohnson::recursive_sort(C& container, int size_comparison)
-{	
-	this->sort_odd(container, size_comparison);
-	if (size_comparison < static_cast<int>(container.size()))
-		this->recursive_sort(container, size_comparison * 2);
-	if (size_comparison <= static_cast<int>(container.size()))
+void	FordJohnson::sort(C& container)
+{
+	C	unsorted;	
+	int	size_comparison = 2;
+
+	while (size_comparison < static_cast<int>(container.size()))
 	{
-		C	unsorted;
-		
+		this->sort_odd(container, size_comparison);
+		size_comparison *= 2;
+	}
+	while (size_comparison >= 2)
+	{
 		this->push_unsorted(container, unsorted, size_comparison);
 		this->insert_sorted(container, unsorted, size_comparison);
+		unsorted.clear();
+		size_comparison /= 2;
 	}
 }
