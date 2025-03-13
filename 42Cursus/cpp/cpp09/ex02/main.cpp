@@ -25,9 +25,21 @@ bool	check_sort(std::deque<int>& deque)
 void	manage(std::deque<int>& deque, std::vector<int>& vector)
 {
 	FordJohnson	fj;
+	clock_t		start;
+	clock_t		end;
+	double		d;
 
+	start = clock();
 	fj.sort(deque);
+	end = clock();
+	d = (end - start) * 1000 / CLOCKS_PER_SEC;
+	std::cout << "deque time sort : " << d << "ms" << std::endl;
+	
+	start = clock();
 	fj.sort(vector);
+	end = clock();
+	d = (end - start) * 1000 / CLOCKS_PER_SEC;
+	std::cout << "vector time sort : " << d << "ms" << std::endl << std::endl;
 }
 
 void	print_container(std::deque<int>& deque, std::vector<int>& vector)

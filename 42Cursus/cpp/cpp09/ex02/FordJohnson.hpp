@@ -9,6 +9,7 @@
 #include <iterator>
 #include <deque>
 #include <vector>
+#include <ctime>
 
 class	FordJohnson
 {

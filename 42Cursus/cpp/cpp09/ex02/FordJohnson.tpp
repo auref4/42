@@ -91,13 +91,35 @@ void	FordJohnson::sort(C& container)
 
 	while (size_comparison < static_cast<int>(container.size()))
 	{
+		std::cout << "size_comparison = " << size_comparison << std::endl;
 		this->sort_odd(container, size_comparison);
+		std::cout << "sorted :";
+		for (int i = 0; i < static_cast<int>(container.size()); i++)
+			std::cout << container[i] << " ";
+		std::cout << std::endl << std::endl;
 		size_comparison *= 2;
 	}
 	while (size_comparison >= 2)
 	{
 		this->push_unsorted(container, unsorted, size_comparison);
+		std::cout << "size_comparison = " << size_comparison << std::endl;	
+		std::cout << "sorted :";
+		for (int i = 0; i < static_cast<int>(container.size()); i++)
+			std::cout << container[i] << " ";
+		std::cout << std::endl;
+		std::cout << "unsorted :";
+		for (int i = 0; i < static_cast<int>(unsorted.size()); i++)
+			std::cout << unsorted[i] << " ";
+		std::cout << std::endl;
 		this->insert_sorted(container, unsorted, size_comparison);
+		std::cout << "sorted :";
+		for (int i = 0; i < static_cast<int>(unsorted.size()); i++)
+			std::cout << container[i] << " ";
+		std::cout << std::endl;;
+		std::cout << "unsorted :";
+		for (int i = 0; i < static_cast<int>(unsorted.size()); i++)
+			std::cout << unsorted[i] << " ";
+		std::cout << std::endl << std::endl;
 		unsorted.clear();
 		size_comparison /= 2;
 	}
