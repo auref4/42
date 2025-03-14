@@ -47,7 +47,7 @@ void	print_container(std::deque<int>& deque, std::vector<int>& vector)
 	std::cout << "dequeu = ";
 	for (std::deque<int>::iterator	it = deque.begin(); it != deque.end(); it++)
 		std::cout << *it << " ";
-	std::cout << std::endl;
+	std::cout << std::endl << std::endl;
 	std::cout << "vector = ";
 	for (std::vector<int>::iterator	it = vector.begin(); it != vector.end(); it++)
 		std::cout << *it << " ";
