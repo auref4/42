@@ -38,9 +38,11 @@ typename C::iterator	FordJohnson::binary_search(C& container, const int& nb_link
 
 	if (half_distance < 1 || size_comparison == 2)
 		half_distance = 1;
+	std::cout << "nb_link = " << nb_link << std::endl;
+	std::cout << "to_insert = " << to_insert << std::endl;
+	std::cout << "coucou" << std::endl;
 	while (1)
 	{
-	//	std::cout << "coucou" << std::endl;
 		if (i_binary >= link)
 			break;
 		if (i_binary != container.begin() && to_insert < *(i_binary + (size_comparison / 2 - 1)) && to_insert > *(i_binary - 1))
@@ -54,6 +56,7 @@ typename C::iterator	FordJohnson::binary_search(C& container, const int& nb_link
 		if (half_distance > 1)
 			half_distance /= 2;	
 	}
+	std::cout << "bye" << std::endl << std::endl;
 	return i_binary;
 }
 
@@ -89,9 +92,10 @@ void	FordJohnson::init_variables(struct LocalVariables<Iterator>& lc, C& unsorte
 		std::cout << "jacosthal = " << i_jacobsthal << std::endl;
 		std::cout << "unsorted.size = " << static_cast<int>(unsorted.size()) << std::endl;
 		std::cout << "size_comparison = " << size_comparison << std::endl;
-		std::cout << "unsorted.size / size_comparison = " << unsorted.size() / (size_comparison / 2 + 1) << std::endl << std::endl;;
+		std::cout << "unsorted.size / size_comparison = " << unsorted.size() / (size_comparison / 2 + 1) << std::endl;
 		lc.it = unsorted.begin();
 		lc.it += ((size_comparison / 2 + 1) * (i_jacobsthal - 1));
+		std::cout << "distance restante = " << std::distance(lc.it, unsorted.end()) << std::endl << std::endl;
 		if (std::distance(lc.it, unsorted.end()) < (size_comparison / 2 + 1))
 			std::cout << "WARNING" << std::endl;
 		lc.nb_link = *(lc.it + (size_comparison / 2));
@@ -109,7 +113,16 @@ void	FordJohnson::insert_sorted(C& container, C& unsorted, const int& size_compa
 	lc.i_while = 1;	
 	while (unsorted.empty() == false)
 	{
+		std::cout << " container size = " << container.size() << std::endl;
 		this->init_variables(lc, unsorted, size_comparison);
+		std::cout << "sorted list : ";
+		for (int i = 0; i < static_cast<int>(container.size()); i++)
+			std::cout << container[i] << " ";
+		std::cout << std::endl;
+		std::cout << "unsorted list : ";
+		for (int i = 0; i < static_cast<int>(unsorted.size()); i++)
+			std::cout << unsorted[i] << " ";
+		std::cout << std::endl;
 		lc.index_to_insert = this->binary_search(container, lc.nb_link, lc.to_insert, size_comparison);
 		for (int i = lc.size_to_insert; i > 0; i--)
 		{
