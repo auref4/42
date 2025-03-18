@@ -94,9 +94,10 @@ void	FordJohnson::init_variables(struct LocalVariables<Iterator>& lc, C& unsorte
 		std::cout << "size_comparison = " << size_comparison << std::endl;
 		std::cout << "unsorted.size / size_comparison = " << unsorted.size() / (size_comparison / 2 + 1) << std::endl;
 		lc.it = unsorted.begin();
+		std::cout << "index it will jump : " << ((size_comparison / 2 + 1) * (i_jacobsthal - 1)) << std::endl;
 		lc.it += ((size_comparison / 2 + 1) * (i_jacobsthal - 1));
 		std::cout << "distance restante = " << std::distance(lc.it, unsorted.end()) << std::endl << std::endl;
-		if (std::distance(lc.it, unsorted.end()) < (size_comparison / 2 + 1))
+		if (std::distance(lc.it, unsorted.end()) < (size_comparison / 2 + 1) || lc.it == unsorted.end())
 			std::cout << "WARNING" << std::endl;
 		lc.nb_link = *(lc.it + (size_comparison / 2));
 		lc.to_insert = *(lc.it + (size_comparison / 2 - 1));
@@ -134,7 +135,10 @@ void	FordJohnson::insert_sorted(C& container, C& unsorted, const int& size_compa
 		lc.index_to_insert = container.insert(lc.index_to_insert, *lc.it);
 		lc.it = unsorted.erase(lc.it);
 		if (unsorted.empty() == false)
+		{
+			std::cout << "CRASH HERE?" << std::endl;
 			lc.it = unsorted.erase(lc.it);
+		}
 		lc.i_while++;
 	}
 }
