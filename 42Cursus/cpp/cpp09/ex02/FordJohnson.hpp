@@ -22,6 +22,7 @@ struct	LocalVariables
 	int		already_insert;
 	Iterator	it;
 	Iterator	index_to_insert;
+	bool		change_n_jacobsthal;
 };
 
 class	FordJohnson
