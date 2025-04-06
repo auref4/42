@@ -59,6 +59,8 @@ class	FordJohnson
 
 	template <typename C>
 	typename C::iterator	binary_search(C& container, const int& nb_link, const int& to_insert, const int& size_comparaison);
+
+	int	_comparisons;
 };
 
 #include "FordJohnson.tpp"

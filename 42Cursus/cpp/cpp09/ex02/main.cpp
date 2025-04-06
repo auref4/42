@@ -27,19 +27,24 @@ void	manage(std::deque<int>& deque, std::vector<int>& vector)
 	FordJohnson	fj;
 	clock_t		start;
 	clock_t		end;
-	double		d;
+	double		d1;
+	double		d2;
 
 	start = clock();
 	fj.sort(deque);
 	end = clock();
-	d = (end - start) * 1000 / CLOCKS_PER_SEC;
-	std::cout << "deque time sort : " << d << "ms" << std::endl;
-	
+	d1 = (end - start) / CLOCKS_PER_SEC;
+	d2 = (end - start) * 100000 / CLOCKS_PER_SEC;
+	d2 -= (d1 * 100000);
+	std::cout << "deque time sort : " << d1 << "." << d2 << "s" << std::endl;
+
 	start = clock();
 	fj.sort(vector);
 	end = clock();
-	d = (end - start) * 1000 / CLOCKS_PER_SEC;
-	std::cout << "vector time sort : " << d << "ms" << std::endl << std::endl;
+	d1 = (end - start) / CLOCKS_PER_SEC;
+	d2 = (end - start) * 100000 / CLOCKS_PER_SEC;
+	d2 -= (d1 * 100000);
+	std::cout << "vector time sort : " << d1 << "." << d2 << "s" << std::endl << std::endl;
 }
 
 void	print_container(std::deque<int>& deque, std::vector<int>& vector)

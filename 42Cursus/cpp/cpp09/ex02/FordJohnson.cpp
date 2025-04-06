@@ -2,11 +2,11 @@
 
 //CONSTRUCTOR
 
-FordJohnson::FordJohnson()
+FordJohnson::FordJohnson() : _comparisons(0)
 {
 }
 
-FordJohnson::FordJohnson(FordJohnson const &src)
+FordJohnson::FordJohnson(FordJohnson const &src) : _comparisons(src._comparisons)
 {
 	(void)src;
 }
@@ -21,7 +21,8 @@ FordJohnson::~FordJohnson()
 
 FordJohnson&	FordJohnson::operator=(FordJohnson const& rhs)
 {
-	(void)rhs;
+	if (this != &rhs)
+		this->_comparisons = rhs._comparisons;
 	return *this;
 }
 
