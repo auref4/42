@@ -5,7 +5,7 @@ void	FordJohnson::sort_odd(C& container, const int& size_comparison)
 {
 	for (typename C::iterator it = container.begin(); it != container.end(); it += size_comparison)
 	{
-		if (std::distance(container.begin(), it) + size_comparison >= static_cast<int>(container.size()))
+		if (std::distance(container.begin(), it) + size_comparison > static_cast<int>(container.size()))
 			break;
 		this->_comparisons++;
 		if (*(it + (size_comparison / 2) - 1) > *(it + size_comparison - 1))
@@ -52,35 +52,27 @@ template<typename C>
 typename C::iterator	FordJohnson::binary_search(C& container, const int& nb_link, const int& to_insert, const int& size_comparison)
 {
 	typename C::iterator	link = std::find(container.begin(), container.end(), nb_link);
-	typename C::iterator	i_binary = container.begin();
-	
-	int	tmp = std::distance(container.begin(), link) / (size_comparison / 2) / 2;
-	i_binary += (size_comparison / 2) * tmp;
+	typename C::iterator	to_compare;
+	int			size_groups = size_comparison / 2;
+	int			first_half = 0;
+	int			mid;
+	int			second_half = std::distance(container.begin(), link) / size_groups;
 
-	int	half_distance = std::distance(container.begin(), i_binary) / (size_comparison / 2) / 2;
-	if (half_distance < 1)
-		half_distance = 1;
-
-	while (1)
+	while (first_half < second_half)
 	{
-		this->_comparisons++;
-		if (i_binary >= link)
-			break;
-		this->_comparisons++;
-		if (i_binary == container.begin() && to_insert < *(i_binary + (size_comparison / 2 - 1)))
-			break;
-		this->_comparisons += 2;
-		if (i_binary != container.begin() && to_insert < *(i_binary + (size_comparison / 2 - 1)) && to_insert > *(i_binary - 1))
-			break;
-		this->_comparisons++;
-		if (to_insert > *(i_binary + (size_comparison / 2 - 1)))
-			i_binary += (half_distance * (size_comparison / 2));
+		mid = first_half + (second_half - first_half) / 2;
+		to_compare = container.begin() + (size_groups * mid);
+		if (std::distance(to_compare, link) >= size_groups - 1)
+			to_compare += size_groups - 1;
 		else
-			i_binary -= (half_distance * (size_comparison / 2));
-		if (half_distance > 1)
-			half_distance /= 2;	
+			to_compare += std::distance(to_compare, link) - 1;
+		this->_comparisons++;
+		if (to_insert < *to_compare)
+			second_half = mid;
+		else
+			first_half = mid + 1;
 	}
-	return i_binary;
+	return container.begin() + (first_half * size_groups);
 }
 
 template <typename C, typename Iterator>
@@ -149,12 +141,34 @@ void	FordJohnson::sort(C& container)
 	this->_comparisons = 0;
 	while (size_comparison <= static_cast<int>(container.size()))
 	{
+		std::cout << "size_comparaison / 2 = " << size_comparison / 2 << std::endl;
+		std::cout << "sorted : ";
+		for (int i = 0; i < static_cast<int>(container.size()); i++)
+			std::cout << container[i] << " ";
+		std::cout << std::endl;
+		std::cout << "unsorted : ";
+		for (int i = 0; i < static_cast<int>(unsorted.size()); i++)
+			std::cout << unsorted[i] << " ";
+		std::cout << std::endl << std::endl;
+
 		this->sort_odd(container, size_comparison);
 		size_comparison *= 2;
 	}
 	while (size_comparison >= 2)
 	{
+		std::cout << "size_comparaison / 2 = " << size_comparison / 2 << std::endl;
+		std::cout << "sorted : ";
+		for (int i = 0; i < static_cast<int>(container.size()); i++)
+			std::cout << container[i] << " ";
+		std::cout << std::endl;
+
 		this->push_unsorted(container, unsorted, size_comparison);
+
+		std::cout << "unsorted : ";
+		for (int i = 0; i < static_cast<int>(unsorted.size()); i++)
+			std::cout << unsorted[i] << " ";
+		std::cout << std::endl << std::endl;
+
 		this->manage_unsorted(container, unsorted, size_comparison);
 		unsorted.clear();
 		size_comparison /= 2;
