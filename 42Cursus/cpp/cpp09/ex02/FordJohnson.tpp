@@ -8,6 +8,7 @@ void	FordJohnson::sort_odd(C& container, const int& size_comparison)
 		if (std::distance(container.begin(), it) + size_comparison > static_cast<int>(container.size()))
 			break;
 		this->_comparisons++;
+		std::cout << "_comparisons increment = " << this->_comparisons << std::endl;
 		if (*(it + (size_comparison / 2) - 1) > *(it + size_comparison - 1))
 			std::swap_ranges(it, it + (size_comparison / 2), it + (size_comparison / 2));
 	}
@@ -58,6 +59,8 @@ typename C::iterator	FordJohnson::binary_search(C& container, const int& nb_link
 	int			mid;
 	int			second_half = std::distance(container.begin(), link) / size_groups;
 
+	std::cout << "to_insert = " << to_insert << std::endl;
+	std::cout << "nb groups = " << second_half << std::endl;
 	while (first_half < second_half)
 	{
 		mid = first_half + (second_half - first_half) / 2;
@@ -66,12 +69,23 @@ typename C::iterator	FordJohnson::binary_search(C& container, const int& nb_link
 			to_compare += size_groups - 1;
 		else
 			to_compare += std::distance(to_compare, link) - 1;
+		std::cout << "mid = " << mid << std::endl;
 		this->_comparisons++;
+		std::cout << "_comparisons increment = " << this->_comparisons << std::endl;
+		/*if (second_half - first_half == 1)
+		{
+			std::cout << "IF" << std::endl;
+			if (to_insert < *to_compare)
+				return container.begin() + (first_half * size_groups);
+			else
+				return container.begin() + (second_half * size_groups);
+		}*/
 		if (to_insert < *to_compare)
 			second_half = mid;
 		else
 			first_half = mid + 1;
 	}
+	std::cout << std::endl;
 	return container.begin() + (first_half * size_groups);
 }
 
