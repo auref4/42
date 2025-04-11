@@ -85,6 +85,8 @@ typename C::iterator	FordJohnson::binary_search(C& container, const int& nb_link
 		else
 			first_half = mid + 1;
 	}
+	typename C::iterator	result = container.begin() + (first_half * size_groups);
+	std::cout << "insert at " << *result << std::endl;
 	std::cout << std::endl;
 	return container.begin() + (first_half * size_groups);
 }
