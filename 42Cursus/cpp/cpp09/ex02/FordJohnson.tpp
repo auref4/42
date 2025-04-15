@@ -58,12 +58,17 @@ typename C::iterator	FordJohnson::binary_search(C& container, const int& nb_link
 	int			first_half = 0;
 	int			mid;
 	int			second_half = std::distance(container.begin(), link) / size_groups;
-
+//	bool			b = false;
 	std::cout << "to_insert = " << to_insert << std::endl;
 	std::cout << "nb groups = " << second_half << std::endl;
 	while (first_half < second_half)
 	{
 		mid = first_half + (second_half - first_half) / 2;
+//		if (second_half == 2 && b == false)
+//		{
+//			b = true;
+//			mid -= 1;
+//		}
 		to_compare = container.begin() + (size_groups * mid);
 		if (std::distance(to_compare, link) >= size_groups - 1)
 			to_compare += size_groups - 1;
@@ -72,14 +77,6 @@ typename C::iterator	FordJohnson::binary_search(C& container, const int& nb_link
 		std::cout << "mid = " << mid << std::endl;
 		this->_comparisons++;
 		std::cout << "_comparisons increment = " << this->_comparisons << std::endl;
-		/*if (second_half - first_half == 1)
-		{
-			std::cout << "IF" << std::endl;
-			if (to_insert < *to_compare)
-				return container.begin() + (first_half * size_groups);
-			else
-				return container.begin() + (second_half * size_groups);
-		}*/
 		if (to_insert < *to_compare)
 			second_half = mid;
 		else
