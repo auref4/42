@@ -1,63 +1,5 @@
 #include "FordJohnson.hpp"
-
-bool	check_sort(std::deque<int>& deque)
-{
-	int	i = 0;
-
-	while (i < static_cast<int>(deque.size()))
-	{
-		std::deque<int>::iterator it = deque.begin() + i;
-		while (it < deque.end() - 1)
-		{
-			if (*it > *(it + 1))
-			{
-				std::cout << "result : unsorted ! it = " << *it << ", it+1 = " << *(it + 1) << std::endl;
-				return false;
-			}
-			it++;
-		}
-		i++;
-	}
-	std::cout << "result : sorted !" << std::endl;
-	return true;
-}
-
-void	manage(std::deque<int>& deque, std::vector<int>& vector)
-{
-	FordJohnson	fj;
-	clock_t		start;
-	clock_t		end;
-	double		d1;
-	double		d2;
-
-	start = clock();
-	fj.sort(deque);
-	end = clock();
-	d1 = (end - start) / CLOCKS_PER_SEC;
-	d2 = (end - start) * 100000 / CLOCKS_PER_SEC;
-	d2 -= (d1 * 100000);
-	std::cout << "deque time sort : " << d1 << "." << d2 << "s" << std::endl;
-
-	start = clock();
-	fj.sort(vector);
-	end = clock();
-	d1 = (end - start) / CLOCKS_PER_SEC;
-	d2 = (end - start) * 100000 / CLOCKS_PER_SEC;
-	d2 -= (d1 * 100000);
-	std::cout << "vector time sort : " << d1 << "." << d2 << "s" << std::endl << std::endl;
-}
-
-void	print_container(std::deque<int>& deque, std::vector<int>& vector)
-{
-	std::cout << "dequeu = ";
-	for (std::deque<int>::iterator	it = deque.begin(); it != deque.end(); it++)
-		std::cout << *it << " ";
-	std::cout << std::endl << std::endl;
-	std::cout << "vector = ";
-	for (std::vector<int>::iterator	it = vector.begin(); it != vector.end(); it++)
-		std::cout << *it << " ";
-	std::cout << std::endl;
-}
+#include "PmergeMe.hpp"
 
 bool	check_duplicates(std::deque<int>& deque)
 {
@@ -107,6 +49,30 @@ bool	init_container(std::deque<int>& deque, std::vector<int>& vector, char** arg
 	return true;
 }
 
+void	manage(std::deque<int>& deque, std::vector<int>& vector)
+{
+	FordJohnson	fj;
+	clock_t		start;
+	clock_t		end;
+	
+	first_screen(deque);
+
+	start = clock();
+	fj.sort(deque);
+	end = clock();
+	double d1 = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+	double d2 = static_cast<double>((end - start) % CLOCKS_PER_SEC) * 1e6 / CLOCKS_PER_SEC;
+
+	start = clock();
+	fj.sort(vector);
+	end = clock();
+	double d3 = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+	double d4 = static_cast<double>((end - start) % CLOCKS_PER_SEC) * 1e6 / CLOCKS_PER_SEC;
+
+	second_screen(deque);
+	third_screen(d1 + d2 / 1e6, d3 + d4 / 1e6, fj);
+}
+
 int	main(int argc, char** argv)
 {
 	if (argc == 1)
@@ -114,17 +80,12 @@ int	main(int argc, char** argv)
 		std::cerr << "Incorrect number of arguments" << std::endl;
 		return 0;
 	}
+
 	std::deque<int>		deque;
 	std::vector<int>	vector;
 
 	if (init_container(deque, vector, argv) == false)
 		return 0;
-	std::cout << "before sort :" << std::endl;
-	print_container(deque, vector);
-	std::cout << std::endl;
 	manage(deque, vector);
-	std::cout << "after sort :" << std::endl;
-	print_container(deque, vector);
-	check_sort(deque);
 	return 1;
 }

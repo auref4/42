@@ -28,6 +28,11 @@ FordJohnson&	FordJohnson::operator=(FordJohnson const& rhs)
 
 //FUNCTION
 
+int	FordJohnson::get_comparisons(void)
+{
+	return this->_comparisons;
+}
+
 int	FordJohnson::index_jacobsthal(const int& n)
 {
 	return (std::pow(2, n) - std::pow(-1, n)) / 3;

@@ -35,9 +35,11 @@ class	FordJohnson
 
 	FordJohnson&	operator=(FordJohnson const& rhs);			//CANONICAL
 
+	int	get_comparisons(void);
+
 	template <typename C>
 	void	sort(C& container);
-
+	
 	private :
 
 	template <typename C>
