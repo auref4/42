@@ -23,8 +23,8 @@ void	first_screen(std::deque<int>& deque)
 
 void	second_screen(std::deque<int>& deque)
 {
-	std::string	sorting = " ⏳SORTING...⏳";
-	std::cout << std::endl;
+	std::string	sorting = " SORTING...⏳";
+	std::cout << std::endl << std::endl;
 	for (int i = 0; i < static_cast<int>(sorting.size()); i++)
 	{
 		usleep(200000);
@@ -33,7 +33,7 @@ void	second_screen(std::deque<int>& deque)
 	usleep(2000000);
 	std::cout << "\033[A" << "\033[2K" << std::flush;
 	usleep(300000);
-	check_sort(deque);
+	check_sort(deque, 1);
 	usleep(2000000);
 	std::cout << "╔═════════════════════════════════════════════════════════════════════════════════════════════════════" << std::endl;
 	std::cout << "║ SORTED LIST ✅" << std::endl;
@@ -44,7 +44,7 @@ void	second_screen(std::deque<int>& deque)
 
 void	third_screen(double d1, double d2, FordJohnson& fj)
 {
-	std::string	stats = " 📊 STATS 🔽";
+	std::string	stats = " ~ STATS 📊 🔽";
 
 	std::cout << std::endl << std::endl;
 	for (int i = 0; i < static_cast<int>(stats.size()); i++)
@@ -83,7 +83,7 @@ void	print_container(std::deque<int>& deque)
 	std::cout << std::endl;
 }
 
-bool	check_sort(std::deque<int>& deque)
+bool	check_sort(std::deque<int>& deque, int nb)
 {
 	int	i = 0;
 
@@ -94,8 +94,11 @@ bool	check_sort(std::deque<int>& deque)
 		{
 			if (*it > *(it + 1))
 			{
-				std::cout << std::endl;
-				std::cout << "UNSORTED ❌ IT = " << *it << ", IT+1 = " << *(it + 1) << std::endl << std::endl;
+				if (nb == 1)
+				{
+					std::cout << std::endl;
+					std::cout << "UNSORTED ❌ IT = " << *it << ", IT+1 = " << *(it + 1) << std::endl << std::endl;
+				}
 				return false;
 			}
 			it++;
@@ -103,6 +106,6 @@ bool	check_sort(std::deque<int>& deque)
 		i++;
 	}
 	std::cout << std::endl;
-	std::cout << " ✔️  LIST CORRECTLY SORTED 🔽" << std::endl << std::endl;
+	std::cout << " ~ LIST CORRECTLY SORTED ✔️ 🔽" << std::endl << std::endl;
 	return true;
 }

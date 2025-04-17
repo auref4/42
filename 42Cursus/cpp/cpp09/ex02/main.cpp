@@ -54,9 +54,13 @@ void	manage(std::deque<int>& deque, std::vector<int>& vector)
 	FordJohnson	fj;
 	clock_t		start;
 	clock_t		end;
-	
-	first_screen(deque);
 
+	if (check_sort(deque, 0) == true)
+	{
+		third_screen(0, 0, fj);
+		return;
+	}
+	first_screen(deque);
 	start = clock();
 	fj.sort(deque);
 	end = clock();
