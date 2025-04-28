@@ -1,0 +1,27 @@
+		FILES
+
+Dockerfile : define how build an image
+docker-compose.yml : define how launch multiple containers
+
+		COMMANDS
+
+//MANAGE IMAGES/CONTAINERS		
+
+"docker build" : build the Dockerfile (images)
+	-t : gives name to the image
+"docker run 'name'" : run 'name' container
+	-it : interactive mode (active terminal)
+	--rm : delete container after run
+	--network 'name' : run with 'name' network
+	--name 'name' : give 'name' name for the container
+"docker-compose up" : build the docker-compose.yml
+"docker images" : list all images that exist localy
+"docker rmi 'name'" : delete the "name" image
+"docker ps" : list all containers that run
+	-a : list all container that run and stoped
+"docker rm 'ID'" : delete "ID" container
+"docker container prune" : deleter all container
+
+//MANAGE NETWORK
+
+"docker network create 'name'" : create "name" network
