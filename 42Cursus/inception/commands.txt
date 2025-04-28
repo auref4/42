@@ -1,9 +1,9 @@
-		FILES
+		FILES:
 
 Dockerfile : define how build an image
 docker-compose.yml : define how launch multiple containers
 
-		COMMANDS
+		COMMANDS:
 
 //MANAGE IMAGES/CONTAINERS		
 
