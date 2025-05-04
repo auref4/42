@@ -1,0 +1,55 @@
+networks:
+  inception-network:
+    name: inception-network
+    driver: bridge
+
+volumes:
+  nginx-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/user4/data/nginx
+      o: bind
+
+  wordpress-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/user4/data/wordpress
+      o: bind
+
+  mariadb-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/user4/data/mariadb
+      o: bind
+
+services:
+  nginx:
+    build:
+      context: ./requirements/nginx
+    container_name: nginx_container
+    ports:
+      - "443:443"
+    volumes:
+      - nginx-data:/usr/share/nginx/html
+    networks:
+      - inception-network
+
+  mariadb:
+    build:
+      context: ./requirements/mariadb
+    container_name: mariadb_container
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    networks:
+      - inception-network
+    ports:
+      - "3306:3306"
+
