@@ -27,17 +27,42 @@ volumes:
 
 services:
   nginx:
+    image: nginx-image
     build:
       context: ./requirements/nginx
     container_name: nginx_container
-    ports:
-      - "443:443"
     volumes:
-      - nginx-data:/usr/share/nginx/html
+      - wordpress-data:/usr/share/nginx/html
     networks:
       - inception-network
+    ports:
+      - "443:443"
+    depends_on:
+      - wordpress
+    restart: always
+
+  wordpress:
+    image: wordpress-image
+    build:
+      context: ./requirements/wordpress
+    container_name: wordpress_container
+    environment:
+      WORDPRESS_DB_HOST: mariadb:3306
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - wordpress-data:/var/www/html
+    networks:
+      - inception-network
+    expose:
+      - "9000"
+    depends_on:
+      - mariadb
+    restart: always
 
   mariadb:
+    image: mariadb-image
     build:
       context: ./requirements/mariadb
     container_name: mariadb_container
@@ -50,6 +75,7 @@ services:
       - mariadb-data:/var/lib/mysql
     networks:
       - inception-network
-    ports:
-      - "3306:3306"
+    expose:
+      - "3306"
+    restart: always
 
