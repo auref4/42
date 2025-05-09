@@ -1,10 +1,10 @@
 #!/bin/bash
 
-#init database
-if [ ! -d "/var/lib/mysql/mysql" ]; then
-    echo "Initialisation de MariaDB..."
-    mysqld --initialize-insecure --user=mysql
-fi
+service mysql_start;
 
-#exec mariadb
-exec mysqld_safe --datadir='/var/lib/mysql' --user=mysql
+mysql -e "CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;"
+mysql -e "CREATE USER IF NOT EXISTS \`${MYSQL_USER}\`@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}';"
+mysql -e "GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO \`${MYSQL_USER}\`@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';"
+mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PASSWORD}';"
+mysqladmin -u root -p $MYSQL_ROOT_PASSWORD shutdown
+exec mysqld_safe
