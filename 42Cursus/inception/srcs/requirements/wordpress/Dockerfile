@@ -1,24 +1,28 @@
 FROM debian:bullseye
 
 RUN apt-get update && apt-get install -y \
+    sudo \
     wget \
     php-fpm \
     php-mysql \
-    mariadb-client
+    mariadb-client \
+    curl \
+    unzip \
+    bash
 
+RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -P /usr/local/bin/
+RUN chmod +x /usr/local/bin/wp-cli.phar
+RUN mv /usr/local/bin/wp-cli.phar /usr/local/bin/wp
 
 RUN wget https://fr.wordpress.org/wordpress-6.0-fr_FR.tar.gz -P /var/www
 RUN cd /var/www && tar -xzf wordpress-6.0-fr_FR.tar.gz && rm wordpress-6.0-fr_FR.tar.gz
 RUN chown -R root:root /var/www/wordpress
 
-COPY ./conf/php.ini /etc/php/7.4/fpm/php.ini
-COPY ./conf/wp-config.php /var/www/html/wp-config.php
+COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
+COPY ./tools/script.sh /usr/local/bin/script.sh
 
-RUN sed -i "s/database_name_here/${MYSQL_DATABASE}/" /var/www/html/wp-config.php && \
-    sed -i "s/username_here/${MYSQL_USER}/" /var/www/html/wp-config.php && \
-    sed -i "s/password_here/${MYSQL_PASSWORD}/" /var/www/html/wp-config.php && \
-    sed -i "s/localhost/${MYSQL_HOST}/" /var/www/html/wp-config.php
+RUN chmod +x /usr/local/bin/script.sh
 
 EXPOSE 9000
 
-CMD ["php-fpm7.4", "-F"]
+ENTRYPOINT ["/usr/local/bin/script.sh"]

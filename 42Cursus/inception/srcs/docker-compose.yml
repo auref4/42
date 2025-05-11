@@ -37,6 +37,8 @@ services:
       - inception-network
     ports:
       - "443:443"
+    env_file:
+      - .env
     depends_on:
       - wordpress
     restart: always
@@ -46,17 +48,14 @@ services:
     build:
       context: ./requirements/wordpress
     container_name: wordpress_container
-    environment:
-      WORDPRESS_DB_HOST: ${MARIADB_HOST}
-      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
-      WORDPRESS_DB_USER: ${MYSQL_USER}
-      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - wordpress-data:/var/www/html
     networks:
       - inception-network
     expose:
-      - "9000"
+      - "9000"  
+    env_file:
+      - .env
     depends_on:
       - mariadb
     restart: always
@@ -66,16 +65,13 @@ services:
     build:
       context: ./requirements/mariadb
     container_name: mariadb_container
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - mariadb-data:/var/lib/mysql
     networks:
       - inception-network
     expose:
       - "3306"
+    env_file:
+      - .env
     restart: always
 

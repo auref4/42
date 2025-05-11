@@ -11,7 +11,7 @@ RUN chmod 755 /var/www/html
 RUN chown -R www-data:www-data /var/www/html
 
 RUN apt-get install -y openssl
-RUN openssl req -x509 -nodes -out /etc/nginx/ssl/nginx.crt -keyout /etc/nginx/ssl/nginx.key -subj "/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=${DOMAIN_NAME}/UID=${LOGIN}"
+RUN openssl req -x509 -nodes -out /etc/nginx/ssl/certs/nginx.crt -keyout /etc/nginx/ssl/private/nginx.key -subj "/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=${DOMAIN_NAME}/UID=${LOGIN}"
 
 EXPOSE 443
 
