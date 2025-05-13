@@ -3,8 +3,8 @@ FROM debian:bullseye
 RUN apt-get update && apt-get install -y \
     sudo \
     wget \
-    php-fpm \
-    php-mysql \
+    php7.4-fpm \
+    php7.4-mysql \
     mariadb-client \
     curl \
     unzip \

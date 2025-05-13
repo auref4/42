@@ -32,7 +32,7 @@ services:
       context: ./requirements/nginx
     container_name: nginx_container
     volumes:
-      - wordpress-data:/usr/share/nginx/html
+      - wordpress-data:/var/www/html
     networks:
       - inception-network
     ports:
