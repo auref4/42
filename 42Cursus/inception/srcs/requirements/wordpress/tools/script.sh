@@ -10,7 +10,7 @@ mkdir -p /var/www/.wp-cli/cache
 chown -R www-data:www-data /var/www/.wp-cli
 
 if [ ! -f /var/www/html/wp-config.php ]; then
-    sudo -u www-data wp core download --path=/var/www/html
+    sudo -u www-data wp core download --version=6.4.3 --path=/var/www/html
 
     sudo -u www-data wp core config \
         --dbname=${MYSQL_DATABASE} \
@@ -27,6 +27,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
         --admin_email="user@mail.com" \
         --path="/var/www/html"
 
+    chmod -R 777 /var/www/html/		
     echo "define('WP_MAIL_SMTP', false);" | sudo tee -a /var/www/html/wp-config.php
 fi
 
@@ -35,4 +36,4 @@ if [ ! -d "/run/php" ]; then
     chown www-data:www-data /run/php
 fi
 
-php-fpm7.4 -F
+exec php-fpm7.4 -F
