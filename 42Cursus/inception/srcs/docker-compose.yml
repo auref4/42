@@ -4,12 +4,6 @@ networks:
     driver: bridge
 
 volumes:
-  nginx-data:
-    driver: local
-    driver_opts:
-      type: none
-      device: /home/user4/data/nginx
-      o: bind
 
   wordpress-data:
     driver: local
